@@ -6,9 +6,13 @@ var index = Mock.mock('http://api.com/index', {
   //   'birthday': '@date("yyyy-MM-dd")', //日期
   //   'city': '@city(true)'//中国城市
   // }],
-  "swiper|4":[
+  "swiper|2":[
     {
-      'imgPath':Random.image('800x400', '#04a1f7', '#FFF', 'png', ''),
+      'imgPath':"static/testImg/banner01.png",
+      'id':'@id'
+    },
+    {
+      'imgPath':"static/testImg/banner02.png",
       'id':'@id'
     }
   ],
@@ -20,8 +24,8 @@ var index = Mock.mock('http://api.com/index', {
     }],
     'banner':Random.image('400x100', '#ffcc33', '#FFF', 'png', 's1-banner')
   },
-  'section2|10':{
-    'list|10':[{
+  'section2|11':{
+    'list|11':[{
         'title':'@first',
         'price|99-1000':100,
         'intro': Random.paragraph(),

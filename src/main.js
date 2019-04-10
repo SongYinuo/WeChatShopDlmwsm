@@ -7,7 +7,20 @@ import api from '@/http/api.js'       //http请求
 import less from 'less'
 import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
-Vue.use(Mint);
+
+import ElementUi from 'element-ui'
+import '../node_modules/element-ui/lib/theme-chalk/index.css'
+
+import 'swiper/src/less/swiper.less';
+
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+
+Vue.use(ElementUi)
+
+Vue.use(Mint)
+
+Vue.use(VueAwesomeSwiper);
+
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
 

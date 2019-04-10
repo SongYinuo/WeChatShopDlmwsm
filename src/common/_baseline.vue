@@ -9,7 +9,7 @@
 
 <style lang="less" scoped>
   div {
-    padding: 8vw 0;
+    padding: 4vw 0;
     text-align: center;
     letter-spacing: .2vw;
     color: rgb(158, 158, 158);

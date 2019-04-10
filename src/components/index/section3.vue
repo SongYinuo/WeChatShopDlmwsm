@@ -1,194 +1,139 @@
-<template lang="html">
-  <section class="section3">
-    <ul class="section3-list">
-      <li v-for="k in list" :key='k.id'>
-        <div class="section3-list-left">
-          <h4>{{k.title}}</h4>
-          <div class="time">
-            <span class="time-num">{{k.dom.num1||'00'}}</span>
-            <span class="time-col">:</span>
-            <span class="time-num">{{k.dom.num2||'00'}}</span>
-            <span class="time-col">:</span>
-            <span class="time-num">{{k.dom.num3||'00'}}</span>
+<template>
+  <section class="section2">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="swiper in swiperList" :key="swiper.id">
+           <router-link :to="{name:'详情页'}">
+            <img :src="swiper.imgUrl" class="swiperListImg">
+          </router-link>
+          <div class="explainRow">
+            <h2 class="section2-list-title ac">
+              {{swiper.title}}
+            </h2>
+            <p class="section2-list-price">
+              ￥{{swiper.price}} 
+              <del>{{swiper.originalPrice}}</del>
+            </p>
+            <p class="section2-list-annotation">
+              {{swiper.textAnnotation}}
+            </p>
           </div>
-          <p class="start">Starts at {{k.start}}</p>
-        </div>
-        <router-link :to="{name:'分类页'}" class="section3-list-right">
-          <img v-lazy="k.imgPath">
-          <span>${{k.price}}</span>
-        </router-link>
-      </li>
-    </ul>
-    <router-link :to="{name:'分类页'}" class="section3-banner">
-      <img v-lazy="banner">
-    </router-link>
+          </div>
+        </div>
+      </div>
   </section>
 </template>
 
 <script>
 import { Lazyload } from 'mint-ui';
-
-  export default {
-    data() {
-      return {
-        list:[],
-        banner:'',
-        dom: [{
-          num1: '',
-          num2: '',
-          num3: ''
-        }, {
-          num1: '',
-          num2: '',
-          num3: ''
-        }, {
-          num1: '',
-          num2: '',
-          num3: ''
-        }, {
-          num1: '',
-          num2: '',
-          num3: ''
-        }]
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+export default {
+  props: {
+    banner: {
+      type: String,
+      default: ''
+    },
+    list: {
+      type: Array,
+      default: function () {
+        return []
       }
     },
-    mounted() {
-      this.$api({
-        url: '/index',
-      }).then(response => {
-        const resDatas = response.data.section3
-        this.list = resDatas.list
-        this.banner = resDatas.banner
-        // 将拿到的时间数据处理成倒计时
-        let setTime = ((ending, dom) => {
-          let endTime = ending;
-          let timeMsg = endTime.toString();
-          let end = new Date(timeMsg).getTime();
-          setInterval(() => {
-            let now = new Date().getTime();
-            let sy = parseInt((end - now) / 1000);
-            let minute = parseInt(sy % 3600 / 60);
-            let second = parseInt(sy % 60);
-
-            minute < 10 ? minute = "0" + minute : minute;
-            second < 10 ? second = "0" + second : second;
-            let ms = (100 - Number(parseInt(now / 10).toString().substr(-2))).toString();
-
-            if (end - now <= 0) {
-              minute = '00';
-              second = '00';
-              ms = '00';
-              dom.num2 = ms;
-              return
-            }
-            dom.num1 = minute;
-            dom.num2 = second;
-            dom.num3 = ms;
-          }, 40)
-        })
-
-        for (let i of this.dom.keys()) {
-          setTime(resDatas.list[i].end, this.dom[i])
-          this.list[i].dom = this.dom[i]
-        }
-
-      }).catch((error) => {
-        console.log(error)
-      })
-
-
-    }
   }
+}
 </script>
 
 <style lang="less" scoped>
-  @import '../../assets/fz.less';
-  @import '../../assets/index/style.css';
-  .section3 {
-    width: 100%;
-    .pt();
-    .section3-list {
-      width: 100%;
-      .bt();
-      >li {
-        display: -ms-flex;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        padding: 4vw 5vw 10vw 12vw;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        width: 100%;
-        .section3-list-left {
-          padding-top: 10vw;
-          width: 50%;
-          h4 {
-            .fz(font-size, 34);
-            line-height: 4.8vw;
-            margin-bottom: 3.2vw;
-            letter-spacing: 0.42vw;
-          }
-          .time {
-            .time-num {
-              display: inline-block;
-              text-align: center;
-              padding: 1.6vw;
-              color: #fff;
-              border-radius: 0.5vw;
-              background-color: #444;
-              .fz(font-size, 26);
-              letter-spacing: 0.3vw;
-            }
-            .time-col {
-              color: #333;
-              width: 2vw;
-              display: inline-block;
-              text-align: center;
-              font-weight: 700;
-              .fz(font-size, 30);
-            }
-          }
-
-          .start {
-            .fz(font-size, 30);
-            padding-top: 4vw;
-            letter-spacing: 0.3vw;
-          }
-        }
-
-        .section3-list-right {
-          width: 50%;
-          display: block;
-          padding-top: 10vw;
-          position: relative;
-          img {
-            display: block;
-            width: 100%;
-            background-color: gold;
-          }
-          span {
-            padding: .3vw 1.2vw;
-            border-radius: 1vw;
-            text-align: center;
-            position: absolute;
-            bottom: .4vw;
-            right: .2vw;
-            background-color: @cl;
-            color: #fff;
-            .fz(font-size,24);
-          }
+@import "../../assets/fz.less";
+@import "../../assets/index/style.css";
+.swiper-container {
+  width: 100%;
+  .swiper-wrapper {
+    padding: 2vw;
+  }
+  .swiper-slide {
+    width: 247px;
+    height: 100%;
+    line-height: 100%;
+    .swiperListImg {
+      width: 80%;
+      overflow: hidden;
+      padding: 4vw 5vw;
+      border: 1px solid #eee;
+    }
+    .explainRow {
+      padding: 2vw 0;
+      line-height: 1.2;
+      height: 10vw;
+      .fz(font-size,29);
+      border-bottom: 1px solid #eee;
+      h2 {
+      text-align: left;
+      width: 68%;
+      float: left;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      }
+      p {
+        float: right;
+        margin-right: 12px;
+        line-height: 1.5;
+        del {
+          color: gray;
+          .fz(font-size, 22);
         }
       }
-    }
-
-    .section3-banner {
-      display: block;
-      width: 100%;
-      .bd();
-      img {
-        display: block;
+      .section2-list-price {
+        .fz(font-size, 26);
+        color: #e4393c;
+      }
+      .section2-list-annotation {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         width: 100%;
+        color: gray;
+        margin-right: 0;
+          .fz(font-size, 22);
       }
     }
   }
+}
 </style>
+<script>
+  export default {
+    name: '',
+    data () {
+      return {
+        swiperList:[
+        { title:"1热卖古典轻奢瓷器艺术品陈设饰品", imgUrl: 'https://t10.baidu.com/it/u=3605678574,1074337534&fm=76', url: 'https://m.vip.com', textAnnotation: '1热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制1', price: '514', originalPrice: '759'  },
+        { title:"2热卖古典轻奢瓷器艺术品陈设饰品", imgUrl: 'https://t10.baidu.com/it/u=3605678574,1074337534&fm=76', url: 'https://www.baidu.com' , textAnnotation: '2热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制2', price: '515', originalPrice: '758' },
+        { title:"3热卖古典轻奢瓷器艺术品陈设饰品", imgUrl: 'https://t10.baidu.com/it/u=3605678574,1074337534&fm=76', url: 'https://www.baidu.com', textAnnotation: '3热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制3', price: '516', originalPrice: '759' },
+        { title:"4热卖古典轻奢瓷器艺术品陈设饰品", imgUrl: 'https://t10.baidu.com/it/u=3605678574,1074337534&fm=76', url: 'https://m.vip.com' , textAnnotation: '4热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制4', price: '517', originalPrice: '759' },
+        { title:"5热卖古典轻奢瓷器艺术品陈设饰品", imgUrl: 'https://t10.baidu.com/it/u=3605678574,1074337534&fm=76', url: 'https://m.vip.com' , textAnnotation: '5热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制5', price: '518', originalPrice: '759' },
+        { title:"6热卖古典轻奢瓷器艺术品陈设饰品", imgUrl: 'https://t10.baidu.com/it/u=3605678574,1074337534&fm=76', url: 'htttp://www.baidu.com' , textAnnotation: '6热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制6', price: '519', originalPrice: '759' },
+        { title:"7热卖古典轻奢瓷器艺术品陈设饰品", imgUrl: 'https://t10.baidu.com/it/u=3605678574,1074337534&fm=76', url: 'htttp://www.baidu.com', textAnnotation: '7热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制7', price: '520', originalPrice: '759' },
+        { title:"8热卖古典轻奢瓷器艺术品陈设饰品", imgUrl: 'https://t10.baidu.com/it/u=3605678574,1074337534&fm=76', url: 'htttp://www.baidu.com' , textAnnotation: '8热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制8', price: '514', originalPrice: '759' },
+        { title:"9热卖古典轻奢瓷器艺术品陈设饰品", imgUrl: 'https://t10.baidu.com/it/u=3605678574,1074337534&fm=76', url: 'htttp://www.baidu.com', textAnnotation: '9热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制9', price: '514', originalPrice: '759' },
+        { title:"10热卖古典轻奢瓷器艺术品陈设饰品", imgUrl: 'https://t10.baidu.com/it/u=3605678574,1074337534&fm=76', url: 'https://m.vip.com', textAnnotation: '10热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制10', price: '514', originalPrice: '759' }
+    ]
+    }
+    },
+    mounted () {
+      this._initSwiper();
+    },
+    methods: {
+      _initSwiper () {
+        this.swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1.6,
+        spaceBetween: 16,
+        pagination: '.swiper-pagination',
+            slidesPerView: 'auto',
+            paginationClickable: true,
+            spaceBetween: 12
+        })
+    }
+  }
+  }
+  </script>

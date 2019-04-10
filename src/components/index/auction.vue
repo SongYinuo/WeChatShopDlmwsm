@@ -2,15 +2,27 @@
 <template lang="html">
   <section class="section1 pd2">
     <div class="sectionRow">
-      <h1 class="section1-title pd2">支持大学生创业</h1>
-      <p>顺格格面膜定力相助</p>
+      <span class="section1-title pd2">拍卖会</span>
     </div>
+    <!-- <div class="auctionImg">
+        <img src="../../../static/testImg/banner02.png">
+        <h1>拍卖会|满文满商</h1>
+        <p>第二十二季拍卖大会是空前未有的一场大型的拍卖会产品玲琅满目，欢迎大家准时参加。</p>
+    </div> -->
     <el-row class="auctionImg">
     <el-col :span="24">
-        <div class="grid-content bg-purple-dark pd4">
-            <img src="../../../static/testImg/mianmo.png">
+        <div class="grid-content bg-purple-dark">
+            <img src="../../../static/testImg/banner02.png">
         </div>
         </el-col>
+    <el-col :span="12" :offset="6">
+        <div class="grid-content bg-purple-dark auctionTitle">
+            <h1>拍卖会|满文满商</h1>
+        </div>
+    </el-col>
+    <el-col :span="16" :offset="4">
+        <p class="auctionExplain">第二十二季拍卖大会是空前未有的一场大型的拍卖会产品玲琅满目，欢迎大家准时参加。</p>
+    </el-col>
     </el-row>
   </section>
 </template>
@@ -23,15 +35,7 @@ export default {};
 <style lang="less" scoped>
 @import "../../assets/fz.less";
 @import "../../assets/index/style.css";
-.pd4 {
-  padding: 4vw;
-}
 .sectionRow {
-  border-top: 1px solid #f4f4f4;
-    p{
-      .fz(font-size, 28);
-      color: #959595;
-    }
   .section1-title {
     padding: 2vw 0;
     .fz(font-size, 48);
@@ -49,7 +53,6 @@ export default {};
 .auctionImg {
   img {
     width: 100%;
-    border-radius: 2vw;
   }
 }
 .auctionTitle {
@@ -63,6 +66,6 @@ export default {};
 .auctionExplain {
       line-height: 1.6;
       .fz(font-size, 18);  
-      color: #959595;
+      color: #343434;
 }
 </style>
