@@ -1,14 +1,16 @@
 <template lang="html">
-  <div class="linkMean pd" id="app">
-      <ul class="pd">
-        <li v-for="item in items">
+  <el-row class="indexLinkMean brB10">
+    <el-col :span="22" :offset="1" class="linkMeanRow">
+      <div v-for="item in items" class="linkMeanCol mgTB2">
+        <div class="grid-content bg-purple">
           <a :href="item.url">
-          <img :src="item.iconUrl">
+            <img :src="item.iconUrl">
             <span class="indexMeanText">{{item.text}}</span>
           </a>
-        </li>
-      </ul>
-  </div>
+        </div>
+      </div>
+    </el-col>
+ </el-row>
 </template>
 
 <script type="text/javascript">
@@ -75,29 +77,21 @@ export default {
 <style lang="less" scoped>
 @import "../../assets/fz.less";
 @import "../../assets/index/style.css";
-.linkMean {
-  border-bottom: 10px solid #f5f5f5;
-  .pd {
-    padding: 1vw 2%;
-  }
-  ul {
-    width: 100%;
+.indexLinkMean {
+  .linkMeanRow {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    li {
+    .linkMeanCol {
       width: 20%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 19px;
-
       img {
         margin-bottom: 6%;
         width: 80%;
         padding: 0 10%;
       }
-
       .indexMeanText {
         font-size: 14px;
         color: #333;
