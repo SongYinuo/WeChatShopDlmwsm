@@ -158,7 +158,6 @@ export default {
         spaceBetween: 16,
         pagination: ".swiper-pagination",
         paginationClickable: true,
-        spaceBetween: 12
       });
     }
   }

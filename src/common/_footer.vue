@@ -3,24 +3,31 @@
   <footer class="footer" @click.stop='gotoRouter'>
     <mt-tabbar v-model="selected" fixed>
     <mt-tab-item id="首页">
-      <i slot="icon" class="icon-index"></i>
+      <!-- <i slot="icon" class="icon-index"></i> -->
+      <img slot="icon" class="icon-index" src="../../static/testImg/indexOrangeIcon.png">
         首页
     </mt-tab-item>
     <mt-tab-item id="购物车页">
-      <i slot="icon" class="icon-car"></i>
+      <!-- <i slot="icon" class="icon-car"></i> -->
+      <img slot="icon" class="icon-index" src="../../static/testImg/indexCarIcon.png">
       购物车
     </mt-tab-item>
     <mt-tab-item id="分类页">
-      <i slot="icon" class="icon-category"></i>
-      分类
+      <!-- <i slot="icon" class="icon-category"></i>
+      分类 -->
+      <span class="spanImg">
+        <img slot="icon" class="icon-index" src="../../static/testImg/indexPublishIcon.png">
+      </span>
     </mt-tab-item>
     <mt-tab-item id="分类页">
-      <i slot="icon" class="icon-category"></i>
+      <!-- <i slot="icon" class="icon-category"></i> -->
+      <img slot="icon" class="icon-index" src="../../static/testImg/indexCollectionIcon.png">
       收藏
     </mt-tab-item>
 
     <mt-tab-item id="用户页">
-      <i slot="icon" class="icon-user"></i>
+      <!-- <i slot="icon" class="icon-user"></i> -->
+      <img slot="icon" class="icon-index" src="../../static/testImg/indexMyIcon.png">
       我的
     </mt-tab-item>
   </mt-tabbar>
@@ -76,8 +83,6 @@
 
 }
   .footer {
-
-
     .mint-tabbar {
       background-color: #fff;
       background-image: none;
@@ -94,6 +99,10 @@
       }
       i {
         .fz(font-size, 42);
+      }
+      .spanImg img{
+        width: 40px;
+        height: 40px;
       }
     }
   }

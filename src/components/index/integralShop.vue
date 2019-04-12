@@ -145,13 +145,10 @@ export default {
   methods: {
     _initSwiper() {
       this.swiper = new Swiper("#integralShopSwiper", {
-        slidesPerView: 3.04,
-        spaceBetween: 10,
-        slidesPerGroup: 3,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
-        }
+        spaceBetween: 16,
+        slidesPerView : 3.04,
+        pagination: ".swiper-pagination",
+        paginationClickable: true,
       });
     }
   }
