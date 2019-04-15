@@ -16,7 +16,9 @@
     <el-row class="auctionImg pdT2">
         <el-col :span="22" :offset="1">
           <div>
-              <img src="../../../static/testImg/mianmo.png">
+              <router-link :to="{ name: '支持大学生创业页' }">
+                  <img src="../../../static/testImg/mianmo.png">
+              </router-link>
           </div>
         </el-col>
     </el-row>
@@ -30,7 +32,7 @@ export default {};
 
 <style lang="less" scoped>
 @import "../../assets/fz.less";
-@import "../../assets/index/style.css";
+@import "../../assets/index/style.less";
 @import "../../assets/index/indexSwiper.less";
 .auctionImg {
   img {

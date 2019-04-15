@@ -9,7 +9,9 @@
               </el-col>
               <el-col :span="8">
                 <div class="indexSwiperHeaderMore">
-                  <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  <router-link :to="{ name: '最具有影响力排名页' }">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                 </div>
               </el-col>
             </el-col>
@@ -67,7 +69,7 @@ export default {};
 
 <style lang="less" scoped>
 @import "../../assets/fz.less";
-@import "../../assets/index/style.css";
+@import "../../assets/index/style.less";
 @import "../../assets/index/indexSwiper.less";
 .rankingComapnyRow {
   overflow: hidden;

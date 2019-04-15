@@ -76,7 +76,7 @@
 
 <style lang="less" scoped>
   @import '../assets/fz.less';
-  @import '../assets/index/style.css';
+  @import '../assets/index/style.less';
 
 .mint-tab-item-label:hover {
   color:#333;

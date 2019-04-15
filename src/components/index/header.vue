@@ -12,7 +12,7 @@ export default {};
 
 <style lang="less" scoped>
 @import "../../assets/fz.less";
-@import "../../assets/index/style.css";
+@import "../../assets/index/style.less";
 .mint-header {
   padding: 6.8vw 4.8vw;
   background-color: #fff;

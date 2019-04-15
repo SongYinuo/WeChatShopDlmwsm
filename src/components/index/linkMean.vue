@@ -3,10 +3,10 @@
     <el-col :span="22" :offset="1" class="linkMeanRow">
       <div v-for="item in items" class="linkMeanCol mgTB2">
         <div class="grid-content bg-purple">
-          <a :href="item.url">
-            <img :src="item.iconUrl">
-            <span class="indexMeanText">{{item.text}}</span>
-          </a>
+            <router-link :to="{ name: (item.text)}">
+                <img :src="item.iconUrl">
+                <span class="indexMeanText">{{item.text}}</span>
+            </router-link>
         </div>
       </div>
     </el-col>
@@ -20,53 +20,43 @@ export default {
       items: [
         {
           text: "红山",
-          iconUrl: "static/testImg/redMountain.png",
-          url: "https://m.vip.com"
+          iconUrl: "static/testImg/redMountain.png"
         },
         {
           text: "旅游",
-          iconUrl: "static/testImg/travel.png",
-          url: "https://www.baidu.com"
+          iconUrl: "static/testImg/travel.png"
         },
         {
           text: "讲堂",
-          iconUrl: "static/testImg/redMountain.png",
-          url: "https://www.baidu.com"
+          iconUrl: "static/testImg/redMountain.png"
         },
         {
           text: "茶饮",
-          iconUrl: "static/testImg/teaDrinks.png",
-          url: "https://m.vip.com"
+          iconUrl: "static/testImg/teaDrinks.png"
         },
         {
           text: "养生",
-          iconUrl: "static/testImg/regimen.png",
-          url: "https://m.vip.com"
+          iconUrl: "static/testImg/regimen.png"
         },
         {
           text: "顺格格",
-          iconUrl: "static/testImg/shunPrincess.png",
-          url: "htttp://www.baidu.com"
+          iconUrl: "static/testImg/shunPrincess.png"
         },
         {
           text: "哈百年",
-          iconUrl: "static/testImg/haHundred.png",
-          url: "htttp://www.baidu.com"
+          iconUrl: "static/testImg/haHundred.png"
         },
         {
           text: "交易中心",
-          iconUrl: "static/testImg/tradingCenter.png",
-          url: "htttp://www.baidu.com"
+          iconUrl: "static/testImg/tradingCenter.png"
         },
         {
           text: "绿色食品",
-          iconUrl: "static/testImg/greenFood.png",
-          url: "htttp://www.baidu.com"
+          iconUrl: "static/testImg/greenFood.png"
         },
         {
           text: "书画摄影",
-          iconUrl: "static/testImg/greenFood.png",
-          url: "https://m.vip.com"
+          iconUrl: "static/testImg/greenFood.png"
         }
       ]
     };
@@ -76,7 +66,7 @@ export default {
 
 <style lang="less" scoped>
 @import "../../assets/fz.less";
-@import "../../assets/index/style.css";
+@import "../../assets/index/style.less";
 .indexLinkMean {
   .linkMeanRow {
     display: flex;

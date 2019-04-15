@@ -28,6 +28,7 @@ Vue.prototype.$api = api;
 // 用钩子函数beforeEach()对路由进行判断
 
 router.beforeEach((to, from, next) => {
+  window.scrollTo(0,0);
     if (to.meta.requireAuth) {  // 需要权限,进一步进行判断
       if (store.state.login.token) {  // 通过vuex state获取当前的token是否存在
         next();

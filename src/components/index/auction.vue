@@ -14,7 +14,9 @@
     <el-row class="auctionImg">
         <el-col :span="24">
             <div>
-                <img src="../../../static/testImg/banner02.png">
+                <router-link :to="{ name: '拍卖会页' }">
+                    <img src="../../../static/testImg/banner02.png">
+                </router-link>
             </div>
         </el-col>
         <el-col :span="22" :offset="1" class="auctionExplainRow brB1 pdB2">
@@ -39,7 +41,7 @@ export default {};
 
 <style lang="less" scoped>
 @import "../../assets/fz.less";
-@import "../../assets/index/style.css";
+@import "../../assets/index/style.less";
 @import "../../assets/index/indexSwiper.less";
 .indexAuction {
   .auctionImg {

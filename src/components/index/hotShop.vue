@@ -9,7 +9,9 @@
               </el-col>
               <el-col :span="8">
                 <div class="indexSwiperHeaderMore">
-                  <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  <router-link :to="{ name: '热卖商城页' }">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                 </div>
               </el-col>
             </el-col>
@@ -21,7 +23,7 @@
                   <div class="swiper-container">
                      <div class="swiper-wrapper">
                         <div class="swiper-slide" v-for="swiper in swiperList" :key="swiper.id">
-                           <router-link :to="{name:'详情页'}">
+                           <router-link :to="{ name: '详情页', query: { id: swiper.id }}">
                             <img :src="swiper.imgUrl" class="swiperListImg">
                           </router-link>
                           <div class="explainRow">
@@ -65,6 +67,7 @@ export default {
     return {
       swiperList: [
         {
+          id: "Hot10001",
           title: "1热卖古典轻奢瓷器艺术品陈设饰品",
           imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
           url: "https://m.vip.com",
@@ -73,6 +76,7 @@ export default {
           originalPrice: "759"
         },
         {
+          id: "Hot10002",
           title: "2热卖古典轻奢瓷器艺术品陈设饰品",
           imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
           url: "https://www.baidu.com",
@@ -81,6 +85,7 @@ export default {
           originalPrice: "758"
         },
         {
+          id: "Hot10003",
           title: "3热卖古典轻奢瓷器艺术品陈设饰品",
           imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
           url: "https://www.baidu.com",
@@ -89,6 +94,7 @@ export default {
           originalPrice: "759"
         },
         {
+          id: "Hot10004",
           title: "4热卖古典轻奢瓷器艺术品陈设饰品",
           imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
           url: "https://m.vip.com",
@@ -97,6 +103,7 @@ export default {
           originalPrice: "759"
         },
         {
+          id: "Hot10005",
           title: "5热卖古典轻奢瓷器艺术品陈设饰品",
           imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
           url: "https://m.vip.com",
@@ -105,6 +112,7 @@ export default {
           originalPrice: "759"
         },
         {
+          id: "Hot10006",
           title: "6热卖古典轻奢瓷器艺术品陈设饰品",
           imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
           url: "htttp://www.baidu.com",
@@ -113,6 +121,7 @@ export default {
           originalPrice: "759"
         },
         {
+          id: "Hot10007",
           title: "7热卖古典轻奢瓷器艺术品陈设饰品",
           imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
           url: "htttp://www.baidu.com",
@@ -121,6 +130,7 @@ export default {
           originalPrice: "759"
         },
         {
+          id: "Hot10008",
           title: "8热卖古典轻奢瓷器艺术品陈设饰品",
           imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
           url: "htttp://www.baidu.com",
@@ -129,6 +139,7 @@ export default {
           originalPrice: "759"
         },
         {
+          id: "Hot10009",
           title: "9热卖古典轻奢瓷器艺术品陈设饰品",
           imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
           url: "htttp://www.baidu.com",
@@ -137,6 +148,7 @@ export default {
           originalPrice: "759"
         },
         {
+          id: "Hot10010",
           title: "10热卖古典轻奢瓷器艺术品陈设饰品",
           imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
           url: "https://m.vip.com",
@@ -157,7 +169,7 @@ export default {
         slidesPerView: 1.2,
         spaceBetween: 16,
         pagination: ".swiper-pagination",
-        paginationClickable: true,
+        paginationClickable: true
       });
     }
   }
@@ -166,6 +178,6 @@ export default {
 
 <style lang="less" scoped>
 @import "../../assets/fz.less";
-@import "../../assets/index/style.css";
+@import "../../assets/index/style.less";
 @import "../../assets/index/indexSwiper.less";
 </style>

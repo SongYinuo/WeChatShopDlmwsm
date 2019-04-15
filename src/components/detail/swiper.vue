@@ -24,7 +24,7 @@ export default {
 
 <style lang="less" scoped>
 @import "../../assets/fz.less";
-@import "../../assets/index/style.css";
+@import "../../assets/index/style.less";
 
 .swiper {
   width: 100%;

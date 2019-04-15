@@ -116,9 +116,8 @@
 
 <style lang="less" scoped>
   @import '../assets/fz.less';
-  @import '../assets/index/style.css';
+  @import '../assets/index/style.less';
   @import '../assets/user/icon/carstyle.css';
-
 
   .car {
     width: 100%;
