@@ -1,35 +1,35 @@
 <template lang="html">
-  <section class="content">
-    <div class="img-wrap" v-for="k in content">
-      <img :src="k.imgSrc">
-    </div>
+  <section class="detail-content">
+    <el-row class="pdT2">
+      <el-col :span="24" v-for="k in datas.swiperUrl">
+        <img :src="k.img" class="contentUrl">
+      </el-col>
+    </el-row>
   </section>
-
 </template>
 
 <script>
 export default {
-  computed:{
-    content(){
-      return this.$store.state.detail.productDatas.contentImgSrc
-    }
+  // computed:{
+  //   content(){
+  //     return this.$store.state.detail.productDatas.contentImgSrc
+  //   }
+  // }
+  data() {
+    return {
+      datas: {
+        swiperUrl: [
+          { img: "static/testImg/product-details01.jpg", text: "1" },
+          { img: "static/testImg/product-details01-1.jpg", text: "2" },
+          { img: "static/testImg/product-details01-2.jpg", text: "3" },
+          { img: "static/testImg/product-details01-3.jpg", text: "4" }
+        ]
+      }
+    };
   }
-}
+};
 </script>
 
-<style lang="less" scoped>
-  .content {
-    width: 100%;
-    margin-top: 10px;
-    border-top: 20px solid #F8FCFF;
-    .img-wrap {
-    height: 120vw;
-
-      img {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
+<style lang="less">
+@import "../../assets/detail/details.less";
 </style>

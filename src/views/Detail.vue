@@ -3,8 +3,8 @@
     <v-swiper/>
     <v-chose/>
     <v-content/>
-    <v-baseline/>
-    <v-footer/>>
+    <!-- <v-baseline/> -->
+    <v-footer/>
   </div>
 </template>
 

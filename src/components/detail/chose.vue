@@ -1,210 +1,150 @@
 <template lang="html">
-  <section class="chose" v-if="view">
-    <div class="chose-view">
-      <h1 class="chose-view-title">
-        {{view.title}} ~~
-        <span>(已选 {{colText}} - {{sizeText}})</span>
-      </h1>
-      <span>{{view.price}}元</span>
-      <p class="chose-view-intro">{{view.intro}}</p>
-    </div>
-  <!-- 添加空函数 解决Safari浏览器 :active无效 -->
-    <div class="chose-mychosed" ontouchstart="">
-      <div class="colChose">
-        <span
-           v-for="(k,i) in view.chose"
-           :class="{active:colSelected==i}"
-           @click="colChose(i)"
-         >{{k.col}}</span>
-      </div>
-      <div class="sizeChose" >
-        <span
-          v-for="(k,i) in view.chose"
-          :class="{active:sizeSelected==i}"
-          @click="sizeChose(i)"
-        >
-          {{k.size}}
-        </span>
-      </div>
-    </div>
+  <section class="details">
+    <el-row class="brB10 mgB2">
+        <el-col :span="22" :offset="1" class="details-explainRow">
+              <el-col :span="24" class="explainRowPrice colorRed pdB2">¥{{data.price}}元</el-col>
+              <el-col :span="24" class="explainRowTitle pdB2 lh1-2">{{data.title}}</el-col>
+              <el-col :span="24" class="explainRowFreightExplain pdB2 lh1-2">运输费用仅限于目的地至大陆的运送。 对于包括岛屿和海外领土在内的非大陆目的地。</el-col>
+        </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="22" :offset="1">
+        <el-col class="specificationRow brB1">
+          <el-col :span="18">
+            <span>已选</span>
+            <span>未选</span>
+          </el-col>
+          <el-col :span="6" class="text-alignRight">
+            <el-button type="text" @click="dialogFormVisible = true">请选择</el-button>
+            <i class="el-icon-arrow-right"></i>
+          </el-col>
+        </el-col>
+        <el-col class="specificationRow brB1">
+          <el-col :span="18">
+            运费
+          </el-col>
+          <el-col :span="6" class="text-alignRight">¥{{data.freightPrice}}</el-col>
+        </el-col>
+        <el-col class="specificationRow">
+          <el-col :span="18">
+            库存
+          </el-col>
+          <el-col :span="6" class="text-alignRight">{{data.inventory}}</el-col>
+        </el-col>
+      </el-col>
+    </el-row>
+  
+    <el-row>
+      <el-dialog title="商品规格信息" :visible.sync="dialogFormVisible" top="0">
+        <el-row class="detailsRow-specification">
+            <el-col :span="24">
+                <el-col :span="8" class="specificationProductImg">
+                  <img :src="data.specification.url">
+                </el-col>
+                <el-col :span="16">
+                    <span class="colorRed specificationProductText">¥{{data.specification.price}}</span>
+                </el-col>
+            </el-col>
+            <el-col :span="24">
+              <el-col :span="24">
+                <div class="pd1">{{data.specification.specificationUnit}}</div>
+                <el-radio-group v-for="k in data.specification.specificationData">
+                    <el-col :span="23" :offset="1">
+                      <el-radio-button label="k.checked" class="radio mgTB2">{{k.text}}</el-radio-button>
+                    </el-col>
+                </el-radio-group>
+              </el-col>
+              <el-col :span="24">
+                <div class="pd1">{{data.specification.typeUnit}}</div>
+                <el-radio-group v-for="k in data.specification.typeData">
+                    <el-col :span="23" :offset="1">
+                        <el-radio-button label="k.checked" class="mgTB2">{{k.text}}</el-radio-button>
+                      </el-col>
+                </el-radio-group>
+              </el-col>
+            </el-col>
 
-
-
+        </el-row>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        </div>
+      </el-dialog>
+    </el-row>
   </section>
-
-
 </template>
 
 <script>
-import {
-  MessageBox
-} from 'mint-ui';
-import {
-  mapState
-} from 'vuex'
-
+import { MessageBox } from "mint-ui";
+import { mapState } from "vuex";
 
 export default {
-
-  computed: mapState({
-
-    view: state => state.detail.productDatas.view,
-    colSelected: state => state.detail.colSelected,
-    sizeSelected: state => state.detail.sizeSelected,
-    // 返回当前选择颜色的值(innerText)
-    colText() {
-      return this.view.chose[this.colSelected].col
-    },
-    // 返回当前选择规格的值(innerText)
-    sizeText() {
-      return this.view.chose[this.sizeSelected].size
-    }
-
-  }),
-  methods: {
-
-    //点击后把i赋值给colSelected,再通过判断决定是否添加选中样式 (active)
-    colChose(i) {
-      this.$store.commit('CHANGE_COL_SELECTED', i);
-    },
-    sizeChose(i) {
-      this.$store.commit('CHANGE_SIZE_SELECTED', i);
-    }
-
+  data() {
+    return {
+      radio3: "1",
+      dialogFormVisible: false,
+      form: {
+        name: "",
+        region: "",
+        date1: "",
+        date2: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: ""
+      },
+      data: {
+        title: "【夢工房】龍文堂 造 岩口 道安形 鉄瓶 身縦銘　ZZ-3 ",
+        price: "2.4w",
+        freightPrice: "150",
+        inventory: 120,
+        specification: {
+          url: "static/testImg/product-details01.jpg",
+          price: "254w",
+          specificationUnit: "尺寸",
+          specificationData: [
+            { text: "50cm*80cm", btnId: 0, checked: false },
+            { text: "30cm*60cm", btnId: 1, checked: false },
+            { text: "10cm*40cm", btnId: 2, checked: false },
+            { text: "50cm*80cm", btnId: 0, checked: false },
+            { text: "30cm*60cm", btnId: 1, checked: false },
+            { text: "10cm*40cm", btnId: 2, checked: false }
+          ],
+          typeUnit: "样式",
+          typeData: [
+            { text: "鹰雕像", btnId: 0, checked: false },
+            { text: "虎雕像", btnId: 1, checked: false },
+            { text: "象雕像", btnId: 2, checked: false },
+            { text: "50cm*80cm", btnId: 0, checked: false },
+            { text: "30cm*60cm", btnId: 1, checked: false },
+            { text: "10cm*40cm", btnId: 2, checked: false }
+          ]
+        }
+      }
+    };
   }
-}
+};
 </script>
 
-<style lang="less" scoped>
-@import '../../assets/fz.less';
-.chose {
-    padding: 3vw;
-
-    .chose-view {
-        > h1 {
-            .fz(font-size,36);
-            color: #2c3e50;
-            > span {
-                color: rgb(238, 113, 80);
-            }
-        }
-        > span {
-            line-height: 10vw;
-            color: @cl;
-            .fz(font-size,34);
-            font-weight: 600;
-        }
-
-    }
-
-    .chose-mychosed {
-
-        background-color: #fff;
-        > div {
-            padding-top: 20px;
-            display: -ms-flex;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-
-            span {
-                .fz(font-size,26);
-                padding: 6px 10px;
-                border: 1px solid rgb(111, 111,111);
-                margin-right: 6vw;
-                color: rgb(111, 111, 111);
-                &.active,
-                &:active {
-                    color: @cl;
-                    border-color: @cl;
-                    -webkit-transform: scale(1.1);
-                    transform: scale(1.1);
-                }
-
-            }
-        }
-    }
-
-    .footer {
-        width: 100%;
-        display: -webkit-flex;
-        display: -ms-flex;
-        display: flex;
-        height: 14vw;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        background-color: #ffffff;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        .bt();
-        .footer-addcar,
-        .footer-gocar,
-        .footer-index {
-            text-align: center;
-        }
-
-        .footer-index {
-            -webkit-flex: 3;
-            -ms-flex: 3;
-            flex: 3;
-            line-height: 14vw;
-            height: 14vw;
-            padding-top: 1.5vw;
-            border-right-color: #f7f7f7;
-            border-right-style: solid;
-            .fz(border-right-width,1);
-
-            i {
-                .fz(font-size,45);
-            }
-            &:active {
-                background-color: #f1f1f1;
-            }
-        }
-
-        .footer-gocar {
-            position: relative;
-            -webkit-flex: 3;
-            -ms-flex: 3;
-            flex: 3;
-            height: 14vw;
-            line-height: 14vw;
-            padding-top: 1.6vw;
-            span {
-                height: 5.5vw;
-                width: 5.5vw;
-                line-height: 5.5vw;
-                position: absolute;
-                top: 0.5vw;
-                right: 5.5vw;
-                background-color: @cl;
-                border-radius: 50%;
-                color: #fff;
-                .fz(font-size,24);
-            }
-            &:active {
-                background-color: #f1f1f1;
-            }
-            i {
-                .fz(font-size,48);
-            }
-        }
-
-        .footer-addcar {
-            -webkit-flex: 6;
-            -ms-flex: 6;
-            flex: 6;
-            line-height: 14vw;
-            height: 14vw;
-
-            color: #fff;
-            background-color: @cl;
-            letter-spacing: 0.2vw;
-            &:active {
-                background-color: #ff7d00;
-            }
-        }
-    }
+<style lang="less">
+@import "../../assets/fz.less";
+@import "../../assets/detail/details.less";
+.el-dialog {
+  width: 100%;
+  margin: 0;
+  bottom: 0;
+  position: fixed;
+}
+.el-radio-button__inner {
+  padding: 12px;
+  margin-right: 4px;
+}
+.el-dialog__footer {
+  padding: 0;
+  .el-button {
+    width: 100%;
+  }
+}
+.el-button--text {
+  color: #666;
 }
 </style>
