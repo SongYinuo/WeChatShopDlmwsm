@@ -1,24 +1,35 @@
 <template lang="html">
     <div class="swiper">
       <mt-swipe :auto="4000">
-        <mt-swipe-item v-for="k in swiper" :key="k.id">
-           <img :src="k.imgSrc">
+        <mt-swipe-item v-for="k in datas.swiperUrl" :key="k.id">
+           <img :src="k.img">
         </mt-swipe-item>
       </mt-swipe>
       <div class="back" @click="$router.go(-1)">
         <span class="icon-go"></span>
       </div>
     </div>
-
 </template>
 
 <script>
 export default {
-  computed: {
-    swiper () {
-      return this.$store.state.detail.productDatas.swiper
+  data() {
+    return {
+      datas: {
+        swiperUrl: [
+          {img: 'static/testImg/product-details01.jpg',text: '1'},
+          {img: 'static/testImg/product-details01-1.jpg',text: '2'},
+          {img: 'static/testImg/product-details01-2.jpg',text: '3'},
+          {img: 'static/testImg/product-details01-3.jpg',text: '4'}
+        ],
+      }
     }
   }
+  // computed: {
+  //   swiper () {
+  //     return this.$store.state.detail.productDatas.swiper
+  //   }
+  // }
 }
 </script>
 

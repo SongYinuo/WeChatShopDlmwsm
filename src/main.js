@@ -15,11 +15,15 @@ import 'swiper/src/less/swiper.less';
 
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 
+import VueWechatTitle from 'vue-wechat-title'
+
 Vue.use(ElementUi)
 
 Vue.use(Mint)
 
 Vue.use(VueAwesomeSwiper);
+
+Vue.use(VueWechatTitle)
 
 Vue.config.productionTip = false
 Vue.prototype.$api = api;

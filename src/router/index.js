@@ -33,7 +33,10 @@ export default new Router({
   routes: [{
     path: '/',
     name: '首页',
-    component: Index
+    component: Index,
+    meta: {
+      title: '首页'
+    }
   }, {
     path: '/category',
     name: '分类页',
