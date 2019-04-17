@@ -25,7 +25,6 @@
                     </router-link >
                 </div>
                 </el-col>
-                
 
                             
             </el-row>
