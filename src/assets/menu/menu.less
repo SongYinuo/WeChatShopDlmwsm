@@ -1,103 +1,187 @@
 @import "../../assets/fz.less";
- .el-tabs__nav-wrap::after{
-    background-color: transparent;
+
+.el-tabs__nav-wrap::after {
+  background-color: transparent;
 }
 
-.el-tabs__nav {
-    
-    margin-left: 32%;
-   
+
+
+.el-tabs__active-bar {
+  background-color: #D9B53D;
+  width: 22px;
+  height: 2px;
 }
-.el-tabs__active-bar{
-    background-color: #D9B53D;
-    width: 22px;
-    height: 2px;
+
+.el-tabs__item {
+  .fz(font-size, 34);
+  color: #313131;
 }
-.el-tabs__item{
-    .fz(font-size, 34);
-    color: #313131;
-}
-.menuHeader{
-    width: 40px;
+
+.menuHeader {
+  width: 40px;
 
 }
 
-.cl{
-    clear: left;
+.cl {
+  clear: left;
 }
-.menuHead-txt{
-    .fz(font-size, 26);
-    color: #D9B53D;
-    margin-left: 5px;
-   
+
+.menuHead-txt {
+  .fz(font-size, 26);
+  color: #D9B53D;
+  margin-left: 5px;
+
 }
-.menuHead-smalltxt{
+
+.menuHead-smalltxt {
+  .fz(font-size, 22);
+  color: #949494;
+  margin-top: 10px;
+
+}
+
+.el-main {
+  padding: 0;
+}
+
+
+
+.smalltxt-div {
+  .fz(font-size, 24);
+  color: #545454;
+  padding-top: 9px;
+  margin-left: 45px;
+  overflow: hidden;
+
+}
+
+.tc {
+  text-align: center;
+}
+
+.smallimg img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.smallimg {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E9E9E9;
+  margin-bottom: 10px;
+}
+
+.mg {
+  margin-top: 10px;
+}
+
+.menu-video {
+  border-radius: 5px;
+  width: 100%;
+  
+}
+
+.emptyFOOT {
+  height: 70px;
+}
+
+.menu-strategy {
+  .fz(font-size, 30);
+  color: #313131;
+  font-weight: bold;
+}
+
+.menu-strategy-small {
+  color: #545454;
+  .fz(font-size, 24);
+  margin-top: 14px;
+}
+
+.menu-strategy-img img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.menu-strategy-time {
+  color: #ADAEAF;
+  .fz(font-size, 24);
+  margin-top: 21px;
+}
+
+.menuStrategy {
+  margin-top: 15px;
+}
+
+.tittle {
+  .fz(font-size, 34);
+  font-weight: bold;
+  color: #313131;
+}
+
+.pd{
+    padding-right: 10%;
+}
+.menuHead-smtxt{
+    margin-left: 45px;
     .fz(font-size, 22);
     color: #949494;
-    margin-top: 10px;
-    
-}
-.el-main{
-    padding: 0;
-}
-.smalltxt-p{
+    margin-top: -20px;
+}.smalltxt-p {
     .fz(font-size, 28);
     color: #313131;
-    margin-top: 14px;
     font-weight: bold;
-
-}
-.smalltxt-div{
-    .fz(font-size, 24);
-    color: #545454;
-    padding-top: 9px;
     margin-left: 45px;
+  }.menu-time{
+    .fz(font-size, 24);
+    color: #ADAEAF;
+    display: block;
+    margin-top: 15%;
+  }.menu-buttron{
+    background-color: #DAB62E;
+    border-radius: 22px;
+    line-height: 43px;
     overflow: hidden;
-   
+    width: 127px;
+    
+  }.menu-buttron img{
+    width: 24px;
+    padding-left: 10%;
+    float: left;
+    padding-top: 5%;
+    padding-right: 6px;
+  }
+  .menu-buttron p{
+    
+    color: #fff;
+    .fz(font-size, 34);
+    float: left;
+  }
+  .el-tabs--left .el-tabs__active-bar.is-left{
+    right: auto;
+    left: 0;
 }
 
-.tc{
-    text-align: center;
+.el-tabs__item {
+  .fz(font-size, 26);
+  color: #313131;
+  height: 50px;
+  line-height: 50px;
+}.el-tabs__item:hover {
+  color: #DAB62E;
+  cursor: pointer;
+  background-color: #fff;
+}.tradingtab-adiv{
+  background-color: #DAB62E;
+  border-radius: 3px;
 }
-.smallimg img{
- width: 100%;
- border-radius: 4px;
+.tradingtab-adiv img,.tradingtab-icon img{
+  width: 80%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
-.smallimg{
-    margin-top: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #E9E9E9;
-}
-.mg{
-    margin-top: 10px;
-}
-.menu-video{
-    border-radius:5px;
-    width: 100%;
-}
-.emptyFOOT{
-    height: 70px;
-}.menu-strategy{
-    .fz(font-size, 30);
-    color: #313131;
-    font-weight: bold;
-}.menu-strategy-small{
-    color: #545454;
-    .fz(font-size, 24);
-    margin-top: 14px;
-}
-.menu-strategy-img img{
-    width: 100%;
-    border-radius: 4px;
-}.menu-strategy-time{
-    color: #ADAEAF;
-    .fz(font-size, 24);
-    margin-top: 21px;
-}.menuStrategy{
-    margin-top: 15px;
-}
-.tittle{
-    .fz(font-size, 34);
-    font-weight: bold;
-    color: #313131;
+.tradingtab-icon{
+  width: 33%;
+ float: left;
+  text-align: center;
+  
 }
