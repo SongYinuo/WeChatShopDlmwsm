@@ -24,11 +24,13 @@
                         </el-row>
                         <el-row class="rows">
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArray" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
-                                  <div class="bgCfff pdTRBL1">
-                                    <img :src="k.url">
-                                    <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
-                                    <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
-                                  </div>
+                                  <router-link :to="{ name: '详情页', params: { id: k.id } }">
+                                      <div class="bgCfff pdTRBL1">
+                                          <img :src="k.url">
+                                          <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
+                                          <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
+                                      </div>
+                                  </router-link>
                                 </el-col>
                         </el-row>
                         <el-row>
@@ -42,11 +44,13 @@
                         </el-row>
                         <el-row>
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArrayTwo" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
-                                  <div class="bgCfff pdTRBL1">
-                                    <img :src="k.url">
-                                    <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
-                                    <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
-                                  </div>
+                                  <router-link :to="{ name: '详情页', params: { id: k.id } }">
+                                    <div class="bgCfff pdTRBL1">
+                                      <img :src="k.url">
+                                      <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
+                                      <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
+                                    </div>
+                                  </router-link>
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
@@ -62,11 +66,13 @@
                         </el-row>
                         <el-row class="rows">
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArray" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
-                                  <div class="bgCfff pdTRBL1">
-                                    <img :src="k.url">
-                                    <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
-                                    <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
-                                  </div>
+                                  <router-link :to="{ name: '详情页', params: { id: k.id } }">
+                                    <div class="bgCfff pdTRBL1">
+                                      <img :src="k.url">
+                                      <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
+                                      <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
+                                    </div>
+                                  </router-link>
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
@@ -82,11 +88,13 @@
                         </el-row>
                         <el-row class="rows">
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArrayTwo" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
-                                  <div class="bgCfff pdTRBL1">
-                                    <img :src="k.url">
-                                    <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
-                                    <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
-                                  </div>
+                                  <router-link :to="{ name: '详情页', params: { id: k.id } }">
+                                    <div class="bgCfff pdTRBL1">
+                                      <img :src="k.url">
+                                      <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
+                                      <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
+                                    </div>
+                                  </router-link>
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
@@ -102,11 +110,13 @@
                         </el-row>
                         <el-row class="rows">
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArrayTwo" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
-                                  <div class="bgCfff pdTRBL1">
-                                    <img :src="k.url">
-                                    <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
-                                    <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
-                                  </div>
+                                  <router-link :to="{ name: '详情页', params: { id: k.id } }">
+                                    <div class="bgCfff pdTRBL1">
+                                      <img :src="k.url">
+                                      <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
+                                      <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
+                                    </div>
+                                  </router-link >
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
@@ -122,11 +132,13 @@
                         </el-row>
                         <el-row class="rows">
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArray" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
-                                  <div class="bgCfff pdTRBL1">
-                                    <img :src="k.url">
-                                    <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
-                                    <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
-                                  </div>
+                                  <router-link :to="{ name: '详情页', params: { id: k.id } }">
+                                    <div class="bgCfff pdTRBL1">
+                                      <img :src="k.url">
+                                      <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
+                                      <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
+                                    </div>
+                                  </router-link>
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
@@ -158,41 +170,49 @@ export default {
         oneTitle: "顺格格面膜",
         mianmoShunPrincessArray: [
           {
+            id: "ShunGG00001",
             url: "static/testImg/product-details01.jpg",
             title: "顺格格面膜-时尚走 秀必备1",
             price: 124
           },
           {
+            id: "ShunGG00002",
             url: "static/testImg/product-details01.jpg",
             title: "顺格格面膜-时尚走 秀必备2",
             price: 125
           },
           {
+            id: "ShunGG00003",
             url: "static/testImg/product-details01.jpg",
             title: "顺格格面膜-时尚走 秀必备3",
             price: 126
           },
           {
+            id: "ShunGG00004",
             url: "static/testImg/product-details01.jpg",
             title: "顺格格面膜-时尚走 秀必备4",
             price: 127
           },
           {
+            id: "ShunGG00005",
             url: "static/testImg/product-details01.jpg",
             title: "顺格格面膜-时尚走 秀必备5",
             price: 128
           },
           {
+            id: "ShunGG00006",
             url: "static/testImg/product-details01.jpg",
             title: "顺格格面膜-时尚走 秀必备6",
             price: 129
           },
           {
+            id: "ShunGG00007",
             url: "static/testImg/product-details01.jpg",
             title: "顺格格面膜-时尚走 秀必备7",
             price: 130
           },
           {
+            id: "ShunGG00008",
             url: "static/testImg/product-details01.jpg",
             title: "顺格格面膜-时尚走 秀必备8",
             price: 131
@@ -201,41 +221,49 @@ export default {
         twoTitle: "寡肽原液面膜",
         mianmoShunPrincessArrayTwo: [
           {
+            id: "YuanYemianmo0000001",
             url: "static/testImg/product-details01-3.jpg",
             title: "顺格格面膜-时尚走 秀必备11",
             price: 224
           },
           {
+            id: "YuanYemianmo0000002",
             url: "static/testImg/product-details01-3.jpg",
             title: "顺格格面膜-时尚走 秀必备12",
             price: 225
           },
           {
+            id: "YuanYemianmo0000003",
             url: "static/testImg/product-details01-3.jpg",
             title: "顺格格面膜-时尚走 秀必备13",
             price: 226
           },
           {
+            id: "YuanYemianmo0000004",
             url: "static/testImg/product-details01-3.jpg",
             title: "顺格格面膜-时尚走 秀必备14",
             price: 227
           },
           {
+            id: "YuanYemianmo0000005",
             url: "static/testImg/product-details01-3.jpg",
             title: "顺格格面膜-时尚走 秀必备15",
             price: 228
           },
           {
+            id: "YuanYemianmo0000006",
             url: "static/testImg/product-details01-3.jpg",
             title: "顺格格面膜-时尚走 秀必备16",
             price: 229
           },
           {
+            id: "YuanYemianmo0000007",
             url: "static/testImg/product-details01-3.jpg",
             title: "顺格格面膜-时尚走 秀必备17",
             price: 230
           },
           {
+            id: "YuanYemianmo0000008",
             url: "static/testImg/product-details01-3.jpg",
             title: "顺格格面膜-时尚走 秀必备18",
             price: 231
@@ -308,5 +336,4 @@ export default {
     color: white;
   }
 }
-
 </style>
