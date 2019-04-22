@@ -4,7 +4,9 @@
   background-color: transparent;
 }
 
-
+.el-tabs__nav {
+  margin-left: 32%;
+}
 
 .el-tabs__active-bar {
   background-color: #D9B53D;
@@ -19,7 +21,6 @@
 
 .menuHeader {
   width: 40px;
-
 }
 
 .cl {
@@ -30,21 +31,24 @@
   .fz(font-size, 26);
   color: #D9B53D;
   margin-left: 5px;
-
 }
 
 .menuHead-smalltxt {
   .fz(font-size, 22);
   color: #949494;
   margin-top: 10px;
-
 }
 
 .el-main {
   padding: 0;
 }
 
-
+.smalltxt-p {
+  .fz(font-size, 28);
+  color: #313131;
+  margin-top: 14px;
+  font-weight: bold;
+}
 
 .smalltxt-div {
   .fz(font-size, 24);
@@ -52,7 +56,67 @@
   padding-top: 9px;
   margin-left: 45px;
   overflow: hidden;
+}
 
+.tc {
+  text-align: center;
+}
+
+.smallimg img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.smallimg {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E9E9E9;
+}
+
+.mg {
+  margin-top: 10px;
+}
+
+.menu-video {
+  border-radius: 5px;
+  width: 100%;
+}
+
+.el-tabs__item {
+  .fz(font-size, 34);
+  color: #313131;
+}
+
+.menuHeader {
+  width: 40px;
+}
+
+.cl {
+  clear: left;
+}
+
+.menuHead-txt {
+  .fz(font-size, 26);
+  color: #D9B53D;
+  margin-left: 5px;
+}
+
+.menuHead-smalltxt {
+  .fz(font-size, 22);
+  color: #949494;
+  margin-top: 10px;
+}
+
+.el-main {
+  padding: 0;
+}
+
+.smalltxt-div {
+  .fz(font-size, 24);
+  color: #545454;
+  padding-top: 9px;
+  margin-left: 45px;
+  overflow: hidden;
 }
 
 .tc {
@@ -78,7 +142,7 @@
 .menu-video {
   border-radius: 5px;
   width: 100%;
-  
+
 }
 
 .emptyFOOT {
@@ -118,70 +182,124 @@
   color: #313131;
 }
 
-.pd{
+.menuShunPrincess {
+  width: 100%;
+
+  .shunPrincessAdvertising {
+    img {
+      width: 100%
+    }
+  }
+
+  .ShunPrincessRow {
+    img {
+      width: 100%;
+    }
+  }
+
+  .maskHeaderTitle {
+    .fz(font-size, 36);
+  }
+
+  .listRome {
+    position: absolute;
+    height: 6vw;
+    line-height: 6vw;
+    top: 4vw;
+    right: 0;
+    .fz(font-size, 26);
+  }
+
+  .shunPrincessProductTitle {
+    .fz(font-size, 26);
+  }
+
+  .shunPrincessProductPrice {
+    .fz(font-size, 26);
+  }
+
+  .pd {
     padding-right: 10%;
-}
-.menuHead-smtxt{
+  }
+
+  .menuHead-smtxt {
     margin-left: 45px;
     .fz(font-size, 22);
     color: #949494;
     margin-top: -20px;
-}.smalltxt-p {
+  }
+
+  .smalltxt-p {
     .fz(font-size, 28);
     color: #313131;
     font-weight: bold;
     margin-left: 45px;
-  }.menu-time{
+  }
+
+  .menu-time {
     .fz(font-size, 24);
     color: #ADAEAF;
     display: block;
     margin-top: 15%;
-  }.menu-buttron{
+  }
+
+  .menu-buttron {
     background-color: #DAB62E;
     border-radius: 22px;
     line-height: 43px;
     overflow: hidden;
     width: 127px;
-    
-  }.menu-buttron img{
+  }
+
+  .menu-buttron img {
     width: 24px;
     padding-left: 10%;
     float: left;
     padding-top: 5%;
     padding-right: 6px;
   }
-  .menu-buttron p{
-    
+
+  .menu-buttron p {
+
     color: #fff;
     .fz(font-size, 34);
     float: left;
   }
-  .el-tabs--left .el-tabs__active-bar.is-left{
+
+  .el-tabs--left .el-tabs__active-bar.is-left {
     right: auto;
     left: 0;
-}
+  }
 
-.el-tabs__item {
-  .fz(font-size, 26);
-  color: #313131;
-  height: 50px;
-  line-height: 50px;
-}.el-tabs__item:hover {
-  color: #DAB62E;
-  cursor: pointer;
-  background-color: #fff;
-}.tradingtab-adiv{
-  background-color: #DAB62E;
-  border-radius: 3px;
-}
-.tradingtab-adiv img,.tradingtab-icon img{
-  width: 80%;
-  padding-left: 10%;
-  padding-right: 10%;
-}
-.tradingtab-icon{
-  width: 33%;
- float: left;
-  text-align: center;
-  
+  .el-tabs__item {
+    .fz(font-size, 26);
+    color: #313131;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .el-tabs__item:hover {
+    // color: #DAB62E;
+    cursor: pointer;
+    // background-color: #fff;
+    color: white;
+  }
+
+  .tradingtab-adiv {
+    background-color: #DAB62E;
+    border-radius: 3px;
+  }
+
+  .tradingtab-adiv img,
+  .tradingtab-icon img {
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .tradingtab-icon {
+    width: 33%;
+    float: left;
+    text-align: center;
+  }
 }

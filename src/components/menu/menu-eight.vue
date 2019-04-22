@@ -208,8 +208,13 @@
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/menu/menu.less";
+.tradingtab {
 .el-tabs__nav {
     margin-left: 0%;
     background-color: #F5F5F4;
+}
+.tradingtab-antique .tradingtab-adiv img {
+    width: 100%;
+}
 }
 </style>
