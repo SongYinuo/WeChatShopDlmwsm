@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       datas: {
-        tabKey: "namekey",
+        tabKey: "10:00",
         timeLimits: {
           timeLimitsArray: [
             {
