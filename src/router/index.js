@@ -15,6 +15,7 @@ const Login = resolve => require(['@/views/login.vue'], resolve)
 const TimeIimit = resolve => require(['@/components/timeIimit/timeIimit.vue'], resolve)
 const HotShop = resolve => require(['@/components/hotShop/hotShop.vue'], resolve)
 const CompanyRank = resolve => require(['@/components/companyRank/companyRank.vue'], resolve)
+const CompanyDetails = resolve => require(['@/components/companyRank/companyDetails.vue'], resolve)
 const Auction = resolve => require(['@/components/auction/auction.vue'], resolve)
 const IntegralShop = resolve => require(['@/components/integralShop/integralShop.vue'], resolve)
 const UndergraduateBusiness = resolve => require(['@/components/undergraduateBusiness/undergraduateBusiness.vue'], resolve)
@@ -87,6 +88,10 @@ export default new Router({
     name: '最具有影响力排名页',
     component: CompanyRank
   }, {
+    path: '/companyDetails/:id',
+    name: '公司排名详情',
+    component: CompanyDetails
+  }, {
     path: '/auction',
     name: '拍卖会页',
     component: Auction
@@ -139,6 +144,5 @@ export default new Router({
     name: '书画摄影',
     component: PaintingPhotography
   }
-  
   ]
 })
