@@ -5,7 +5,7 @@
         <el-header class="tittle">{{detailsInfo.title}}</el-header>
         <el-main class="detailsInfo">
             <el-row>
-                <el-col :span="22" :offset="1" class="detailsInfoText lh1-8">
+                <el-col :span="22" :offset="1" class="detailsInfoText lh1-8 textIndent2-8">
                     {{detailsInfo.id}}-{{detailsInfo.captionText}}
                 </el-col>
                 <el-col class="detailsInfoImg mgTB2">
@@ -38,8 +38,7 @@ export default {
 }
 .detailsInfo {
   .detailsInfoText {
-      .fz(font-size, 28);
-      text-indent: 28px; 
+    .fz(font-size, 28);
   }
   .detailsInfoImg {
     img {
