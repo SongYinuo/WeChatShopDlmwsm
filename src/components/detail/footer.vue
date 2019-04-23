@@ -32,7 +32,7 @@
           <router-link :to="{name:'购物车页'}" class="footer-index">
             <div class="footerCar">
               <i class="icon-index"></i>
-              <span class="badge bgRed colorWhite text-alignCenter" v-show="isShow">1</span>
+              <!-- <span class="badge bgRed colorWhite text-alignCenter">1</span> -->
             </div>
             <span class="foot-text">购物车</span>
           </router-link>
@@ -40,7 +40,7 @@
       </el-col>
       <el-col :span="16">
         <el-col :span="12" class="detail-footer foot-right text-alignCenter bgCF2">
-            <span class="footer-addcar colorBlack" @click="showToggle"> 加入购物车</span>
+            <span class="footer-addcar colorBlack"> 加入购物车</span>
         </el-col>
         <el-col :span="12" class="detail-footer foot-right text-alignCenter bgCOrange">
               <span class="footer-addcar colorWhite"> 立即购买</span>
@@ -138,7 +138,7 @@ export default {
       .fz(font-size, 18);
       position: absolute;
       line-height: 1;
-      left: 18px;
+      left: 12px;
     }
   }
 }
