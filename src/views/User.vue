@@ -1,304 +1,233 @@
 <template lang="html">
-
-  <div class="car">
-      <header class="header">
-          <div class="header-icon">
-              <span class="icon2-user"></span>
-          </div>
-          <span>登录/注册</span>
+  <div class="user">
+      <header class="userHeader pd4 brB10">
+         <el-row>
+           <el-col :span="23" :offset="1">
+                  <div>
+                      <el-col :span="4">
+                        <span class="userHeadPortraitImg">
+                          <img :src="userInfo.headPortraitUrl" v-if="userInfo.login===true">
+                          <img src="../../static/testImg/defaultAvatar.png" v-if="userInfo.login===false">
+                            <span class="userAuthenticationImg">
+                            <img src="../../static/testImg/userVip.png" v-if="userInfo.vip===true">
+                          </span>
+                        </span>
+                      </el-col>
+                      <el-col :span="20">
+                          <el-col :span="16" :offset="1">
+                            <div class="userName pdT6" v-if="userInfo.login===true">
+                              {{userInfo.name}}
+                            </div>
+                            <div class="userName pdT6" v-if="userInfo.login===false">
+                              <router-link :to="{ name: '登录页' }">
+                                <span>登录/注册</span>
+                              </router-link>
+                            </div>
+                          </el-col>
+                          <el-col :span="7" class="signIn signInBrown pdTRBL2 text-alignRight signInBorderR12" v-if="userInfo.login===true">
+                            <router-link :to="{ name: '签到'}">
+                              <span class="colorWhite">每日签到</span>
+                            </router-link>
+                          </el-col>
+                          <el-col :span="21" :offset="1" class="pd4">
+                              <div v-if="userInfo.login===false">
+                                <el-col :span="6" v-for="k in userInfo.linkMenu">
+                                    <div class="text-alignCenter colorGray userText pdT2">{{k.title}}</div>
+                                </el-col>
+                              </div>
+                              <div v-if="userInfo.login===true">
+                                <el-col :span="6" v-for="k in userInfo.linkMenu">
+                                  <router-link :to="{ name: (k.routerLink)}">
+                                    <div class="text-alignCenter userNumTitle">{{k.num}}</div>
+                                    <div class="text-alignCenter colorGray userText pdT2">{{k.title}}</div>
+                                  </router-link>
+                                </el-col>
+                              </div>
+                          </el-col>
+                       </el-col>
+                  </div>
+              <!-- <span>登录/注册</span> -->
+            </el-col>
+          </el-row>
       </header>
       <div class="main">
-          <router-link class="my-indent" :to="{ name: ''}">
-              <span class="my-indent-left">我的订单</span>
-              <div class="my-indent-right">
-                  <span>全部订单</span>
-                  <i class="icon-go"></i>
-              </div>
-          </router-link>
-
-          <section class="my-pay">
-              <router-link :to="{ name: ''}">
-                  <span class="icon2-money"></span>
-                  <p>代付款</p>
+        <el-row class="userMain pd2 userOrderForm">
+          <el-col :span="22" :offset="1" class="brB1 pd4">
+             <el-col :span="16" class="text-alignLeft orderFormTitle">我的订单</el-col>
+             <router-link :to="{ name: '全部' }">
+              <el-col :span="8" class="text-alignRight orderFormMore letterSpacing1 colorGray">查看全部 ></el-col>
+             </router-link>
+          </el-col>
+          <el-col :span="22" :offset="1" class="brB1 pd4">
+            <el-col class="orderFormMenu pd1" v-for="o in userInfo.linkorderFormMenu">
+              <router-link :to="{ name: (o.text) }">
+                <div class="menuIcon"><img :src='o.iconUrl'></div>
+                <div class="menuTitle pd1 text-alignCenter lh1-6 mgT1 colorGray">{{o.text}}</div>
               </router-link>
-              <router-link :to="{ name: ''}">
-                  <span class="icon2-thecar"></span>
-                  <p>待收货</p>
-              </router-link>
-              <router-link :to="{ name: ''}">
-                  <span class="icon2-fixed"></span>
-                  <p>退换修</p>
-              </router-link>
-
-          </section>
-
-          <section class="my-vip">
-            <router-link class="my-vip-top ho" :to="{ name: ''}" >
-              <div class="my-vip-top-div">
-                <span class="icon2-vip">
-                    <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span>
-                </span>
-              </div>
-              <p>
-                <span>会员福利</span><i class="icon-go"></i>
-              </p>
-            </router-link>
-            <router-link class="my-vip-bottom ho" :to="{ name: ''}">
-              <div>
-                <span class="icon2-money"></span>
-              </div>
-              <p>
-                <span>我的优惠</span><i class="icon-go"></i>
-              </p>
-            </router-link>
-          </section>
-
-          <section class="my-service">
-              <router-link class="my-service-top" :to="{ name: ''}">
-                  <div>
-                    <span class="icon2-service">
-                        <span class="path1"></span><span class="path2"></span><span class="path3"></span>
-                    </span>
-                  </div>
-                  <p>
-                    <span>服务中心</span><i class="icon-go"></i>
-                  </p>
-              </router-link>
-              <router-link class="my-service-bottom" :to="{ name: ''}">
-                  <div>
-                    <span class="icon2-milogo"></span>
-                  </div>
-                  <p>
-                    <span>电商之家</span><i class="icon-go"></i>
-                  </p>
-              </router-link>
-          </section>
-
-          <section class="my-settle">
-              <router-link :to="{ name: ''}" class="my-settle-top">
-                  <div>
-                    <span class="icon2-f"></span>
-
-                  </div>
-
-                  <p>
-                    <span>F码通道</span><i class="icon-go"></i>
-                  </p>
-              </router-link>
-              <router-link :to="{ name: ''}" class="my-settle-bottom">
-                <div>
-                  <span class="icon2-settle"></span>
-                </div>
-                <p>
-                  <span>设置</span><i class="icon-go"></i>
-                </p>
-              </router-link>
-          </section>
-
+            </el-col>
+          </el-col>
+        </el-row>
       </div>
-      <v-baseline></v-baseline>
+      <div class="coupon">
+        <el-row>
+          <el-col :span="22" :offset="1">
+            <div class="couponRow pd1">
+              <router-link :to="{ name: '卡券' }">
+                <img :src="userInfo.couponAdvertisingImg">
+              </router-link>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="textMenu">
+        <el-row class="pd2 mgT2">
+          <el-col :span="22" :offset="1" class="brB1 pd2">
+            <el-col :span="16" class="text-alignLeft orderFormTitle textIcon">
+              <img src="../../static/testImg/user-generalize.png">
+              推广中心
+            </el-col>
+            <el-col :span="8" class="text-alignRight orderFormMore letterSpacing1 colorGray">
+              <router-link :to="{ name: '推广中心' }">
+                <span class="pdLR1">></span>
+              </router-link>
+            </el-col>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="22" :offset="1" class="pd2">
+            <el-col :span="16" class="text-alignLeft orderFormTitle textIcon">
+               <img src="../../static/testImg/user-site.png">
+              收货地址
+            </el-col>
+            <el-col :span="8" class="text-alignRight orderFormMore letterSpacing1 colorGray">
+              <router-link :to="{ name: '收货地址' }">
+                <span class="pdLR1">></span>
+              </router-link>
+            </el-col>
+          </el-col>
+        </el-row>
+      </div>
+      <!-- <v-baseline></v-baseline> -->
       <v-footer></v-footer>
     </div>
 </template>
 
 <script>
-  // import * as mockData from '@/http/mock.js' //模拟数据
+// import * as mockData from '@/http/mock.js' //模拟数据
 
-  import Baseline from '@/common/_baseline.vue'
-  import Footer from '@/common/_footer.vue'
-  export default {
-    components: {
-      'v-baseline': Baseline,
-      'v-footer': Footer
-    }
+import Baseline from "@/common/_baseline.vue";
+import Footer from "@/common/_footer.vue";
+export default {
+  data() {
+    return {
+      userInfo: {
+        login: true,
+        headPortraitUrl: "static/testImg/travel.png",
+        name: "行骗艺术家",
+        vip: true,
+        linkMenu: [
+          {
+            title: "心得",
+            num: 122,
+            routerLink: "userExperienceExchange"
+          },
+          {
+            title: "讲堂",
+            num: 123,
+            routerLink: "userLectureRoom"
+          },
+          {
+            title: "书画摄影",
+            num: 162,
+            routerLink: "userPaintingPhotography"
+          },
+          {
+            title: "古董鉴定",
+            num: 172,
+            routerLink: "userAntiqueAppraisal"
+          }
+        ],
+        linkorderFormMenu: [
+          {
+            iconUrl: "static/testImg/user-all.png",
+            text: "全部"
+          },
+          {
+            iconUrl: "static/testImg/user-forCollection.png",
+            text: "待付款"
+          },
+          {
+            iconUrl: "static/testImg/user-shipments.png",
+            text: "待发货"
+          },
+          {
+            iconUrl: "static/testImg/user-take.png",
+            text: "待收货"
+          },
+          {
+            iconUrl: "static/testImg/user-after.png",
+            text: "退款/售后"
+          }
+        ],
+        couponAdvertisingImg: "static/testImg/pic1@2x.png"
+      }
+    };
+  },
+  components: {
+    "v-baseline": Baseline,
+    "v-footer": Footer
   }
+};
 </script>
 
 <style lang="less" scoped>
-  @import '../assets/fz.less';
-  @import '../assets/index/style.less';
-  @import '../assets/user/icon/carstyle.css';
-
-  .car {
-    width: 100%;
-    padding-bottom: 14vw;
-    background-color: #F8FCFF;
-    .header {
-      width: 100%;
-      height: 16vw;
-      background: url(../../static/carbg.png) center 0 #f37d0f;
-      background-size: auto 100%;
-      padding: 3.2vw 0;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      .header-icon {
-        border: .4vw solid #ffffff;
-        background-color: @cl;
-        margin-left: 4vw;
-        -webkit-box-sizing: border-box;
-              box-sizing: border-box;
-        width: 14vw;
-        height: 14vw;
-        line-height: 16vw;
-        text-align: center;
-        border-radius: 50%;
-        span {
-          .fz(font-size, 54);
-          &::before {
-            color: #ffffff;
-          }
-        }
-      }
-      >span {
-        margin-left: 3.2vw;
-        .fz(font-size, 30);
-        color: #ffffff;
-        letter-spacing: .2vw;
-      }
-    }
-    .main {
-      width: 100%;
-      .my-indent {
-        width: 100%;
-        display: block;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        color: #333;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-        padding: 0 5vw;
-        height: 15vw;
-        line-height: 15vw;
-        background-color: #fff;
-        .bd();
-        &:active {
-          background-color: rgb(224, 227, 230)
-        }
-
-        .my-indent-right {
-          span {
-            display: inline-block;
-            .fz(font-size, 28);
-            color: rgba(0, 0, 0, .4);
-            position: relative;
-          }
-          i {
-            position: relative;
-            top: .8vw;
-          }
-        }
-      }
-
-      .my-pay {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        width: 100%;
-        padding: 2vw 0;
-        background-color: #fff;
-        .bd();
-
-        >a {
-          display: block;
-          width: 33.33%;
-          color: #999;
-          text-align: center;
-
-          >span {
-            .fz(font-size, 50);
-            margin-top: 2.3vw;
-            display: block;
-            text-align: center;
-          }
-
-          p {
-            padding: 2.3vw 0;
-            text-align: center;
-          }
-        }
-      }
-
-      .my-vip,.my-service,.my-settle {
-        width: 100%;
-        .mt();
-        .bd();
-        .bt();
-        >a {
-          background-color: #fff;
-          display: block;
-          width: 100%;
-          display: -ms-flex;
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-          height: 15vw;
-          -webkit-box-align: center;
-              -ms-flex-align: center;
-                  align-items: center;
-          -webkit-box-pack: justify;
-              -ms-flex-pack: justify;
-                  justify-content: space-between;
-          padding: 0 6vw;
-          -webkit-box-sizing: border-box;
-                  box-sizing: border-box;
-          &:active {
-            background-color: rgb(224, 227, 230);
-          }
-          >div {
-            -ms-flex: 2;
-            -webkit-box-flex: 2;
-                    flex: 2;
-                    padding-top: 1.3vw;
-          }
-
-          .my-vip-top-div {
-            padding-top: 0;
-          }
-          >p {
-            -ms-flex: 10;
-            -webkit-box-flex: 10;
-                    flex: 10;
-            position: relative;
-
-            &:active {
-              background-color: rgb(224, 227, 230);
-            }
-
-            i {
-              position: absolute;
-              right: 0;
-              top: .4vw;
-            }
-          }
-        }
-
-      }
-    }
-  }
-  /*图标大小不一，重新定义*/
-
-  .icon-go {
+@import "../assets/fz.less";
+@import "../assets/index/style.less";
+@import "../assets/user/icon/carstyle.css";
+@import "../assets/user/user.less";
+.user {
+  .userNumTitle {
     .fz(font-size, 36);
-    &::before {
-      color: #aba8a8;
+  }
+  .userText {
+    .fz(font-size, 24);
+  }
+  .userOrderForm {
+    .orderFormTitle {
+    }
+    .orderFormMore {
+      .fz(font-size, 28);
+    }
+    .orderFormMenu {
+      width: 20%;
+      .menuTitle {
+        .fz(font-size, 28);
+      }
+      .menuIcon {
+        img {
+          width: 28px;
+          height: 28px;
+          margin: 0 auto;
+          display: block;
+        }
+      }
     }
   }
-
-  [class^="icon2-"],
-  [class*=" icon2-"] {
-    .fz(font-size, 50);
+  .coupon {
+    .couponRow {
+      img {
+        width: 100%;
+        border-radius: 8px;
+      }
+    }
   }
-
-  .icon2-service {
-    .fz(font-size, 34);
+  .textMenu {
+    .textIcon {
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
   }
-
+}
 </style>
