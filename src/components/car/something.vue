@@ -1,5 +1,4 @@
 <template lang="html">
-
   <div class="wrap">
     <v-gologin></v-gologin>
     <ul class="something" v-if='carList'>
@@ -21,7 +20,6 @@
             </div>
           </div>
       </li>
-
     </ul>
   </div>
 </template>

@@ -1,5 +1,21 @@
 <template lang="html">
   <section class="details">
+    <el-row class="auctionDetails auctionBgPink pd2" v-if="data.state===!''">
+      <el-col :span="22" :offset="1">
+        <el-col :span="4" class="">
+            <div class="colorWhite text-alignCenter">拍卖</div>
+            <div class="colorWhite text-alignCenter mgT1">主场会</div>
+        </el-col>
+         <!-- <el-col :span="8" :offset="12" v-if="data.unknowAuction.state==='未拍卖'">
+           <div class="colorWhite text-alignRight">{{data.unknowAuction.unknownDate}}{{data.unknowAuction.unknownTime}}开抢</div>
+           <div class="colorWhite text-alignRight mgT1">{{data.unknowAuction.inventoryMax}}限件</div>
+         </el-col> -->
+         <el-col :span="12" :offset="8" v-if="data.auctionIng.state==='已拍卖'">
+           <div class="colorWhite text-alignRight">距离结束还剩 {{data.auctionIng.unknownTime}}</div>
+           <div class="colorWhite text-alignRight mgT1">库存剩余：{{data.auctionIng.inventory}}件</div>
+         </el-col>
+      </el-col>
+    </el-row>
     <el-row class="brB10 mgB2">
         <el-col :span="22" :offset="1" class="details-explainRow">
               <el-col :span="24" class="explainRowPrice colorRed pdB2">¥{{data.price}}元</el-col>
@@ -93,6 +109,18 @@ export default {
         desc: ""
       },
       data: {
+        state: "拍卖",
+        unknowAuction: {
+          state: "未拍卖",
+          unknownDate: "3月28日",
+          unknownTime: "0:00",
+          inventoryMax: 800
+        },
+        auctionIng: {
+          state: "已拍卖",
+          unknownTime: "23:20",
+          inventory: 563
+        },
         title: "【夢工房】龍文堂 造 岩口 道安形 鉄瓶 身縦銘　ZZ-3 ",
         price: "2.4w",
         freightPrice: "150",
@@ -128,6 +156,7 @@ export default {
 <style lang="less">
 @import "../../assets/fz.less";
 @import "../../assets/detail/details.less";
+@import "../../assets/index/style.less";
 .el-dialog {
   width: 100%;
   margin: 0;

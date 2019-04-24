@@ -1,22 +1,19 @@
 <template lang="html">
   <footer class="footer">
-
     <div class="footer-result">
       <p>共{{count}}件 金额：</p>
       <p><span>{{allpay}} </span>元</p>
     </div>
-    <router-link :to="{ name: '分类页'}" class="footer-goon" >
+    <router-link :to="{ name: '首页'}" class="footer-goon" >
       继续购物
     </router-link>
     <a class="footer-pay" @click="goPay">
       去结算
     </a>
   </footer>
-
 </template>
 
 <script>
-
 export default {
   computed: {
     // 勾选的商品数量
@@ -56,11 +53,8 @@ export default {
         // 保存+缓存选择的商品 ,在支付页能用到
         this.$store.dispatch('setSelectedList')
         this.$router.push({ name: '支付页' })
-
       } else {
-
         alert('你还没选择商品')
-
       }
 
     }
