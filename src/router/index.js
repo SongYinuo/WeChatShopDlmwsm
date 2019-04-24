@@ -28,6 +28,7 @@ const HaHundredYears = resolve => require(['@/components/menu/menu-seven.vue'], 
 const TransactionCenter = resolve => require(['@/components/menu/menu-eight.vue'], resolve)
 const GreenFood = resolve => require(['@/components/menu/menu-nine.vue'], resolve)
 const PaintingPhotography = resolve => require(['@/components/menu/menu-ten.vue'], resolve)
+const TradingCenter = resolve => require(['@/components/menuList/tradingCenter.vue'], resolve)
 
 export default new Router({
   routes: [{
@@ -129,7 +130,11 @@ export default new Router({
   }, {
     path: '/menu-eight',
     name: '交易中心',
-    component: TransactionCenter
+    component: TransactionCenter,
+    // children: [{
+    //   path: '/menu-eight/tradingCenter',
+    //   component: TradingCenter
+    // }]
   }, {
     path: '/menu-nine',
     name: '绿色食品',
@@ -138,6 +143,10 @@ export default new Router({
     path: '/menu-ten',
     name: '书画摄影',
     component: PaintingPhotography
+  }, {
+    path: '/tradingCenter',
+    name: '交易中心列表',
+    component: TradingCenter
   }
   
   ]

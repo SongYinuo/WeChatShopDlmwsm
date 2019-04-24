@@ -1,220 +1,273 @@
 <template lang="html">
     <el-container>
         <el-header class="tittle">交易中心</el-header>
-              <el-tabs :tab-position="tabPosition" class="tradingtab">
-                <el-tab-pane label="家居">
+        <div class="trading">
+           <el-tabs :tab-position="tabPosition"  v-model="datas.tabkey">
+              
+                <el-tab-pane v-for="household in datas.households" :label="household.label" :name="household.name">
                   <el-row>
                       <el-col :span="22" :offset="1" class="tradingtab-antique">
-                        <div class="tradingtab-adiv">
-                          <img src="../../../static/testImg/banner01.png">
+                    <div class="tradingtab-adiv">
+                          <img :src="household.houseUrl">
                         </div>
                       </el-col>
                   </el-row>
-                   <div v-for="household in households">
-                      <router-link :to="{ name:(household.text)}">
+                   <div v-for="k in household.iconArray">
+                        
+                      <router-link :to="{ name:'交易中心列表',query: { id: k.id }}">
                         <span class="tradingtab-icon">
-                          <img :src="household.iconurl" >
-                            <span class="menu-strategy tc">{{household.text}}</span>
-                              </span>
+                          <img :src="k.iconurl" >
+                            <span class="menu-strategy tc">{{k.text}}</span>
+                         </span>
                       </router-link>
                    </div>
+                   
                   </el-tab-pane>
-                <el-tab-pane label="古董">
-                  <el-row>
-                    <el-col :span="22" :offset="1" class="tradingtab-antique">
-                      <div class="tradingtab-adiv"><img src="../../../static/testImg/banner01.png"></div>
-                    </el-col>
-                  </el-row>
-                  <div v-for="item in items">
-                    <router-link :to="{ name:(item.text)}">
-                      <span class="tradingtab-icon">
-                        <img :src="item.iconurl" >
-                          <span class="menu-strategy tc">{{item.text}}</span>
-                      </span>
-                    </router-link>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane label="手机">
-                  <el-row>
-                    <el-col :span="22" :offset="1" class="tradingtab-antique">
-                      <div class="tradingtab-adiv"><img src="../../../static/testImg/banner01.png"></div>
-                    </el-col>
-                  </el-row>
-                  <div v-for="phone in phones">
-                    <router-link :to="{ name:(phone.text)}">
-                      <span class="tradingtab-icon">
-                        <img :src="phone.iconurl" >
-                          <span class="menu-strategy tc">{{phone.text}}</span>
-                      </span>
-                    </router-link>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane label="数码">
-                  <el-row>
-                    <el-col :span="22" :offset="1" class="tradingtab-antique">
-                      <div class="tradingtab-adiv"><img src="../../../static/testImg/banner01.png"></div>
-                    </el-col>
-                  </el-row>
-                  <div v-for="digital in digitals">
-                    <router-link :to="{ name:(digital.text)}">
-                      <span class="tradingtab-icon">
-                        <img :src="digital.iconurl" >
-                          <span class="menu-strategy tc">{{digital.text}}</span>
-                      </span>
-                    </router-link>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane label="电脑">
-                  <el-row>
-                    <el-col :span="22" :offset="1" class="tradingtab-antique">
-                      <div class="tradingtab-adiv"><img src="../../../static/testImg/banner01.png"></div>
-                    </el-col>
-                  </el-row>
-                  <div v-for=" computer in computers">
-                    <router-link :to="{ name:(computer.text)}">
-                      <span class="tradingtab-icon">
-                        <img :src=" computer.iconurl" >
-                          <span class="menu-strategy tc">{{computer.text}}</span>
-                      </span>
-                    </router-link>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane label="家电"><el-row>
-                    <el-col :span="22" :offset="1" class="tradingtab-antique">
-                      <div class="tradingtab-adiv"><img src="../../../static/testImg/banner01.png"></div>
-                    </el-col>
-                  </el-row>
-                  <div v-for="appliance in appliances">
-                    <router-link :to="{ name:(appliance.text)}">
-                      <span class="tradingtab-icon">
-                        <img :src="appliance.iconurl" >
-                          <span class="menu-strategy tc">{{appliance.text}}</span>
-                      </span>
-                    </router-link>
-                  </div>
-                </el-tab-pane>
+
              </el-tabs>
+             </div>
           </el-container>
       </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        tabPosition: 'left',
-        households:[
-           {
-             iconurl:"static/testImg/greenFood.png",
-             text:"沙发", 
-            },{
-             iconurl:"static/testImg/greenFood.png",
-             text:"摆设", 
-            },
-            {
-             iconurl:"static/testImg/greenFood.png",
-             text:"复古瓷碗", 
-            },{
-             iconurl:"static/testImg/greenFood.png",
-             text:"搪瓷", 
-            }
+export default {
+  data() {
+    return {
+      
+      tabPosition: "left",
+     
+      datas: {
+        aa: 'aa',
+        tabkey:'jiaju',
+        households: [
+          {
+            label: '家居',
+            name: 'jiaju',
+            houseUrl: "static/testImg/banner01.png",
+            iconArray: [
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "沙发",
+                id: "100001"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "摆设",
+                id: "100002"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "复古瓷碗",
+                id: "100003"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "搪瓷",
+                id: "100004"
+              }
             ],
-        items:[
-           {
-             iconurl:"static/testImg/redMountain.png",
-             text:"玉", 
-            },{
-             iconurl:"static/testImg/redMountain.png",
-             text:"摆设", 
-            },
-            {
-             iconurl:"static/testImg/redMountain.png",
-             text:"复古瓷碗", 
-            },{
-             iconurl:"static/testImg/redMountain.png",
-             text:"搪瓷", 
-            }
+          } ,
+          {
+            label: '古董',
+            name: 'gudong',
+            houseUrl: "static/testImg/banner01.png",
+            iconArray: [
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "沙发",
+                id: "100001"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "摆设",
+                id: "100002"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "复古瓷碗",
+                id: "100003"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "搪瓷",
+                id: "100004"
+              }
             ],
-         phones:[
-           {
-             iconurl:"static/testImg/haHundred.png",
-             text:"手机", 
-            },{
-             iconurl:"static/testImg/haHundred.png",
-             text:"手机", 
-            },
-            {
-             iconurl:"static/testImg/haHundred.png",
-             text:"手机", 
-            },{
-             iconurl:"static/testImg/haHundred.png",
-             text:"手机", 
-            }
+          } ,
+          {
+            label: '手机',
+            name: 'shouji',
+            houseUrl: "static/testImg/banner01.png",
+            iconArray: [
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "沙发",
+                id: "100001"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "摆设",
+                id: "100002"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "复古瓷碗",
+                id: "100003"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "搪瓷",
+                id: "100004"
+              }
             ],
-            digitals:[
-           {
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            },{
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            },
+          },
             {
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            },{
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            }
+            label: '数码',
+            name: 'shuma',
+            houseUrl: "static/testImg/banner01.png",
+            iconArray: [
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "沙发",
+                id: "100001"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "摆设",
+                id: "100002"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "复古瓷碗",
+                id: "100003"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "搪瓷",
+                id: "100004"
+              }
             ],
-            computers:[
-           {
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            },{
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            },
+          } ,
             {
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            },{
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            }
+            label: '电脑',
+            name: 'diannao',
+            houseUrl: "static/testImg/banner01.png",
+            iconArray: [
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "沙发",
+                id: "100001"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "摆设",
+                id: "100002"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "复古瓷碗",
+                id: "100003"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "搪瓷",
+                id: "100004"
+              }
             ],
-            appliances:[
-           {
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            },{
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            },
+          } ,
             {
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            },{
-             iconurl:"static/testImg/tradingCenter.png",
-             text:"手机", 
-            }
+            label: '家电',
+            name: 'jiadian',
+            houseUrl: "static/testImg/banner01.png",
+            iconArray: [
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "沙发",
+                id: "100001"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "摆设",
+                id: "100002"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "复古瓷碗",
+                id: "100003"
+              },
+              {
+                iconurl: "static/testImg/greenFood.png",
+                text: "搪瓷",
+                id: "100004"
+              }
             ],
-       
+          } ,
+        ]
       }
     }
-  };
+  }
+};
 </script>
 
-<style lang="less" >
+<style lang="less">
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/menu/menu.less";
-.tradingtab {
-.el-tabs__nav {
-    margin-left: 0%;
-    background-color: #F5F5F4;
+
+.trading .el-tabs__nav {
+  margin-left: 0%;
+  background-color: #f5f5f4;
+  left: 0;
 }
-.tradingtab-antique .tradingtab-adiv img {
-    width: 100%;
+.trading .el-tabs--left .el-tabs__active-bar.is-left, .el-tabs--left .el-tabs__nav-wrap.is-left::after {
+    left: 0;
+   
 }
+.trading  .el-tabs__item:hover {
+    color: #DAB62E;
+    cursor: pointer;
+    background-color: #fff;
+}
+.tradingtab-adiv img {
+  width: 80%;
+
+  padding-left: 10%;
+}
+
+.tradingtab-adiv {
+  border-radius: 3px;
+  background-color: #dab62e;
+}
+.trading .tradingtab-icon {
+  width: 33%;
+  float: left;
+  text-align: center;
+}
+   
+// .trading .el-tabs--left .el-tabs__active-bar.is-left,
+// .el-tabs--left .el-tabs__nav-wrap.is-left::after {
+//   left: 0;
+// }
+// .trading .el-tabs__item.is-active {
+//   color: #dab62e;
+//   background-color: #ffffff;
+// }
+// .trading .el-tabs__item {
+//   .fz(font-size, 26);
+//   color: #313131;
+// }
+// .trading .el-tabs__item {
+//   height: 50px;
+//   line-height: 50px;
+// }
+
+// .trading .menu-strategy {
+//   .fz(font-size, 26);
+//   color: #313131;
+//   font-weight: bold;
+// }
+
+.tradingtab-icon img{
+  border-radius: 3px;
 }
 </style>
