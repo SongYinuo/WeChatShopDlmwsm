@@ -9,12 +9,13 @@
                   <div v-for="item in items">
                       <router-link  :to="{ name: (item.text)}">
                           <el-row class="smallimg">
-                              <el-col :span="16" class="pd" >  
+                              <el-col :span="12" class="pd" >  
                                 <p class="menu-strategy ">{{item.text}}</p>
-                                <div class="menu-strategy-small">{{item.txt}}</div>
+                                <div class="menu-strategy-small omit">{{item.txt}}</div>
+                                <div class="menuTime">{{item.time}}</div>
                               </el-col>
 
-                              <el-col :span="8">  
+                              <el-col :span="8" :offset="4">  
                             <img :src="item.iconUrl" >
                             
                          </el-col>
@@ -33,7 +34,7 @@
                         <el-col :span="22" >
                             <img :src="array.iconUrl" class="fl menuHeader" >
                             <div class="fl menuHead-txt">{{array.text}}</div>
-                            <div class="fl cl menuHead-smtxt">{{array.txt}}</div>
+                            <div class="fl cl menuHead-smtxt omit">{{array.txt}}</div>
                              <p class="smalltxt-p cl fl">{{array.paragraph}}</p>
                             <div class="cl smalltxt-div">{{array.article}}</div>
                   
@@ -118,18 +119,21 @@ export default {
                     text: "云南旅游攻略",
                     txt: "云南是个风景秀丽的城市，值得推荐！......",
                     iconUrl: "static/testImg/secondCompany.png",
+                    time:"17分钟",
                     state:"审核中"
                 },
                 {
                     text: "云南旅游攻略",
                     txt: "云南是个风景秀丽的城市，值得推荐！......",
                     iconUrl: "static/testImg/secondCompany.png",
+                    time:"17分钟",
                     state:" "
                 },
                 {
                     text: "云南旅游攻略",
                     txt: "云南是个风景秀丽的城市，值得推荐！......",
                     iconUrl: "static/testImg/secondCompany.png",
+                    time:"17分钟",
                     states:"已审核"
                 }
             ],
@@ -168,4 +172,23 @@ export default {
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/menu/menu.less";
+.menuTime{
+    position: absolute;
+    bottom: 10px;
+    .fz(font-size, 24);
+    color: #ADAEAF;
+  }
+  .menuHead-smtxt {
+    margin-left: 45px;
+    .fz(font-size, 22);
+    color: #949494;
+    margin-top: -20px;
+    text-overflow: ellipsis;
+  }
+  .smalltxt-p {
+    .fz(font-size, 28);
+    color: #313131;
+    font-weight: bold;
+    margin-left: 45px;
+  }
 </style>

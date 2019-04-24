@@ -9,12 +9,13 @@
                   <div v-for="item in items">
                       <router-link  :to="{ name: (item.text)}">
                           <el-row class="smallimg">
-                              <el-col :span="16" class="pd" >  
+                              <el-col :span="12" class="pd" >  
                                 <p class="menu-strategy ">{{item.text}}</p>
-                                <div class="menu-strategy-small">{{item.txt}}</div>
+                                <div class="menu-strategy-small omit">{{item.txt}}</div>
+                                <div class="menuTime">{{item.time}}</div>
                               </el-col>
 
-                              <el-col :span="8">  
+                              <el-col :span="8" :offset="4">  
                             <img :src="item.iconUrl" >
                             
                          </el-col>
@@ -33,7 +34,7 @@
                         <el-col :span="22" >
                             <img :src="array.iconUrl" class="fl menuHeader" >
                             <div class="fl menuHead-txt">{{array.text}}</div>
-                            <div class="fl cl menuHead-smtxt">{{array.txt}}</div>
+                            <div class="fl cl menuHead-smtxt omit">{{array.txt}}</div>
                              <p class="smalltxt-p cl fl">{{array.paragraph}}</p>
                             <div class="cl smalltxt-div">{{array.article}}</div>
                   
@@ -116,20 +117,23 @@ export default {
             items: [
                 {
                     text: "红山玉文化源远流长",
-                    txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反......",
+                    txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
                     iconUrl: "static/testImg/secondCompany.png",
+                    time:"17分钟",
                     state:"审核中"
                 },
                 {
                     text: "红山玉文化源远流长",
-                    txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反......",
+                    txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
                     iconUrl: "static/testImg/secondCompany.png",
+                    time:"17分钟",
                     state:" "
                 },
                 {
                     text: "红山玉文化源远流长",
-                    txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反......",
+                    txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
                     iconUrl: "static/testImg/secondCompany.png",
+                    time:"17分钟",
                     states:"已审核"
                 }
             ],
@@ -139,7 +143,7 @@ export default {
                     txt: "47分钟前",
                     iconUrl: "static/testImg/shunPrincess.png",
                     paragraph: "红山文化|论红山文化的历史性",
-                    article: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反......",
+                    article: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
                     photoUrl: "static/testImg/secondCompany.png",
                 },
                 
@@ -150,7 +154,7 @@ export default {
                     txt: "47分钟前",
                     iconUrl:  "static/testImg/shunPrincess.png",
                     paragraph: "红山文化|论红山文化的历史性",
-                    article: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反......",
+                    article: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
                     videoUrl: "http://www.runoob.com/try/demo_source/movie.mp4",
                 },
                
@@ -171,4 +175,25 @@ export default {
 .el-tabs__nav {
     margin-left: 35%;
 }
+.menuHead-smtxt {
+    margin-left: 45px;
+    .fz(font-size, 22);
+    color: #949494;
+    margin-top: -20px;
+  }
+ 
+  .smalltxt-p {
+    .fz(font-size, 28);
+    color: #313131;
+    font-weight: bold;
+    margin-left: 45px;
+  }
+   .menuTime{
+    position: absolute;
+    bottom: 10px;
+    .fz(font-size, 24);
+    color: #ADAEAF;
+  }
+
+
 </style>

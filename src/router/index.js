@@ -40,6 +40,7 @@ const Regimen = resolve => require(['@/components/menu/menu-five.vue'], resolve)
 const ShunPrincess = resolve => require(['@/components/menu/menu-six.vue'], resolve)
 const HaHundredYears = resolve => require(['@/components/menu/menu-seven.vue'], resolve)
 const TransactionCenter = resolve => require(['@/components/menu/menu-eight.vue'], resolve)
+const TradingCenter = resolve => require(['@/components/menuList/tradingCenter.vue'], resolve)
 const GreenFood = resolve => require(['@/components/menu/menu-nine.vue'], resolve)
 const PaintingPhotography = resolve => require(['@/components/menu/menu-ten.vue'], resolve)
 
@@ -148,6 +149,10 @@ export default new Router({
     path: '/menu-eight',
     name: '交易中心',
     component: TransactionCenter
+  },{
+    path: '/tradingCenter',
+    name: '交易中心列表',
+    component: TradingCenter
   }, {
     path: '/menu-nine',
     name: '绿色食品',
