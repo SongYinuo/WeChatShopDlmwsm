@@ -5,7 +5,6 @@
   </router-link>
 </template>
 
-
 <style lang="less" scoped>
   @import '../../assets/fz.less';
   .gologin {

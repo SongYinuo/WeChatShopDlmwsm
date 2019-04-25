@@ -1,10 +1,14 @@
 <template lang="html">
-
   <div class="pay">
-    <v-header>
+    <!-- <v-header>
       <h1 slot="title">支付订单</h1>
-    </v-header>
-
+    </v-header> -->
+    <el-header class="tittle">
+          <div class="back" @click="$router.go(-1)">
+              <i class="el-icon-arrow-left"></i>
+          </div>
+        支付订单
+     </el-header>
     <div class="pay-address">
       <div>
         <p class="main-address-per">收货人:<span>王先生</span></p>

@@ -2,7 +2,12 @@
     <!-- <mt-header title="支持大学生创业">
     </mt-header> -->
     <el-container>
-        <el-header class="tittle">支持大学生创业</el-header>
+        <el-header class="tittle">
+          <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+          </div>
+        支持大学生创业
+        </el-header>
         <el-main class="undergraduateBusinesRow">
             <el-row>
                 <el-col :span="22" :offset="1" class="">

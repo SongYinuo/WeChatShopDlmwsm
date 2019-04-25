@@ -1,8 +1,14 @@
 <template lang="html">
   <div class="login">
-    <v-header>
+    <!-- <v-header>
       <h1 slot="title">登录页</h1>
-    </v-header>
+    </v-header> -->
+    <el-header class="tittle">
+        <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+        </div>
+        登录页
+    </el-header>
     <section>
       <mt-field
        label="账号"
@@ -32,7 +38,6 @@
      size="large"
      @click="logout"
      v-else>退出登录</mt-button>
-
   </div>
 </template>
 

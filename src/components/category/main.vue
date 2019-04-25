@@ -2,10 +2,7 @@
   <div class="main">
     <h2>{{_datas.title}}</h2>
     <ul>
-      <li
-         v-for="(k,i) in _datas.list"
-         :key='i'
-      >
+      <liv-for="(k,i) in _datas.list" :key='i'>
         <router-link :to="{name:'详情页'}">
           <img v-lazy="k.imgPath"><span>{{k.title}}</span>
         </router-link>
@@ -15,30 +12,30 @@
 </template>
 
 <script>
-import { Lazyload } from 'mint-ui';
+import { Lazyload } from "mint-ui";
 export default {
   props: {
     datas: {
       type: Array,
-      default: function () {
-        return []
+      default: function() {
+        return [];
       }
     }
   },
   computed: {
     // 获取当前aside栏选择的是第几个
-    tabIndex () {
-      return this.$store.state.category.tabIndex
+    tabIndex() {
+      return this.$store.state.category.tabIndex;
     },
-    _datas (){
-      const _datas =  {
-        list:[],
-        title:''
-      }
-      return this.datas[this.tabIndex] || _datas
+    _datas() {
+      const _datas = {
+        list: [],
+        title: ""
+      };
+      return this.datas[this.tabIndex] || _datas;
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>

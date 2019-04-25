@@ -2,7 +2,12 @@
     <!-- <mt-header title="拍卖会">
     </mt-header> -->
     <el-container>
-        <el-header class="tittle">拍卖会</el-header>
+        <el-header class="tittle">
+          <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+          </div>
+        拍卖会
+        </el-header>
         <el-main class="auctionRow pd2 mgB2">
             <el-row class="advertising">
                 <el-col class="advertisingImg">
