@@ -1,6 +1,10 @@
 <template lang="html">
-    <mt-header title="搜索">
-    </mt-header>
+    <el-header class="tittle">
+        <div class="back" @click="$router.go(-1)">
+           <i class="el-icon-arrow-left"></i>
+        </div>
+        搜索
+    </el-header>
 </template>
 
 <script>

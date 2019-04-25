@@ -2,7 +2,12 @@
     <!-- <mt-header title="热卖商城">
     </mt-header> -->
     <el-container>
-        <el-header class="tittle">热卖商城</el-header>
+        <el-header class="tittle">
+          <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+          </div>
+        热卖商城
+        </el-header>
         <el-main class="hotShop">
             <el-row>
                 <el-col :span="12" v-for="k in datas.hotShopListArray" class="hotShopRow pdTRBL2">

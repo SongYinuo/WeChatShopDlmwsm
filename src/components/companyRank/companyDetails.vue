@@ -2,7 +2,12 @@
     <!-- <mt-header title="公司排名">
     </mt-header> -->
     <el-container>
-        <el-header class="tittle">{{detailsInfo.title}}</el-header>
+        <el-header class="tittle">
+          <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+          </div>
+        {{detailsInfo.title}}
+        </el-header>
         <el-main class="detailsInfo">
             <el-row>
                 <el-col :span="22" :offset="1" class="detailsInfoText lh1-8 textIndent2-8">

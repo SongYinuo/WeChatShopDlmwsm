@@ -63,8 +63,8 @@ export default {
     height: 7vw;
     position: absolute;
     left: 4vw;
-    top: 2vw;
-    background-color: rgba(0, 0, 0, 0.4);
+    top: 4vw;
+    // background-color: rgba(0, 0, 0, 0.4);
     border-radius: 50%;
     text-align: center;
     span {
@@ -73,7 +73,7 @@ export default {
       .fz(font-size, 40);
       transform: rotate(-180deg);
       &::before {
-        color: #fff;
+        color: #333;
       }
     }
 

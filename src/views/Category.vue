@@ -1,8 +1,14 @@
 <template lang="html">
   <div class="wrap">
-    <v-header class="header">
+    <!-- <v-header class="header">
       <h1 slot="title">商品分类</h1>
-    </v-header>
+    </v-header> -->
+    <el-header class="tittle">
+        <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+        </div>
+        商品分类
+    </el-header>
     <section class="view">
       <v-aside :datas="allData.aside"/>
       <router-view 
@@ -13,7 +19,6 @@
 </template>
 
 <script>
-
 import Header from '@/common/_header.vue'
 import Aside from '@/components/category/aside.vue'
 import category from '@/http/mock.js' //模拟数据

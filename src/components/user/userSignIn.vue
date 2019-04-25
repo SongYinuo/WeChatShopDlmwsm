@@ -1,6 +1,11 @@
 <template lang="html">
     <el-container>
-        <el-header class="tittle">签到</el-header>
+        <el-header class="tittle">
+          <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+          </div>
+          签到
+        </el-header>
         <el-main class="userSignInInfo">
           <el-row>
             <el-col>

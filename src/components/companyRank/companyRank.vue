@@ -2,7 +2,12 @@
     <!-- <mt-header title="公司排名">
     </mt-header> -->
     <el-container>
-        <el-header class="tittle">排名信息</el-header>
+        <el-header class="tittle">
+          <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+          </div>
+        排名信息
+        </el-header>
         <el-main class="companyRank">
             <el-row  class="companyRankRow pd2" v-for="k in companyRanksArray">
                 <el-col :span="22" :offset="1" class="brB1 pdB3">

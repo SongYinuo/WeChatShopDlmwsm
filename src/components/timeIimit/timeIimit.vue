@@ -2,7 +2,12 @@
     <!-- <mt-header title="限时抢购">
     </mt-header> -->
     <el-container>
-        <el-header class="tittle">限时抢购</el-header>
+        <el-header class="tittle">
+          <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+          </div>
+        限时抢购
+        </el-header>
         <el-main class="timeLimit">
             <el-row>
                 <el-col :span="24">

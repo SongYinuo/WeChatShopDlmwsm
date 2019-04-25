@@ -1,10 +1,15 @@
 <template lang="html">
-
     <div class="car">
       <!-- slot分发内容 让子组件混合父组件的内容 -->
-      <v-header>
+      <!-- <v-header>
         <h1 slot="title">购物车</h1>
-      </v-header>
+      </v-header> -->
+      <el-header class="tittle">
+          <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+          </div>
+        购物车
+      </el-header>
       <!-- 根据购物车是否有商品加载不同的组件 -->
       <v-something v-if="count"/>
       <v-nothing v-else/>
