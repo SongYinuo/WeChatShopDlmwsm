@@ -47,6 +47,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import "../assets/header.less";
 .car {
   width: 100%;
   padding-bottom: 14vw;

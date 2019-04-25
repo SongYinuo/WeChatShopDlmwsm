@@ -89,6 +89,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import "../assets/header.less";
 .login {
   >section {
     .tip {
