@@ -2,7 +2,7 @@
   <div class="main">
     <h2>{{_datas.title}}</h2>
     <ul>
-      <liv-for="(k,i) in _datas.list" :key='i'>
+      <li v-for="(k,i) in _datas.list" :key='i'>
         <router-link :to="{name:'详情页'}">
           <img v-lazy="k.imgPath"><span>{{k.title}}</span>
         </router-link>
@@ -39,6 +39,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import "../../assets/header.less";
 .main {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
