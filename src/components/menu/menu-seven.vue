@@ -50,7 +50,7 @@
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
-                    <el-tab-pane label="饰品" name="shipin">
+                    <el-tab-pane label="大米" name="shipin">
                         <el-row>
                             <el-col :span="24">
                                 <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.oneTitle}}</div>
@@ -70,7 +70,7 @@
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
-                    <el-tab-pane label="衣衫" name="yichen">
+                    <el-tab-pane label="水源" name="yichen">
                         <el-row>
                            <el-col :span="24">
                                 <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.twoTitle}}</div>
@@ -90,7 +90,7 @@
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
-                    <el-tab-pane label="口红" name="kouhong">
+                    <el-tab-pane label="空气" name="kouhong">
                         <el-row>
                            <el-col :span="24">
                                 <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.twoTitle}}</div>
@@ -158,86 +158,86 @@ export default {
         oneTitle: "红肠",
         mianmoShunPrincessArray: [
           {
-            url: "static/testImg/product-details01.jpg",
-            title: "顺格格面膜-时尚走 秀必备1",
+            url: "static/testImg/food1.jpg",
+            title: "精品红肠 品味经典-回味无穷",
             price: 124
           },
           {
-            url: "static/testImg/product-details01.jpg",
-            title: "顺格格面膜-时尚走 秀必备2",
+            url: "static/testImg/food1.jpg",
+            title: "精品红肠 品味经典-回味无穷2",
             price: 125
           },
           {
-            url: "static/testImg/product-details01.jpg",
-            title: "顺格格面膜-时尚走 秀必备3",
+            url: "static/testImg/food1.jpg",
+            title: "精品红肠 品味经典-回味无穷",
             price: 126
           },
           {
-            url: "static/testImg/product-details01.jpg",
-            title: "顺格格面膜-时尚走 秀必备4",
+            url: "static/testImg/food1.jpg",
+            title: "精品红肠 品味经典-回味无穷",
             price: 127
           },
           {
-            url: "static/testImg/product-details01.jpg",
-            title: "顺格格面膜-时尚走 秀必备5",
+            url: "static/testImg/food1.jpg",
+            title: "精品红肠 品味经典-回味无穷",
             price: 128
           },
           {
-            url: "static/testImg/product-details01.jpg",
-            title: "顺格格面膜-时尚走 秀必备6",
+            url: "static/testImg/food1.jpg",
+            title: "精品红肠 品味经典-回味无穷",
             price: 129
           },
           {
-            url: "static/testImg/product-details01.jpg",
-            title: "顺格格面膜-时尚走 秀必备7",
+            url: "static/testImg/food1.jpg",
+            title: "精品红肠 品味经典-回味无穷",
             price: 130
           },
           {
-            url: "static/testImg/product-details01.jpg",
-            title: "顺格格面膜-时尚走 秀必备8",
+            url: "static/testImg/food1.jpg",
+            title: "精品红肠 品味经典-回味无穷",
             price: 131
           }
         ],
         twoTitle: "五常大米",
         mianmoShunPrincessArrayTwo: [
           {
-            url: "static/testImg/product-details01-3.jpg",
-            title: "顺格格面膜-时尚走 秀必备11",
+            url: "static/testImg/rice-2.jpg",
+            title: "五常大米 入口回味-唇齿留香",
             price: 224
           },
           {
-            url: "static/testImg/product-details01-3.jpg",
-            title: "顺格格面膜-时尚走 秀必备12",
+            url: "static/testImg/rice-2.jpg",
+            title: "五常大米 入口回味-唇齿留香",
             price: 225
           },
           {
-            url: "static/testImg/product-details01-3.jpg",
-            title: "顺格格面膜-时尚走 秀必备13",
+            url: "static/testImg/rice-2.jpg",
+            title: "五常大米 入口回味-唇齿留香",
             price: 226
           },
           {
-            url: "static/testImg/product-details01-3.jpg",
-            title: "顺格格面膜-时尚走 秀必备14",
+            url: "static/testImg/rice-2.jpg",
+            title: "五常大米 入口回味-唇齿留香",
             price: 227
           },
           {
-            url: "static/testImg/product-details01-3.jpg",
-            title: "顺格格面膜-时尚走 秀必备15",
+            url: "static/testImg/rice-2.jpg",
+            title: "五常大米 入口回味-唇齿留香",
             price: 228
           },
           {
-            url: "static/testImg/product-details01-3.jpg",
-            title: "顺格格面膜-时尚走 秀必备16",
+            url: "static/testImg/rice-2.jpg",
+            title: "五常大米 入口回味-唇齿留香",
             price: 229
           },
           {
-            url: "static/testImg/product-details01-3.jpg",
-            title: "顺格格面膜-时尚走 秀必备17",
+            url: "static/testImg/rice-2.jpg",
+            title: "五常大米 入口回味-唇齿留香",
             price: 230
           },
           {
-            url: "static/testImg/product-details01-3.jpg",
-            title: "顺格格面膜-时尚走 秀必备18",
+            url: "static/testImg/rice-2.jpg",
+            title: "五常大米 入口回味-唇齿留香  ",
             price: 231
           }
         ]
