@@ -9,8 +9,10 @@
                           <img :src="userInfo.headPortraitUrl" v-if="userInfo.login===true">
                           <img src="../../static/testImg/defaultAvatar.png" v-if="userInfo.login===false">
                             <span class="userAuthenticationImg">
-                            <img src="../../static/testImg/userVip.png" v-if="userInfo.vip===true">
-                          </span>
+                              <router-link :to="{ name: 'Vip' }">
+                                <img src="../../static/testImg/userVip.png" v-if="userInfo.vip===true">
+                              </router-link>
+                            </span>
                         </span>
                       </el-col>
                       <el-col :span="20">
