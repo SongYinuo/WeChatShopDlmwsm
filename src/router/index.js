@@ -21,6 +21,7 @@ const UserShippingAddress = resolve => require(['@/components/user/userShippingA
 const UserPromotionCenter = resolve => require(['@/components/user/userPromotionCenter.vue'], resolve)
 const UserSignIn = resolve => require(['@/components/user/userSignIn.vue'], resolve)
 const UserCoupon = resolve => require(['@/components/user/userCoupon.vue'], resolve)
+const Vip = resolve => require(['@/components/user/userVip.vue'], resolve)
 const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
 const Pay = resolve => require(['@/components/car/pay/pay.vue'], resolve)
@@ -233,6 +234,13 @@ export default new Router({
     component: PaintingPhotography,
     meta: {
       title: '书画摄影'
+    }
+  }, {
+    path: '/userVip',
+    name: 'Vip',
+    component: Vip,
+    meta: {
+      title: '我的会员'
     }
   }, {
     path: '/userAntiqueAppraisal',
