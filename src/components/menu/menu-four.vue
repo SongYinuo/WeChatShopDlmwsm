@@ -100,6 +100,11 @@
                    
                 </router-link>
               </div>
+                <el-col> 
+                    <router-link :to="{ name:'首页'}">
+                        <span class="flbtn"><img src="static/testImg/write@2x.png">分享</span>
+                    </router-link>
+             </el-col>
               <el-row>
                 <el-col :span="24"><div class="emptyFOOT"></div></el-col>
               </el-row>

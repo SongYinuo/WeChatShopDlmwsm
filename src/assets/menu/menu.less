@@ -1,5 +1,23 @@
 @import "../../assets/fz.less";
-
+.menuTime{
+  position: absolute;
+  bottom: 10px;
+  .fz(font-size, 24);
+  color: #ADAEAF;
+}
+.menuHead-smtxt {
+  margin-left: 45px;
+  .fz(font-size, 22);
+  color: #949494;
+  margin-top: -20px;
+  text-overflow: ellipsis;
+}
+.smalltxt-p {
+  .fz(font-size, 28);
+  color: #313131;
+  font-weight: bold;
+  margin-left: 45px;
+}
 .el-tabs__nav-wrap::after {
   background-color: transparent;
 }
@@ -180,7 +198,6 @@
 
 .tittle {
   .fz(font-size, 34);
-  font-weight: bold;
   color: #313131;
 }
 
@@ -267,7 +284,25 @@
  
 }
 .PaintingNav{
-  padding: 2vw;
+  padding: 2vw 0;
+  POSITION: relative;
+}
+.flbtn{
+  width: 127px;
+  height: 44px;
+  background: #DAB62E;
+  position:fixed;
+  right: 15px;
+  top:500px;
+  z-index: 99;
+  border-radius: 25px;
+  line-height: 44px;
+  text-align: center;
+  .fz(font-size, 34);
+  color: #fff;
+}.flbtn img{
+  width: 24px;
+  line-height: 44px;
 }
 .PaintingNav{
   .PtImg{
@@ -275,8 +310,38 @@
   }
   .ptText{
     .fz(font-size, 30);
+    color: #313131;
+    font-weight: bold;
+    padding-left: 15px;
   }
   .ptTxt{
     .fz(font-size, 24);
+    padding-left: 22px;
+    color: #545454;
+   
   }
+  .ptbg{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 32px 32px 0 32px;
+    border-color: red transparent ;
+    position: absolute;
+    left: -6vw;
+    top: 1vw;
+    transform:rotate(135deg);
+   
+  }
+  .ptAttribute{
+    .fz(font-size, 22);
+    
+    position: absolute;
+    left: 0vw;
+    top: 3vw;
+    color: #fff;
+    transform:rotate(-45deg);
+    
+   
+  }
+ 
 }

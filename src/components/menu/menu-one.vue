@@ -14,7 +14,6 @@
                                 <div class="menu-strategy-small omit">{{item.txt}}</div>
                                 <div class="menuTime">{{item.time}}</div>
                               </el-col>
-
                               <el-col :span="8" :offset="4">  
                             <img :src="item.iconUrl" >
                             
@@ -22,9 +21,6 @@
                           </el-row>
                       </router-link>
                   </div>
-                 
-                  
-                
               </el-row>
           </el-tab-pane>
           <el-tab-pane label="社区" name="second">
@@ -89,18 +85,17 @@
                         </el-col>
                     </el-row>
                     <el-row type="flex" class="row-bg smallimg " justify="space-around">
-                        
-                            
                             <el-col :span="6" :offset="3"><img :src="array.photoUrl"></el-col>
                             <el-col :span="6"></el-col>
                             <el-col :span="6"></el-col>
-                            
-                            
-                        
                     </el-row>
-                   
                 </router-link>
               </div>
+              <el-col> 
+                    <router-link :to="{ name:'首页'}">
+                        <span class="flbtn"><img src="static/testImg/write@2x.png">分享</span>
+                    </router-link>
+             </el-col>
               <el-row>
                 <el-col :span="24"><div class="emptyFOOT"></div></el-col>
               </el-row>
