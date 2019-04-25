@@ -23,18 +23,69 @@
     }
 
     .signIn {
-        margin-top: 4vw;
+      margin-top: 4vw;
     }
 
     .signInBorderR12 {
-        border-top-left-radius: 2em;
-        border-top-right-radius: 0em;
-        border-bottom-right-radius: 0em;
-        border-bottom-left-radius: 2em;
+      border-top-left-radius: 2em;
+      border-top-right-radius: 0em;
+      border-bottom-right-radius: 0em;
+      border-bottom-left-radius: 2em;
     }
 
-    .userName {
+    .userName {}
+  }
+}
 
+.userSignInInfo {
+  position: relative;
+
+  .userSignInInfoBgImg {
+    img {
+      width: 100%;
     }
   }
+
+  .userSignInInfoDays {
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    position: absolute;
+    top: 20%;
+
+    .signIn {
+      .fz(font-size, 40);
+    }
+
+    .signInInfoDaysBg {
+      .fz(font-size, 72);
+      padding: 8px 10px;
+      background-image: url('../../../static/testImg/qiandaobtn.png');
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+
+    .integralTotalAmount {
+      padding: 12px 24px;
+      border-radius: 20px;
+    }
+  }
+
+  .signDesk {
+    .signDeskRow {
+      position: inherit;
+      top: -12vw;
+      border-radius: 8px;
+    }
+
+    .continuousSignInDays {
+      .fz(font-size, 40);
+
+    }
+
+    .SignInIntegralDescription {
+      .fz(font-size, 28);
+    }
+  }
+
 }
