@@ -1,4 +1,4 @@
-<template lang="html">
+  <template lang="html">
     <el-container>
         <el-header class="tittle">交易中心栏目列表</el-header>
       
