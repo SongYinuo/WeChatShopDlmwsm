@@ -57,6 +57,9 @@ export default new Router({
     name: '分类页',
     redirect: '/category/all',
     component: Category,
+    meta: {
+      title: '分类页'
+    },
     children: [{
       path: '/category/:tab',
       component: CategoryMain
@@ -64,11 +67,17 @@ export default new Router({
   }, {
     path: '/car',
     name: '购物车页',
-    component: Car
+    component: Car,
+    meta: {
+      title: '购物车页'
+    }
   }, {
     path: '/car/pay',
     name: '支付页',
-    component: Pay
+    component: Pay,
+    meta: {
+      title: '支付页'
+    }
   },
   {
     path: '/user',
@@ -76,143 +85,246 @@ export default new Router({
     component: User,
     meta: {
       requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+      title: '用户页'
     },
   }, {
     path: '/detail/:id',
     name: '详情页',
-    component: Detail
+    component: Detail,
+    meta: {
+      title: '详情页'
+    }
   }, {
     path: '/search',
     name: '搜索页',
-    component: Search
+    component: Search,
+    meta: {
+      title: '搜索页'
+    }
   }, {
     path: '/login',
     name: '登录页',
-    component: Login
+    component: Login,
+    meta: {
+      title: '登录页'
+    }
   }, {
     path: '/timeIimit',
     name: '限时抢购页',
-    component: TimeIimit
+    component: TimeIimit,
+    meta: {
+      title: '限时抢购页'
+    }
   }, {
     path: '/hotShop',
     name: '热卖商城页',
-    component: HotShop
+    component: HotShop,
+    meta: {
+      title: '热卖商城页'
+    }
   }, {
     path: '/companyRank',
     name: '最具有影响力排名页',
-    component: CompanyRank
+    component: CompanyRank,
+    meta: {
+      title: '最具有影响力排名页'
+    }
   }, {
     path: '/companyDetails/:id',
     name: '公司排名详情',
-    component: CompanyDetails
+    component: CompanyDetails,
+    meta: {
+      title: '公司排名详情'
+    }
   }, {
     path: '/auction',
     name: '拍卖会页',
-    component: Auction
+    component: Auction,
+    meta: {
+      title: '拍卖会页'
+    }
   }, {
     path: '/integralShop',
     name: '积分商城页',
-    component: IntegralShop
+    component: IntegralShop,
+    meta: {
+      title: '积分商城页'
+    }
   }, {
     path: '/undergraduateBusiness',
     name: '支持大学生创业页',
-    component: UndergraduateBusiness
+    component: UndergraduateBusiness,
+    meta: {
+      title: '支持大学生创业页'
+    }
   }, {
     path: '/menu-one',
     name: '红山',
-    component: Rosewood
+    component: Rosewood,
+    meta: {
+      title: '红山'
+    }
   }, {
     path: '/menu-two',
     name: '旅游',
-    component: Travel
+    component: Travel,
+    meta: {
+      title: '旅游'
+    }
   }, {
     path: '/menu-three',
     name: '讲堂',
-    component: LectureRoom
+    component: LectureRoom,
+    meta: {
+      title: '讲堂'
+    }
   }, {
     path: '/menu-four',
     name: '茶饮',
-    component: Tea
+    component: Tea,
+    meta: {
+      title: '茶饮'
+    }
   }, {
     path: '/menu-five',
     name: '养生',
-    component: Regimen
+    component: Regimen,
+    meta: {
+      title: '养生'
+    }
   }, {
     path: '/menu-six',
     name: '顺格格',
-    component: ShunPrincess
+    component: ShunPrincess,
+    meta: {
+      title: '顺格格'
+    }
   }, {
     path: '/menu-seven',
     name: '哈百年',
-    component: HaHundredYears
+    component: HaHundredYears,
+    meta: {
+      title: '哈百年'
+    }
   }, {
     path: '/menu-eight',
     name: '交易中心',
-    component: TransactionCenter
-  },{
+    component: TransactionCenter,
+    meta: {
+      title: '交易中心'
+    }
+  }, {
     path: '/tradingCenter',
     name: '交易中心列表',
-    component: TradingCenter
+    component: TradingCenter,
+    meta: {
+      title: '交易中心列表'
+    }
   }, {
     path: '/menu-nine',
     name: '绿色食品',
-    component: GreenFood
+    component: GreenFood,
+    meta: {
+      title: '绿色食品'
+    }
   }, {
     path: '/menu-ten',
     name: '书画摄影',
-    component: PaintingPhotography
+    component: PaintingPhotography,
+    meta: {
+      title: '书画摄影'
+    }
   }, {
     path: '/userAntiqueAppraisal',
     name: 'userAntiqueAppraisal',
-    component: UserAntiqueAppraisal
+    component: UserAntiqueAppraisal,
+    meta: {
+      title: '用户古董鉴定'
+    }
   }, {
     path: '/userExperienceExchange',
     name: 'userExperienceExchange',
-    component: UserExperienceExchange
+    component: UserExperienceExchange,
+    meta: {
+      title: '用户心得'
+    }
   }, {
     path: '/userLectureRoom',
     name: 'userLectureRoom',
-    component: UserLectureRoom
+    component: UserLectureRoom,
+    meta: {
+      title: '用户讲堂'
+    }
   }, {
     path: '/userPaintingPhotography',
     name: 'userPaintingPhotography',
-    component: UserPaintingPhotography
+    component: UserPaintingPhotography,
+    meta: {
+      title: '用户书画摄影'
+    }
   }, {
     path: '/userMenuAll',
     name: '全部',
-    component: UserMenuAll
+    component: UserMenuAll,
+    meta: {
+      title: '订单全部'
+    }
   }, {
     path: '/userForCollection',
     name: '待付款',
-    component: UserForCollection
+    component: UserForCollection,
+    meta: {
+      title: '订单待付款'
+    }
   }, {
     path: '/userShipments',
     name: '待发货',
-    component: UserShipments
+    component: UserShipments,
+    meta: {
+      title: '订单待发货'
+    }
   }, {
     path: '/userTake',
     name: '待收货',
-    component: UserTake
+    component: UserTake,
+    meta: {
+      title: '订单待收货'
+    }
   }, {
     path: '/userAfter',
     name: '退款/售后',
-    component: UserAfter
+    component: UserAfter,
+    meta: {
+      title: '订单退款/售后'
+    }
   }, {
     path: '/userPromotionCenter',
     name: '推广中心',
-    component: UserPromotionCenter
+    component: UserPromotionCenter,
+    meta: {
+      title: '用户推广中心'
+    }
   }, {
     path: '/userShippingAddress',
     name: '收货地址',
-    component: UserShippingAddress
+    component: UserShippingAddress,
+    meta: {
+      title: '用户收货地址'
+    }
   }, {
     path: '/userSignIn',
     name: '签到',
-    component: UserSignIn
-  },{
+    component: UserSignIn,
+    meta: {
+      title: '签到'
+    }
+  }, {
     path: '/userCoupon',
     name: '卡券',
-    component: UserCoupon
+    component: UserCoupon,
+    meta: {
+      title: '卡券'
+    }
   }
   ]
 })

@@ -30,7 +30,6 @@ Vue.prototype.$api = api;
 
 
 // 用钩子函数beforeEach()对路由进行判断
-
 router.beforeEach((to, from, next) => {
   window.scrollTo(0,0);
     if (to.meta.requireAuth) {  // 需要权限,进一步进行判断
@@ -49,6 +48,13 @@ router.beforeEach((to, from, next) => {
     }
 })
 
+// 页面修改时修改浏览器标签栏
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+      document.title = to.meta.title
+  }
+  next()
+})
 
 /* eslint-disable no-new */
 new Vue({
