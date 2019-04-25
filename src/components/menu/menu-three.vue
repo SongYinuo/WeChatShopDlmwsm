@@ -3,11 +3,8 @@
     </mt-header> -->
     <el-container>
         <el-header class="tittle">大讲堂</el-header>
-         <el-col :span="22" :offset="1">
-            <el-row></el-row>
-            <el-row >
-                
-                
+         <el-row>
+            <el-col :span="22" :offset="1">
                 <div v-for="item in items">
                     <router-link :to="{ name: (item.text)}">
                         <el-row class="smallimg">
@@ -16,34 +13,20 @@
                                 <div class="menu-strategy-small omit">{{item.txt}}</div>
                                 <span class="menuTime">{{item.time}}</span>
                             </el-col>
-                            
-                        <el-col :span="8" offset="4">  
+                             <el-col :span="8" :offset="4">  
                             <img :src="item.iconUrl" >
                         
                          </el-col>
                         </el-row>
                     </router-link >
                 </div>
-                
-                
-
-                            
-            </el-row>
-            <el-row>
-                  <el-col :span="8" :offset="14">  
-                           <!-- <div class="menu-buttron">
-                               <a href="#">
-                                   <img src="../../../static/testImg/write@2x.png">
-                                   <p>讲个故事</p>
-                                </a>
-                            </div> -->
-                        <el-button type="warning" round class="menuBtn">
-                           <img src="../../../static/testImg/write@2x.png">
-                            讲个故事
-                        </el-button>
-                         </el-col>
-            </el-row>
-         </el-col>
+             </el-col>
+              <el-col> 
+                    <router-link :to="{ name:'首页'}">
+                        <span class="flbtn"><img src="static/testImg/write@2x.png">讲个故事</span>
+                    </router-link>
+             </el-col>
+         </el-row>
   </el-container>
  
 </template>
