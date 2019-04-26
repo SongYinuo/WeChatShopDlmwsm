@@ -1,20 +1,26 @@
 <template lang="html">
 
 <el-container>
-  <el-header class="tittle">养生文化</el-header>
+   <el-header class="tittle">
+    <div class="back" @click="$router.go(-1)">
+        <i class="el-icon-arrow-left"></i>
+    </div>
+    养生文化
+  </el-header>
        <el-col :span="22" :offset="1">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="攻略" name="first">
               <el-row >
                   <div v-for="item in items">
-                      <router-link  :to="{ name: (item.text)}">
+                       <router-link  :to="{ name:'旅游攻略',query: { id: item.id }}">
                           <el-row class="smallimg">
-                              <el-col :span="16" class="pd" >  
+                              <el-col :span="12" class="pd" >  
                                 <p class="menu-strategy ">{{item.text}}</p>
                                 <div class="menu-strategy-small">{{item.txt}}</div>
+                                <span class="menuTime">{{item.time}}</span>
                               </el-col>
 
-                              <el-col :span="8">  
+                              <el-col :span="8" :offset="4">  
                             <img :src="item.iconUrl" >
                             
                          </el-col>
@@ -28,7 +34,7 @@
           </el-tab-pane>
           <el-tab-pane label="社区" name="second">
               <div v-for="array in arrays">
-                <router-link :to="{name: (array.text)}">
+                 <router-link :to="{name: '种草详情',query: { id: array.id }}">
                     <el-row>
                         <el-col :span="22" >
                             <img :src="array.iconUrl" class="fl menuHeader" >
@@ -53,7 +59,7 @@
                 </router-link>
               </div>
               <div v-for="avideo in avideos">
-                <router-link :to="{name: (avideo.text)}">
+                 <router-link :to="{name: '种草详情',query: { id: avideo.id }}">
                     <el-row>
                         <el-col :span="22" >
                             <img :src="avideo.iconUrl" class="fl menuHeader" >
@@ -76,7 +82,7 @@
                 
               </div>
              <div v-for="array in arrays">
-                <router-link :to="{name: (array.text)}">
+                 <router-link :to="{name: '种草详情',query: { id: array.id }}">
                     <el-row>
                         <el-col :span="22" >
                             <img :src="array.iconUrl" class="fl menuHeader" >
@@ -101,7 +107,7 @@
                 </router-link>
               </div>
                <el-col> 
-                    <router-link :to="{ name:'首页'}">
+                    <router-link :to="{ name:'发布分享'}">
                         <span class="flbtn"><img src="static/testImg/write@2x.png">分享</span>
                     </router-link>
              </el-col>
@@ -123,19 +129,25 @@ export default {
                     text: "对胃好的食物",
                     txt: "如何选择一份对胃好不伤胃的早餐呢......",
                     iconUrl: "static/testImg/secondCompany.png",
-                    state:"审核中"
+                    time:"17分钟",
+                    state:"审核中",
+                    id:"120001"
                 },
                 {
                     text: "对胃好的食物",
                     txt: "如何选择一份对胃好不伤胃的早餐呢......",
                     iconUrl: "static/testImg/secondCompany.png",
-                    state:" "
+                    time:"17分钟",
+                    state:" ",
+                    id:"120002"
                 },
                 {
                     text: "对胃好的食物",
                     txt: "如何选择一份对胃好不伤胃的早餐呢......",
                     iconUrl: "static/testImg/secondCompany.png",
-                    states:"已审核"
+                    time:"17分钟",
+                    states:"已审核",
+                    id:"120003"
                 }
             ],
             arrays: [
@@ -146,6 +158,7 @@ export default {
                     paragraph: "红山文化|论红山文化的历史性",
                     article: "如何选择一份对胃好不伤胃的早餐呢......",
                     photoUrl: "static/testImg/secondCompany.png",
+                    id:"120004"
                 },
                 
             ],
@@ -157,6 +170,7 @@ export default {
                     paragraph: "红山文化|论红山文化的历史性",
                     article: "如何选择一份对胃好不伤胃的早餐呢......",
                     videoUrl: "http://www.runoob.com/try/demo_source/movie.mp4",
+                    id:"120005"
                 },
                
             ]

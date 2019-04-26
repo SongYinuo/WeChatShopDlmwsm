@@ -1,20 +1,27 @@
 <template lang="html">
     <el-container>
-      <el-header class="tittle">书画摄影</el-header>
+       <el-header class="tittle">
+         <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+         </div>
+        书画摄影
+    </el-header>
         <el-row class="indexSearchRow pdB2">
            <el-col :span="22" :offset="1">
             <el-input placeholder="请输入内容" v-model="input3" class="serachInput" prefix-icon="el-icon-search"></el-input>
          </el-col>
         <el-col :span="24" v-for="Painting in Paintings" class="PaintingNav">
+            <router-link  :to="{ name:'书画详情',query: { id: Painting.id }}">
             <img :src="Painting.photoUrl" class="PtImg ">
             <div class="ptText pd1 ">《{{Painting.text}}》</div>
             <div class="ptTxt">{{Painting.txt}}</div>
             <div class="ptbg"></div>
             <span class="ptAttribute">{{Painting.attribute}}</span>
+            </router-link>
         </el-col>
      
         <el-col> 
-            <router-link :to="{ name:'首页'}">
+            <router-link :to="{ name:'上传'}">
                 <span class="flbtn"><img src="static/testImg/write@2x.png">上传作品</span>
             </router-link>
         </el-col>

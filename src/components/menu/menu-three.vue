@@ -1,12 +1,16 @@
 <template lang="html">
-    <!-- <mt-header title="讲堂">
-    </mt-header> -->
+    
     <el-container>
-        <el-header class="tittle">大讲堂</el-header>
+         <el-header class="tittle">
+            <div class="back" @click="$router.go(-1)">
+             <i class="el-icon-arrow-left"></i>
+            </div>
+             讲堂
+        </el-header>
          <el-row>
             <el-col :span="22" :offset="1">
                 <div v-for="item in items">
-                    <router-link :to="{ name: (item.text)}">
+                     <router-link  :to="{ name:'故事分类',query: { id: item.id }}">
                         <el-row class="smallimg">
                           <el-col :span="12" class="pd" >  
                                 <p class="menu-strategy ">{{item.text}}</p>
@@ -22,7 +26,7 @@
                 </div>
              </el-col>
               <el-col> 
-                    <router-link :to="{ name:'首页'}">
+                     <router-link  :to="{ name:'发布心得'}">
                         <span class="flbtn"><img src="static/testImg/write@2x.png">讲个故事</span>
                     </router-link>
              </el-col>
@@ -40,19 +44,22 @@ export default {
                     text: "红山玉文化源远流长",
                     txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
                     iconUrl: "static/testImg/secondCompany.png",
-                    time: "17分钟"
+                    time: "17分钟",
+                    id:"11200"
                 },
                 {
                     text: "红山玉文化源远流长",
                     txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
                     iconUrl: "static/testImg/secondCompany.png",
-                    time: "17分钟"
+                    time: "17分钟",
+                    id:"11201"
                 },
                 {
                     text: "红山玉文化源远流长",
                     txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
                     iconUrl: "static/testImg/secondCompany.png",
-                    time: "17分钟"
+                    time: "17分钟",
+                    id:"11202"
                 }
             ]
         }

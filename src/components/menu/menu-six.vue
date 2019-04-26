@@ -1,8 +1,12 @@
 <template lang="html">
-    <!-- <mt-header title="顺格格">
-    </mt-header> -->
+    
     <el-container>
-      <el-header class="tittle">顺格格</el-header>
+      <el-header class="tittle">
+        <div class="back" @click="$router.go(-1)">
+            <i class="el-icon-arrow-left"></i>
+         </div>
+       顺格格
+    </el-header>
       <el-main class="menuShunPrincess">
           <el-row>
             <el-col class="shunPrincessAdvertising">
