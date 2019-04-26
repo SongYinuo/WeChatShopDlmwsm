@@ -1,8 +1,12 @@
 <template lang="html">
-    <!-- <mt-header title="顺格格">
-    </mt-header> -->
+ 
     <el-container>
-      <el-header class="tittle">哈百年</el-header>
+      <el-header class="tittle">
+         <div class="back" @click="$router.go(-1)">
+             <i class="el-icon-arrow-left"></i>
+          </div>
+          哈百年
+      </el-header>
       <el-main class="menuShunPrincess">
           <el-row>
             <el-col class="shunPrincessAdvertising">
@@ -24,11 +28,13 @@
                         </el-row>
                         <el-row class="rows">
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArray" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
+                                  <router-link :to="{ name: '详情页', params: { id: k.id } }">
                                   <div class="bgCfff pdTRBL1">
                                     <img :src="k.url">
                                     <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
                                     <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
                                   </div>
+                                   </router-link>
                                 </el-col>
                         </el-row>
                         <el-row>
@@ -42,11 +48,13 @@
                         </el-row>
                         <el-row>
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArrayTwo" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
+                                  <router-link :to="{ name: '详情页', params: { id: k.id } }">
                                   <div class="bgCfff pdTRBL1">
                                     <img :src="k.url">
                                     <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
                                     <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
                                   </div>
+                                  </router-link>
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
@@ -62,11 +70,13 @@
                         </el-row>
                         <el-row class="rows">
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArray" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
+                                   <router-link :to="{ name: '详情页', params: { id: k.id } }">
                                   <div class="bgCfff pdTRBL1">
                                     <img :src="k.url">
                                     <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
                                     <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
                                   </div>
+                                  </router-link>
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
@@ -82,11 +92,13 @@
                         </el-row>
                         <el-row class="rows">
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArrayTwo" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
+                                   <router-link :to="{ name: '详情页', params: { id: k.id } }">
                                   <div class="bgCfff pdTRBL1">
                                     <img :src="k.url">
                                     <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
                                     <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
                                   </div>
+                                   </router-link>
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
@@ -102,11 +114,13 @@
                         </el-row>
                         <el-row class="rows">
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArrayTwo" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
+                                   <router-link :to="{ name: '详情页', params: { id: k.id } }">
                                   <div class="bgCfff pdTRBL1">
                                     <img :src="k.url">
                                     <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
                                     <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
                                   </div>
+                                    </router-link >
                                 </el-col>
                         </el-row>
                     </el-tab-pane>
@@ -122,11 +136,13 @@
                         </el-row>
                         <el-row class="rows">
                                 <el-col :span="8" v-for="k in datas.mianmoShunPrincessArray" :key="k.id" class="ShunPrincessRow bgCBlue pdTRBL1">
+                                  <router-link :to="{ name: '详情页', params: { id: k.id } }">
                                   <div class="bgCfff pdTRBL1">
                                     <img :src="k.url">
                                     <div class="shunPrincessProductTitle pd2">{{k.title}}</div>
                                     <div class="shunPrincessProductPrice pdB2 colorRed">¥{{k.price}}</div>
                                   </div>
+                                  </router-link>
                                 </el-col>
                         </el-row>
                     </el-tab-pane>

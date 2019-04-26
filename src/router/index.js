@@ -44,7 +44,13 @@ const TransactionCenter = resolve => require(['@/components/menu/menu-eight.vue'
 const TradingCenter = resolve => require(['@/components/menuList/tradingCenter.vue'], resolve)
 const GreenFood = resolve => require(['@/components/menu/menu-nine.vue'], resolve)
 const PaintingPhotography = resolve => require(['@/components/menu/menu-ten.vue'], resolve)
-
+const MenuhongshanOneDetails = resolve => require(['@/components/menu/menuDetails/menuhongshanOneDetails.vue'], resolve)
+const MenuhongshanTwoDetails = resolve => require(['@/components/menu/menuDetails/menuhongshanTwoDetails.vue'], resolve)
+const MenuLectureOneDetails = resolve => require(['@/components/menu/menuDetails/menuLectureOneDetails.vue'], resolve)
+const MenuBookOneDetails = resolve => require(['@/components/menu/menuDetails/menuBookOneDetails.vue'], resolve)
+const MenuReleaseShareOneDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseShareOneDetails.vue'], resolve)
+const MenuReleaseTipsTwoDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseTipsTwoDetails.vue'], resolve)
+const MenuUploadOneDetails = resolve => require(['@/components/menu/menuDetails/menuUploadOneDetails.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -235,7 +241,36 @@ export default new Router({
     meta: {
       title: '书画摄影'
     }
+  },{
+    path: '/menuhongshanOneDetails',
+    name: '旅游攻略',
+    component: MenuhongshanOneDetails,
+    meta: {
+      title: '旅游攻略'
+    }
   }, {
+    path: '/menuhongshanTwoDetails',
+    name: '种草详情',
+    component: MenuhongshanTwoDetails,
+    meta: {
+      title: '种草详情'
+    }
+  },  {
+    path: '/menuLectureOneDetails',
+    name: '故事分类',
+    component: MenuLectureOneDetails,
+    meta: {
+      title: '故事分类'
+    }
+  },  {
+    path: '/menuBookOneDetails',
+    name: '书画详情',
+    component: MenuBookOneDetails,
+    meta: {
+      title: '书画详情'
+    }
+  },     
+  {
     path: '/userVip',
     name: 'Vip',
     component: Vip,
@@ -332,6 +367,27 @@ export default new Router({
     component: UserCoupon,
     meta: {
       title: '卡券'
+    }
+  }, {
+    path: '/menuReleaseShareOneDetails',
+    name: '发布分享',
+    component: MenuReleaseShareOneDetails,
+    meta: {
+      title: '发布分享'
+    }
+  }, {
+    path: '/menuReleaseTipsTwoDetails',
+    name: '发布心得',
+    component: MenuReleaseTipsTwoDetails,
+    meta: {
+      title: '发布心得'
+    }
+  }, {
+    path: '/menuUploadOneDetails',
+    name: '上传',
+    component: MenuUploadOneDetails,
+    meta: {
+      title: '上传'
     }
   }
   ]
