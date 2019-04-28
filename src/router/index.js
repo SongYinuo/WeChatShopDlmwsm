@@ -21,6 +21,7 @@ const UserShippingAddress = resolve => require(['@/components/user/userShippingA
 const UserPromotionCenter = resolve => require(['@/components/user/userPromotionCenter.vue'], resolve)
 const UserSignIn = resolve => require(['@/components/user/userSignIn.vue'], resolve)
 const UserCoupon = resolve => require(['@/components/user/userCoupon.vue'], resolve)
+const UserOrderFormDetail = resolve => require(['@/components/user/userOrderFormDetail/userOrderFormDetails.vue'], resolve)
 const Vip = resolve => require(['@/components/user/userVip.vue'], resolve)
 const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
@@ -339,6 +340,13 @@ export default new Router({
     component: UserAfter,
     meta: {
       title: '订单退款/售后'
+    }
+  }, {
+    path: '/user/userOrderFormDetails/:id',
+    name: '订单详情',
+    component: UserOrderFormDetail,
+    meta: {
+      title: '订单详情'
     }
   }, {
     path: '/userPromotionCenter',

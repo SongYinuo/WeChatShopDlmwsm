@@ -37,21 +37,25 @@
             </router-link>
           </el-col>
           <el-col :span="17" :offset="1" class="pdLR1">
-            <el-col :span="16" class="mgT1">
-              <div class="pd1 productTitle">{{o.title}}</div>
-              <div>
-                <span class="colorGray productSpecification">{{o.specificationSize}} ; </span>
-                <span class="colorGray productSpecification">{{o.specificationShape}} ; </span>
-              </div>
-            </el-col>
-            <el-col :span="7" :offset="1" class="mgT2">
-              <div class="text-alignRight price">¥{{o.price}}</div>
-              <div class="text-alignRight amount">x{{o.amount}}</div>
-              <div class="refundText colorYellow text-alignRight pdT1" v-if="o.state==='退款成功'">退款成功</div>
-            </el-col>
-            <el-col class="pd2">
-              <el-col :span="16" :offset="8">共{{o.amount}}件商品 合计：{{o.price}}</el-col>
-            </el-col>
+            <el-row>
+              <router-link :to="{ name: '订单详情', params: { id: o.orderFormId } } ">
+                <el-col :span="16" class="mgT1">
+                  <div class="pd1 productTitle">{{o.title}}</div>
+                  <div>
+                    <span class="colorGray productSpecification">{{o.specificationSize}} ; </span>
+                    <span class="colorGray productSpecification">{{o.specificationShape}} ; </span>
+                  </div>
+                </el-col>
+                <el-col :span="7" :offset="1" class="mgT2">
+                  <div class="text-alignRight price">¥{{o.price}}</div>
+                  <div class="text-alignRight amount">x{{o.amount}}</div>
+                  <div class="refundText colorYellow text-alignRight pdT1" v-if="o.state==='退款成功'">退款成功</div>
+                </el-col>
+                <el-col class="pd2">
+                  <el-col :span="16" :offset="8">共{{o.amount}}件商品 合计：{{o.price}}</el-col>
+                </el-col>
+              </router-link>
+            </el-row>
             <el-row class="orderFormBtnRow">
               <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.state==='待付款'">
                 <el-button round @click="btnCancellationOrder = true">取消订单</el-button>
@@ -108,6 +112,7 @@ export default {
         listArray: [
           {
             id: "userOrderForm300001",
+            orderFormId: "orderForm200001",
             productImg: "static/testImg/product-details01-3.jpg",
             title: "【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
             specificationSize: "50cm*80cm",
@@ -118,6 +123,7 @@ export default {
           },
           {
             id: "userOrderForm300002",
+            orderFormId: "orderForm200002",
             productImg: "static/testImg/product-details01-3.jpg",
             title: "1【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
             specificationSize: "50cm*80cm",
@@ -128,6 +134,7 @@ export default {
           },
           {
             id: "userOrderForm300003",
+            orderFormId: "orderForm200003",
             productImg: "static/testImg/product-details01-3.jpg",
             title: "2【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
             specificationSize: "50cm*80cm",
@@ -138,6 +145,7 @@ export default {
           },
           {
             id: "userOrderForm300004",
+            orderFormId: "orderForm200004",
             productImg: "static/testImg/product-details01-3.jpg",
             title: "3【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
             specificationSize: "50cm*80cm",
