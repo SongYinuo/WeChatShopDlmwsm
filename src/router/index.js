@@ -52,6 +52,7 @@ const MenuBookOneDetails = resolve => require(['@/components/menu/menuDetails/me
 const MenuReleaseShareOneDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseShareOneDetails.vue'], resolve)
 const MenuReleaseTipsTwoDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseTipsTwoDetails.vue'], resolve)
 const MenuUploadOneDetails = resolve => require(['@/components/menu/menuDetails/menuUploadOneDetails.vue'], resolve)
+const MenuhongshanThreeDetails = resolve => require(['@/components/menu/menuDetails/menuhongshanThreeDetails.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -255,6 +256,13 @@ export default new Router({
     component: MenuhongshanTwoDetails,
     meta: {
       title: '种草详情'
+    }
+  }, {
+    path: '/menuhongshanThreeDetails',
+    name: '种草详情视频',
+    component: MenuhongshanThreeDetails,
+    meta: {
+      title: '种草详情视频'
     }
   },  {
     path: '/menuLectureOneDetails',
