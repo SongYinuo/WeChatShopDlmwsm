@@ -55,7 +55,7 @@
                 </router-link>
               </div>
               <div v-for="avideo in avideos">
-                <router-link :to="{name: '种草详情',query: { id: avideo.id }}">
+                <router-link :to="{name: '种草详情视频',query: { id: avideo.id }}">
                     <el-row>
                         <el-col :span="22" >
                             <img :src="avideo.iconUrl" class="fl menuHeader" >
