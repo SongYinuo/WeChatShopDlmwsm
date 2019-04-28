@@ -52,7 +52,7 @@
                                 </div>
                               </el-col>
                               <el-col :span="3">
-                                <div class="explainOriginalPrice textar">
+                                <div class="explainOriginalPrice text-alignRight">
                                   <del>¥{{swiper.originalPrice}}</del>
                                 </div>
                               </el-col>
