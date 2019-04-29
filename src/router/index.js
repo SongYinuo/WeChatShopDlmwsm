@@ -53,6 +53,7 @@ const MenuReleaseShareOneDetails = resolve => require(['@/components/menu/menuDe
 const MenuReleaseTipsTwoDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseTipsTwoDetails.vue'], resolve)
 const MenuUploadOneDetails = resolve => require(['@/components/menu/menuDetails/menuUploadOneDetails.vue'], resolve)
 const MenuhongshanThreeDetails = resolve => require(['@/components/menu/menuDetails/menuhongshanThreeDetails.vue'], resolve)
+const MenuReleaseParentDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseParentDetails.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -271,7 +272,15 @@ export default new Router({
     meta: {
       title: '故事分类'
     }
-  },  {
+  }, {
+    path: '/menuReleaseParentDetails',
+    name: '发布',
+    component: MenuReleaseParentDetails,
+    meta: {
+      title: '发布'
+    }
+  },
+   {
     path: '/menuBookOneDetails',
     name: '书画详情',
     component: MenuBookOneDetails,
