@@ -22,6 +22,7 @@ const UserPromotionCenter = resolve => require(['@/components/user/userPromotion
 const UserSignIn = resolve => require(['@/components/user/userSignIn.vue'], resolve)
 const UserCoupon = resolve => require(['@/components/user/userCoupon.vue'], resolve)
 const UserOrderFormDetail = resolve => require(['@/components/user/userOrderFormDetail/userOrderFormDetails.vue'], resolve)
+const UserLogisticsDetailsList = resolve => require(['@/components/user/userOrderFormDetail/userLogisticsDetailsList.vue'], resolve)
 const Vip = resolve => require(['@/components/user/userVip.vue'], resolve)
 const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
@@ -355,6 +356,13 @@ export default new Router({
     component: UserOrderFormDetail,
     meta: {
       title: '订单详情'
+    }
+  }, {
+    path: '/user/userLogisticsDetailsList/:logisticsId',
+    name: '物流跟踪详情',
+    component: UserLogisticsDetailsList,
+    meta: {
+      title: '物流跟踪详情'
     }
   }, {
     path: '/userPromotionCenter',
