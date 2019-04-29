@@ -4,49 +4,11 @@
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      推广中心
+      账户明细
     </el-header>
-    <div class="userPromotionCenter">
-      <el-row class="brB10">
-        <el-col class="advettImg">
-          <img :src="promotionCenterInfo.advettImgUrl">
-        </el-col>
-        <el-col :span="22" :offset="1">
-          <div class="commissionTitle pd4 text-alignCenter colorGray">我的佣金（元）</div>
-          <div class="commissionPrice pd4 text-alignCenter">1200</div>
-          <div class="pd2 text-alignCenter">
-            <router-link :to="{ name: '推荐提现' }">
-              <el-button class="bgRed colorWhite">立即提现</el-button>
-            </router-link>
-          </div>
-          <el-col>
-            <el-col :span="8">
-              <div class="pd1">{{promotionCenterInfo.promotionEarnings}}</div>
-              <div class="commissionText colorGray pd2">累计推广收益</div>
-            </el-col>
-            <el-col :span="8">
-              <router-link :to="{ name: '一级推广' }">
-                <div class="pd1">{{promotionCenterInfo.levelOnePromoter}}</div>
-                <div class="commissionText colorGray pd2">一级推广员</div>
-              </router-link>
-            </el-col>
-            <el-col :span="8">
-              <router-link :to="{ name: '二级推广' }">
-                <div class="pd1">{{promotionCenterInfo.levelTwoPromoter}}</div>
-                <div class="commissionText colorGray pd2">二级推广员</div>
-              </router-link>
-            </el-col>
-          </el-col>
-        </el-col>
-      </el-row>
+    <el-main class="userPromotionCenter">
       <el-row>
         <el-col :span="22" :offset="1">
-          <el-col class="pd4 mgB2">
-            <el-col :span="16" class="accountsTitle">账户明细</el-col>
-            <router-link :to="{ name: '账户明细' }">
-              <el-col :span="8" class="text-alignRight"><i class="el-icon-arrow-right"></i></el-col>
-            </router-link>
-          </el-col>
           <el-col class="brB1 pd1" v-for="k in promotionCenterInfo.accountsArray">
             <el-col :span="16">
               <div class="pd1 accountsText">{{k.accountsType}}</div>
@@ -59,7 +21,7 @@
           </el-col>
         </el-col>
       </el-row>
-    </div>
+    </el-main>
   </el-container>
 </template>
 
@@ -116,15 +78,13 @@ export default {
         ]
       }
     };
-  },
-  methods: {}
+  }
 };
 </script>
-
 <style lang="less">
-@import "../../assets/index/style.less";
-@import "../../assets/header.less";
-@import "../../assets/user/user.less";
+@import "../../../assets/index/style.less";
+@import "../../../assets/header.less";
+@import "../../../assets/user/user.less";
 
 .el-main {
   padding: 0;

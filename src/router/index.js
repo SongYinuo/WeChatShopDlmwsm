@@ -23,6 +23,10 @@ const UserSignIn = resolve => require(['@/components/user/userSignIn.vue'], reso
 const UserCoupon = resolve => require(['@/components/user/userCoupon.vue'], resolve)
 const UserOrderFormDetail = resolve => require(['@/components/user/userOrderFormDetail/userOrderFormDetails.vue'], resolve)
 const UserLogisticsDetailsList = resolve => require(['@/components/user/userOrderFormDetail/userLogisticsDetailsList.vue'], resolve)
+const UserPromotionCenterDetails = resolve => require(['@/components/user/userOrderFormDetail/userPromotionCenterDetails.vue'], resolve)
+const UserExtensionAgentLevelOne = resolve => require(['@/components/user/userOrderFormDetail/userExtensionAgentLevelOne.vue'], resolve)
+const UserExtensionAgentLevelTwo = resolve => require(['@/components/user/userOrderFormDetail/userExtensionAgentLevelTwo.vue'], resolve)
+const UserWithdrawDeposit = resolve => require(['@/components/user/userOrderFormDetail/userWithdrawDeposit.vue'], resolve)
 const Vip = resolve => require(['@/components/user/userVip.vue'], resolve)
 const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
@@ -244,7 +248,7 @@ export default new Router({
     meta: {
       title: '书画摄影'
     }
-  },{
+  }, {
     path: '/menuhongshanOneDetails',
     name: '旅游攻略',
     component: MenuhongshanOneDetails,
@@ -265,22 +269,21 @@ export default new Router({
     meta: {
       title: '种草详情视频'
     }
-  },  {
+  }, {
     path: '/menuLectureOneDetails',
     name: '故事分类',
     component: MenuLectureOneDetails,
     meta: {
       title: '故事分类'
     }
-  },  {
+  }, {
     path: '/menuBookOneDetails',
     name: '书画详情',
     component: MenuBookOneDetails,
     meta: {
       title: '书画详情'
     }
-  },     
-  {
+  }, {
     path: '/userVip',
     name: 'Vip',
     component: Vip,
@@ -370,6 +373,34 @@ export default new Router({
     component: UserPromotionCenter,
     meta: {
       title: '用户推广中心'
+    }
+  }, {
+    path: '/userPromotionCenter/userPromotionCenterDetails',
+    name: '账户明细',
+    component: UserPromotionCenterDetails,
+    meta: {
+      title: '账户明细'
+    }
+  }, {
+    path: '/userPromotionCenter/userWithdrawDeposit',
+    name: '推荐提现',
+    component: UserWithdrawDeposit,
+    meta: {
+      title: '推荐提现'
+    }
+  }, {
+    path: '/userPromotionCenter/userExtensionAgentLevelone',
+    name: '一级推广',
+    component: UserExtensionAgentLevelOne,
+    meta: {
+      title: '一级推广'
+    }
+  }, {
+    path: '/userPromotionCenter/userExtensionAgentLevelTwo',
+    name: '二级推广',
+    component: UserExtensionAgentLevelTwo,
+    meta: {
+      title: '二级推广'
     }
   }, {
     path: '/userShippingAddress',
