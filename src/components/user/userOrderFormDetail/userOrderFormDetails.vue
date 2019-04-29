@@ -31,28 +31,31 @@
                 <img src="../../../../static/testImg/user-take.png">
               </div>
             </el-col>
-            <el-col :span="19" :offset="1">
+            <el-col :span="21" :offset="1">
               <div v-for="k in detailsInfo.logisticsDynamicArray">
-                <div class="logisticsInfoRow lh1-6 colorYellow">
-                  <span>快递已在</span>
-                  <span>{{k.logisticsCity}}</span>
-                  <span>{{k.department}}</span>
-                  <span>签收</span>
-                  <span>签收人：{{k.signer}}</span>
-                  <span>本人如有疑问请电联</span>
-                  <span>{{k.signerPhone}}</span>
-                  <span>{{k.signerSpecialPlane}}</span>
-                  <div class="mgT1 pd2 colorGray">{{k.dateTime}}</div>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="1" :offset="1">
-              <div class="logisticsMoreIcon">
-                <i class="el-icon-arrow-right"></i>
+                <el-col :span="22">
+                  <div class="logisticsInfoRow lh1-6 colorYellow">
+                    <span>快递已在</span>
+                    <span>{{k.logisticsCity}}</span>
+                    <span>{{k.department}}</span>
+                    <span>签收</span>
+                    <span>签收人：{{k.signer}}</span>
+                    <span>本人如有疑问请电联</span>
+                    <span>{{k.signerPhone}}</span>
+                    <span>{{k.signerSpecialPlane}}</span>
+                    <div class="mgT1 pd2 colorGray">{{k.dateTime}}</div>
+                  </div>
+               </el-col>
+               <el-col :span="1" :offset="1">
+                  <router-link :to="{ name: '物流跟踪详情', params: { logisticsId: k.logisticsId } }">
+                    <div class="logisticsMoreIcon">
+                      <i class="el-icon-arrow-right"></i>
+                    </div>
+                  </router-link>
+              </el-col>
               </div>
             </el-col>
           </el-col>
-
           <el-col :span="22" :offset="1" class="pd4">
             <el-col :span="2">
               <div class="detailsMainLogisticsIcon">
@@ -266,7 +269,8 @@ export default {
             signer: "小明",
             signerPhone: "15124550264",
             signerSpecialPlane: "0451-82896542",
-            dateTime: "2019-03-05  06:18:12"
+            dateTime: "2019-03-05  06:18:12",
+            logisticsId: "logisticsA100000101"
           }
           //  { logisticsCity: '哈尔滨南岗区', department: '分部', signer: '分部签收', signerPhone: '15524550264',signerSpecialPlane: '0451-82896542' } ,
           //  { logisticsCity: '天津', department: '转部', signer: '签收', signerPhone: '13124550264',signerSpecialPlane: '0451-82896542' }
