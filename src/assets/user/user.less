@@ -324,30 +324,109 @@
   .el-form-item {
     margin-bottom: 0;
   }
+
   .el-form-item__content {
     margin-left: 0;
   }
+
   .usableBalance {
     .fz(font-size, 26);
   }
-  .el-input__inner, .el-input__inner:hover {
+
+  .el-input__inner,
+  .el-input__inner:hover {
     border: none;
   }
+
   .subBtn {
     width: 100%;
   }
+
   .priceCharacter {
     .fz(font-size, 60);
   }
+
   input::-webkit-input-placeholder {
     color: #aab2bd;
     .fz(font-size, 40);
   }
+
   .el-input__inner {
     padding: 0;
     .fz(font-size, 60);
   }
+
   .promptText {
     .fz(font-size, 28);
+  }
+}
+
+.addRow {
+  border-top: 10px solid #f5f5f5;
+  .addInfo {
+    border-bottom: 10px solid #f5f5f5;
+
+    .name {
+      .fz(font-size, 28);
+    }
+
+    .phone {
+      .fz(font-size, 28);
+    }
+
+    .defaultIcon {
+      border-radius: 8px;
+      margin-top: 8px;
+      .fz(font-size, 16);
+    }
+
+    .site {
+      .fz(font-size, 24);
+    }
+
+    .addressTxt {
+      border-bottom: 1px #E9E9E9 solid;
+    }
+  }
+
+  .addInfo:last-child {
+    border: none;
+    margin-bottom: 16vw;
+  }
+
+  .newBtn {
+    position: fixed;
+    bottom: 10px;
+    .el-button {
+      width: 100%;
+    }
+  }
+
+}
+
+.newAddRow {
+  .el-input__inner {
+    border: none;
+    border-bottom: 1px solid #E9E9E9;
+    .fz(font-size, 24);
+    color: #333;
+  }
+  .el-textarea__inner {
+    border: none;
+    border-bottom: 1px solid #E9E9E9;
+    .fz(font-size, 24);
+    color: #333;
+    resize:none;
+  }
+  ::-webkit-input-placeholder { 
+    color:#999;
+    .fz(font-size, 24);
+  }
+  .saveBtn {
+    position: fixed;
+    bottom: 10px;
+    .el-button {
+      width: 100%;
+    }
   }
 }
