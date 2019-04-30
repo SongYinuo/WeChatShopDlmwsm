@@ -27,6 +27,7 @@ const UserPromotionCenterDetails = resolve => require(['@/components/user/userOr
 const UserExtensionAgentLevelOne = resolve => require(['@/components/user/userOrderFormDetail/userExtensionAgentLevelOne.vue'], resolve)
 const UserExtensionAgentLevelTwo = resolve => require(['@/components/user/userOrderFormDetail/userExtensionAgentLevelTwo.vue'], resolve)
 const UserWithdrawDeposit = resolve => require(['@/components/user/userOrderFormDetail/userWithdrawDeposit.vue'], resolve)
+const UserNewAddress = resolve => require(['@/components/user/userOrderFormDetail/userNewAddress.vue'], resolve)
 const Vip = resolve => require(['@/components/user/userVip.vue'], resolve)
 const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
@@ -408,6 +409,13 @@ export default new Router({
     component: UserShippingAddress,
     meta: {
       title: '用户收货地址'
+    }
+  }, {
+    path: '/userShippingAddress/userNewAddress',
+    name: '新增地址',
+    component: UserNewAddress,
+    meta: {
+      title: '新增地址'
     }
   }, {
     path: '/userSignIn',
