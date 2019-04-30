@@ -11,8 +11,8 @@
     </div>
   </div> -->
     <div id="admire">
-        <img src="http://img17.3lian.com/d/file/201703/08/0d04014b873fad9be92e93a4f97412f6.jpg" class="likeimage" v-if="!admire" @click="change()">
-        <img v-else src="http://image.biaobaiju.com/uploads/20180111/01/1515605129-IPibQmRBat.jpg" class="likeimage" @click="change()">
+        <img src="static/testImg/Focus2.png" class="likeimage" v-if="!admire" @click="change()">
+        <img v-else src="static/testImg/Focus1.png" class="likeimage" @click="change()">
     </div>
 </template>
 
@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     change: function() {
+      // alert(11111);
       this.admire == false ? (this.admire = true) : (this.admire = false);
       localStorage.setItem("admire", this.admire); //储存状态到本地，关闭页面重新打开会显示点赞状态
     }
