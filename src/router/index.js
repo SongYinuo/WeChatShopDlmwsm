@@ -33,6 +33,7 @@ const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
 const Pay = resolve => require(['@/components/car/pay/pay.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
+const Collect = resolve => require(['@/views/Collect.vue'], resolve)
 const TimeIimit = resolve => require(['@/components/timeIimit/timeIimit.vue'], resolve)
 const HotShop = resolve => require(['@/components/hotShop/hotShop.vue'], resolve)
 const CompanyRank = resolve => require(['@/components/companyRank/companyRank.vue'], resolve)
@@ -60,6 +61,8 @@ const MenuReleaseTipsTwoDetails = resolve => require(['@/components/menu/menuDet
 const MenuUploadOneDetails = resolve => require(['@/components/menu/menuDetails/menuUploadOneDetails.vue'], resolve)
 const MenuhongshanThreeDetails = resolve => require(['@/components/menu/menuDetails/menuhongshanThreeDetails.vue'], resolve)
 const MenuReleaseParentDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseParentDetails.vue'], resolve)
+const PosterQRcode = resolve => require(['@/components/detail/posterQRcode.vue'], resolve)
+const MenuTabLists = resolve => require(['@/components/menu/menuDetails/MenuTabLists.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -123,6 +126,13 @@ export default new Router({
     component: Login,
     meta: {
       title: '登录页'
+    }
+  }, {
+    path: '/collect',
+    name: '收藏页',
+    component: Collect,
+    meta: {
+      title: '收藏页'
     }
   }, {
     path: '/timeIimit',
@@ -459,6 +469,20 @@ export default new Router({
     component: MenuUploadOneDetails,
     meta: {
       title: '上传'
+    }
+  }, {
+    path: '/details/posterQRcode/:posterQRcodeId/:titleName/:id',
+    name: '分享二维码',
+    component: PosterQRcode,
+    meta: {
+      title: '分享二维码'
+    }
+  }, {
+    path: '/menu/menuTab/tabIdmenuTabLists/:id/:name',
+    name: 'tab栏目分类',
+    component: MenuTabLists,
+    meta: {
+      title: '栏目分类'
     }
   }
   ]

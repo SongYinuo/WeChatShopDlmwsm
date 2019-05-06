@@ -1,4 +1,5 @@
 <template lang="html">
+  <section class="detailsDtails">
     <div class="swiper">
       <mt-swipe :auto="4000">
         <mt-swipe-item v-for="k in datas.swiperUrl" :key="k.id">
@@ -10,6 +11,7 @@
         <span class="icon-go"></span>
       </div>
     </div>
+  </section>
 </template>
 
 <script>
@@ -38,47 +40,48 @@ export default {
 <style lang="less" scoped>
 @import "../../assets/fz.less";
 @import "../../assets/index/style.less";
-
-.swiper {
-  width: 100%;
-  position: relative;
-  .mint-swipe {
+.detailsDtails {
+  .swiper {
     width: 100%;
-    height: 100vw;
-    img {
-      display: block;
+    position: relative;
+    .mint-swipe {
       width: 100%;
-      height: 100%;
-    }
-  }
-  .hotIcon {
-    position: absolute;
-    left: 8vw;
-    top: 8vw;
-    .fz(font-size, 28);
-    border-radius: 8px;
-  }
-  .back {
-    width: 7vw;
-    height: 7vw;
-    position: absolute;
-    left: 4vw;
-    top: 4vw;
-    // background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 50%;
-    text-align: center;
-    span {
-      display: inline-block;
-      line-height: 7vw;
-      .fz(font-size, 40);
-      transform: rotate(-180deg);
-      &::before {
-        color: #333;
+      height: 100vw;
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
       }
     }
+    .hotIcon {
+      position: absolute;
+      left: 8vw;
+      top: 8vw;
+      .fz(font-size, 28);
+      border-radius: 8px;
+    }
+    .back {
+      width: 7vw;
+      height: 7vw;
+      position: absolute;
+      left: 4vw;
+      top: 4vw;
+      // background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 50%;
+      text-align: center;
+      span {
+        display: inline-block;
+        line-height: 7vw;
+        .fz(font-size, 40);
+        transform: rotate(-180deg);
+        &::before {
+          color: #333;
+        }
+      }
 
-    &:active {
-      transform: scale(1.3);
+      &:active {
+        transform: scale(1.3);
+      }
     }
   }
 }

@@ -23,10 +23,8 @@
           </router-link>
         </el-col>
         <el-col :span="8" class="detail-footer foot-left text-alignCenter pdT1">
-          <router-link :to="{name:'分享'}" class="footer-index">
-            <div><i class="el-icon-share"></i></div>
+            <div @click="shardRow = true"><i class="el-icon-share"></i></div>
             <span class="foot-text">分享</span>
-          </router-link>
         </el-col>
         <el-col :span="8" class="detail-footer foot-left text-alignCenter pdT1">
           <router-link :to="{name:'购物车页'}" class="footer-index">
@@ -47,6 +45,22 @@
         </el-col>
       </el-col>
     </el-row>
+    <el-row>
+    <el-dialog title="" class="detailsDialogRow" :visible.sync="shardRow" width="100%" top="0" :append-to-body='true'>
+      <el-row slot="footer" class="dialog-footer pd4">
+        <router-link :to="{ name: '分享二维码', params: { id: id, titleName: menuLinkTitle, posterQRcodeId: posterQRcodeId } }">
+          <el-col :span="12" class="text-alignCenter">
+            <el-col class="shardImg"><img src="../../../static/testImg/sharePosters.png"></el-col>
+            <div class="shardText pd2" @click="sharePosters">生成分享海报</div>
+          </el-col>
+        </router-link>
+        <el-col :span="12" class="text-alignCenter">
+          <el-col class="shardImg"><img src="../../../static/testImg/shardFriend.png"></el-col>
+          <div class="shardText pd2" @click="shardFriend">分享给好友</div>
+        </el-col>
+      </el-row>
+    </el-dialog>
+    </el-row>
   </footer>
 </template>
 
@@ -54,9 +68,22 @@
 import { MessageBox } from "mint-ui";
 import { Toast } from "mint-ui";
 export default {
-  // data: {
-  //   isShow: true
-  // },
+  data() {
+    return {
+      shardRow: false,
+      id: 'Id123456',
+      menuLinkTitle: '二维码',
+      posterQRcodeId: 'posterQRcode122201120'
+    };
+  },
+  methods: {
+    sharePosters() {
+      console.log('分享海报')
+    },
+    shardFriend() {
+      console.log('分享朋友')
+    }
+  }
   // methods: {
   //   showToggle: function() {
   //     this.isShow = !this.isShow;

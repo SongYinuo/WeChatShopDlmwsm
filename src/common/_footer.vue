@@ -19,7 +19,7 @@
         <img slot="icon" class="icon-index" src="../../static/testImg/indexPublishIcon.png">
       </span>
     </mt-tab-item>
-    <mt-tab-item id="分类页">
+    <mt-tab-item id="收藏页">
       <!-- <i slot="icon" class="icon-category"></i> -->
       <img slot="icon" class="icon-index" src="../../static/testImg/indexCollectionIcon.png">
       收藏
