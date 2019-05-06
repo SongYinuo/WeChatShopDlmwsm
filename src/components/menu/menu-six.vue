@@ -21,8 +21,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.oneTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                    <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -42,8 +43,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.twoTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                    <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -64,10 +66,13 @@
               <el-row>
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.oneTitle}}</div>
+                  
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                    <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
+                 
                 </el-col>
               </el-row>
               <el-row class="rows">
@@ -88,8 +93,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.twoTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                     <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -111,8 +117,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.twoTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                    <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -134,8 +141,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.oneTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                    <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -178,6 +186,8 @@
           //     {  text: '包包', name: 'baobao' }
           // ],
           oneTitle: "顺格格面膜",
+          classifyId:"classify-1000",
+          classifyValue:"顺格格面膜",
           mianmoShunPrincessArray: [
             {
               id: "ShunGG00001",
@@ -229,6 +239,8 @@
             }
           ],
           twoTitle: "寡肽原液面膜",
+          classifyId:"classify-1000",
+          classifyValue:"寡肽原液面膜",
           mianmoShunPrincessArrayTwo: [
             {
               id: "YuanYemianmo0000001",

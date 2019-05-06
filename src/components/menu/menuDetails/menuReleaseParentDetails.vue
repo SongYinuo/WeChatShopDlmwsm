@@ -21,10 +21,16 @@
           <el-col class="decil text-alignCenter" :span="4" :offset="6"><i class="el-icon-picture-outline deIcon"></i>
           </el-col>
         </router-link>
-         <router-link  :to="{name:'发布心得'}">
+         <!-- <router-link  :to="{name:'发布心得'}"> -->
+           <!-- <div class="camera"><v-camera /> -->
         <el-col class="decil text-alignCenter" :span="4" :offset="4"> <i class="el-icon-arrow-right deIcon"></i>
+        
         </el-col>
-        </router-link>
+         <div class="Camera">
+            <v-camera />
+          </div>
+        <!-- </div> -->
+        <!-- </router-link> -->
         <el-col :span="6"></el-col>
          
       </el-row>
@@ -37,7 +43,11 @@
   </el-container>
 </template>
 <script>
+  import Camera from "@/common/camera.vue";
   export default {
+    components: {
+      "v-camera": Camera
+    },
     data() {
       return {
 

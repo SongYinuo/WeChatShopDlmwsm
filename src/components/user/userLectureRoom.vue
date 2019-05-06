@@ -4,8 +4,9 @@
           <div class="back" @click="$router.go(-1)">
             <i class="el-icon-arrow-left"></i>
           </div>
-          讲堂
+          用户讲堂
         </el-header>
+        
     </el-container>
 </template>
 

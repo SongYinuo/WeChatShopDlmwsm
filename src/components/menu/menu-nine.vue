@@ -21,8 +21,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.oneTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                    <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -42,8 +43,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.twoTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                    <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -65,8 +67,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.oneTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                   <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -88,8 +91,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.twoTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                    <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -111,8 +115,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.twoTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                    <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -134,8 +139,9 @@
                 <el-col :span="24">
                   <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{datas.oneTitle}}</div>
                   <el-col class="listRome fr" :span="6">
-                    查看更多
-                    <i class="el-icon-arrow-right"></i>
+                   <router-link :to="{ name: '热卖商城页' ,query:{ id: datas.classifyId, value: datas.classifyValue }}">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                  </router-link>
                   </el-col>
                 </el-col>
               </el-row>
@@ -178,6 +184,8 @@
           //     {  text: '包包', name: 'baobao' }
           // ],
           oneTitle: "有机蔬菜",
+          classifyId:"classify-1200",
+          classifyValue:"有机蔬菜",
           mianmoShunPrincessArray: [
             {
               url: "static/testImg/vegetables-1.jpg",
@@ -221,6 +229,8 @@
             }
           ],
           twoTitle: "有机水果",
+          classifyId:"classify-1120",
+          classifyValue:"有机水果",
           mianmoShunPrincessArrayTwo: [
             {
               url: "static/testImg/oringe-1.jpg",

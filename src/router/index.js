@@ -132,7 +132,7 @@ export default new Router({
       title: '限时抢购页'
     }
   }, {
-    path: '/hotShop',
+    path: '/hotShop/:id/:value',
     name: '热卖商城页',
     component: HotShop,
     meta: {
