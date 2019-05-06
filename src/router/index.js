@@ -21,6 +21,7 @@ const UserShippingAddress = resolve => require(['@/components/user/userShippingA
 const UserPromotionCenter = resolve => require(['@/components/user/userPromotionCenter.vue'], resolve)
 const UserSignIn = resolve => require(['@/components/user/userSignIn.vue'], resolve)
 const UserCoupon = resolve => require(['@/components/user/userCoupon.vue'], resolve)
+const UserCouponDetails = resolve => require(['@/components/user/userOrderFormDetail/userCouponDetails.vue'], resolve)
 const UserOrderFormDetail = resolve => require(['@/components/user/userOrderFormDetail/userOrderFormDetails.vue'], resolve)
 const UserLogisticsDetailsList = resolve => require(['@/components/user/userOrderFormDetail/userLogisticsDetailsList.vue'], resolve)
 const UserPromotionCenterDetails = resolve => require(['@/components/user/userOrderFormDetail/userPromotionCenterDetails.vue'], resolve)
@@ -448,6 +449,13 @@ export default new Router({
     component: UserCoupon,
     meta: {
       title: '卡券'
+    }
+  }, {
+    path: '/userCoupon/userCouponDetails/:id',
+    name: '卡券详情',
+    component: UserCouponDetails,
+    meta: {
+      title: '卡券详情'
     }
   }, {
     path: '/menuReleaseShareOneDetails',
