@@ -19,20 +19,66 @@
     .fz(font-size, 28)
   }
 
-  .detailsRow-specification {
-    .specificationProductImg {
-      img {
-        width: 100px;
+  .auctionDetails {
+    height: 14vw;
+  }
+
+  .detailsDialog {
+    .demo-ruleForm {
+      .detailsRow-specification {
+        .specificationProductImg {
+          img {
+            width: 100px;
+          }
+        }
+
+        .specificationProductText {
+          .fz(font-size, 36)
+        }
+
+        .width33-3 {
+          width: 33.3%;
+          margin-right: 2%;
+          border: 1px solid #eee;
+        }
+
+        .el-radio__input.is-checked+.el-radio__label {
+          color: #DAB62E;
+        }
+
+        .el-radio__label {
+          padding: 2vw 0;
+          display: block;
+          width: 100%;
+          float: left;
+          border-radius: 4px;
+        }
+
+        .is-checked {
+          border: 1px solid #DAB62E;
+        }
+
+        .el-radio__original {
+          display: none;
+        }
+
+        .el-radio__input {
+          display: none;
+        }
+      }
+
+      .subBtn {
+        width: 100%;
       }
     }
 
-    .specificationProductText {
-      .fz(font-size, 36)
+    .el-dialog__body {
+      padding: 10px 20px;
     }
-  }
 
-  .auctionDetails {
-    height: 14vw;
+    .el-dialog__header {
+      padding: 10px 20px;
+    }
   }
 }
 
@@ -60,4 +106,47 @@ details.less
 
 .foot-right {
   line-height: 14vw;
+}
+
+.dialog-footer {
+  .shardImg {
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .shardText {
+    .fz(font-size, 24)
+  }
+}
+
+.detailsDialogRow {
+  .el-dialog__body {
+    padding: 10px;
+  }
+}
+
+.posterQRcodeInfo {
+  .posterQRcodeRow {
+    img {
+      width: 100%;
+    }
+
+    .posterQRcodUimg {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+    }
+
+    .posterQRcodUname {
+      line-height: 8vw;
+    }
+  }
+
+  .appletOfWeChatInfo {
+    img {
+      width: 100%;
+    }
+  }
 }
