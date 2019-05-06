@@ -61,6 +61,7 @@ const MenuUploadOneDetails = resolve => require(['@/components/menu/menuDetails/
 const MenuhongshanThreeDetails = resolve => require(['@/components/menu/menuDetails/menuhongshanThreeDetails.vue'], resolve)
 const MenuReleaseParentDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseParentDetails.vue'], resolve)
 const PosterQRcode = resolve => require(['@/components/detail/posterQRcode.vue'], resolve)
+const MenuTabLists = resolve => require(['@/components/menu/menuDetails/MenuTabLists.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -467,6 +468,13 @@ export default new Router({
     component: PosterQRcode,
     meta: {
       title: '分享二维码'
+    }
+  }, {
+    path: '/menu/menuTab/tabIdmenuTabLists/:id/:name',
+    name: 'tab栏目分类',
+    component: MenuTabLists,
+    meta: {
+      title: '栏目分类'
     }
   }
   ]
