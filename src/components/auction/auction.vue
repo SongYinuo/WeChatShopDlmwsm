@@ -225,6 +225,15 @@ export default {
   padding: 0;
 }
 .auctionRow {
+  .el-tabs__active-bar {
+    display: none;
+  }
+  .el-tabs__nav-wrap::after {
+    display: none;
+  }
+  .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
+    padding: 0 20px;
+  }
   .el-tabs__header {
     margin-bottom: 4px;
   }

@@ -33,6 +33,7 @@ const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
 const Pay = resolve => require(['@/components/car/pay/pay.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
+const Collect = resolve => require(['@/views/Collect.vue'], resolve)
 const TimeIimit = resolve => require(['@/components/timeIimit/timeIimit.vue'], resolve)
 const HotShop = resolve => require(['@/components/hotShop/hotShop.vue'], resolve)
 const CompanyRank = resolve => require(['@/components/companyRank/companyRank.vue'], resolve)
@@ -125,6 +126,13 @@ export default new Router({
     component: Login,
     meta: {
       title: '登录页'
+    }
+  }, {
+    path: '/collect',
+    name: '收藏页',
+    component: Collect,
+    meta: {
+      title: '收藏页'
     }
   }, {
     path: '/timeIimit',
