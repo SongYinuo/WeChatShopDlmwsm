@@ -39,7 +39,7 @@
                               </div>
                               <div v-if="userInfo.login===true">
                                 <el-col :span="6" v-for="k in userInfo.linkMenu">
-                                  <router-link :to="{ name: (k.routerLink)}">
+                                  <router-link :to="{ name: (k.routerLink), query:{ id:k.id }}">
                                     <div class="text-alignCenter userNumTitle">{{k.num}}</div>
                                     <div class="text-alignCenter colorGray userText pdT2">{{k.title}}</div>
                                   </router-link>
@@ -131,17 +131,18 @@ export default {
           {
             title: "心得",
             num: 122,
-            routerLink: "userExperienceExchange"
+            routerLink: "红山"
           },
           {
             title: "讲堂",
             num: 123,
-            routerLink: "userLectureRoom"
+            routerLink: "讲堂",
+            id:"12000"
           },
           {
             title: "书画摄影",
             num: 162,
-            routerLink: "userPaintingPhotography"
+            routerLink: "书画摄影"
           },
           {
             title: "古董鉴定",

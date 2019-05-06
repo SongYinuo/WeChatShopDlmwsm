@@ -38,20 +38,13 @@
                                     <div class="fl cl menuHead-smtxt omit">{{array.txt}}</div>
                                     <p class="smalltxt-p cl fl">{{array.paragraph}}</p>
                                     <div class="cl smalltxt-div">{{array.article}}</div>
-
                                 </el-col>
                             </el-row>
                             <el-row type="flex" class="row-bg smallimg " justify="space-around">
-
-
                                 <el-col :span="6" :offset="3"><img :src="array.photoUrl"></el-col>
                                 <el-col :span="6"><img :src="array.photoUrl"></el-col>
                                 <el-col :span="6"><img :src="array.photoUrl"></el-col>
-
-
-
                             </el-row>
-
                         </router-link>
                     </div>
                     <div v-for="avideo in avideos">
@@ -63,19 +56,14 @@
                                     <div class="fl cl menuHead-smtxt">{{avideo.txt}}</div>
                                     <p class="smalltxt-p cl fl">{{avideo.paragraph}}</p>
                                     <div class="cl smalltxt-div">{{avideo.article}}</div>
-
                                 </el-col>
                             </el-row>
                             <el-row :gutter="22" class="mg ">
-
                                 <el-col :span="22" :offset="3" class=" smallimg">
                                     <video :src="avideo.videoUrl" controls="controls" class="menu-video"></video>
                                 </el-col>
-
                             </el-row>
-
                         </router-link>
-
                     </div>
                     <div v-for="array in arrays">
                         <router-link :to="{name: '种草详情',query: { id: array.id }}">
