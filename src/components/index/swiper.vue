@@ -15,27 +15,27 @@ export default {
       swipeData: [
         {
           title: "轮播一",
-          imgUrl: "../../../static/testImg/banner01.png",
+          imgUrl: "static/testImg/banner01.png",
           id: "banner1"
         },
         {
           title: "轮播二",
-          imgUrl: "../../../static/testImg/banner02.png",
+          imgUrl: "static/testImg/banner02.png",
           id: "banner2"
         },
         {
           title: "轮播三",
-          imgUrl: "../../../static/testImg/banner01.png",
+          imgUrl: "static/testImg/banner01.png",
           id: "banner3"
         },
         {
           title: "轮播四",
-          imgUrl: "../../../static/testImg/banner02.png",
+          imgUrl: "static/testImg/banner02.png",
           id: "banner4"
         },
         {
           title: "轮播五",
-          imgUrl: "../../../static/testImg/banner01.png",
+          imgUrl: "static/testImg/banner01.png",
           id: "banner5"
         }
       ]

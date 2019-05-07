@@ -81,70 +81,70 @@ export default {
         {
           id: 'IntegralA100001',
           title: "1神龟",
-          imgUrl: "../../../static/testImg/productImg.png",
+          imgUrl: "static/testImg/productImg.png",
           textAnnotation: "1300积分送30",
           price: "414"
         },
         {
           id: 'IntegralA100002',
           title: "2神龟",
-          imgUrl: "../../../static/testImg/productImg.png",
+          imgUrl: "static/testImg/productImg.png",
           textAnnotation: "21300积分送30",
           price: "415"
         },
         {
           id: 'IntegralA100003',
           title: "3神龟",
-          imgUrl: "../../../static/testImg/productImg.png",
+          imgUrl: "static/testImg/productImg.png",
           textAnnotation: "31300积分送30",
           price: "416"
         },
         {
           id: 'IntegralA100004',
           title: "4神龟",
-          imgUrl: "../../../static/testImg/productImg.png",
+          imgUrl: "static/testImg/productImg.png",
           textAnnotation: "41300积分送30",
           price: "417"
         },
         {
           id: 'IntegralA100005',
           title: "5神龟",
-          imgUrl: "../../../static/testImg/productImg.png",
+          imgUrl: "static/testImg/productImg.png",
           textAnnotation: "51300积分送30",
           price: "418"
         },
         {
           id: 'IntegralA100006',
           title: "6神龟",
-          imgUrl: "../../../static/testImg/productImg.png",
+          imgUrl: "static/testImg/productImg.png",
           textAnnotation: "61300积分送30",
           price: "419"
         },
         {
           id: 'IntegralA100007',
           title: "7神龟",
-          imgUrl: "../../../static/testImg/productImg.png",
+          imgUrl: "static/testImg/productImg.png",
           textAnnotation: "71300积分送30",
           price: "420"
         },
         {
           id: 'IntegralA100008',
           title: "8神龟",
-          imgUrl: "../../../static/testImg/productImg.png",
+          imgUrl: "static/testImg/productImg.png",
           textAnnotation: "81300积分送30",
           price: "414"
         },
         {
           id: 'IntegralA100009',
           title: "9神龟",
-          imgUrl: "../../../static/testImg/productImg.png",
+          imgUrl: "static/testImg/productImg.png",
           textAnnotation: "91300积分送30",
           price: "414"
         },
         {
           id: 'IntegralA1000010',
           title: "10神龟",
-          imgUrl: "../../../static/testImg/productImg.png",
+          imgUrl: "static/testImg/productImg.png",
           textAnnotation: "11300积分送30",
           price: "414"
         }
@@ -161,6 +161,8 @@ export default {
         slidesPerView : 3.04,
         pagination: ".swiper-pagination",
         paginationClickable: true,
+        loop: true,
+        autoplay: 5000
       });
     }
   }

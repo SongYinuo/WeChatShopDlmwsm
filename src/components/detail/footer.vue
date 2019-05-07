@@ -17,10 +17,8 @@
     <el-row style="width: 100%">
       <el-col :span="8">
         <el-col :span="8" class="detail-footer foot-left text-alignCenter pdT1">
-          <router-link :to="{name:'收藏'}">
             <div><i class="el-icon-star-off"></i></div>
-            <span class="foot-text">收藏</span>
-          </router-link>
+            <span class="foot-text" @click="clickCollect">收藏</span>
         </el-col>
         <el-col :span="8" class="detail-footer foot-left text-alignCenter pdT1">
             <div @click="shardRow = true"><i class="el-icon-share"></i></div>
@@ -71,17 +69,23 @@ export default {
   data() {
     return {
       shardRow: false,
-      id: 'Id123456',
-      menuLinkTitle: '二维码',
-      posterQRcodeId: 'posterQRcode122201120'
+      id: "Id123456",
+      menuLinkTitle: "二维码",
+      posterQRcodeId: "posterQRcode122201120"
     };
   },
   methods: {
     sharePosters() {
-      console.log('分享海报')
+      console.log("分享海报");
     },
     shardFriend() {
-      console.log('分享朋友')
+      console.log("分享朋友");
+    },
+    clickCollect() {
+      this.$message({
+        message: "恭喜你，收藏成功",
+        type: "success"
+      });
     }
   }
   // methods: {
