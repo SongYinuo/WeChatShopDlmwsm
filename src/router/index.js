@@ -64,6 +64,8 @@ const MenuhongshanThreeDetails = resolve => require(['@/components/menu/menuDeta
 const MenuReleaseParentDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseParentDetails.vue'], resolve)
 const PosterQRcode = resolve => require(['@/components/detail/posterQRcode.vue'], resolve)
 const MenuTabLists = resolve => require(['@/components/menu/menuDetails/MenuTabLists.vue'], resolve)
+const MenuIdentificationDetails = resolve => require(['@/components/menu/menuDetails/menuIdentificationDetails.vue'], resolve)
+const MenuThroughIdentificationDetails = resolve => require(['@/components/menu/menuDetails/menuThroughIdentificationDetails.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -491,6 +493,20 @@ export default new Router({
     component: MenuTabLists,
     meta: {
       title: '栏目分类'
+    }
+  }, {
+    path: '/menuIdentificationDetails',
+    name: '鉴定',
+    component: MenuIdentificationDetails,
+    meta: {
+      title: '鉴定'
+    }
+  },{
+    path: '/menuThroughIdentificationDetails',
+    name: '已发布-鉴定',
+    component: MenuThroughIdentificationDetails,
+    meta: {
+      title: '已发布-鉴定'
     }
   }
   ]

@@ -19,7 +19,6 @@
                             </el-col>
                             <el-col :span="8" :offset="4">
                                 <img :src="item.iconUrl">
-
                             </el-col>
                         </el-row>
                     </router-link>
@@ -66,7 +65,6 @@
         }
     };
 </script>
-
 <style lang="less" scoped>
     @import "../../assets/index/style.less";
     @import "../../assets/header.less";

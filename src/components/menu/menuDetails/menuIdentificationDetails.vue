@@ -4,7 +4,7 @@
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      上传
+      鉴定
     </el-header>
     <el-row class="upload">
       <el-col :span="22" :offset="1">
@@ -19,15 +19,15 @@
       <el-col :span="22" :offset="1">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
           <el-form-item prop="name" label=" " label-width="10px">
-            <el-input type="text" placeholder="作品名" v-model="ruleForm.name" maxlength="10" show-word-limit>
+            <el-input type="text" placeholder="古董名称" v-model="ruleForm.name" maxlength="10" show-word-limit>
             </el-input>
           </el-form-item>
           <el-form-item prop="nameAuthor" label=" " label-width="10px">
-            <el-input type="text" placeholder="作者名" v-model="ruleForm.nameAuthor" maxlength="10" show-word-limit>
+            <el-input type="text" placeholder="联系人" v-model="ruleForm.nameAuthor" maxlength="10" show-word-limit>
             </el-input>
           </el-form-item>
 
-          <el-form-item label="尺寸" required class="size" label-width="40px">
+          <!-- <el-form-item label="尺寸" required class="size" label-width="40px">
             <el-row class="sizes">
               <el-col :span="9">
                 <el-form-item prop="date1">
@@ -42,15 +42,15 @@
               </el-col>
               <el-col class="line" :span="3">cm</el-col>
             </el-row>
-          </el-form-item>
-          <el-form-item label="年份" required class="material" label-width="40px">
+          </el-form-item> -->
+          <el-form-item label=" " required  label-width="10px">
             <el-col :span="24">
               <el-form-item prop="year1">
-                <el-input type="text" placeholder="请输入年份" v-model="ruleForm.year1" style="width: 100%;"></el-input>
+                <el-input type="text" placeholder="联系方式" v-model="ruleForm.year1" style="width: 100%;"></el-input>
               </el-form-item>
             </el-col>
           </el-form-item>
-          <el-form-item label="材质" required class="material" label-width="40px">
+          <!-- <el-form-item label="材质" required class="material" label-width="40px">
             <el-col :span="24">
               <el-form-item prop="year1">
                 <el-select v-model="ruleForm.region" placeholder="请选择材质" style="width: 100%;">
@@ -60,7 +60,7 @@
                 </el-select>
               </el-form-item>
             </el-col>
-          </el-form-item>
+          </el-form-item> -->
 
           <el-form-item prop="messageText" class="messageTexts">
             <el-col :span="24">
@@ -91,27 +91,21 @@
         ruleForm: {
           name: '',
           nameAuthor: '',
-          date1: '',
-          date2: '',
+          
           year1: '',
           region: '',
           messageText: '',
         },
         rules: {
           name: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
+            { required: true, message: '请输入古董', trigger: 'blur' },
             { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
           ], nameAuthor: [
-            { required: true, message: '请输入名称', trigger: 'blur' },
-            { min: 2, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+            { required: true, message: '请输入联系人名称', trigger: 'blur' },
+            { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
           ],
-          date1: [
-            { required: true, message: '请输入长度', trigger: 'change' }
-          ],
-          date2: [
-            { required: true, message: '请输入宽度', trigger: 'change' }
-          ], year1: [
-            { required: true, message: '请输入年限', trigger: 'change' }
+           year1: [
+            { required: true, message: '请输入联系电话', trigger: 'change' }
           ],
           region: [
             { required: true, message: '请选择活动区域', trigger: 'change' }
@@ -133,7 +127,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             // alert('submit!');
-            console.log(this.ruleForm.name, this.ruleForm.nameAuthor, this.ruleForm.date1, this.ruleForm.date2, this.ruleForm.year1, this.ruleForm.region, this.ruleForm.messageText);
+            console.log(this.ruleForm.name, this.ruleForm.nameAuthor,  this.ruleForm.year1, this.ruleForm.region, this.ruleForm.messageText);
           } else {
             console.log('error submit!!');
             return false;

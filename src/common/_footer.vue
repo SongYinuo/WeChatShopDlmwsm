@@ -12,7 +12,7 @@
       <img slot="icon" class="icon-index" src="../../static/testImg/indexCarIcon.png">
       购物车
     </mt-tab-item>
-    <mt-tab-item id="分类页">
+    <mt-tab-item id="鉴定">
       <!-- <i slot="icon" class="icon-category"></i>
       分类 -->
       <span class="spanImg">
