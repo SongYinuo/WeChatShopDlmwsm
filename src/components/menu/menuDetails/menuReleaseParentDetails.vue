@@ -21,11 +21,10 @@
           <el-col class="decil text-alignCenter" :span="4" :offset="6"><i class="el-icon-picture-outline deIcon"></i>
           </el-col>
         </router-link>
-         <!-- <router-link  :to="{name:'发布心得'}"> -->
-           <!-- <div class="camera"><v-camera /> -->
+        <router-link :to="{name:'发布分享'}">
         <el-col class="decil text-alignCenter" :span="4" :offset="4"> <i class="el-icon-arrow-right deIcon"></i>
-        
         </el-col>
+         </router-link>
          <div class="Camera">
             <v-camera />
           </div>

@@ -7,7 +7,7 @@
       鉴定
     </el-header>
     <el-row class="upload">
-      <el-col :span="22" :offset="1">
+      <el-col :span="22" :offset="1" class="phptos">
         <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
           :on-preview="handlePictureCardPreview" :on-remove="handleRemove" class="bgRelease">
           <i class="el-icon-plus">添加图片</i>
@@ -26,42 +26,13 @@
             <el-input type="text" placeholder="联系人" v-model="ruleForm.nameAuthor" maxlength="10" show-word-limit>
             </el-input>
           </el-form-item>
-
-          <!-- <el-form-item label="尺寸" required class="size" label-width="40px">
-            <el-row class="sizes">
-              <el-col :span="9">
-                <el-form-item prop="date1">
-                  <el-input type="text" placeholder=" " v-model="ruleForm.date1" style="width: 100%;"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col class="line" :span="3">cm ×</el-col>
-              <el-col :span="9">
-                <el-form-item prop="date2">
-                  <el-input placeholder=" " v-model="ruleForm.date2" style="width: 100%;"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col class="line" :span="3">cm</el-col>
-            </el-row>
-          </el-form-item> -->
-          <el-form-item label=" " required  label-width="10px">
+          <el-form-item label=" " required label-width="10px">
             <el-col :span="24">
               <el-form-item prop="year1">
                 <el-input type="text" placeholder="联系方式" v-model="ruleForm.year1" style="width: 100%;"></el-input>
               </el-form-item>
             </el-col>
           </el-form-item>
-          <!-- <el-form-item label="材质" required class="material" label-width="40px">
-            <el-col :span="24">
-              <el-form-item prop="year1">
-                <el-select v-model="ruleForm.region" placeholder="请选择材质" style="width: 100%;">
-                  <el-option label="布面油画" value="Oilcanvas"></el-option>
-                  <el-option label="彩铅画" value=" colorlead"></el-option>
-                  <el-option label="其他" value="other"></el-option>
-                </el-select>
-              </el-form-item>
-            </el-col>
-          </el-form-item> -->
-
           <el-form-item prop="messageText" class="messageTexts">
             <el-col :span="24">
               <el-input type="textarea" placeholder="说点什么吧" v-model="ruleForm.messageText" maxlength="50"
@@ -69,11 +40,18 @@
               </el-input>
             </el-col>
           </el-form-item>
-
-
+          <el-col :span="24" class="video">
+            <div class="videotxt pdB3">视频</div>
+            <el-upload class="pdB3" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
+              :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                 <i class="el-icon-plus"></i>
+            </el-upload>
+            <el-dialog :visible.sync="dialogVisible">
+                <img width="100%" :src="dialogImageUrl" alt="">
+            </el-dialog>
+          </el-col>
           <el-col :span="22" :offset="1">
-            <el-button type="warning" class="release" @click="submitForm('ruleForm')">发布</el-button>
-
+            <el-button type="warning" class="releasevideo" @click="submitForm('ruleForm')">发布</el-button>
           </el-col>
         </el-form>
 
@@ -91,7 +69,7 @@
         ruleForm: {
           name: '',
           nameAuthor: '',
-          
+
           year1: '',
           region: '',
           messageText: '',
@@ -104,7 +82,7 @@
             { required: true, message: '请输入联系人名称', trigger: 'blur' },
             { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
           ],
-           year1: [
+          year1: [
             { required: true, message: '请输入联系电话', trigger: 'change' }
           ],
           region: [
@@ -127,7 +105,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             // alert('submit!');
-            console.log(this.ruleForm.name, this.ruleForm.nameAuthor,  this.ruleForm.year1, this.ruleForm.region, this.ruleForm.messageText);
+            console.log(this.ruleForm.name, this.ruleForm.nameAuthor, this.ruleForm.year1, this.ruleForm.region, this.ruleForm.messageText);
           } else {
             console.log('error submit!!');
             return false;
