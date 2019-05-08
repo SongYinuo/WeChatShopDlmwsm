@@ -9,7 +9,7 @@
               </el-col>
               <el-col :span="8">
                 <div class="indexSwiperHeaderMore">
-                  <router-link :to="{ name: '热卖商城页' }">
+                  <router-link :to="{ name: '热卖商城页', params: { id: hotId, value: hotTitle } }">
                       <a>查看更多<i class="el-icon-arrow-right"></i></a>
                   </router-link>
                 </div>
@@ -65,6 +65,8 @@ export default {
   name: "",
   data() {
     return {
+      hotTitle: '热卖',
+      hotId: 'HotA10001',
       swiperList: [
         {
           id: "Hot10001",
