@@ -51,6 +51,7 @@ const ShunPrincess = resolve => require(['@/components/menu/menu-six.vue'], reso
 const HaHundredYears = resolve => require(['@/components/menu/menu-seven.vue'], resolve)
 const TransactionCenter = resolve => require(['@/components/menu/menu-eight.vue'], resolve)
 const TradingCenter = resolve => require(['@/components/menuList/tradingCenter.vue'], resolve)
+const MoreList = resolve => require(['@/components/menuList/moreList.vue'], resolve)
 const GreenFood = resolve => require(['@/components/menu/menu-nine.vue'], resolve)
 const PaintingPhotography = resolve => require(['@/components/menu/menu-ten.vue'], resolve)
 const MenuhongshanOneDetails = resolve => require(['@/components/menu/menuDetails/menuhongshanOneDetails.vue'], resolve)
@@ -248,6 +249,13 @@ export default new Router({
     component: TradingCenter,
     meta: {
       title: '交易中心列表'
+    }
+  },{
+    path: '/moreList',
+    name: '更多列表',
+    component: MoreList,
+    meta: {
+      title: '更多'
     }
   }, {
     path: '/menu-nine',
