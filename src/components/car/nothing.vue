@@ -27,6 +27,7 @@ export default {
 <style lang="less" scoped>
   .nothing {
     width: 100%;
+    height: 280px;
     text-align: center;
     .nothing-img {
       text-align: center;

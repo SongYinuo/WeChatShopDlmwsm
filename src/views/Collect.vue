@@ -64,7 +64,7 @@
              </el-tab-pane>
             <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified" v-if="k.label==='书画'">
                   <el-col :span="12" class="collectInfoProductDrawing pdTRBL2" v-for="o in k.infoArray">
-                    <router-link :to="{ name: '详情页',query: { id: o.id, title: k.label } }">
+                    <router-link :to="{ name: '书画详情',query: { id: o.id, title: k.label } }">
                       <img :src="o.imgUrl">
                     </router-link>
                     <div class="mgT4 overHidden">{{o.title}}</div>
