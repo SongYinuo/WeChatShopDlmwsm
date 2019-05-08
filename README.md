@@ -1,6 +1,6 @@
 # 技术栈
 
-vue2.0 + vue-router + vuex + axios + mock.js(模拟数据) + ES6 + less
+vue2.0 + vue-router + vuex + axios  + ES6 + less
 
 ## 简介
 
@@ -21,7 +21,7 @@ vuex + webStorage 实现了购物车功能,axios拦截,配合路由钩子函数�
 
 ## 待完成
 
-1. 购物车内编辑(增减商品)
+1. 购物车内编辑(增减商品),购物车全选功能有bug
 
 2. 搜索功能
 
