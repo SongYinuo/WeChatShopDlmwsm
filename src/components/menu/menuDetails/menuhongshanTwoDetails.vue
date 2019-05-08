@@ -17,6 +17,34 @@
           <div class="swiper-pagination"></div>
         </div>
       </el-col>
+      <el-button icon="el-icon-more" circle type="text" @click="dialogVisible = true"></el-button>
+      <el-dialog
+  title="操作"
+  :visible.sync="dialogVisible"
+  width="100%"
+  :before-close="handleClose">
+  
+  <span slot="footer" class="dialog-footer">
+    
+    <el-row >
+      <el-col :span="22" :offset="1">
+        <el-col :span="4" :offset="2">
+    
+    <div type="primary"   @click="dialogVisible = false" class="icon">
+      <i class="el-icon-edit"></i>
+    </div>
+    <div class="del">编辑</div>
+    </el-col>
+      <el-col :span="4" :offset="2">
+     <div type="danger"  @click="dialogVisible = false" class="icon">
+        <i class="el-icon-delete"></i>
+     </div>
+     <div class="del">删除</div>
+     </el-col>
+     </el-col>
+     </el-row>
+  </span>
+</el-dialog>
       <el-row>
         <el-col :span="22" :offset="1" class="pdT6">
           <div v-for="item in items" class="copy">
@@ -51,6 +79,7 @@
     },
     data() {
       return {
+        dialogVisible: false,
         content: "sichaoyun",
         swiperList: [
           { imgUrl: "static/testImg/tourism01.jpg" },
@@ -73,6 +102,9 @@
       this._initSwiper();
     },
     methods: {
+       handleClose(done) {
+     
+      },
       _initSwiper() {
         this.swiper = new Swiper(".swiper-container", {
           type: "fraction",
@@ -81,7 +113,10 @@
           pagination: ".swiper-pagination",
           paginationType: "fraction"
         });
-      }
+      },
+       prev () {
+      this.$router.go(-1)
+    }
     }
   };
 </script>
