@@ -67,6 +67,7 @@ const PosterQRcode = resolve => require(['@/components/detail/posterQRcode.vue']
 const MenuTabLists = resolve => require(['@/components/menu/menuDetails/MenuTabLists.vue'], resolve)
 const MenuIdentificationDetails = resolve => require(['@/components/menu/menuDetails/menuIdentificationDetails.vue'], resolve)
 const MenuThroughIdentificationDetails = resolve => require(['@/components/menu/menuDetails/menuThroughIdentificationDetails.vue'], resolve)
+const MenuTheEditor = resolve => require(['@/components/menu/menuDetails/menuTheEditor.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -515,6 +516,13 @@ export default new Router({
     component: MenuThroughIdentificationDetails,
     meta: {
       title: '已发布-鉴定'
+    }
+  },{
+    path: '/menuTheEditor',
+    name: '编辑详情',
+    component: MenuTheEditor,
+    meta: {
+      title: '编辑详情'
     }
   }
   ]
