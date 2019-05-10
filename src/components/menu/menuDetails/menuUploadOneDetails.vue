@@ -53,11 +53,12 @@
           <el-form-item label="材质" required class="material" label-width="40px">
             <el-col :span="24">
               <el-form-item prop="year1">
-                <el-select v-model="ruleForm.region" placeholder="请选择材质" style="width: 100%;">
+                <!-- <el-select v-model="ruleForm.region" placeholder="请选择材质" style="width: 100%;">
                   <el-option label="布面油画" value="Oilcanvas"></el-option>
                   <el-option label="彩铅画" value=" colorlead"></el-option>
                   <el-option label="其他" value="other"></el-option>
-                </el-select>
+                </el-select> -->
+                <el-input type="text" placeholder="请输入材质" v-model="ruleForm.year1" style="width: 100%;"></el-input>
               </el-form-item>
             </el-col>
           </el-form-item>

@@ -32,7 +32,7 @@
             <el-form-item label="视频" label-width="60px">
               <el-switch v-model="ruleForm.delivery" @change="test()"></el-switch>
             </el-form-item>
-            <el-upload class="pdB3" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
+            <el-upload class="pdB3" action="http://192.168.1.5/api/user/test" list-type="picture-card"
               :on-preview="handlePictureCardPreview" :on-remove="handleRemove" ref="ruleForm.photo"
               v-if="this.ruleForm.photo">
               <i class="el-icon-plus"></i>
@@ -56,7 +56,7 @@
   export default {
     data() {
       return {
-        InitializationAddUrl: "https://jsonplaceholder.typicode.com/posts",
+        InitializationAddUrl: "http://192.168.1.5/api/user/test",
         dialogImageUrl: "",
         dialogVisible: false,
         delivery: false,

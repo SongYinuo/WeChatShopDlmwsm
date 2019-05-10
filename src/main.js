@@ -29,6 +29,8 @@ Vue.config.productionTip = false
 Vue.prototype.$api = api;
 
 
+
+
 // 用钩子函数beforeEach()对路由进行判断
 router.beforeEach((to, from, next) => {
   window.scrollTo(0,0);

@@ -1,10 +1,12 @@
 <template lang="html">
   <el-container>
-    <el-header class="tittle">
+    <el-header class="tittle" v-model="title" v-for="i in name">
+      <!-- v-if="this.ruleForm.text!==''&&this.ruleForm.textarea!=='' -->
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      种草详情
+      <!-- {种草详情} -->
+      {{i.title}}
     </el-header>
     <el-row class="details">
       <el-col :span="24">
@@ -18,33 +20,29 @@
         </div>
       </el-col>
       <el-button icon="el-icon-more" circle type="text" @click="dialogVisible = true"></el-button>
-      <el-dialog
-  title="操作"
-  :visible.sync="dialogVisible"
-  width="100%"
-  :before-close="handleClose">
-  
-  <span slot="footer" class="dialog-footer">
-    
-    <el-row >
-      <el-col :span="22" :offset="1">
-        <el-col :span="4" :offset="2">
-    
-    <div type="primary"   @click="dialogVisible = false" class="icon">
-      <i class="el-icon-edit"></i>
-    </div>
-    <div class="del">编辑</div>
-    </el-col>
-      <el-col :span="4" :offset="2">
-     <div type="danger"  @click="dialogVisible = false" class="icon">
-        <i class="el-icon-delete"></i>
-     </div>
-     <div class="del">删除</div>
-     </el-col>
-     </el-col>
-     </el-row>
-  </span>
-</el-dialog>
+      <el-dialog title="操作" :visible.sync="dialogVisible" width="100%">
+        <span slot="footer" class="dialog-footer">
+          <el-row>
+            <el-col :span="22" :offset="1">
+              <el-col :span="4" :offset="2">
+                <router-link :to="{name:'编辑详情'}">
+                  <div type="primary" @click="dialogVisible = false" class="icon">
+                    <i class="el-icon-edit"></i>
+                  </div>
+                </router-link>
+                <div class="del">编辑</div>
+              </el-col>
+              <el-col :span="4" :offset="2">
+
+                <div type="danger" @click="prev()" class="icon">
+                  <i class="el-icon-delete"></i>
+                </div>
+                <div class="del">删除</div>
+              </el-col>
+            </el-col>
+          </el-row>
+        </span>
+      </el-dialog>
       <el-row>
         <el-col :span="22" :offset="1" class="pdT6">
           <div v-for="item in items" class="copy">
@@ -78,12 +76,18 @@
       "v-like": Like
     },
     data() {
+
       return {
+        title: "种草详情",
         dialogVisible: false,
         content: "sichaoyun",
         swiperList: [
           { imgUrl: "static/testImg/tourism01.jpg" },
           { imgUrl: "static/testImg/tourism02.jpg" }
+        ], name: [
+          {
+            title: "种草详情",
+          }
         ],
         items: [
           {
@@ -102,8 +106,8 @@
       this._initSwiper();
     },
     methods: {
-       handleClose(done) {
-     
+      handleClose(done) {
+
       },
       _initSwiper() {
         this.swiper = new Swiper(".swiper-container", {
@@ -114,9 +118,22 @@
           paginationType: "fraction"
         });
       },
-       prev () {
-      this.$router.go(-1)
-    }
+      prev() {
+        this.$router.go(-1)
+      }
+      //   ,watch: {
+      //    title:{
+      //      handle:function(Title,oldTitle){
+      //        console.log(Title);
+      //        console.log(oldTitle);
+      //      }
+      //    }
+      //   //  title: function(Title,oldTitle){
+      //   //    console.log(Title);
+      //   //     console.log(oldTitle);
+
+      //   //  }
+      // } 
     }
   };
 </script>
