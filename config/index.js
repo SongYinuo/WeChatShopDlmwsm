@@ -1,4 +1,4 @@
-// see http://vuejs-templates.github.io/webpack for documentation.
+/// see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
 
 module.exports = {
@@ -28,8 +28,14 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      
-  } 
+      '/php': {
+        // 测试环境
+        target: 'http://192.168.1.13',  // 接口域名
+        changeOrigin: true,  //是否跨域
+        pathRewrite: {
+            '^/php': '/Api'   //需要rewrite重写的,
+        }              
+      }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
@@ -37,5 +43,6 @@ module.exports = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false
-  
+  }
+
 }

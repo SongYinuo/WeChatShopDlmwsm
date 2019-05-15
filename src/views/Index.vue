@@ -36,7 +36,7 @@ import IntegralShop from '@/components/index/integralShop.vue'
 import UndergraduateBusiness from '@/components/index/undergraduateBusiness.vue'
 import Baseline from '@/common/_baseline.vue'
 import Footer from '@/common/_footer.vue'
-import index from '@/http/mock.js' //模拟数据
+// import index from '@/http/mock.js' //模拟数据
 export default {
   components: {
     'v-header': Header,

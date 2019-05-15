@@ -4,6 +4,7 @@ import App from './App'
 import router from './router'
 import store from '@/vuex/store.js'   //vuex
 import api from '@/http/api.js'       //http请求
+import axios from 'axios'
 import less from 'less'
 import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
@@ -26,10 +27,10 @@ Vue.use(VueAwesomeSwiper);
 Vue.use(VueWechatTitle)
 
 Vue.config.productionTip = false
-Vue.prototype.$api = api;
 
+Vue.prototype.$api = api
 
-
+Vue.prototype.$http= axios
 
 // 用钩子函数beforeEach()对路由进行判断
 router.beforeEach((to, from, next) => {
