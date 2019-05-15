@@ -3,7 +3,7 @@ import store from '@/vuex/store.js'
 import router from '../router'
 
 const api = axios.create();
-api.defaults.baseURL = 'http://api.com';
+api.defaults.baseURL = '/Api';
 api.defaults.timeout = 5000;
 api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
@@ -42,7 +42,7 @@ api.interceptors.response.use(function (response) {
     // 对响应错误做点什么
     store.commit('SET_LOADING',false);
 
-    if(errore.response) {
+    if(error.response) {
 
       if(error.response.status== 401) {
           // 如果返回401 即没有权限，跳到登录页重新登录

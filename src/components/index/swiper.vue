@@ -2,44 +2,33 @@
     <mt-swipe :auto="4000">
       <mt-swipe-item v-for="swipe in swipeData">
         <router-link :to="{ name: '详情页'}">
-          <img :src="swipe.imgUrl">
+          <img :src="swipe.ad_code">
         </router-link>
       </mt-swipe-item>
     </mt-swipe>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      swipeData: [
-        {
-          title: "轮播一",
-          imgUrl: "static/testImg/banner01.png",
-          id: "banner1"
-        },
-        {
-          title: "轮播二",
-          imgUrl: "static/testImg/banner02.png",
-          id: "banner2"
-        },
-        {
-          title: "轮播三",
-          imgUrl: "static/testImg/banner01.png",
-          id: "banner3"
-        },
-        {
-          title: "轮播四",
-          imgUrl: "static/testImg/banner02.png",
-          id: "banner4"
-        },
-        {
-          title: "轮播五",
-          imgUrl: "static/testImg/banner01.png",
-          id: "banner5"
-        }
-      ]
+      swipeData: []
     };
+  },
+  mounted() {
+    this.getImg();
+  },
+  methods: {
+    getImg(){
+      const thit = this
+      axios.get('/php/Index/advert')
+      .then(function(res){
+        thit.swipeData = res.data.data;
+      }).catch(function(error){
+        console.log(error)
+      })
+    }
   }
 };
 </script>
