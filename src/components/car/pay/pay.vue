@@ -49,9 +49,7 @@
 <script>
 import Util from '../../../util/common'
 import Header from '@/common/_header.vue'
-import {
-  MessageBox
-} from 'mint-ui';
+import { MessageBox } from 'mint-ui';
 export default {
   components: {
     'v-header': Header
