@@ -6,7 +6,7 @@
       </div>
       编辑详情
     </el-header>
-    <el-upload action="http://192.168.1.5/api/user/test" list-type="picture-card"
+    <el-upload action="http://192.168.1.13/api/user/test" list-type="picture-card"
       :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :limit="3" >
       <i class="el-icon-plus"></i>
     </el-upload>
