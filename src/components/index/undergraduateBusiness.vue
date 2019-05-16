@@ -27,7 +27,10 @@
 
 <script>
 import { Lazyload } from "mint-ui";
-export default {};
+import axios from 'axios'
+export default {
+  
+};
 </script>
 
 <style lang="less" scoped>
