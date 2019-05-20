@@ -60,7 +60,7 @@ export default {
   methods:{
     getImg(){
       const that = this
-      axios.get('/php/Index/college_student?')
+      axios.get('/Api/Index/college_student?')
       .then(function(res){
          console.log(res,res.data.data)
         that.undergraduateBusinessDetails = res.data.data;
