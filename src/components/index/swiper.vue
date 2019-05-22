@@ -22,7 +22,7 @@ export default {
   methods: {
     getImg(){
       const thit = this
-      axios.get('/php/Index/advert')
+      axios.get('/Api/Index/advert')
       .then(function(res){
         thit.swipeData = res.data.data;
       }).catch(function(error){

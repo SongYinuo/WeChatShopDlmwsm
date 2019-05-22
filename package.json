@@ -1,5 +1,5 @@
 {
-  "name": "teach",
+  "name": "songyinuo",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "",
@@ -67,5 +67,15 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "main": ".postcssrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SongYinuo/WeChatShopDlmwsm.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SongYinuo/WeChatShopDlmwsm/issues"
+  },
+  "homepage": "https://github.com/SongYinuo/WeChatShopDlmwsm#readme"
 }

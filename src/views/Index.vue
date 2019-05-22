@@ -75,16 +75,17 @@ export default {
     }
   },
  
-  beforeCreate() {
-    this.$api({
-      method: 'post',
-      url: '/index'
-    }).then((response) => {
-      this.datas = response.data;
-    }).catch(function(error) {
-      alert(error)
-    })
-  }
+  // beforeCreate() {
+  //   this.$api({
+  //     method: 'post',
+  //     url: '/index'
+  //   }).then((response) => {
+  //     this.datas = response.data;
+  //   }).catch(function(error) {
+  //     alert(error)
+  //   })
+  // }
+  // axios调取接口首页报错  因为没这个接口
 }
 </script>
 

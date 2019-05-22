@@ -102,7 +102,7 @@ export default {
   methods:{
     getImg(){
       const that = this
-      axios.get('/php/Index/company_sort?size=12')
+      axios.get('/Api/Index/company_sort?size=12')
       .then(function(res){
         console.log(res,res.data.data)
         that.companyRanksArray = res.data.data;
