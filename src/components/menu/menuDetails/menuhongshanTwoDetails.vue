@@ -71,6 +71,7 @@
 <script>
   // import FocusIn from '@/common/_focusIn.vue'
   import Like from "@/common/like.vue";
+  import axios from "axios";
   export default {
     components: {
       "v-like": Like

@@ -13,11 +13,16 @@
             </el-col>
             <el-col :span="24" v-for="Painting in Paintings" class="PaintingNav">
                 <router-link :to="{ name:'书画详情',query: { id: Painting.id }}">
-                    <img :src="Painting.photoUrl" class="PtImg ">
-                    <div class="ptText pd1 ">《{{Painting.text}}》</div>
-                    <div class="ptTxt">{{Painting.txt}}</div>
-                    <div class="ptbg"></div>
-                    <span class="ptAttribute">{{Painting.attribute}}</span>
+                    <img :src="Painting.thumb" class="PtImg ">
+                    <div class="ptText pd1 ">《{{Painting.title}}》</div>
+                    <div class="ptTxt">{{Painting.img_author}}|{{Painting.img_material}}</div>
+
+                    <div class="ptbg" v-if="Painting.is_hot===1">
+                    <span class="ptAttribute" >热门</span>
+                    </div>
+                    <div class="ptbg" v-if="Painting.is_hot===-1"  style="display:none;">
+                    <span class="ptAttribute" > 热门</span>
+                    </div>
                 </router-link>
             </el-col>
 
@@ -32,65 +37,81 @@
 </template>
 
 <script>
+import axios from "axios";
     export default {
         data() {
             return {
                 input3: '',
                 Paintings: [
-                    {
-                        photoUrl: "static/testImg/youhua.jpg",
-                        text: "大好河山",
-                        txt: "作者|简笔画",
-                        attribute: "热门",
-                        id: "11001"
-                    },
-                    {
-                        photoUrl: "static/testImg/youhua.jpg",
-                        text: "大好河山",
-                        txt: "作者|简笔画",
-                        attribute: "热门",
-                        id: "11002"
-                    },
-                    {
-                        photoUrl: "static/testImg/painting-1.jpg",
-                        text: "大好河山",
-                        txt: "作者|简笔画",
-                        attribute: "热门",
-                        id: "11003"
-                    }, {
-                        photoUrl: "static/testImg/painting-1.jpg",
-                        text: "大好河山",
-                        txt: "作者|简笔画",
-                        attribute: "热门",
-                        id: "11004"
-                    }, {
-                        photoUrl: "static/testImg/photo1.jpg",
-                        text: "大好河山",
-                        txt: "作者|简笔画",
-                        attribute: "热门",
-                        id: "11005"
-                    }, {
-                        photoUrl: "static/testImg/photo1.jpg",
-                        text: "大好河山",
-                        txt: "作者|简笔画",
-                        attribute: "热门",
-                        id: "11006"
-                    }, {
-                        photoUrl: "static/testImg/photo1.jpg",
-                        text: "大好河山",
-                        txt: "作者|简笔画",
-                        attribute: "热门",
-                        id: "11007"
-                    }, {
-                        photoUrl: "static/testImg/photo1.jpg",
-                        text: "大好河山",
-                        txt: "作者|简笔画",
-                        attribute: "热门",
-                        id: "11008"
-                    }
+                    // {
+                    //     photoUrl: "static/testImg/youhua.jpg",
+                    //     text: "大好河山",
+                    //     txt: "作者|简笔画",
+                    //     attribute: "热门",
+                    //     id: "11001"
+                    // },
+                    // {
+                    //     photoUrl: "static/testImg/youhua.jpg",
+                    //     text: "大好河山",
+                    //     txt: "作者|简笔画",
+                    //     attribute: "热门",
+                    //     id: "11002"
+                    // },
+                    // {
+                    //     photoUrl: "static/testImg/painting-1.jpg",
+                    //     text: "大好河山",
+                    //     txt: "作者|简笔画",
+                    //     attribute: "热门",
+                    //     id: "11003"
+                    // }, {
+                    //     photoUrl: "static/testImg/painting-1.jpg",
+                    //     text: "大好河山",
+                    //     txt: "作者|简笔画",
+                    //     attribute: "热门",
+                    //     id: "11004"
+                    // }, {
+                    //     photoUrl: "static/testImg/photo1.jpg",
+                    //     text: "大好河山",
+                    //     txt: "作者|简笔画",
+                    //     attribute: "热门",
+                    //     id: "11005"
+                    // }, {
+                    //     photoUrl: "static/testImg/photo1.jpg",
+                    //     text: "大好河山",
+                    //     txt: "作者|简笔画",
+                    //     attribute: "热门",
+                    //     id: "11006"
+                    // }, {
+                    //     photoUrl: "static/testImg/photo1.jpg",
+                    //     text: "大好河山",
+                    //     txt: "作者|简笔画",
+                    //     attribute: "热门",
+                    //     id: "11007"
+                    // }, {
+                    //     photoUrl: "static/testImg/photo1.jpg",
+                    //     text: "大好河山",
+                    //     txt: "作者|简笔画",
+                    //     attribute: "热门",
+                    //     id: "11008"
+                    // }
                 ]
             }
-        },
+        },mounted(){
+            this.getData();
+            
+        },methods:{
+            getData(){
+                const that = this;
+                axios
+                .get("/php/Article/paint_list")
+                .then(function(res){
+                    console.log(res);
+                    that.Paintings = res.data.data;
+                }).catch(function(error){
+                    console.log(error);
+                });
+            }
+        }
     };
 </script>
 
@@ -99,4 +120,17 @@
     @import "../../assets/header.less";
     @import "../../assets/search/search.less";
     @import "../../assets/menu/menu.less";
+    .ptbg .ptAttribute[data-v-5a4365ff] {
+    font-size: 9px;
+    position: absolute;
+    left: -40px;
+    top: -29px;
+    color: #fff;
+    width: 50px;
+    /* -webkit-transform: rotate(-45deg); */
+    transform: rotate(-180deg);
+    z-index: 99;
+}.PaintingNav .ptbg[data-v-5a4365ff]{
+        top: 0.6vw;
+}
 </style>

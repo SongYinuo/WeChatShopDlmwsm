@@ -3,7 +3,8 @@
     <el-col :span="22" :offset="1" class="linkMeanRow">
       <div v-for="item in items" class="linkMeanCol mgTB2">
         <div class="grid-content bg-purple">
-            <router-link :to="{ name: (item.text)}">
+            <!-- <router-link :to="{ name: (item.text)}"> -->
+                <router-link :to="{ name: (item.text),query: { title: item.text }}">
                 <img :src="item.iconUrl">
                 <span class="indexMeanText">{{item.text}}</span>
             </router-link>
@@ -28,6 +29,7 @@ export default {
         },
         {
           text: "讲堂",
+
           iconUrl: "static/testImg/redMountain.png"
         },
         {

@@ -203,7 +203,7 @@ export default new Router({
       title: '旅游'
     }
   }, {
-    path: '/menu-three',
+    path: '/menu-three:title',
     name: '讲堂',
     component: LectureRoom,
     meta: {
