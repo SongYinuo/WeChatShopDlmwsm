@@ -15,14 +15,14 @@
                         <img :src="k.thumb">
                     </el-col>
                     <span class="companyRanksIcon">
-                        <img src="../../../static/testImg/first.png" v-if="(k,index) in companyRanksArray.slice(0,1)">
-                        <img src="../../../static/testImg/second.png"  v-if="(k,index) in companyRanksArray.slice(0,2)">
-                        <img src="../../../static/testImg/thirdly.png"  v-if="(k,index) in companyRanksArray.slice(2,2)">
+                        <img src="../../../static/testImg/first.png" v-if="index == 0">
+                        <img src="../../../static/testImg/second.png" v-if="index == 1">
+                        <img src="../../../static/testImg/thirdly.png" v-if="index == 2">
                     </span>
                     <router-link :to="{ name: '公司排名详情', params: { article_id: k.article_id } }">
                         <el-col :span="17" :offset="1" class="companyText">
                             <div class="companyName overHidden lh1-6 pdT1" v-html="k.title">{{k.title}}</div>
-                            <div class="companyCaption colorGray mgT1" v-html="k.content">{{k.content}}</div>
+                            <div class="companyCaption colorGray mgT1 img1" v-html="k.content">{{k.content}}</div>
                         </el-col>
                     </router-link>
                 </el-col>
@@ -126,6 +126,7 @@ export default {
       img {
         width: 100%;
         border-radius: 8px;
+        height: 80px;
       }
     }
     .companyRanksIcon {
@@ -145,6 +146,9 @@ export default {
     }
     .companyCaption {
       .fz(font-size, 28);
+    }
+    .img1 img{
+      width: 100%;
     }
   }
 }

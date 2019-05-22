@@ -10,12 +10,12 @@
         </el-header>
         <el-main class="undergraduateBusinesRow">
             <el-row>
-                <el-col :span="22" :offset="1" class="">
-                    <div class="lh1-2 letterSpacing1 pd2 textIndent2-8" v-html="undergraduateBusinessDetails.content">
+                <el-col :span="22" :offset="1" >
+                    <div class="lh1-2 letterSpacing1 pd2 textIndent2-8 img1" v-html="undergraduateBusinessDetails.content">
                         {{undergraduateBusinessDetails.content}}
                     </div>
-                    <div class="detailsImg pd1">
-                        <img :src="undergraduateBusinessDetails.thumb">
+                    <div class="detailsImg pd1 ">
+                        <img :src="undergraduateBusinessDetails.thumb" >
                     </div>
                     <!-- <div class="lh1-2 letterSpacing1 pd2 textIndent2-8">
                         {{undergraduateBusinessDetails.explainText}}
@@ -27,7 +27,7 @@
                         <img :src="undergraduateBusinessDetails.detailsTwo">
                     </div> -->
                 </el-col>
-                <el-col :span="8" :offset="8" class="pd2">
+                <el-col :span="22" :offset="1" class="pd2">
                     <router-link :to="{ name: '顺格格' }">
                         <el-button plain class="joinIn">我也要加入</el-button>
                      </router-link>
@@ -72,21 +72,30 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less" >
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 .el-main {
   padding: 0;
 }
 .undergraduateBusinesRow {
-  .fz(font-size, 28);
-  .detailsImg {
-    img {
-      width: 100%;
-    }
-  }
+  .fz(font-size, 24);
+ color: #313131;
+  //   img {
+  //     width: 80%;
+  //   }
+
   .joinIn {
     width: 100%;
+    background-color: #DAB62E;
+    color: #fff;
+    .fz(font-size, 34);
+  }
+  .detailsImg img{
+    width: 100%;
+  }.img1 img{
+    width: 100%;
+    margin-left: -8%;
   }
 }
 </style>

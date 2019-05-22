@@ -7,7 +7,7 @@
       编辑详情
     </el-header>
     <el-upload action="http://192.168.1.13/api/user/test" list-type="picture-card"
-      :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :limit="3" >
+      :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :limit="3" :data="editor">
       <i class="el-icon-plus"></i>
     </el-upload>
     <el-dialog :visible.sync="dialogVisible">
@@ -21,7 +21,10 @@
     data() {
       return {
         dialogImageUrl: '',
-        dialogVisible: false
+        dialogVisible: false,
+        editor:{
+          model:'article'
+        }
       };
     },
     
