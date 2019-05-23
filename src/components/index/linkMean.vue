@@ -24,7 +24,7 @@ export default {
           iconUrl: "static/testImg/redMountain.png"
         },
         {
-          text: "旅游",
+          text: "旅游555",
           iconUrl: "static/testImg/travel.png"
         },
         {
