@@ -1,88 +1,88 @@
 <template lang="html">
 
-    <el-container>
-        <el-header class="tittle">
-            <div class="back" @click="$router.go(-1)">
-                <i class="el-icon-arrow-left"></i>
+  <el-container>
+    <el-header class="tittle">
+      <div class="back" @click="$router.go(-1)">
+        <i class="el-icon-arrow-left"></i>
+      </div>
+      红山文化
+    </el-header>
+    <el-col :span="22" :offset="1">
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="攻略" name="first">
+          <el-row>
+            <div v-for="item in items">
+              <router-link :to="{ name:'旅游攻略',query: { id: item.article_id }}">
+                <el-row class="smallimg">
+                  <el-col :span="12" class="pd">
+                    <p class="menu-strategy " v-html="item.title">{{item.title}}</p>
+                    <div class="menu-strategy-small omit" v-html="item.content">{{item.content}}</div>
+                    <div v-html="items.confirm_time">{{items.confirm_time}}</div>
+                    <div class="menuTime" v-html="item.confirm_time_text">{{item.confirm_time_text}}</div>
+                  </el-col>
+                  <el-col :span="8" :offset="4">
+                    <img :src="item.thumb">
+
+                  </el-col>
+                </el-row>
+              </router-link>
             </div>
-            红山文化
-        </el-header>
-        <el-col :span="22" :offset="1">
-            <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="攻略" name="first">
-                    <el-row>
-                        <div v-for="item in items">
-                            <router-link :to="{ name:'旅游攻略',query: { id: item.article_id }}">
-                                <el-row class="smallimg">
-                                    <el-col :span="12" class="pd">
-                                        <p class="menu-strategy " v-html="item.title">{{item.title}}</p>
-                                        <div class="menu-strategy-small omit" v-html="item.content">{{item.content}}</div>
-                                        <div v-html="items.confirm_time">{{items.confirm_time}}</div>
-                                        <div class="menuTime" v-html="item.confirm_time_text">{{item.confirm_time_text}}</div>
-                                    </el-col>
-                                    <el-col :span="8" :offset="4">
-                                        <img :src="item.thumb">
-
-                                    </el-col>
-                                </el-row>
-                            </router-link>
-                        </div>
-                    </el-row>
-                </el-tab-pane>
-                <el-tab-pane label="社区" name="second">
-                    <div v-for="array in arrays">
-                        <router-link :to="{name: '种草详情',query: { id: array.article_id }}">
-                            <el-row>
-                                <el-col :span="22">
-                                    <!-- <img v-if="list===null || list.length===0" src="../default.png" alt="默认图">
-                                    <img v-else :src="list[0].url" alt="图片"> -->
-                                    
-                                    <img :src="array.author_head_pic" class="fl menuHeader">
-                                    <div class="fl menuHead-txt">{{array.title}}</div>
-                                    <div class="fl cl menuHead-smtxt omit">{{array.confirm_time_text}}</div>
-                                    <p class="smalltxt-p cl fl">{{array.content}}</p>
-                                    <div class="cl smalltxt-div">{{array.author}}</div>
-                                </el-col>
-                            </el-row>
-                            <el-row type="flex" class="row-bg smallimg " >
-                                <el-col :span="8"   v-for="b in array.user_url" v-if="array.user_type===1 && array.user_url.length===1" justify="start">
-                                 
-                                    <img :src="b" class="CommunityImg"    >
-
-                                </el-col><!--单图-->
-                                <el-row>
-                                  <div class="morePhoto">
-                                <el-col :span="8"   v-for="b in array.user_url" v-if="array.user_type===1 && array.user_url.length > 1" justify="start">
-                                 
-                                    <img :src="b" class="CommunityImg2"    >
-
-                                </el-col><!--多图-->
-                                  </div>
-                                </el-row>
-
-                                <video :src="array.user_url" controls="controls" class="menu-video" v-if="array.user_type===2"></video>
-                                
-                                
-                                <!-- <el-col :span="21" :offset="3" >
-                                   <video :src="array.user_url" controls="controls" class="menu-video" v-else="array.user_type===2"></video>
-                                </el-col> -->
-                            </el-row>
-                        </router-link>
-                    </div>
-                    <el-col>
-                        <router-link :to="{ name:'发布'}">
-                            <span class="flbtn"><img src="static/testImg/write@2x.png">发布</span>
-                        </router-link>
+          </el-row>
+        </el-tab-pane>
+        <el-tab-pane label="社区" name="second">
+          <div v-for="array in arrays">
+            <router-link :to="{name: '种草详情',query: { id: array.article_id,title:array.title }}">
+              <el-row>
+                <el-col :span="22">
+                  <img :src="array.author_head_pic" v-on:error.once="moveErrorImg($event)" class="fl menuHeader">
+                  <div class="fl menuHead-txt">{{array.title}}</div>
+                  <div class="fl cl menuHead-smtxt omit">{{array.confirm_time_text}}</div>
+                  <p class="smalltxt-p cl fl">{{array.content}}</p>
+                  <div class="cl smalltxt-div">{{array.author}}</div>
+                </el-col>
+              </el-row>
+              <el-row type="flex" class="row-bg smallimg ">
+                <el-row>
+                  <div class="morePhoto1">
+                    <el-col :span="7" :offset="1" v-for="b in array.user_url"
+                      v-if="array.user_type===1 && array.user_url.length===1" justify="start">
+                      <img :src="b" class="CommunityImg">
                     </el-col>
-                    <el-row>
-                        <el-col :span="24">
-                            <div class="emptyFOOT"></div>
-                        </el-col>
-                    </el-row>
-                </el-tab-pane>
-            </el-tabs>
-        </el-col>
-    </el-container>
+                    <!--单图-->
+                  </div>
+                </el-row>
+                <el-row>
+                  <div class="morePhoto">
+                    <el-col :span="7" :offset="1" v-for="b in array.user_url"
+                      v-if="array.user_type===1 && array.user_url.length > 1" justify="start">
+                      <img :src="b" class="CommunityImg2">
+                    </el-col>
+                    <!--多图-->
+                  </div>
+                </el-row>
+                <el-row>
+                  <el-col :span="21" :offset="3">
+                    <video :src="array.user_url" controls="controls" class="menu-video"
+                      v-if="array.user_type===2"></video>
+                  </el-col>
+                </el-row>
+              </el-row>
+            </router-link>
+          </div>
+          <el-col>
+            <router-link :to="{ name:'发布'}">
+              <span class="flbtn"><img src="static/testImg/write@2x.png">发布</span>
+            </router-link>
+          </el-col>
+          <el-row>
+            <el-col :span="24">
+              <div class="emptyFOOT"></div>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+      </el-tabs>
+    </el-col>
+  </el-container>
 </template>
 <script type="text/javascript">
 import axios from "axios";
@@ -90,32 +90,19 @@ export default {
   data() {
     return {
       activeName: "first",
-      picString: "../../../static/image/cm.png,../../../static/image/cat.png",
-      rowNums:[],
-     sublist:[],
+      // picString: "../../../static/image/cm.png,../../../static/image/cat.png",
+      rowNums: [],
+      sublist: [],
       // author_head_pic: '暂无',
-      items: [
-       
-      ],
-      arrays: [
-       
-      ]
-     
+      items: [],
+      arrays: []
     };
   },
-
-//    computed: {
-//     // array: function() {
-//     //   return this.array.user_url.split(",");
-//     //   console.log(this.array.user_url.split(","))
-//     // }
-   
-//   },
   mounted() {
     this.getData();
     this.getImg();
   },
- 
+
   methods: {
     handleClick(tab, event) {
       // console.log(tab, event);
@@ -125,7 +112,7 @@ export default {
       axios
         .get("/Api/Article/article_list?cat_id=1001")
         .then(function(res) {
-          // console.log(res)
+          console.log(res);
           that.items = res.data.data.admin_list;
         })
         .catch(function(error) {
@@ -142,6 +129,9 @@ export default {
         .catch(function(error) {
           // console.log(error)
         });
+    },
+    moveErrorImg: function(event) {
+      event.currentTarget.src = "static/testImg/defaultAvatar.png";
     }
   }
 };
@@ -175,13 +165,18 @@ export default {
   .fz(font-size, 24);
   color: #adaeaf;
 }
+
 .CommunityImg {
   width: 32%;
 }
+
 .menu-video {
   height: 310px;
-  width: 90%   ;
-}.morePhoto,.CommunityImg{
+  width: 90%;
+}
+
+.morePhoto,
+.CommunityImg {
   width: 90%;
   margin-left: 10%;
 }

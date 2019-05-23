@@ -280,7 +280,7 @@ export default new Router({
       title: '旅游攻略'
     }
   }, {
-    path: '/menuhongshanTwoDetails',
+    path: '/menuhongshanTwoDetails/:title/:id',
     name: '种草详情',
     component: MenuhongshanTwoDetails,
     meta: {

@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
@@ -96,19 +96,33 @@ export default {
       ]
     };
   },
-  mounted(){
+  mounted() {
     this.getImg();
   },
-  methods:{
-    getImg(){
-      const that = this
-      axios.get('/Api/Index/company_sort?size=12')
-      .then(function(res){
-        console.log(res,res.data.data)
-        that.companyRanksArray = res.data.data;
-      }).catch(function(error){
-        console.log(error)
-      })
+  // methods:{
+  //   getImg(){
+  //     const that = this
+  //     axios.get('/php/Index/company_sort?size=12')
+  //     .then(function(res){
+  //       console.log(res,res.data.data)
+  //       that.companyRanksArray = res.data.data;
+  //     }).catch(function(error){
+  //       console.log(error)
+  //     })
+  //   }
+  // }
+  methods: {
+    getImg() {
+      const that = this;
+      axios
+        .get("/Api/Index/company_sort?size=12")
+        .then(function(res) {
+          console.log(res, res.data.data);
+          that.companyRanksArray = res.data.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };
@@ -147,7 +161,7 @@ export default {
     .companyCaption {
       .fz(font-size, 28);
     }
-    .img1 img{
+    .img1 img {
       width: 100%;
     }
   }
