@@ -29,86 +29,46 @@
             </div>
           </el-row>
         </el-tab-pane>
-        <el-tab-pane label="社区" name="second">
+      <el-tab-pane label="社区" name="second">
           <div v-for="array in arrays">
             <router-link :to="{name: '种草详情',query: { id: array.article_id }}">
               <el-row>
                 <el-col :span="22">
-                  <img :src="array.author_head_pic" class="fl menuHeader">
+                  <img :src="array.author_head_pic" v-on:error.once="moveErrorImg($event)" class="fl menuHeader">
                   <div class="fl menuHead-txt">{{array.title}}</div>
                   <div class="fl cl menuHead-smtxt omit">{{array.confirm_time_text}}</div>
                   <p class="smalltxt-p cl fl">{{array.content}}</p>
                   <div class="cl smalltxt-div">{{array.author}}</div>
-
                 </el-col>
               </el-row>
-              <el-row type="flex" class="row-bg smallimg " justify="space-around">
-                <el-col :span="21" :offset="3"  >
-                    <!-- v-for="(item,index) in item.name.split(',')" -->
-                    <img :src="array.user_url" class="CommunityImg"   v-if="array.user_type===1" >
-                    <video :src="array.user_url" controls="controls" class="menu-video" v-else="array.user_type===2"></video>
-                    <!-- <img :src="array.user_url">
-                    <img :src="array.user_url"> -->
-                </el-col>
-
-                <!-- <el-col :span="6" :offset="3"><img :src="array.photoUrl"></el-col> -->
-                <!-- <el-col :span="6"><img :src="array.photoUrl"></el-col>
-                <el-col :span="6"><img :src="array.photoUrl"></el-col> -->
-
-
-
+              <el-row type="flex" class="row-bg smallimg ">
+                <el-row>
+                  <div class="morePhoto1">
+                    <el-col :span="7" :offset="1" v-for="b in array.user_url"
+                      v-if="array.user_type===1 && array.user_url.length===1" justify="start">
+                      <img :src="b" class="CommunityImg">
+                    </el-col>
+                    <!--单图-->
+                  </div>
+                </el-row>
+                <el-row>
+                  <div class="morePhoto">
+                    <el-col :span="7" :offset="1" v-for="b in array.user_url"
+                      v-if="array.user_type===1 && array.user_url.length > 1" justify="start">
+                      <img :src="b" class="CommunityImg2">
+                    </el-col>
+                    <!--多图-->
+                  </div>
+                </el-row>
+                <el-row>
+                  <el-col :span="21" :offset="3">
+                    <video :src="array.user_url" controls="controls" class="menu-video"
+                      v-if="array.user_type===2"></video>
+                  </el-col>
+                </el-row>
               </el-row>
-
             </router-link>
           </div>
-          <!-- <div v-for="avideo in avideos">
-            <router-link :to="{name: '种草详情视频',query: { id: avideo.id }}">
-              <el-row>
-                <el-col :span="22">
-                  <img :src="avideo.iconUrl" class="fl menuHeader">
-                  <div class="fl menuHead-txt">{{avideo.text}}</div>
-                  <div class="fl cl menuHead-smtxt">{{avideo.txt}}</div>
-                  <p class="smalltxt-p cl fl">{{avideo.paragraph}}</p>
-                  <div class="cl smalltxt-div">{{avideo.article}}</div>
-
-                </el-col>
-              </el-row>
-              <el-row :gutter="22" class="mg ">
-
-                <el-col :span="22" :offset="3" class=" smallimg">
-                  <video :src="avideo.videoUrl" controls="controls" class="menu-video"></video>
-                </el-col>
-
-              </el-row>
-
-            </router-link>
-
-          </div> -->
-          <!-- <div v-for="array in arrays">
-            <router-link :to="{name: '种草详情',query: { id: array.id }}">
-              <el-row>
-                <el-col :span="22">
-                  <img :src="array.iconUrl" class="fl menuHeader">
-                  <div class="fl menuHead-txt">{{array.text}}</div>
-                  <div class="fl cl menuHead-smtxt">{{array.txt}}</div>
-                  <p class="smalltxt-p cl fl">{{array.paragraph}}</p>
-                  <div class="cl smalltxt-div">{{array.article}}</div>
-
-                </el-col>
-              </el-row>
-              <el-row type="flex" class="row-bg smallimg " justify="space-around">
-
-
-                <el-col :span="6" :offset="3"><img :src="array.photoUrl"></el-col>
-                <el-col :span="6"></el-col>
-                <el-col :span="6"></el-col>
-
-
-
-              </el-row>
-
-            </router-link>
-          </div> -->
           <el-col>
             <router-link :to="{ name:'发布'}">
               <span class="flbtn"><img src="static/testImg/write@2x.png">发布</span>
@@ -131,53 +91,12 @@ export default {
     return {
       activeName: "first",
       items: [
-        // {
-        //   text: "云南旅游攻略",
-        //   txt: "云南是个风景秀丽的城市，值得推荐！......",
-        //   iconUrl: "static/testImg/secondCompany.png",
-        //   time: "17分钟",
-        //   state: "审核中",
-        //   id: "11000"
-        // },
-        // {
-        //   text: "云南旅游攻略",
-        //   txt: "云南是个风景秀丽的城市，值得推荐！......",
-        //   iconUrl: "static/testImg/secondCompany.png",
-        //   time: "17分钟",
-        //   state: " ",
-        //   id: "11001"
-        // },
-        // {
-        //   text: "云南旅游攻略",
-        //   txt: "云南是个风景秀丽的城市，值得推荐！......",
-        //   iconUrl: "static/testImg/secondCompany.png",
-        //   time: "17分钟",
-        //   states: "已审核",
-        //   id: "11003"
-        // }
+    
       ],
       arrays: [
-        // {
-        //   text: "云南旅游攻略",
-        //   txt: "47分钟前",
-        //   iconUrl: "static/testImg/shunPrincess.png",
-        //   paragraph: "红山文化|论红山文化的历史性",
-        //   article: "云南是个风景秀丽的城市，值得推荐！...",
-        //   photoUrl: "static/testImg/secondCompany.png",
-        //   id: "11004"
-        // }
+
       ],
-      avideos: [
-        // {
-        //   text: "云南旅游攻略",
-        //   txt: "47分钟前",
-        //   iconUrl: "static/testImg/shunPrincess.png",
-        //   paragraph: "红山文化|论红山文化的历史性",
-        //   article: "云南是个风景秀丽的城市，值得推荐！...",
-        //   videoUrl: "http://www.runoob.com/try/demo_source/movie.mp4",
-        //   id: "11005"
-        // }
-      ]
+ 
     };
   },mounted(){
     this.getData();
@@ -189,7 +108,7 @@ export default {
     },getData(){
       const that = this;
       axios
-        .get("/php/Article/article_list?cat_id=1002")
+        .get("/api/Article/article_list?cat_id=1002")
         .then(function(res){
           that.items = res.data.data.admin_list;
         })
@@ -200,7 +119,7 @@ export default {
     },getImg(){
       const that = this;
       axios
-        .get("/php/Article/article_list?cat_id=1002")
+        .get("/api/Article/article_list?cat_id=1002")
         .then(function(res){
           that.arrays = res.data.data.user_list;
         })
@@ -208,7 +127,9 @@ export default {
 
         });
       
-    }
+    }, moveErrorImg:function (event) {
+                event.currentTarget.src = "static/testImg/defaultAvatar.png";
+            }
   }
 };
 </script>
@@ -237,5 +158,9 @@ export default {
   color: #313131;
   font-weight: bold;
   margin-left: 45px;
-}
+}.morePhoto,
+  .CommunityImg {
+    width: 90%;
+    margin-left: 10%;
+  }
 </style>

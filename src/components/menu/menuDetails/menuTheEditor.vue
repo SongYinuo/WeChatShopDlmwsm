@@ -6,17 +6,18 @@
       </div>
       编辑详情
     </el-header>
-    <el-upload action="http://192.168.1.13/api/user/test" list-type="picture-card"
-      :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :limit="3" :data="editor">
-      <i class="el-icon-plus"></i>
-    </el-upload>
-    <el-dialog :visible.sync="dialogVisible">
-      <img width="100%" :src="dialogImageUrl" alt="">
-    </el-dialog>
-  </el-container>
+  <el-upload action="http://192.168.1.13/Api/Api/img_upload" list-type="picture-card"
+:on-preview="handlePictureCardPreview" :on-remove="handleRemove" :limit="3" :data="editor">
+<i class="el-icon-plus"></i>
+</el-upload>
+<el-dialog :visible.sync="dialogVisible">
+<img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
+</el-container>
 </template>
 
 <script>
+import axios from "axios";
   export default {
     data() {
       return {
@@ -43,9 +44,9 @@
 </script>
 
 <style lang="less">
-  @import "../../../assets/index/indexSwiper.less";
-  @import "../../../assets/header.less";
-  @import "../../../assets/index/style.less";
-  @import "../../../assets/menu/details.less";
-  @import "../../../assets/fz.less";
+@import "../../../assets/index/indexSwiper.less";
+@import "../../../assets/header.less";
+@import "../../../assets/index/style.less";
+@import "../../../assets/menu/details.less";
+@import "../../../assets/fz.less";
 </style>
