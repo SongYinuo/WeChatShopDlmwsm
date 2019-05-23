@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
@@ -19,15 +19,18 @@ export default {
   mounted() {
     this.getImg();
   },
+ 
   methods: {
-    getImg(){
-      const thit = this
-      axios.get('/Api/Index/advert')
-      .then(function(res){
-        thit.swipeData = res.data.data;
-      }).catch(function(error){
-        console.log(error)
-      })
+    getImg() {
+      const thit = this;
+      axios
+        .get("/api/Index/advert")
+        .then(function(res) {
+          thit.swipeData = res.data.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };

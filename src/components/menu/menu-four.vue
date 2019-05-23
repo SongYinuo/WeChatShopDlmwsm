@@ -27,102 +27,59 @@
                                 </el-row>
                             </router-link>
                         </div>
-
-
-
                     </el-row>
                 </el-tab-pane>
-                <el-tab-pane label="社区" name="second">
+               <el-tab-pane label="社区" name="second">
           <div v-for="array in arrays">
             <router-link :to="{name: '种草详情',query: { id: array.article_id }}">
               <el-row>
                 <el-col :span="22">
-                  <img :src="array.author_head_pic" class="fl menuHeader">
+                  <img :src="array.author_head_pic" v-on:error.once="moveErrorImg($event)" class="fl menuHeader">
                   <div class="fl menuHead-txt">{{array.title}}</div>
                   <div class="fl cl menuHead-smtxt omit">{{array.confirm_time_text}}</div>
                   <p class="smalltxt-p cl fl">{{array.content}}</p>
                   <div class="cl smalltxt-div">{{array.author}}</div>
-
                 </el-col>
               </el-row>
-              <el-row type="flex" class="row-bg smallimg " justify="space-around">
-                <el-col :span="21" :offset="3"  >
-                    <!-- v-for="(item,index) in item.name.split(',')" -->
-                    <img :src="array.user_url" class="CommunityImg"   v-if="array.user_type===1" >
-                    <video :src="array.user_url" controls="controls" class="menu-video" v-else="array.user_type===2"></video>
-                    <!-- <img :src="array.user_url">
-                    <img :src="array.user_url"> -->
-                </el-col>
-
-                <!-- <el-col :span="6" :offset="3"><img :src="array.photoUrl"></el-col> -->
-                <!-- <el-col :span="6"><img :src="array.photoUrl"></el-col>
-                <el-col :span="6"><img :src="array.photoUrl"></el-col> -->
-
-
-
+              <el-row type="flex" class="row-bg smallimg ">
+                <el-row>
+                  <div class="morePhoto1">
+                    <el-col :span="7" :offset="1" v-for="b in array.user_url"
+                      v-if="array.user_type===1 && array.user_url.length===1" justify="start">
+                      <img :src="b" class="CommunityImg">
+                    </el-col>
+                    <!--单图-->
+                  </div>
+                </el-row>
+                <el-row>
+                  <div class="morePhoto">
+                    <el-col :span="7" :offset="1" v-for="b in array.user_url"
+                      v-if="array.user_type===1 && array.user_url.length > 1" justify="start">
+                      <img :src="b" class="CommunityImg2">
+                    </el-col>
+                    <!--多图-->
+                  </div>
+                </el-row>
+                <el-row>
+                  <el-col :span="21" :offset="3">
+                    <video :src="array.user_url" controls="controls" class="menu-video"
+                      v-if="array.user_type===2"></video>
+                  </el-col>
+                </el-row>
               </el-row>
-
             </router-link>
           </div>
-                    <!-- <div v-for="avideo in avideos">
-                        <router-link :to="{name: '种草详情视频',query: { id: avideo.id }}">
-                            <el-row>
-                                <el-col :span="22">
-                                    <img :src="avideo.iconUrl" class="fl menuHeader">
-                                    <div class="fl menuHead-txt">{{avideo.text}}</div>
-                                    <div class="fl cl menuHead-smtxt">{{avideo.txt}}</div>
-                                    <p class="smalltxt-p cl fl">{{avideo.paragraph}}</p>
-                                    <div class="cl smalltxt-div">{{avideo.article}}</div>
-
-                                </el-col>
-                            </el-row>
-                            <el-row :gutter="22" class="mg ">
-
-                                <el-col :span="21" :offset="3" class=" smallimg">
-                                    <video :src="avideo.videoUrl" controls="controls" class="menu-video"></video>
-                                </el-col>
-
-                            </el-row>
-
-                        </router-link>
-
-                    </div> -->
-                    <!-- <div v-for="array in arrays">
-                        <router-link :to="{name: '种草详情',query: { id: array.id }}">
-                            <el-row>
-                                <el-col :span="22">
-                                    <img :src="array.iconUrl" class="fl menuHeader">
-                                    <div class="fl menuHead-txt">{{array.text}}</div>
-                                    <div class="fl cl menuHead-smtxt">{{array.txt}}</div>
-                                    <p class="smalltxt-p cl fl">{{array.paragraph}}</p>
-                                    <div class="cl smalltxt-div">{{array.article}}</div>
-
-                                </el-col>
-                            </el-row>
-                            <el-row type="flex" class="row-bg smallimg " justify="space-around">
-
-
-                                <el-col :span="6" :offset="3"><img :src="array.photoUrl"></el-col>
-                                <el-col :span="6"></el-col>
-                                <el-col :span="6"></el-col>
-
-
-
-                            </el-row>
-
-                        </router-link>
-                    </div> -->
-                    <el-col>
-                        <router-link :to="{ name:'发布'}">
-                            <span class="flbtn"><img src="static/testImg/write@2x.png">发布</span>
-                        </router-link>
-                    </el-col>
-                    <el-row>
-                        <el-col :span="24">
-                            <div class="emptyFOOT"></div>
-                        </el-col>
-                    </el-row>
-                </el-tab-pane>
+          <el-col>
+            <router-link :to="{ name:'发布'}">
+              <span class="flbtn"><img src="static/testImg/write@2x.png">发布</span>
+            </router-link>
+          </el-col>
+          <el-row>
+            <el-col :span="24">
+              <div class="emptyFOOT"></div>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
             </el-tabs>
         </el-col>
     </el-container>
@@ -134,55 +91,13 @@ import axios from "axios";
             return {
                 activeName: 'first',
                 items: [
-                    // {
-                    //     text: "茶具的选择",
-                    //     txt: "如何选择一套好的茶具，教您识别一套好茶具......",
-                    //     iconUrl: "static/testImg/secondCompany.png",
-                    //     state: "审核中",
-                    //     time: "17分钟",
-                    //     id: "12000"
-                    // },
-                    // {
-                    //     text: "茶具的选择",
-                    //     txt: "如何选择一套好的茶具，教您识别一套好茶具......",
-                    //     iconUrl: "static/testImg/secondCompany.png",
-                    //     state: " ",
-                    //     time: "17分钟",
-                    //     id: "12001"
-                    // },
-                    // {
-                    //     text: "茶具的选择",
-                    //     txt: "如何选择一套好的茶具，教您识别一套好茶具......",
-                    //     iconUrl: "static/testImg/secondCompany.png",
-                    //     states: "已审核",
-                    //     time: "17分钟",
-                    //     id: "12002"
-                    // }
+                    
                 ],
                 arrays: [
-                    // {
-                    //     text: "茶具的选择",
-                    //     txt: "47分钟前",
-                    //     iconUrl: "static/testImg/shunPrincess.png",
-                    //     paragraph: "红山文化|论红山文化的历史性",
-                    //     article: "如何选择一套好的茶具，教您识别一套好茶具......",
-                    //     photoUrl: "static/testImg/secondCompany.png",
-                    //     id: "12003"
-                    // },
+                    
 
                 ],
-                avideos: [
-                    // {
-                    //     text: "茶具的选择",
-                    //     txt: "47分钟前",
-                    //     iconUrl: "static/testImg/shunPrincess.png",
-                    //     paragraph: "红山文化|论红山文化的历史性",
-                    //     article: "如何选择一套好的茶具，教您识别一套好茶具......",
-                    //     videoUrl: "http://www.runoob.com/try/demo_source/movie.mp4",
-                    //     id: "12004"
-                    // },
-
-                ]
+                
             }
         },mounted(){
         this.getData();
@@ -194,7 +109,7 @@ import axios from "axios";
             },getData(){
                 const that = this;
                 axios
-                .get("/php/Article/article_list?cat_id=1003")
+                .get("/api/Article/article_list?cat_id=1003")
                 .then(function(res){
                     that.items = res.data.data.admin_list;
                 })
@@ -204,13 +119,15 @@ import axios from "axios";
             },getImg(){
                 const that = this;
                 axios
-                .get("/php/Article/article_list?cat_id=1003")
+                .get("/api/Article/article_list?cat_id=1003")
                 .then(function(res){
                     that.arrays = res.data.data.user_list;
                 })
                 .catch(function(error){
 
                 });
+            }, moveErrorImg:function (event) {
+                event.currentTarget.src = "static/testImg/defaultAvatar.png";
             }
         }
     };
@@ -219,4 +136,43 @@ import axios from "axios";
     @import "../../assets/index/style.less";
     @import "../../assets/header.less";
     @import "../../assets/menu/menu.less";
+    .el-tabs__nav {
+    margin-left: 35%;
+  }
+
+  .menuHead-smtxt {
+    margin-left: 45px;
+    .fz(font-size, 22);
+    color: #949494;
+    margin-top: -20px;
+  }
+
+  .smalltxt-p {
+    .fz(font-size, 28);
+    color: #313131;
+    font-weight: bold;
+    margin-left: 45px;
+  }
+
+  .menuTime {
+    // position: absolute;
+    // bottom: 10px;
+    .fz(font-size, 24);
+    color: #adaeaf;
+  }
+
+  .CommunityImg {
+    width: 32%;
+  }
+
+  .menu-video {
+    height: 310px;
+    width: 90%;
+  }
+
+  .morePhoto,
+  .CommunityImg {
+    width: 90%;
+    margin-left: 10%;
+  }
 </style>

@@ -12,11 +12,24 @@
       <el-col :span="24">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="swiper in swiperList">
-              <img :src="swiper.imgUrl" class="swimg">
-            </div>
+            <el-col class="swiper-slide" v-for="(swiper,index) in swiperList.user_url"
+              v-if="swiperList.user_type===1 && swiperList.user_url.length > 1">
+              <img :src="swiper" class="swimg">
+              <div class="swiper-pagination"></div>
+            </el-col>
           </div>
-          <div class="swiper-pagination"></div>
+          <!-- <div class="swiper-wrapper">
+            <el-col class="swiper-slide" v-for="b in swiperList.user_url"
+              v-if="swiperList.user_type===1 && swiperList.user_url.length===1">
+              <img :src="b" class="swimg">
+              <div class="swiper-pagination"></div>
+            </el-col>
+          </div>
+          <el-col :span="24" class="of">
+            <video :src="swiperList.user_url" controls="controls" class="menu-video"
+              v-if="swiperList.user_type===2"></video>
+          </el-col> -->
+
         </div>
       </el-col>
       <el-button icon="el-icon-more" circle type="text" @click="dialogVisible = true"></el-button>
@@ -33,7 +46,6 @@
                 <div class="del">编辑</div>
               </el-col>
               <el-col :span="4" :offset="2">
-
                 <div type="danger" @click="prev()" class="icon">
                   <i class="el-icon-delete"></i>
                 </div>
@@ -45,12 +57,12 @@
       </el-dialog>
       <el-row>
         <el-col :span="22" :offset="1" class="pdT6">
-          <div v-for="item in items" class="copy">
+          <div class="copy">
             <el-col :span="16">
-              <img :src="item.photoUrl" class="fl deimg">
+              <img :src="items.author_head_pic" v-on:error.once="moveErrorImg($event)" class="fl deimg">
               <div class="fl pdLR2">
-                <span class="fl detittle">{{item.tittle}}</span>
-                <span class="fl detxt">{{item.txt}}</span>
+                <span class="fl detittle">{{items.author}}</span>
+                <span class="fl detxt">{{items.confirm_time_text}}</span>
               </div>
             </el-col>
             <div class="MenuLike">
@@ -58,8 +70,8 @@
             </div>
             <el-row>
               <el-col :span="22">
-                <div class="deParagraph pdT6">{{item.paragraph}}</div>
-                <div class="deText pdT6">{{item.ptext}}</div>
+                <div class="deParagraph pdT6">{{items.title}}</div>
+                <div class="deText pdT6">{{items.content}}</div>
               </el-col>
             </el-row>
           </div>
@@ -69,7 +81,6 @@
   </el-container>
 </template>
 <script>
-  // import FocusIn from '@/common/_focusIn.vue'
   import Like from "@/common/like.vue";
   import axios from "axios";
   export default {
@@ -77,39 +88,30 @@
       "v-like": Like
     },
     data() {
-
       return {
         title: "种草详情",
         dialogVisible: false,
         content: "sichaoyun",
         swiperList: [
-          { imgUrl: "static/testImg/tourism01.jpg" },
-          { imgUrl: "static/testImg/tourism02.jpg" }
-        ], name: [
+        ],
+        name: [
           {
-            title: "种草详情",
+            title: "种草详情"
           }
         ],
         items: [
-          {
-            photoUrl: "static/testImg/shunPrincess.png",
-            tittle: "BB..颜无画",
-            txt: "5天前",
-            paragraph: "给大家推荐一个非常适合旅游的景点",
-            ptext:
-              "到底是什么景点呢？不卖关子了，这个景点就是红山。下面由我为大家介绍一下红山的文化。"
-          }
         ]
       };
     },
 
     mounted() {
       this._initSwiper();
+      this.getData();
+      this.getImg();
+      // this.getGoodsInfoData();
     },
     methods: {
-      handleClose(done) {
-
-      },
+      handleClose(done) { },
       _initSwiper() {
         this.swiper = new Swiper(".swiper-container", {
           type: "fraction",
@@ -120,21 +122,37 @@
         });
       },
       prev() {
-        this.$router.go(-1)
+        this.$router.go(-1);
+      },
+      getData() {
+        var newId = this.$route.query.id;
+        const that = this;
+        axios
+          .get("/api/Article/article_detail" + "?article_id=" + newId)
+          .then(function (res) {
+            console.log(res);
+            that.items = res.data.data;
+          })
+          .catch(function (error) {
+            // console.log(error)
+          });
+      },
+      getImg() {
+        var newId = this.$route.query.id;
+        const that = this;
+        axios
+          .get("/api/Article/article_detail" + "?article_id=" + newId)
+          .then(function (res) {
+            console.log(res.data.data.user_url);
+            that.swiperList = res.data.data;
+          })
+          .catch(function (error) {
+            // console.log(error)
+          });
+      },
+      moveErrorImg: function (event) {
+        event.currentTarget.src = "static/testImg/defaultAvatar.png";
       }
-      //   ,watch: {
-      //    title:{
-      //      handle:function(Title,oldTitle){
-      //        console.log(Title);
-      //        console.log(oldTitle);
-      //      }
-      //    }
-      //   //  title: function(Title,oldTitle){
-      //   //    console.log(Title);
-      //   //     console.log(oldTitle);
-
-      //   //  }
-      // } 
     }
   };
 </script>
@@ -143,4 +161,22 @@
   @import "../../../assets/header.less";
   @import "../../../assets/index/style.less";
   @import "../../../assets/menu/details.less";
+
+  .menu-video {
+    width: 100%;
+    height: 100%;
+  }
+
+  .of {
+    overflow: hidden;
+  }
+
+  .menu-video {
+    height: 310px;
+    width: 100%;
+  }
+
+  .swimg {
+    width: 100%;
+  }
 </style>

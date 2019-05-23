@@ -6,5 +6,73 @@
          </div>
            故事分类
      </el-header>
+     <el-row>
+       <el-col>
+           <el-button type="primary" @click="one()">登录按钮</el-button>
+       </el-col>
+       <el-col>
+           <el-button type="success" @click="two()">按钮1</el-button>
+       </el-col>
+       <el-col>
+           <el-button type="info" @click="three()">按钮2</el-button>
+       </el-col>
+       <el-col>
+           <el-button type="warning" @click="four()">按钮3</el-button>
+       </el-col>
+       <el-col>
+           <el-button type="danger" @click="five()">退出按钮</el-button>
+       </el-col>
+     </el-row>
     </el-container>
 </template>
+<script type="text/javascript">
+import axios from "axios";
+export default {
+  data() {},
+  mounted() {
+    // this.one();
+    // this.two();
+    // this.three();
+    // this.four();
+    // this.five();
+  },
+  methods: {
+    one() {
+      const that = this;
+      axios.get("/api/User/see").then(function(res) {
+        console.log(res,res.data);
+      });
+    },
+    two() {
+      const that = this;
+      axios
+        .get("/api/User/login_test?username=13133335555")
+        .then(function(res) {
+          console.log(res);
+        });
+    },
+    three() {
+      const that = this;
+      axios
+        .get("/api/User/login_test?username=13133336666")
+        .then(function(res) {
+          console.log(res);
+        });
+    },
+    four() {
+      const that = this;
+      axios
+        .get("/api/User/login_test?username=13133337777")
+        .then(function(res) {
+          console.log(res);
+        });
+    },
+    five() {
+      const that = this;
+      axios.get("/api/User/logout_test").then(function(res) {
+        console.log(res);
+      });
+    }
+  }
+};
+</script>
