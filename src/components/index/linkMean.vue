@@ -20,16 +20,15 @@ export default {
     return {
       items: [
         {
-          text: "红山",
+          text: "红山11",
           iconUrl: "static/testImg/redMountain.png"
         },
         {
-          text: "旅游",
+          text: "旅游555",
           iconUrl: "static/testImg/travel.png"
         },
         {
-          text: "讲堂",
-
+          text: "讲堂666",
           iconUrl: "static/testImg/redMountain.png"
         },
         {
