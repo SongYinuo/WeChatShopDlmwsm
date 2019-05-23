@@ -35,6 +35,14 @@ module.exports = {
         pathRewrite: {
             '^/Api': '/Api'   //需要rewrite重写的,
         }              
+      },
+      '/img': {//代理请求图片的接口
+        changeOrigin: true,
+        secure: false, //https请求需设置此项
+        target: 'http://192.168.1.13',
+        pathRewrite: {
+          '^/img': ''  
+        }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

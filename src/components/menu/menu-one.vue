@@ -123,7 +123,7 @@ export default {
     getData() {
       const that = this;
       axios
-        .get("/php/Article/article_list?cat_id=1001")
+        .get("/Api/Article/article_list?cat_id=1001")
         .then(function(res) {
           // console.log(res)
           that.items = res.data.data.admin_list;
@@ -135,7 +135,7 @@ export default {
     getImg() {
       const that = this;
       axios
-        .get("/php/Article/article_list?cat_id=1001")
+        .get("/Api/Article/article_list?cat_id=1001")
         .then(function(res) {
           that.arrays = res.data.data.user_list;
         })
