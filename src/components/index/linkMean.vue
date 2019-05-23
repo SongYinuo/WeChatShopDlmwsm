@@ -20,7 +20,7 @@ export default {
     return {
       items: [
         {
-          text: "红山",
+          text: "红山11",
           iconUrl: "static/testImg/redMountain.png"
         },
         {
