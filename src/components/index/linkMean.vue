@@ -29,7 +29,6 @@ export default {
         },
         {
           text: "讲堂",
-
           iconUrl: "static/testImg/redMountain.png"
         },
         {
