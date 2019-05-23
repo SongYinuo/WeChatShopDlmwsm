@@ -128,7 +128,7 @@
         var newId = this.$route.query.id;
         const that = this;
         axios
-          .get("/api/Article/article_detail" + "?article_id=" + newId)
+          .get("/Api/Article/article_detail" + "?article_id=" + newId)
           .then(function (res) {
             console.log(res);
             that.items = res.data.data;
@@ -141,7 +141,7 @@
         var newId = this.$route.query.id;
         const that = this;
         axios
-          .get("/api/Article/article_detail" + "?article_id=" + newId)
+          .get("/Api/Article/article_detail" + "?article_id=" + newId)
           .then(function (res) {
             console.log(res.data.data.user_url);
             that.swiperList = res.data.data;

@@ -28,13 +28,21 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
+      '/Api': {
         // 测试环境
         target: 'http://192.168.1.13',  // 接口域名
         changeOrigin: true,  //是否跨域
         pathRewrite: {
-            '^/api': '/Api'   //需要rewrite重写的,
+            '^/Api': '/Api'   //需要rewrite重写的,
         }              
+      },
+      '/img': {//代理请求图片的接口
+        changeOrigin: true,
+        secure: false, //https请求需设置此项
+        target: 'http://192.168.1.13',
+        pathRewrite: {
+          '^/img': ''  
+        }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

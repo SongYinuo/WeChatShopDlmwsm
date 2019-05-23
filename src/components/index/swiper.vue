@@ -17,20 +17,33 @@ export default {
     };
   },
   mounted() {
-    this.getImg();
+    // this.getImg();
+    this.getSwiper();
   },
  
   methods: {
-    getImg() {
-      const thit = this;
-      axios
-        .get("/api/Index/advert")
-        .then(function(res) {
-          thit.swipeData = res.data.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    // getImg(){
+    //   const thit = this
+    //   axios.get('/Api/Index/advert')
+    //   .then(function(res){
+    //     thit.swipeData = res.data.data;
+    //   }).catch(function(error){
+    //     console.log(error)
+    //   })
+    // }
+    getSwiper(){
+      const thit = this
+      axios({
+        methods: 'get',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        url: '/Api/Index/advert'
+      }).then(function(res){
+        thit.swipeData = res.data.data;
+      }).catch(function(error){
+        console.log(error)
+      })
     }
   }
 };
