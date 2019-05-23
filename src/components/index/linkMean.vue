@@ -28,7 +28,7 @@ export default {
           iconUrl: "static/testImg/travel.png"
         },
         {
-          text: "讲堂",
+          text: "讲堂666",
           iconUrl: "static/testImg/redMountain.png"
         },
         {
