@@ -41,9 +41,9 @@ export default {
       axios.get('/php/Index/company_detail?article_id=1418')
       .then(function(res){
         that.detailsInfo = res.data.data;
-        console.log(res)
+        // console.log(res)
       }).catch(function(error){
-        console.log(error)
+        // console.log(error)
       })
     }
   }

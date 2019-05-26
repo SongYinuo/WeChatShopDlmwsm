@@ -215,12 +215,12 @@ export default {
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
-        console.log(this.ruleForm.resourceA, this.ruleForm.resourceB);
+        // console.log(this.ruleForm.resourceA, this.ruleForm.resourceB);
         if (valid) {
           alert("submit!");
           this.dialogFormVisible = false
         } else {
-          console.log("error submit!!");
+          // console.log("error submit!!");
           return false;
         }
       });

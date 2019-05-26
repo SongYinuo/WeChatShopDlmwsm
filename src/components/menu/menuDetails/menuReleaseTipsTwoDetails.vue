@@ -10,9 +10,10 @@
       <el-row class="Release">
         <el-col :span="22" :offset="1">
           <el-form-item prop="file" class="upload-img-form" ref="uploadElement">
-            <el-upload :action="InitializationAddUrl" ref="upload" :limit="9" list-type="picture-card"
-              :on-preview="handlePictureCardPreview" :on-remove="handleRemove" class="bgRelease" :auto-upload='false'
-              :on-change='changeUpload' multiple :show-file-list="true">
+            <el-upload :action="InitializationAddImgUrl" list-type="picture-card" :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload" :on-progress="onProgress" name="upfile"
+              :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :data="editor" accept="image/*"
+              :limit="9">
               <el-button slot="trigger">
                 <i class="el-icon-plus">添加图片</i>
               </el-button>
@@ -32,9 +33,9 @@
             <el-form-item label="视频" label-width="60px">
               <el-switch v-model="ruleForm.delivery" @change="test()"></el-switch>
             </el-form-item>
-            <el-upload class="pdB3" action="http://192.168.1.5/api/user/test" list-type="picture-card"
-              :on-preview="handlePictureCardPreview" :on-remove="handleRemove" ref="ruleForm.photo"
-              v-if="this.ruleForm.photo">
+            <el-upload class="pdB3" :action="InitializationAddVideoUrl" list-type="picture-card"
+              :on-preview="handlePictureCardPreview" :on-remove="handleRemove" ref="ruleForm.photo" :data="editor"
+              accept="video/*" v-if="this.ruleForm.photo" :limit="1">
               <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible">
@@ -53,94 +54,142 @@
   </el-container>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        InitializationAddUrl: "http://192.168.1.5/api/user/test",
-        dialogImageUrl: "",
-        dialogVisible: false,
-        delivery: false,
-        photo: false,
+import axios from "axios";
+export default {
+  data() {
+    return {
+      editor: {
+        model: "article"
+      },
+      InitializationAddImgUrl: "/Api/Api/img_upload",
+      InitializationAddVideoUrl: "/Api/Api/video_upload",
+      dialogImageUrl: "",
+      dialogVisible: false,
+      dialogImageUrl: "",
+      dialogVisible: false,
+      delivery: false,
+      photo: false,
+      text: "",
+      textarea: "",
+      file: "",
+      ruleForm: {
         text: "",
         textarea: "",
         file: "",
-        ruleForm: {
-          text: "",
-          textarea: "",
-          file: "",
-          IUrl: ""
-        },
-        rules: {
-          text: [
-            { required: true, message: "请填要输入的标题信息", trigger: "blur" },
-            { min: 1, max: 30, message: "长度在 1 到 30 个字符", trigger: "blur" }
-          ],
-          textarea: [
-            { required: true, message: "请填要输入的文字信息", trigger: "blur" }
-          ]
-        }
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
+        IUrl: ""
       },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
-      changeUpload: function (file, fileList) {
-        this.fileList = fileList;
-        console.log(this.fileList);
-        console.log(file);
-        this.$nextTick(() => {
-          let upload_list_li = document.getElementsByClassName(
-            "el-upload-list"
-          )[0].children;
-          for (let i = 0; i < upload_list_li.length; i++) {
-            let li_a = upload_list_li[i];
-            let imgElement = document.createElement("img");
-            imgElement.setAttribute("src", fileList[i].url);
-            imgElement.setAttribute("style", "max-width:33.3%;padding-left:25%");
-            if (li_a.lastElementChild.nodeName !== "IMG") {
-              li_a.appendChild(imgElement);
-            }
+      rules: {
+        text: [
+          {
+            required: true,
+            message: "请填要输入的标题信息",
+            trigger: "blur"
+          },
+          {
+            min: 1,
+            max: 30,
+            message: "长度在 1 到 30 个字符",
+            trigger: "blur"
           }
-        });
-      },
-      submitForm(formName) {
-        console.log(this.ruleForm.text);
-        console.log(this.ruleForm.textarea);
-        console.log(this.ruleForm.IUrl);
+        ],
+        textarea: [
+          {
+            required: true,
+            message: "请填要输入的文字信息",
+            trigger: "blur"
+          }
+        ]
+      }
+    };
+  },
+  methods: {
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    beforeAvatarUpload(file) {
+      //请求前
+      console.log(file);
+      const isJPG =
+        file.type === "image/jpg" ||
+        file.type === "image/jpeg" ||
+        file.type === "image/gif" ||
+        file.type === "image/bmp" ||
+        file.type === "image/png";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isJPG) {
+        this.$message.error("仅支持jpg，png，bmp，gif格式的图片！");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
+    onProgress(event, file, fileList) {
+      //请求中
+    },
+    handleAvatarSuccess(res, file) {
+      //请求完成
+      console.log(res, file);
+      this.dialogImageUrl = URL.createObjectURL(file.raw);
+    },
+    submitForm(formName) {
+      axios({
+        method: "post",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/article_img_add",
+        formData: {
+          cat_id: 1004,
+          title: this.ruleForm.text,
+          content: this.ruleForm.textarea,
+          user_url: this.ruleForm.IUrl
+        }
+      })
+      .then(function (res) {
+        console.log(res);
         if (this.ruleForm.text === "" || this.ruleForm.textarea === "") {
           alert("请填要输入的信息");
         } else {
           alert("提交完成");
         }
-      }, test: function () {
-        this.ruleForm.photo = !this.ruleForm.photo
-      }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      console.log(this.ruleForm.text);
+      console.log(this.ruleForm.textarea);
+      console.log(this.ruleForm.IUrl);
+  
+    },
+    test: function() {
+      this.ruleForm.photo = !this.ruleForm.photo;
     }
-  };
+  }
+};
 </script>
 <style lang="less">
-  @import "../../../assets/index/indexSwiper.less";
-  @import "../../../assets/header.less";
-  @import "../../../assets/index/style.less";
-  @import "../../../assets/menu/details.less";
-  @import "../../../assets/fz.less";
+@import "../../../assets/index/indexSwiper.less";
+@import "../../../assets/header.less";
+@import "../../../assets/index/style.less";
+@import "../../../assets/menu/details.less";
+@import "../../../assets/fz.less";
 
-  .el-upload-list__item-actions {
-    display: none;
-  }
+.el-upload-list__item-actions {
+  display: none;
+}
 
-  .el-upload-list--picture-card .el-upload-list__item {
-    width: 30.6%;
-  }
+.el-upload-list--picture-card .el-upload-list__item {
+  width: 30.6%;
+}
 
-  .Release .el-input__inner,
-  .Release .el-textarea__inner {
-    font-size: 14px;
-    color: #333333;
-  }
+.Release .el-input__inner,
+.Release .el-textarea__inner {
+  font-size: 14px;
+  color: #333333;
+}
 </style>

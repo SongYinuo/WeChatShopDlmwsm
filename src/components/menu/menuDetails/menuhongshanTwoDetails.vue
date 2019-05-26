@@ -130,7 +130,7 @@
         axios
           .get("/Api/Article/article_detail" + "?article_id=" + newId)
           .then(function (res) {
-            console.log(res);
+            // console.log(res);
             that.items = res.data.data;
           })
           .catch(function (error) {
@@ -143,7 +143,7 @@
         axios
           .get("/Api/Article/article_detail" + "?article_id=" + newId)
           .then(function (res) {
-            console.log(res.data.data.user_url);
+            // console.log(res.data.data.user_url);
             that.swiperList = res.data.data;
           })
           .catch(function (error) {
