@@ -23,6 +23,7 @@
                         </el-row>
                     </router-link>
                 </div>
+
             </el-col>
             <el-col>
                 <router-link :to="{ name:'发布心得'}">
@@ -73,13 +74,13 @@ import axios from "axios";
             getData(){
                 const that = this;
                 axios
-                .get('/php/Article/classroom_list')
+                .get('/Api/Article/classroom_list')
                 .then(function(res){
-                    console.log(res)
+                    // console.log(res)
                     that.items = res.data.data;
                 })
                 .catch(function(error){
-                    console.log(error)
+                    // console.log(error)
                 });
             }
         }

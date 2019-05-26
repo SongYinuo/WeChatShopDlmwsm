@@ -129,7 +129,7 @@ export default {
           {
             title: "心得",
             num: 122,
-            routerLink: "红山"
+            routerLink: "userExperienceExchange"
           },
           {
             title: "讲堂",

@@ -42,7 +42,7 @@ export default {
       }).then(function(res){
         thit.swipeData = res.data.data;
       }).catch(function(error){
-        console.log(error)
+        // console.log(error)
       })
     }
   }
