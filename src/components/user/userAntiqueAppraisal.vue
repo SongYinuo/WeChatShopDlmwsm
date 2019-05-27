@@ -8,23 +8,25 @@
      </el-header>
      <el-row>
             <el-col :span="22" :offset="1">
-            <div v-for="household in datas.households">
-              <div class="smallTittle">{{household.smallTittle}}</div>
-                <div v-for="k in household.items">
-                    <router-link :to="{ name:'已发布-鉴定',query: { id: k.id }}">
+            <div>
+              <div class="smallTittle">我的发布（{{count}}）</div>
+                <!-- <div v-for="k in household.items"> -->
+                  <div v-for="item in households">
+                    <router-link :to="{name:'已发布-鉴定',query: { id: item.id }}">
                         <el-row class="smallimg">
                             <el-col :span="12" class="pd">
-                                <p class="menu-strategy ">{{k.text}}</p>
-                                <div class="menu-strategy-small omit">{{k.txt}}</div>
-                                <span class="menuTime">{{k.time}}</span>
+                                <p class="menu-strategy ">{{item.title}}</p>
+                                <div class="menu-strategy-small omit">{{item.content}}</div>
+                                <span class="menuTime">{{item.confirm_time_text}}</span>
                             </el-col>
                             <el-col :span="8" :offset="4">
-                                <img :src="k.iconUrl">
-                                <span class="state">{{k.state}}</span>
+                                <img :src="item.thumb">
+                                <span class="state" >{{item.is_confirm == 1?'未处理':'已处理'}}</span>
                             </el-col>
                         </el-row>
                     </router-link>
-                </div>
+                  </div>
+                <!-- </div> -->
               </div>
             </el-col>
         </el-row>
@@ -32,43 +34,32 @@
 </template>
 
 <script>
+import Axios from 'axios';
 export default {
   data() {
     return {
-      datas: {
-        households: [
-          {
-            smallTittle: "发布内容(2)",
-            items: [
-              {
-                text: "鹰雕像",
-                txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
-                iconUrl: "static/testImg/secondCompany.png",
-                time: "17分钟",
-                state:"处理中",
-                id: "11200"
-              },
-              {
-                text: "鹰雕像",
-                txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
-                iconUrl: "static/testImg/secondCompany.png",
-                time: "17分钟",
-                 state:" ",
-                id: "11201"
-              },
-              {
-                text: "鹰雕像",
-                txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
-                iconUrl: "static/testImg/secondCompany.png",
-                time: "17分钟",
-                 state:" ",
-                id: "11202"
-              }
-            ]
-          }
-        ]
-      }
-    };
+      households:[],
+      count:'',
+    }
+  },
+  mounted:function(){
+    this.getData()
+  },
+  methods:{
+    getData:function(){
+      console.log("111")
+     const that = this
+     Axios({
+       methods:'get',
+       url:'/Api/User/prove_list'
+     }).then(function(res){
+       console.log(res)
+      that.households = res.data.data
+     console.log(that.households)
+     that.count = res.data.count
+     })
+
+    }
   }
 };
 </script>
