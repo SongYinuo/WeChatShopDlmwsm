@@ -8,7 +8,6 @@ import axios from 'axios'
 import less from 'less'
 import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
-
 import ElementUi from 'element-ui'
 import '../node_modules/element-ui/lib/theme-chalk/index.css'
 

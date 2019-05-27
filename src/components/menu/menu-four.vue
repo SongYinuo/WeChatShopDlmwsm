@@ -109,7 +109,7 @@ import axios from "axios";
             },getData(){
                 const that = this;
                 axios
-                .get("/api/Article/article_list?cat_id=1003")
+                .get("/Api/Article/article_list?cat_id=1003")
                 .then(function(res){
                     that.items = res.data.data.admin_list;
                 })
@@ -119,7 +119,7 @@ import axios from "axios";
             },getImg(){
                 const that = this;
                 axios
-                .get("/api/Article/article_list?cat_id=1003")
+                .get("/Api/Article/article_list?cat_id=1003")
                 .then(function(res){
                     that.arrays = res.data.data.user_list;
                 })
