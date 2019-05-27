@@ -2,7 +2,7 @@ import axios from 'axios'
 
 let http = {}
 // 正式服
-let completeUrl = 'http://198.168.1.12' 
+let completeUrl = 'http://192.168.1.12' 
 http.post = (url, body) => {
   return axios({
     method: 'post',

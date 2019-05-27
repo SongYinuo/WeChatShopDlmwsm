@@ -39,7 +39,7 @@ module.exports = {
       '/img': {//代理请求图片的接口
         changeOrigin: true,
         secure: false, //https请求需设置此项
-        target: 'http://192.168.1.13',
+        target: 'http://192.168.1.12',
         pathRewrite: {
           '^/img': ''  
         }

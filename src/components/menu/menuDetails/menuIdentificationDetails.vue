@@ -55,7 +55,6 @@
             <el-button type="warning" class="releasevideo" @click="submitForm('ruleForm')">发布</el-button>
           </el-col>
         </el-form>
-
       </el-col>
     </el-row>
 
@@ -139,21 +138,22 @@ export default {
       this.dialogVisible = true;
     },
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          // alert('submit!');
-          console.log(
-            this.ruleForm.name,
-            this.ruleForm.nameAuthor,
-            this.ruleForm.year1,
-            this.ruleForm.region,
-            this.ruleForm.messageText
-          );
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+     let that = this;
+      that.$http
+        .post("/Api/User/prove_add", {
+          title: that.ruleForm.name,
+          img_author: that.ruleForm.nameAuthor,
+          img_width: that.ruleForm.date1,
+          img_height: that.ruleForm.date2,
+          img_material: that.ruleForm.year1,
+          img_year: that.ruleForm.year1,
+          content: that.ruleForm.messageText,
+          thumb: that.basic
+        })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(error => {});
     },
     upqiniu(req) {
       console.log(req);
