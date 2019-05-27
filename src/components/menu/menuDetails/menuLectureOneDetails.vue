@@ -28,7 +28,9 @@
 <script type="text/javascript">
 import axios from "axios";
 export default {
-  data() {},
+  data() {
+    return{}
+  },
   mounted() {
     // this.one();
     // this.two();
@@ -76,3 +78,6 @@ export default {
   }
 };
 </script>
+<style lang="less">
+@import "../../../assets/header.less";
+</style>

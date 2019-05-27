@@ -139,7 +139,7 @@
         axios
           .get("/Api/Article/article_detail" + "?article_id=" + newId)
           .then(function (res) {
-            console.log(res);
+            // console.log(res);
             that.items = res.data.data;
           })
           .catch(function (error) {
@@ -150,10 +150,10 @@
         var newId = this.$route.query.id;
         const that = this;
         axios
-          .get("/Api/Article/article_detail?article_id=24")
+          .get("/Api/Article/article_detail" + "?article_id=" + newId)
           .then(function (res) {
-            console.log(res.data.data.user_url);
-            that.swiperList = res.data.data.user_url;
+            // console.log(res.data.data.user_url);
+            that.swiperList = res.data.data;
           })
           .catch(function (error) {
             // console.log(error)

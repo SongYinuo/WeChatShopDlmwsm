@@ -71,11 +71,11 @@
         axios
         .get("/Api/Article/paint_detail?id=2")
         .then(function(res){
-          console.log(res)
+          // console.log(res)
           that.books = res.data.data;
         })
         .catch(function(error){
-          console.log(error)
+          // console.log(error)
         });   
               
       }

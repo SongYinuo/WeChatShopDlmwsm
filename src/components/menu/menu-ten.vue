@@ -55,10 +55,10 @@ import axios from "axios";
                 axios
                 .get("/Api/Article/paint_list")
                 .then(function(res){
-                    console.log(res);
+                    // console.log(res);
                     that.Paintings = res.data.data;
                 }).catch(function(error){
-                    console.log(error);
+                    // console.log(error);
                 });
             }
         }

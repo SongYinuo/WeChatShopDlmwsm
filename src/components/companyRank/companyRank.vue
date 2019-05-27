@@ -117,11 +117,11 @@ export default {
       axios
         .get("/Api/Index/company_sort?size=12")
         .then(function(res) {
-          console.log(res, res.data.data);
+          // console.log(res, res.data.data);
           that.companyRanksArray = res.data.data;
         })
         .catch(function(error) {
-          console.log(error);
+          // console.log(error);
         });
     }
   }

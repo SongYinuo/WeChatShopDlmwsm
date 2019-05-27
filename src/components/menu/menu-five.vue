@@ -104,7 +104,7 @@ import axios from "axios";
 
         methods: {
             handleClick(tab, event) {
-                console.log(tab, event);
+                // console.log(tab, event);
             },getData(){
                 const that = this;
                 axios
