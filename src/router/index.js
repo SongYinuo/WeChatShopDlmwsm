@@ -456,10 +456,10 @@ export default new Router({
     }
   }, {
     path: '/userCoupon',
-    name: '卡券',
+    name: 'vip专区',
     component: UserCoupon,
     meta: {
-      title: '卡券'
+      title: 'vip专区'
     }
   }, {
     path: '/userCoupon/userCouponDetails/:id',

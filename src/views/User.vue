@@ -129,18 +129,17 @@ export default {
           {
             title: "心得",
             num: 122,
-            routerLink: "红山"
+            routerLink: "userExperienceExchange"
           },
           {
-            title: "讲堂",
+            title: "用户讲堂",
             num: 123,
-            routerLink: "讲堂",
-            id:"12000"
+            routerLink: "userLectureRoom"
           },
           {
             title: "书画摄影",
             num: 162,
-            routerLink: "书画摄影"
+            routerLink: "userPaintingPhotography"
           },
           {
             title: "古董鉴定",

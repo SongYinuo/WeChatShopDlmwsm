@@ -1,4 +1,6 @@
 <template lang="html">
+
+
   <el-container>
     <el-header class="tittle" v-model="title" v-for="i in name">
       <!-- v-if="this.ruleForm.text!==''&&this.ruleForm.textarea!=='' -->
@@ -9,8 +11,8 @@
       {{i.title}}
     </el-header>
     <el-row class="details">
-      <el-col :span="24">
-        <div class="swiper-container">
+      <!-- <el-col :span="24">
+         <div class="swiper-container">
           <div class="swiper-wrapper">
             <el-col class="swiper-slide" v-for="(swiper,index) in swiperList.user_url"
               v-if="swiperList.user_type===1 && swiperList.user_url.length > 1">
@@ -18,7 +20,7 @@
               <div class="swiper-pagination"></div>
             </el-col>
           </div>
-          <!-- <div class="swiper-wrapper">
+          <div class="swiper-wrapper">
             <el-col class="swiper-slide" v-for="b in swiperList.user_url"
               v-if="swiperList.user_type===1 && swiperList.user_url.length===1">
               <img :src="b" class="swimg">
@@ -28,10 +30,19 @@
           <el-col :span="24" class="of">
             <video :src="swiperList.user_url" controls="controls" class="menu-video"
               v-if="swiperList.user_type===2"></video>
-          </el-col> -->
+          </el-col>
 
-        </div>
-      </el-col>
+        </div> 
+       
+      </el-col> -->
+      <div class="block">
+    
+    <el-carousel trigger="click" height="150px" >
+      <el-carousel-item :key="item" v-for="banner in swiperList">
+        <img :src="banner" >
+      </el-carousel-item>
+    </el-carousel>
+  </div>
       <el-button icon="el-icon-more" circle type="text" @click="dialogVisible = true"></el-button>
       <el-dialog title="操作" :visible.sync="dialogVisible" width="100%">
         <span slot="footer" class="dialog-footer">
@@ -92,35 +103,33 @@
         title: "种草详情",
         dialogVisible: false,
         content: "sichaoyun",
-        swiperList: [
-        ],
+        swiperList: [],
         name: [
           {
             title: "种草详情"
           }
         ],
-        items: [
-        ]
+        items: []
       };
     },
 
     mounted() {
-      this._initSwiper();
+      // this._initSwiper();
       this.getData();
       this.getImg();
       // this.getGoodsInfoData();
     },
     methods: {
       handleClose(done) { },
-      _initSwiper() {
-        this.swiper = new Swiper(".swiper-container", {
-          type: "fraction",
-          loop: true,
-          autoplay: 3000,
-          pagination: ".swiper-pagination",
-          paginationType: "fraction"
-        });
-      },
+      // _initSwiper() {
+      //   this.swiper = new Swiper(".swiper-container", {
+      //     type: "fraction",
+      //     loop: true,
+      //     autoplay: 3000,
+      //     pagination: ".swiper-pagination",
+      //     paginationType: "fraction"
+      //   });
+      // },
       prev() {
         this.$router.go(-1);
       },
@@ -128,7 +137,7 @@
         var newId = this.$route.query.id;
         const that = this;
         axios
-          .get("/api/Article/article_detail" + "?article_id=" + newId)
+          .get("/Api/Article/article_detail" + "?article_id=" + newId)
           .then(function (res) {
             console.log(res);
             that.items = res.data.data;
@@ -141,10 +150,10 @@
         var newId = this.$route.query.id;
         const that = this;
         axios
-          .get("/api/Article/article_detail" + "?article_id=" + newId)
+          .get("/Api/Article/article_detail?article_id=24")
           .then(function (res) {
             console.log(res.data.data.user_url);
-            that.swiperList = res.data.data;
+            that.swiperList = res.data.data.user_url;
           })
           .catch(function (error) {
             // console.log(error)

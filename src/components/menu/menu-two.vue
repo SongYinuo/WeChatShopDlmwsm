@@ -108,7 +108,7 @@ export default {
     },getData(){
       const that = this;
       axios
-        .get("/api/Article/article_list?cat_id=1002")
+        .get("/Api/Article/article_list?cat_id=1002")
         .then(function(res){
           that.items = res.data.data.admin_list;
         })
@@ -119,7 +119,7 @@ export default {
     },getImg(){
       const that = this;
       axios
-        .get("/api/Article/article_list?cat_id=1002")
+        .get("/Api/Article/article_list?cat_id=1002")
         .then(function(res){
           that.arrays = res.data.data.user_list;
         })

@@ -39,14 +39,14 @@ export default {
   methods: {
     one() {
       const that = this;
-      axios.get("/api/User/see").then(function(res) {
+      axios.get("/Api/User/see").then(function(res) {
         console.log(res,res.data);
       });
     },
     two() {
       const that = this;
       axios
-        .get("/api/User/login_test?username=13133335555")
+        .get("/Api/User/login_test?username=13133335555")
         .then(function(res) {
           console.log(res);
         });
@@ -54,7 +54,7 @@ export default {
     three() {
       const that = this;
       axios
-        .get("/api/User/login_test?username=13133336666")
+        .get("/Api/User/login_test?username=13133336666")
         .then(function(res) {
           console.log(res);
         });
@@ -62,14 +62,14 @@ export default {
     four() {
       const that = this;
       axios
-        .get("/api/User/login_test?username=13133337777")
+        .get("/Api/User/login_test?username=13133337777")
         .then(function(res) {
           console.log(res);
         });
     },
     five() {
       const that = this;
-      axios.get("/api/User/logout_test").then(function(res) {
+      axios.get("/Api/User/logout_test").then(function(res) {
         console.log(res);
       });
     }

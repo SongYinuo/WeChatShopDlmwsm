@@ -43,57 +43,7 @@ import axios from "axios";
             return {
                 input3: '',
                 Paintings: [
-                    // {
-                    //     photoUrl: "static/testImg/youhua.jpg",
-                    //     text: "大好河山",
-                    //     txt: "作者|简笔画",
-                    //     attribute: "热门",
-                    //     id: "11001"
-                    // },
-                    // {
-                    //     photoUrl: "static/testImg/youhua.jpg",
-                    //     text: "大好河山",
-                    //     txt: "作者|简笔画",
-                    //     attribute: "热门",
-                    //     id: "11002"
-                    // },
-                    // {
-                    //     photoUrl: "static/testImg/painting-1.jpg",
-                    //     text: "大好河山",
-                    //     txt: "作者|简笔画",
-                    //     attribute: "热门",
-                    //     id: "11003"
-                    // }, {
-                    //     photoUrl: "static/testImg/painting-1.jpg",
-                    //     text: "大好河山",
-                    //     txt: "作者|简笔画",
-                    //     attribute: "热门",
-                    //     id: "11004"
-                    // }, {
-                    //     photoUrl: "static/testImg/photo1.jpg",
-                    //     text: "大好河山",
-                    //     txt: "作者|简笔画",
-                    //     attribute: "热门",
-                    //     id: "11005"
-                    // }, {
-                    //     photoUrl: "static/testImg/photo1.jpg",
-                    //     text: "大好河山",
-                    //     txt: "作者|简笔画",
-                    //     attribute: "热门",
-                    //     id: "11006"
-                    // }, {
-                    //     photoUrl: "static/testImg/photo1.jpg",
-                    //     text: "大好河山",
-                    //     txt: "作者|简笔画",
-                    //     attribute: "热门",
-                    //     id: "11007"
-                    // }, {
-                    //     photoUrl: "static/testImg/photo1.jpg",
-                    //     text: "大好河山",
-                    //     txt: "作者|简笔画",
-                    //     attribute: "热门",
-                    //     id: "11008"
-                    // }
+                
                 ]
             }
         },mounted(){
@@ -103,7 +53,7 @@ import axios from "axios";
             getData(){
                 const that = this;
                 axios
-                .get("/php/Article/paint_list")
+                .get("/Api/Article/paint_list")
                 .then(function(res){
                     console.log(res);
                     that.Paintings = res.data.data;

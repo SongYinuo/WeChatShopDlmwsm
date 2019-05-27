@@ -24,7 +24,7 @@ export default {
     getImg() {
       const thit = this;
       axios
-        .get("/api/Index/advert")
+        .get("/Api/Index/advert")
         .then(function(res) {
           thit.swipeData = res.data.data;
         })

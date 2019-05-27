@@ -41,27 +41,7 @@ import axios from "axios";
             return {
                 title:"讲堂",
                 items: [
-                    // {
-                    //     text: "红山玉文化源远流长",
-                    //     txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
-                    //     iconUrl: "static/testImg/secondCompany.png",
-                    //     time: "17分钟",
-                    //     id: "11200"
-                    // },
-                    // {
-                    //     text: "红山玉文化源远流长",
-                    //     txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
-                    //     iconUrl: "static/testImg/secondCompany.png",
-                    //     time: "17分钟",
-                    //     id: "11201"
-                    // },
-                    // {
-                    //     text: "红山玉文化源远流长",
-                    //     txt: "红山文化的玉文化是红山文化的先祖们集体的智慧而集中反",
-                    //     iconUrl: "static/testImg/secondCompany.png",
-                    //     time: "17分钟",
-                    //     id: "11202"
-                    // }
+                   
                 ]
             }
 
@@ -73,7 +53,7 @@ import axios from "axios";
             getData(){
                 const that = this;
                 axios
-                .get('/php/Article/classroom_list')
+                .get('/Api/Article/classroom_list')
                 .then(function(res){
                     console.log(res)
                     that.items = res.data.data;

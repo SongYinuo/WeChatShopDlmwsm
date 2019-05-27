@@ -38,7 +38,7 @@ export default {
   },methods:{
     getData(){
       const that = this
-      axios.get('/php/Index/company_detail?article_id=1418')
+      axios.get('/Api/Index/company_detail?article_id=1418')
       .then(function(res){
         that.detailsInfo = res.data.data;
         console.log(res)
