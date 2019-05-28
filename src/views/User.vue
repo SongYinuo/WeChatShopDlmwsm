@@ -74,7 +74,7 @@
         <el-row>
           <el-col :span="22" :offset="1">
             <div class="couponRow pd1">
-              <router-link :to="{ name: '卡券' }">
+              <router-link :to="{ name: 'vip专区' }">
                 <img :src="userInfo.couponAdvertisingImg">
               </router-link>
             </div>
