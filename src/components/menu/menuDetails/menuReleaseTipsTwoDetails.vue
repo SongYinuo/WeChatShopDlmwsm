@@ -33,8 +33,9 @@
             <el-form-item label="视频" label-width="60px">
               <el-switch v-model="ruleForm.delivery" @change="test()"></el-switch>
             </el-form-item>
-            <el-upload class="pdB3" :action="InitializationAddVideoUrl" list-type="picture-card"
-              :on-preview="handlePictureCardPreview" :on-remove="handleRemove" ref="ruleForm.photo" :data="editor"
+            <el-upload class="pdB3" list-type="picture-card" :on-success="handleAvatarSuccessVideo"
+              :before-upload="beforeAvatarUploadVideo" :on-progress="onProgressVideo" name="upfile"
+              :on-preview="handlePictureCardPreviewVideo" :on-remove="handleRemoveVideo" :data="editorVideo"
               accept="video/*" v-if="this.ruleForm.photo" :limit="1">
               <i class="el-icon-plus"></i>
             </el-upload>
@@ -61,8 +62,12 @@ export default {
       editor: {
         model: "article"
       },
+      editorVideo: {
+        model: "prove"
+      },
       InitializationAddImgUrl: "/Api/Api/img_upload",
       InitializationAddVideoUrl: "/Api/Api/video_upload",
+      qniuyyu: "http://upload-z1.qiniup.com",
       dialogImageUrl: "",
       dialogVisible: false,
       dialogImageUrl: "",
@@ -106,7 +111,14 @@ export default {
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },
+    handleRemoveVideo(file, fileList) {
+      console.log(file, fileList);
+    },
     handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    handlePictureCardPreviewVideo(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
@@ -128,10 +140,33 @@ export default {
       }
       return isJPG && isLt2M;
     },
+      beforeAvatarUploadVideo(file) {
+      //请求前
+      console.log(file);
+      const isVideo =
+        file.type === "image/video" ||
+        file.type === "image/mp4"
+      const isLt20M = file.size / 1024 / 1024 < 20;
+      if (!isVideo) {
+        this.$message.error("仅支持video，mp4视频！");
+      }
+      if (!isLt20M) {
+        this.$message.error("上传视频大小不能超过 20MB!");
+      }
+      return isVideo && isLt20M;
+    },
     onProgress(event, file, fileList) {
       //请求中
     },
+    onProgressVideo(event, file, fileList) {
+      //请求中
+    },
     handleAvatarSuccess(res, file) {
+      //请求完成
+      console.log(res, file);
+      this.dialogImageUrl = URL.createObjectURL(file.raw);
+    },
+    handleAvatarSuccessVideo(res, file) {
       //请求完成
       console.log(res, file);
       this.dialogImageUrl = URL.createObjectURL(file.raw);

@@ -11,55 +11,14 @@
       {{i.title}}
     </el-header>
     <el-row class="details">
-      <!-- <el-col :span="24">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <el-col class="swiper-slide"  v-for="banner in swiperList.user_url"
-              v-if="swiperList.user_type===1 && swiperList.user_url.length > 1">
-             
-              <img :src="banner" class="swimg">
-              <div class="swiper-pagination"></div>
-            </el-col>
-          </div>
-          <div class="swiper-wrapper">
-            <el-col class="swiper-slide"  v-for="banner in swiperList.user_url"
-              v-if="swiperList.user_type===1 && swiperList.user_url.length===1">
-              <img :src="banner" class="swimg">
-              <div class="swiper-pagination"></div>
-            </el-col>
-          </div>
-          <el-col :span="24" class="of">
-            <video :src="swiperList.user_url" controls="controls" class="menu-video"
-              v-if="swiperList.user_type===2"></video>
-          </el-col>
-
-        </div>
-        </el-col> -->
-  <el-col :span="24"> 
-  <div class="block">
-    <el-carousel trigger="click" ref="carousel" v-if="swiperList.user_type===1" >
-      <el-carousel-item v-for="banner in swiperList.user_url"  name="index" >
-        <div v-if="swiperList.user_type===1 && swiperList.user_url.length > 1">
-        <img :src="banner">
-        </div>
-        <div  v-if="swiperList.user_type===1 && swiperList.user_url.length===1">
-         <img :src="banner">
-        </div>
+      <div class="block">
+    
+    <el-carousel trigger="click" height="150px" >
+      <el-carousel-item :key="item" v-for="banner in swiperList">
+        <img :src="banner" >
       </el-carousel-item>
     </el-carousel>
-    <div v-if="swiperList.user_type===2">
-         <video :src="swiperList.user_url" autoplay="autoplay" loop="loop" class="menu-video"></video>
-    </div>
-    <!-- <el-carousel trigger="click"  ref="carousel" >
-      <el-carousel-item v-for="banner in swiperList.user_url"  name="index" >
-        <div  v-if="swiperList.user_type===1 && swiperList.user_url.length===1">
-         <img :src="banner"  >
-        </div>
-      </el-carousel-item>
-    </el-carousel> -->
   </div>
-
-  </el-col> 
       <el-button icon="el-icon-more" circle type="text" @click="dialogVisible = true"></el-button>
       <el-dialog title="操作" :visible.sync="dialogVisible" width="100%">
         <span slot="footer" class="dialog-footer">
@@ -94,7 +53,8 @@
               </div>
             </el-col>
             <div class="MenuLike">
-              <v-like />
+              <!-- article_idd -->
+              <v-like :article_idd='article_idd'></v-like>
             </div>
             <el-row>
               <el-col :span="22">
@@ -109,107 +69,106 @@
   </el-container>
 </template>
 <script>
-import Like from "@/common/like.vue";
-import axios from "axios";
-export default {
-  components: {
-    "v-like": Like
-  },
-  data() {
-    return {
-      title: "种草详情",
-      dialogVisible: false,
-      content: "sichaoyun",
-      swiperList: [],
-      name: [
-        {
-          title: "种草详情"
-        }
-      ],
-      items: []
-    };
-  },
-
-  mounted() {
-    // this._initSwiper();
-    this.getData();
-    this.getImg();
-    // this.getGoodsInfoData();
-  },
-  methods: {
-    handleClose(done) {},
-    // _initSwiper() {
-    //   new Swiper(".swiper-container", {
-    //     loop: true,
-    //     // 如果需要分页器
-    //     pagination: ".swiper-pagination",
-    //     type: "fraction",
-    //       autoplay: 3000,
-    //       paginationType: "fraction"
-    //   });
-    // },
-    prev() {
-      this.$router.go(-1);
+  import Like from "@/common/like.vue";
+  import axios from "axios";
+  export default {
+    components: {
+      "v-like": Like
     },
-    getData() {
-      var newId = this.$route.query.id;
-      const that = this;
-      axios
-        .get("/Api/Article/article_detail" + "?article_id=" + newId)
-        .then(function(res) {
-          // console.log(res);
-          that.items = res.data.data;
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
+    data() {
+      return {
+        title: "种草详情",
+        dialogVisible: false,
+        content: "sichaoyun",
+        swiperList: [],
+        name: [
+          {
+            title: "种草详情"
+          }
+        ],
+        items: [],
+        article_idd:'',
+      };
     },
-    getImg() {
-      var newId = this.$route.query.id;
-      const that = this;
-      axios
-        .get("/Api/Article/article_detail" + "?article_id=" + newId)
-        .then(function(res) {
-          console.log(res.data.data.user_url);
-          that.swiperList = res.data.data;
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
+    beforeCreate(){
+       this.getData();
     },
-    moveErrorImg: function(event) {
-      event.currentTarget.src = "static/testImg/defaultAvatar.png";
+    mounted() {
+      // this._initSwiper();
+      this.getData();
+      this.getImg();
+      // this.getGoodsInfoData();
+    },
+    methods: {
+      handleClose(done) { },
+      // _initSwiper() {
+      //   this.swiper = new Swiper(".swiper-container", {
+      //     type: "fraction",
+      //     loop: true,
+      //     autoplay: 3000,
+      //     pagination: ".swiper-pagination",
+      //     paginationType: "fraction"
+      //   });
+      // },
+      prev() {
+        this.$router.go(-1);
+      },
+      getData() {
+        var newId = this.$route.query.id;
+        const that = this;
+        axios
+          .get("/Api/Article/article_detail" + "?article_id=" + newId)
+          .then(function (res) {
+            console.log("1111")
+            console.log(res);
+            that.article_idd = res.data.data.article_id;
+            console.log(that.article_idd)
+            that.items = res.data.data;
+          })
+          .catch(function (error) {
+            // console.log(error)
+          });
+      },
+      getImg() {
+        var newId = this.$route.query.id;
+        const that = this;
+        axios
+          .get("/Api/Article/article_detail" + "?article_id=" + newId)
+          .then(function (res) {
+            // console.log(res.data.data.user_url);
+            that.swiperList = res.data.data;
+          })
+          .catch(function (error) {
+            // console.log(error)
+          });
+      },
+      moveErrorImg: function (event) {
+        event.currentTarget.src = "static/testImg/defaultAvatar.png";
+      }
     }
-  }
-};
+  };
 </script>
 <style lang="less">
-@import "../../../assets/index/indexSwiper.less";
-@import "../../../assets/header.less";
-@import "../../../assets/index/style.less";
-@import "../../../assets/menu/details.less";
+  @import "../../../assets/index/indexSwiper.less";
+  @import "../../../assets/header.less";
+  @import "../../../assets/index/style.less";
+  @import "../../../assets/menu/details.less";
 
-.menu-video {
-  width: 100%;
-  height: 100%;
-}
+  .menu-video {
+    width: 100%;
+    height: 100%;
+  }
 
-.of {
-  overflow: hidden;
-}
+  .of {
+    overflow: hidden;
+  }
 
-.menu-video {
-  height: 310px;
-  width: 100%;
-}
+  .menu-video {
+    height: 310px;
+    width: 100%;
+  }
 
-.swimg {
-  width: 100%;
-}
-.el-carousel__indicators {
-  display: none;
-}
-img {
-  width: 100%;
-}
+  .swimg {
+    width: 100%;
+  }
 </style>
