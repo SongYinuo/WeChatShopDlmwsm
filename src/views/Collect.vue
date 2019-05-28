@@ -81,6 +81,7 @@
 
 <script>
 import Footer from "@/common/_footer.vue";
+import Axios from "axios";
 export default {
   components: {
     "v-footer": Footer
@@ -94,42 +95,42 @@ export default {
             label: "商品",
             name: "shangpin",
             infoArray: [
-              {
-                id: "idA10000001",
-                imgUrl: "static/testImg/vegetables-1.jpg",
-                title: "精选绿色蔬菜 纯绿色 无公害",
-                price: 152
-              },
-              {
-                id: "idA100000012",
-                imgUrl: "static/testImg/vegetables-1.jpg",
-                title: "1精选绿色蔬菜 纯绿色 无公害",
-                price: 153
-              },
-              {
-                id: "idA100000013",
-                imgUrl: "static/testImg/vegetables-1.jpg",
-                title: "2精选绿色蔬菜 纯绿色 无公害",
-                price: 154
-              },
-              {
-                id: "idA100000014",
-                imgUrl: "static/testImg/vegetables-1.jpg",
-                title: "3精选绿色蔬菜 纯绿色 无公害",
-                price: 155
-              },
-              {
-                id: "idA100000015",
-                imgUrl: "static/testImg/vegetables-1.jpg",
-                title: "4精选绿色蔬菜 纯绿色 无公害",
-                price: 156
-              },
-              {
-                id: "idA100000016",
-                imgUrl: "static/testImg/vegetables-1.jpg",
-                title: "5精选绿色蔬菜 纯绿色 无公害",
-                price: 157
-              }
+              // {
+              //   id: "idA10000001",
+              //   imgUrl: "static/testImg/vegetables-1.jpg",
+              //   title: "精选绿色蔬菜 纯绿色 无公害",
+              //   price: 152
+              // },
+              // {
+              //   id: "idA100000012",
+              //   imgUrl: "static/testImg/vegetables-1.jpg",
+              //   title: "1精选绿色蔬菜 纯绿色 无公害",
+              //   price: 153
+              // },
+              // {
+              //   id: "idA100000013",
+              //   imgUrl: "static/testImg/vegetables-1.jpg",
+              //   title: "2精选绿色蔬菜 纯绿色 无公害",
+              //   price: 154
+              // },
+              // {
+              //   id: "idA100000014",
+              //   imgUrl: "static/testImg/vegetables-1.jpg",
+              //   title: "3精选绿色蔬菜 纯绿色 无公害",
+              //   price: 155
+              // },
+              // {
+              //   id: "idA100000015",
+              //   imgUrl: "static/testImg/vegetables-1.jpg",
+              //   title: "4精选绿色蔬菜 纯绿色 无公害",
+              //   price: 156
+              // },
+              // {
+              //   id: "idA100000016",
+              //   imgUrl: "static/testImg/vegetables-1.jpg",
+              //   title: "5精选绿色蔬菜 纯绿色 无公害",
+              //   price: 157
+              // }
             ]
           },
           {
@@ -316,10 +317,33 @@ export default {
       }
     };
   },
+   mounted() {
+      console.log("2525")
+      let that = this;
+      Axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url:'/Api/User/goods_collect_list'
+      }).then(function(res){
+        console.log(res)
+      })
+    },
   methods: {
     handleClick(tab, event) {
-      // console.log(tab, event);
-    }
+      //  axios({
+      //   methods: 'get',
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded'
+      //   },
+      //   url: '/Api/Index/advert'
+      // }).then(function(res){
+      //   thit.swipeData = res.data.data;
+      // }).catch(function(error){
+      //   // console.log(error)
+      // })
+    },
   }
 };
 </script>
