@@ -17,9 +17,9 @@
                   <el-col>
                     <span class="colorWhite signIn">已连续</span>
                     <span class="colorOrange">
-                      <span class="signInInfoDaysBg left">0</span>
-                      <span class="signInInfoDaysBg center">0</span>
-                      <span class="signInInfoDaysBg right">{{getTiem.keep_days}}</span>
+                      <span class="signInInfoDaysBg left">{{keep_day[0]}}</span>
+                      <span class="signInInfoDaysBg center">{{keep_day[1]}}</span>
+                      <span class="signInInfoDaysBg right">{{keep_day[2]}}</span>
                     </span>
                     <span class="colorWhite signIn">天签到</span>
                   </el-col>
@@ -64,6 +64,8 @@ export default {
         signData:[],
         // 总数据
         getTiem:{},
+        // 签到日期数组
+        keep_day:[],
         // 签到成功的标志
         signSuccess:'马上签到',
         // 是否是签到状态
@@ -88,6 +90,21 @@ export default {
         // that.bookList = res.data.data
         that.signData = res.data.data.list
         that.getTiem = res.data.data
+        var the_keep_day = res.data.data.keep_days
+        //处理为三位数字
+        if(the_keep_day < 10){
+          the_keep_day = '00' + the_keep_day
+        }else if(the_keep_day < 100){
+          the_keep_day = '0' + the_keep_day
+        }else if(the_keep_day > 999){
+          the_keep_day = 999
+        }else{
+          the_keep_day = '' + the_keep_day
+        }
+        
+        that.keep_day = the_keep_day.split('');
+        // console.log(that.keep_day);
+
         that.sign_status = res.data.data.is_sign
         console.log(that.signData)
         // 新加的内容开始
