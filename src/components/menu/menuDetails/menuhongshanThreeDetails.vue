@@ -21,7 +21,7 @@
             </div>
           </el-col>
           <div class="MenuLike">
-            <v-like />
+            <v-like />     
           </div>
           <el-row>
             <el-col :span="22">
