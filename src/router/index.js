@@ -68,6 +68,12 @@ const MenuTabLists = resolve => require(['@/components/menu/menuDetails/MenuTabL
 const MenuIdentificationDetails = resolve => require(['@/components/menu/menuDetails/menuIdentificationDetails.vue'], resolve)
 const MenuThroughIdentificationDetails = resolve => require(['@/components/menu/menuDetails/menuThroughIdentificationDetails.vue'], resolve)
 const MenuTheEditor = resolve => require(['@/components/menu/menuDetails/menuTheEditor.vue'], resolve)
+const UserTipsdetailsone = resolve => require(['@/components/user/userOrderFormDetail/userTipsdetailsone.vue'], resolve)
+const UserDetailsthelecturehall = resolve => require(['@/components/user/userOrderFormDetail/userDetailsthelecturehall.vue'], resolve)
+const UserDetailscalligraphy = resolve => require(['@/components/user/userOrderFormDetail/userDetailscalligraphy.vue'], resolve)
+const MenuDetailslecture = resolve => require(['@/components/menu/menuDetails/menuDetailslecture.vue'], resolve)
+const Userlecturehalltedit = resolve => require(['@/components/user/userOrderFormDetail/userlecturehalltedit.vue'], resolve)
+const Usercalligraphypainting = resolve => require(['@/components/user/userOrderFormDetail/usercalligraphypainting.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -273,7 +279,7 @@ export default new Router({
       title: '书画摄影'
     }
   }, {
-    path: '/menuhongshanOneDetails',
+    path: '/menuhongshanOneDetails/:title/:id',
     name: '旅游攻略',
     component: MenuhongshanOneDetails,
     meta: {
@@ -301,6 +307,13 @@ export default new Router({
       title: '故事分类'
     }
   }, {
+    path: '/menuDetailslecture/:title/:id',
+    name: '讲堂详情',
+    component: MenuDetailslecture,
+    meta: {
+      title: '讲堂详情'
+    }
+  },{
     path: '/menuReleaseParentDetails',
     name: '发布',
     component: MenuReleaseParentDetails,
@@ -308,7 +321,7 @@ export default new Router({
       title: '发布'
     }
   }, {
-    path: '/menuBookOneDetails',
+    path: '/menuBookOneDetails/:title/:id',
     name: '书画详情',
     component: MenuBookOneDetails,
     meta: {
@@ -350,6 +363,43 @@ export default new Router({
       title: '用户书画摄影'
     }
   }, {
+    path: '/userTipsdetailsone',
+    name: '心得详情',
+    component: UserTipsdetailsone,
+    meta: {
+      title: '心得详情'
+    }
+  },{
+    path: '/userDetailsthelecturehall',
+    name: '我的讲堂详情',
+    component: UserDetailsthelecturehall,
+    meta: {
+      title: '我的讲堂详情'
+    }
+  },
+  {
+    path: '/userDetailscalligraphy/:title/:id',
+    name: '我的书画详情',
+    component: UserDetailscalligraphy,
+    meta: {
+      title: '我的书画详情'
+    }
+  },{
+    path: '/userlecturehalltedit/:title/:id',
+    name: '讲堂编辑详情',
+    component: Userlecturehalltedit,
+    meta: {
+      title: '讲堂编辑详情'
+    }
+  },{
+    path: '/usercalligraphypainting/:title/:id',
+    name: '书画编辑详情',
+    component: Usercalligraphypainting,
+    meta: {
+      title: '书画编辑详情'
+    }
+  },
+  {
     path: '/userMenuAll',
     name: '全部',
     component: UserMenuAll,
@@ -518,7 +568,7 @@ export default new Router({
       title: '已发布-鉴定'
     }
   },{
-    path: '/menuTheEditor',
+    path: '/menuTheEditor/:title/:id',
     name: '编辑详情',
     component: MenuTheEditor,
     meta: {

@@ -13,10 +13,14 @@
         <el-input type="textarea" :rows="2" placeholder="说点什么吧" v-model="ruleForm.name">
         </el-input>
         </el-form-item>
-        <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
+        <el-upload :action=domain list-type="picture-card" accept="video/*"
           :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :on-change="changeUpload">
           <i class="el-icon-plus"></i>
         </el-upload>
+        <!-- <el-upload class="pdB3" action="https://jsonplaceholder.typicode.com/posts/" accept="video/*"
+              list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+              <i class="el-icon-plus"></i>
+            </el-upload> -->
          <el-col :span="22" :offset="1">
       <el-button type="warning" class="release"  @click="submitForm('ruleForm')">发布</el-button>
     </el-col>
@@ -29,10 +33,14 @@
   </el-container>
 </template>
 <script>
+ import axios from "axios";
 export default {
   data() {
     return {
+      imageUrl: "",
       textarea: "",
+      domain: "https://upload-z2.qiniup.com",
+      qiniuaddr: "p3z6q1uw1.bkt.clouddn.com",
       dialogImageUrl: "",
       dialogVisible: false,
       ruleForm: {
@@ -56,16 +64,53 @@ export default {
       console.log(this.fileList);
       console.log(file);},
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          // alert('submit!');
-          console.log(this.ruleForm.name);
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    }
+      // this.$refs[formName].validate(valid => {
+      //   if (valid) {
+      //     // alert('submit!');
+      //     console.log(this.ruleForm.name);
+      //   } else {
+      //     console.log("error submit!!");
+      //     return false;
+      //   }
+      // });
+      let that = this;
+      that.$http
+      .post("/Api/User/article_video_add",{
+        content: that.ruleForm.name,
+      })
+      
+    },
+    upqiniu(req) {
+        console.log(req);
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        };
+        this.axios
+          .post("/Api/User/article_video_add", formData, config)
+          .then(res => {
+            console.log(res, res.url);
+            const formdata = new FormData();
+            formdata.append("file", req.file);
+            formdata.append("token", res.data);
+            formdata.append("key", keyname);
+            // 获取到凭证之后再将文件上传到七牛云空间
+            this.axios.post(this.domain, formdata, config).then(res => {
+              this.imageUrl = "http://" + this.qiniuaddr + "/" + res.data.key;
+              console.log(this.imageUrl);
+            });
+          });
+        },beforeUpload(file){
+      const isMP4 = file.type === "image/jpeg" ;
+      const isLt8M = file.size / 1024 / 1024 < 8;
+      if (!isMP4){
+        this.$message.error("上传头像图片只能是 MP4 格式!");
+      }if (!isLt8M){
+        this.$message.error("上传头像图片大小不能超过 8MB!");
+      }
+      return isMP4 && isLt8M;
+    },
   }
 };
 </script>

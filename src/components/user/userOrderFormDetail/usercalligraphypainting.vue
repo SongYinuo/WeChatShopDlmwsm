@@ -20,8 +20,8 @@
       accept="image/*"
       :limit="9" >
       <i class="el-icon-plus"></i>
-      <div v-for="banner in photoUrl.user_show_url">
-      <img :src="banner">
+      <div >
+      <img :src="photoUrl.thumb_show">
       </div>
     </el-upload>
     <el-dialog :visible.sync="dialogVisible">
@@ -34,13 +34,13 @@ import axios from "axios";
 export default {
   data() {
     return {
-      title: "编辑详情",
+      title: "书画编辑详情",
       uploadAction: "/Api/Api/img_upload",
       dialogImageUrl: "",
       photoUrl:[],
       name:[
         {
-          title:"编辑详情"
+          title:"书画编辑详情"
         }
       ],
       dialogVisible: false,
@@ -65,7 +65,7 @@ export default {
       var newId = this.$route.query.id;
       const that = this;
       axios
-      .get("/Api/User/article_detail" + "?article_id=" + newId)
+      .get("/Api/User/paint_detail" + "?id=" + newId)
       .then(function(res){
         console.log(res.data.data);
         that.photoUrl = res.data.data;

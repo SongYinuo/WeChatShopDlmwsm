@@ -14,18 +14,41 @@
       <div class="block">
     
     <el-carousel trigger="click"  >
-      <el-carousel-item  v-for="banner in swiperList.user_url"  v-if="swiperList.user_type===1 && swiperList.user_url.length > 1">
+      <el-carousel-item  v-for="banner in swiperList.user_show_url"  v-if="swiperList.user_type===1 && swiperList.user_show_url.length > 1">
         <img :src="banner" >
       </el-carousel-item>
-      <el-carousel-item  v-for="banner in swiperList.user_url"  v-if="swiperList.user_type===1 && swiperList.user_url.length===1" > 
+      <el-carousel-item  v-for="banner in swiperList.user_show_url"  v-if="swiperList.user_type===1 && swiperList.user_show_url.length===1" > 
         <img :src="banner" >
       </el-carousel-item>
       <el-col :span="24" class="of">
-            <video :src="swiperList.user_url"  autoplay="autoplay" class="menu-video"
+            <video :src="swiperList.user_show_url"  autoplay="autoplay" class="menu-video"
               v-if="swiperList.user_type===2"></video>
           </el-col>
     </el-carousel>
   </div>
+      <el-button icon="el-icon-more" circle type="text" @click="dialogVisible = true"></el-button>
+      <el-dialog title="操作" :visible.sync="dialogVisible" width="100%">
+        <span slot="footer" class="dialog-footer">
+          <el-row>
+            <el-col :span="22" :offset="1">
+              <el-col :span="4" :offset="2">
+                <router-link :to="{name:'编辑详情',query: { id: swiperList.article_id,title:swiperList.title }}">
+                  <div type="primary" @click="dialogVisible = false" class="icon">
+                    <i class="el-icon-edit"></i>
+                  </div>
+                </router-link>
+                <div class="del">编辑</div>
+              </el-col>
+              <el-col :span="4" :offset="2">
+                <div type="danger" @click="prev()" class="icon">
+                  <i class="el-icon-delete"></i>
+                </div>
+                <div class="del">删除</div>
+              </el-col>
+            </el-col>
+          </el-row>
+        </span>
+      </el-dialog>
       <el-row>
         <el-col :span="22" :offset="1" class="pdT6">
           <div class="copy">
@@ -61,13 +84,13 @@
     },
     data() {
       return {
-        title: "种草详情",
+        title: "心得详情",
         dialogVisible: false,
         content: "sichaoyun",
         swiperList: [],
         name: [
           {
-            title: "种草详情"
+            title: "心得详情"
           }
         ],
         items: [],
@@ -101,7 +124,7 @@
         var newId = this.$route.query.id;
         const that = this;
         axios
-          .get("/Api/Article/article_detail" + "?article_id=" + newId)
+          .get("/Api/User/article_detail" + "?article_id=" + newId)
           .then(function (res) {
             console.log("1111")
             console.log(res);
@@ -117,9 +140,9 @@
         var newId = this.$route.query.id;
         const that = this;
         axios
-          .get("/Api/Article/article_detail" + "?article_id=" + newId)
+          .get("/Api/User/article_detail" + "?article_id=" + newId)
           .then(function (res) {
-            // console.log(res.data.data.user_url);
+            console.log(res.data.data.user_url);
             that.swiperList = res.data.data;
           })
           .catch(function (error) {

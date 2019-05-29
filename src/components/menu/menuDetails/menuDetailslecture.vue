@@ -14,18 +14,19 @@
       <div class="block">
     
     <el-carousel trigger="click"  >
-      <el-carousel-item  v-for="banner in swiperList.user_url"  v-if="swiperList.user_type===1 && swiperList.user_url.length > 1">
+      <el-carousel-item  v-for="banner in swiperList.img_url" v-if="swiperList.img_url.length > 1" >
         <img :src="banner" >
       </el-carousel-item>
-      <el-carousel-item  v-for="banner in swiperList.user_url"  v-if="swiperList.user_type===1 && swiperList.user_url.length===1" > 
+      <el-carousel-item  v-for="banner in swiperList.img_url"  v-if="swiperList.img_url.length===1" > 
         <img :src="banner" >
       </el-carousel-item>
-      <el-col :span="24" class="of">
-            <video :src="swiperList.user_url"  autoplay="autoplay" class="menu-video"
+      <!-- <el-col :span="24" class="of">
+            <video :src="swiperList.video_url"  autoplay="autoplay" class="menu-video"
               v-if="swiperList.user_type===2"></video>
-          </el-col>
+          </el-col> -->
     </el-carousel>
   </div>
+  
       <el-row>
         <el-col :span="22" :offset="1" class="pdT6">
           <div class="copy">
@@ -48,6 +49,9 @@
             </el-row>
           </div>
         </el-col>
+        <el-col :span="24" class="of">
+            <video :src="swiperList.video_url"  autoplay="autoplay" class="menu-video"></video>
+          </el-col>
       </el-row>
     </el-row>
   </el-container>
@@ -61,13 +65,13 @@
     },
     data() {
       return {
-        title: "种草详情",
+        title: "讲堂详情",
         dialogVisible: false,
         content: "sichaoyun",
         swiperList: [],
         name: [
           {
-            title: "种草详情"
+            title: "讲堂详情"
           }
         ],
         items: [],
@@ -101,12 +105,14 @@
         var newId = this.$route.query.id;
         const that = this;
         axios
-          .get("/Api/Article/article_detail" + "?article_id=" + newId)
+          .get("/Api/Article/classroom_detail" + "?id=" + newId)
           .then(function (res) {
-            console.log("1111")
-            console.log(res);
+            //   console.log(newId)
+            // console.log("1111")
+            // console.log(res);
             that.article_ids = res.data.data.is_collect;
-            console.log(that.article_ids)
+            // console.log(that.article_ids)
+            // console.log(res.data.data);
             that.items = res.data.data;
           })
           .catch(function (error) {
@@ -117,9 +123,9 @@
         var newId = this.$route.query.id;
         const that = this;
         axios
-          .get("/Api/Article/article_detail" + "?article_id=" + newId)
+          .get("/Api/Article/classroom_detail" + "?id=" + newId)
           .then(function (res) {
-            // console.log(res.data.data.user_url);
+            console.log(res.data.data.img_url);
             that.swiperList = res.data.data;
           })
           .catch(function (error) {
@@ -145,6 +151,7 @@
 
   .of {
     overflow: hidden;
+    margin-top: 20px;
   }
 
   .menu-video {
