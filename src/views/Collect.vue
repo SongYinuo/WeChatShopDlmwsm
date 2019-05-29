@@ -9,36 +9,36 @@
     <el-main class="collectInfo">
       <el-row>
         <el-col :span="22" :offset="1">
-          <el-tabs v-model="collect.activeName" @tab-click="handleClick">
-             <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified" v-if="k.label==='商品'">
-                 <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in k.infoArray">
+          <el-tabs v-model="collect.activeName">
+             <el-tab-pane :label="k.label" :name="k.name"  v-for="k in collect.collectionClassified" v-if="k.label==='商品'">
+                 <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in goodslist">
                   <el-col :span="6" class="collectInfoProductDrawing">
                     <router-link :to="{ name: '详情页',query: { id: o.id, title: k.label } }">
-                      <img :src="o.imgUrl">
+                      <img :src="o.original_img">
                     </router-link>
                   </el-col>
                   <el-col :span="17" :offset="1">
-                    <div class="mgT4">{{o.title}}</div>
-                    <div class="pd2 colorRed">￥{{o.price}}</div>
+                    <div class="mgT4">{{o.goods_name}}</div>
+                    <div class="pd2 colorRed">￥{{o.shop_price}}</div>
                   </el-col>
                  </el-col>
              </el-tab-pane>
               <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified" v-if="k.label==='种草'">
-                 <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in k.infoArray">
+                 <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in grow_grass">
                     <el-col :span="4" class="uUrlImg">
-                      <img :src="o.uUrlImg">
+                      <img :src="o.author_head_pic">
                     </el-col>
-                    <router-link :to="{ name: '种草详情',query: { id: o.id } }" v-if="o.imgUrl!==''">
+                    <router-link :to="{ name: '种草详情',query: { id: o.article_id } }" v-if="o.author_head_pic!==''">
                       <el-col :span="19" :offset="1">
-                        <div class="mgT2 colorGray">{{o.uName}}</div>
-                        <div class="pd1 colorGray uTime">{{o.uTime}}</div>
+                        <div class="mgT2 colorGray">{{o.author}}</div>
+                        <div class="pd1 colorGray uTime">{{o.confirm_time_text}}</div>
                         <div class="pd2">{{o.title}}</div>
                       </el-col>
                     </router-link>
-                    <router-link :to="{ name: '种草详情视频',query: { id: o.id } }" v-if="o.videoUrl!==''">
+                    <router-link :to="{ name: '种草详情视频',query: { id: o.id } }" v-if="o.user_url!==''">
                       <el-col :span="19" :offset="1">
-                        <div class="mgT2 colorGray">{{o.uName}}</div>
-                        <div class="pd1 colorGray uTime">{{o.uTime}}</div>
+                        <div class="mgT2 colorGray">{{o.author}}</div>
+                        <div class="pd1 colorGray uTime">{{o.confirm_time_text}}</div>
                         <div class="pd2">{{o.title}}</div>
                       </el-col>
                     </router-link>
@@ -50,25 +50,25 @@
                  </el-col>
              </el-tab-pane>
              <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified" v-if="k.label==='攻略'|| k.label==='讲堂'">
-                 <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in k.infoArray">
+                 <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in strategyList">
                   <el-col :span="11" class="collectInfoProductDrawing">
-                    <router-link :to="{ name: '种草详情',query: { id: o.id, title: k.label } }">
-                      <img :src="o.imgUrl">
+                    <router-link :to="{ name: '种草详情',query: { id: o.article_id, title: k.label } }">
+                      <img :src="o.author_head_pic">
                     </router-link>
                   </el-col>
                   <el-col :span="12" :offset="1">
                     <div class="mgT10">{{o.title}}</div>
-                    <div class="pd2 colorRed">￥{{o.price}}</div>
+                    <!-- <div class="pd2 colorRed">￥{{o.price}}</div> -->
                   </el-col>
                  </el-col>
              </el-tab-pane>
             <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified" v-if="k.label==='书画'">
-                  <el-col :span="12" class="collectInfoProductDrawing pdTRBL2" v-for="o in k.infoArray">
-                    <router-link :to="{ name: '书画详情',query: { id: o.id, title: k.label } }">
-                      <img :src="o.imgUrl">
+                  <el-col :span="12" class="collectInfoProductDrawing pdTRBL2" v-for="o in bookList">
+                    <router-link :to="{ name: '书画详情',query: { id: o.article_id, title: k.label } }">
+                      <img :src="o.author_head_pic">
                     </router-link>
                     <div class="mgT4 overHidden">{{o.title}}</div>
-                    <div class="pd2 colorRed overHidden">￥{{o.price}}</div>
+                    <!-- <div class="pd2 colorRed overHidden">￥{{o.price}}</div> -->
                   </el-col>
              </el-tab-pane>
           </el-tabs>
@@ -93,257 +93,112 @@ export default {
         collectionClassified: [
           {
             label: "商品",
-            name: "shangpin",
-            infoArray: [
-              // {
-              //   id: "idA10000001",
-              //   imgUrl: "static/testImg/vegetables-1.jpg",
-              //   title: "精选绿色蔬菜 纯绿色 无公害",
-              //   price: 152
-              // },
-              // {
-              //   id: "idA100000012",
-              //   imgUrl: "static/testImg/vegetables-1.jpg",
-              //   title: "1精选绿色蔬菜 纯绿色 无公害",
-              //   price: 153
-              // },
-              // {
-              //   id: "idA100000013",
-              //   imgUrl: "static/testImg/vegetables-1.jpg",
-              //   title: "2精选绿色蔬菜 纯绿色 无公害",
-              //   price: 154
-              // },
-              // {
-              //   id: "idA100000014",
-              //   imgUrl: "static/testImg/vegetables-1.jpg",
-              //   title: "3精选绿色蔬菜 纯绿色 无公害",
-              //   price: 155
-              // },
-              // {
-              //   id: "idA100000015",
-              //   imgUrl: "static/testImg/vegetables-1.jpg",
-              //   title: "4精选绿色蔬菜 纯绿色 无公害",
-              //   price: 156
-              // },
-              // {
-              //   id: "idA100000016",
-              //   imgUrl: "static/testImg/vegetables-1.jpg",
-              //   title: "5精选绿色蔬菜 纯绿色 无公害",
-              //   price: 157
-              // }
-            ]
+            name: "shangpin"
           },
           {
             label: "攻略",
             name: "gonglue",
-            infoArray: [
-              {
-                id: "idA20000001",
-                imgUrl: "static/testImg/pig01.jpg",
-                title: "小猪佩奇",
-                price: 152
-              },
-              {
-                id: "idA200000012",
-                imgUrl: "static/testImg/pig01.jpg",
-                title: "1小猪佩奇",
-                price: 153
-              },
-              {
-                id: "idA200000013",
-                imgUrl: "static/testImg/pig01.jpg",
-                title: "2小猪佩奇",
-                price: 154
-              },
-              {
-                id: "idA200000014",
-                imgUrl: "static/testImg/pig01.jpg",
-                title: "3小猪佩奇",
-                price: 155
-              },
-              {
-                id: "idA200000015",
-                imgUrl: "static/testImg/pig01.jpg",
-                title: "4小猪佩奇",
-                price: 156
-              },
-              {
-                id: "idA200000016",
-                imgUrl: "static/testImg/pig01.jpg",
-                title: "5小猪佩奇",
-                price: 157
-              }
-            ]
           },
           {
             label: "讲堂",
             name: "jiangtang",
-            infoArray: [
-              {
-                id: "idA30000001",
-                imgUrl: "static/testImg/oringe-2.jpg",
-                title: "美味鲜橙",
-                price: 152
-              },
-              {
-                id: "idA300000012",
-                imgUrl: "static/testImg/oringe-2.jpg",
-                title: "1美味鲜橙",
-                price: 253
-              },
-              {
-                id: "idA300000013",
-                imgUrl: "static/testImg/oringe-2.jpg",
-                title: "2美味鲜橙",
-                price: 254
-              },
-              {
-                id: "idA300000014",
-                imgUrl: "static/testImg/oringe-2.jpg",
-                title: "3美味鲜橙",
-                price: 255
-              },
-              {
-                id: "idA300000015",
-                imgUrl: "static/testImg/oringe-2.jpg",
-                title: "4美味鲜橙",
-                price: 256
-              },
-              {
-                id: "idA300000016",
-                imgUrl: "static/testImg/oringe-2.jpg",
-                title: "5美味鲜橙",
-                price: 257
-              }
-            ]
           },
           {
             label: "书画",
             name: "shuhua",
-            infoArray: [
-              {
-                id: "idA30000001",
-                imgUrl: "static/testImg/youhua.jpg",
-                title: "经典书画",
-                price: 105002
-              },
-              {
-                id: "idA300000012",
-                imgUrl: "static/testImg/youhua.jpg",
-                title: "1经典书画 实力大师创作",
-                price: 22053
-              },
-              {
-                id: "idA300000013",
-                imgUrl: "static/testImg/youhua.jpg",
-                title: "2经典书画 实力大师创作",
-                price: 25400
-              },
-              {
-                id: "idA300000014",
-                imgUrl: "static/testImg/youhua.jpg",
-                title: "3经典书画 实力大师创作",
-                price: 25500
-              },
-              {
-                id: "idA300000015",
-                imgUrl: "static/testImg/youhua.jpg",
-                title: "4经典书画 实力大师创作",
-                price: 25600
-              },
-              {
-                id: "idA300000016",
-                imgUrl: "static/testImg/youhua.jpg",
-                title: "5经典书画 实力大师创作",
-                price: 25700
-              }
-            ]
           },
           {
             label: "种草",
-            name: "zhongcao",
-            infoArray: [
-              {
-                id: "idA30000001",
-                uId: "Uid1000001",
-                uName: "柒个我",
-                uUrlImg: "static/testImg/Focus2.png",
-                uTime: "5分钟",
-                imgUrl: "static/testImg/tourism01.jpg",
-                videoUrl: "",
-                title: "今天天气真好",
-                annotation:
-                  "春天天气真好花儿都开了杨柳树枝对着我们弯弯腰蝴蝶姑娘飞来了蜜蜂嗡嗡叫小白兔儿一跳一跳又一跳春天天气真好花儿都开了杨柳树枝对着我们弯弯腰"
-              },
-              {
-                id: "idA30000001",
-                uId: "Uid1000001",
-                uName: "柒个他",
-                uTime: "15分钟",
-                uUrlImg: "static/testImg/Focus2.png",
-                imgUrl: "static/testImg/youhua.jpg",
-                videoUrl: "",
-                title: "1今天天气真好",
-                annotation:
-                  "春天天气真好花儿都开了杨柳树枝对着我们弯弯腰蝴蝶姑娘飞来了蜜蜂嗡嗡叫小白兔儿一跳一跳又一跳春天天气真好花儿都开了杨柳树枝对着我们弯弯腰"
-              },
-              {
-                id: "idA30000001",
-                uId: "Uid1000001",
-                uName: "柒个你",
-                uTime: "45分钟",
-                uUrlImg: "static/testImg/Focus2.png",
-                imgUrl: "",
-                videoUrl: "http://www.runoob.com/try/demo_source/movie.mp4",
-                title: "2今天天气真好",
-                annotation:
-                  "春天天气真好花儿都开了杨柳树枝对着我们弯弯腰蝴蝶姑娘飞来了蜜蜂嗡嗡叫小白兔儿一跳一跳又一跳春天天气真好花儿都开了杨柳树枝对着我们弯弯腰"
-              },
-              {
-                id: "idA30000001",
-                uId: "Uid1000001",
-                uName: "柒个她",
-                uTime: "昨天",
-                uUrlImg: "static/testImg/Focus2.png",
-                imgUrl: "static/testImg/tourism02.jpg",
-                videoUrl: "",
-                title: "3今天天气真好",
-                annotation:
-                  "春天天气真好花儿都开了杨柳树枝对着我们弯弯腰蝴蝶姑娘飞来了蜜蜂嗡嗡叫小白兔儿一跳一跳又一跳春天天气真好花儿都开了杨柳树枝对着我们弯弯腰"
-              }
-            ]
+            name: "zhongcao"
           }
         ]
-      }
+        // 获取商品详情页面的数据
+      },
+      goodslist: [],
+      grow_grass: [],
+      strategyList:[],
+      bookList:[],
     };
   },
-   mounted() {
-      console.log("2525")
-      let that = this;
+  mounted() {
+    this.getProduct();
+    this.growGrass();
+    // 攻略
+    this.strategy();
+    // 书画
+    this.book();
+  },
+
+  methods: {
+    getProduct() {
+      var that = this;
       Axios({
         methods: "get",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        url:'/Api/User/goods_collect_list'
+        url: "/Api/User/goods_collect_list"
+      })
+        .then(function(res) {
+          console.log("111");
+          console.log(res);
+          that.goodslist = res.data.data;
+          console.log(that.goodslist);
+        })
+        .catch({});
+    },
+    // 种草
+    growGrass() {
+      var that = this;
+      Axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/article_collect_front_list"
+      })
+        .then(function(res) {
+          console.log("2525");
+          console.log(res);
+          that.grow_grass = res.data.data;
+          console.log(that.grow_grass)
+          // that.collect.collectionClassified.grow_grass = res.data.data;
+        })
+        .catch({});
+    },
+    // 攻略
+    strategy:function(){
+      var that = this
+      Axios({
+        methods:'get',
+         headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/article_collect_back_list"
       }).then(function(res){
+        console.log("书画")
         console.log(res)
+        that.strategyList = res.data.data
       })
     },
-  methods: {
+  // 书画
+  book(){
+     var that = this
+      Axios({
+        methods:'get',
+         headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/paint_collect_list"
+      }).then(function(res){
+        console.log("功率")
+        console.log(res)
+        that.bookList = res.data.data
+      })
+  },
     handleClick(tab, event) {
-      //  axios({
-      //   methods: 'get',
-      //   headers: {
-      //     'Content-Type': 'application/x-www-form-urlencoded'
-      //   },
-      //   url: '/Api/Index/advert'
-      // }).then(function(res){
-      //   thit.swipeData = res.data.data;
-      // }).catch(function(error){
-      //   // console.log(error)
-      // })
-    },
+      console.log(tab, event);
+    }
   }
 };
 </script>
