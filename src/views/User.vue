@@ -10,7 +10,7 @@
                           <img src="../../static/testImg/defaultAvatar.png" v-if="userInfo.login===false">
                             <span class="userAuthenticationImg">
                               <router-link :to="{ name: 'Vip' }">
-                                <img src="../../static/testImg/userVip.png" v-if="userInfo.vip===true">
+                                <img src="../../static/testImg/userVip.png" v-if="userList.is_vip===1">
                               </router-link>
                             </span>
                         </span>
@@ -74,7 +74,8 @@
         <el-row>
           <el-col :span="22" :offset="1">
             <div class="couponRow pd1">
-              <router-link :to="{ name: 'vip专区' }">
+              <!-- to="{ name: (k.routerLink), query:{ id:k.id }}" -->
+              <router-link :to="{ name: 'vip专区',query:{is_vip:userList.is_vip}}">
                 <img :src="userInfo.couponAdvertisingImg">
               </router-link>
             </div>
@@ -117,9 +118,12 @@
 <script>
 import Baseline from "@/common/_baseline.vue";
 import Footer from "@/common/_footer.vue";
+import Axios from 'axios';
 export default {
   data() {
     return {
+      // 用户信息
+      userList:{},
       userInfo: {
         login: true,
         headPortraitUrl: "static/testImg/travel.png",
@@ -172,6 +176,25 @@ export default {
         couponAdvertisingImg: "static/testImg/pic1@2x.png"
       }
     };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      var that = this;
+      Axios({
+        methods:'get',
+         headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Api/index"
+      }).then(function(res){
+        console.log("这是什么")
+        console.log(res)
+        that.userList = res.data.data.user
+      })
+    }
   },
   components: {
     "v-baseline": Baseline,

@@ -455,7 +455,7 @@ export default new Router({
       title: '签到'
     }
   }, {
-    path: '/userCoupon',
+    path: '/userCoupon/:is_vip',
     name: 'vip专区',
     component: UserCoupon,
     meta: {

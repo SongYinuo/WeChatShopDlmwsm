@@ -19,7 +19,7 @@
              </div>
           </el-col>
         </el-row>
-        <el-dialog title="提示" :visible.sync="dialogShows" width="80%">
+        <el-dialog title="提示" :visible.sync="dialogShows" width="80%" v-if="filters.vipid==''">
           <span>此栏目只针对VIP用户，是否升级为VIP用户？</span>
           <span slot="footer" class="dialog-footer">
             <el-button @click="dialogShows = false">取 消</el-button>
@@ -40,36 +40,27 @@ export default {
   data() {
     return {
       dialogShows: false,
-      userCouponInfo: []
-      // userCouponInfo: {
-      //   arrayInfo: [
-      //     // {
-      //     //   couponId: "couponId1000001",
-      //     //   couponUrl: "static/testImg/pic1@2x.png",
-      //     //   title: "大牌制作中华上下五千年",
-      //     //   vip: true
-      //     // },
-      //     // {
-      //     //   couponId: "couponId1000002",
-      //     //   couponUrl: "static/testImg/tourism02.jpg",
-      //     //   title: "大牌制作中华上下五千年1",
-      //     //   vip: false
-      //     // }
-      //   ]
-      // }
+      userCouponInfo: [],
+      // 是否接收到上一个页面传过来的参数
+     filters: {
+         vipid:''  //这里名字根据实际情况定义
+       }
     };
   },mounted(){
     this.getData();
   },methods: {
     getData(){
+      // var newId = this.$route.query.id;
       const that = this;
-      axios
-      .get("/Api/User/vip_list")
-      .then(function(res){
+      var is_vip = that.$route.query.is_vip;
+      axios.get("/Api/User/vip_list").then(function(res){
         console.log(res)
         // console.log(res.data.data.article_id)
         that.userCouponInfo = res.data.data;
-
+        console.log("1255")
+        console.log(that.$route)
+        is_vip=that.$route.query.is_vip
+        that.filters.vipid = is_vip
       })
       .catch(function(error){
         console.log(error)

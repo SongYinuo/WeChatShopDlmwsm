@@ -30,7 +30,7 @@ module.exports = {
     proxyTable: {
       '/Api': {
         // 测试环境
-        target: 'http://192.168.1.12',  // 接口域名
+        target: 'http://192.168.1.7',  // 接口域名
         changeOrigin: true,  //是否跨域
         pathRewrite: {
             '^/Api': '/Api'   //需要rewrite重写的,
@@ -39,7 +39,7 @@ module.exports = {
       '/img': {//代理请求图片的接口
         changeOrigin: true,
         secure: false, //https请求需设置此项
-        target: 'http://192.168.1.12',
+        target: 'http://192.168.1.7',
         pathRewrite: {
           '^/img': ''  
         }
