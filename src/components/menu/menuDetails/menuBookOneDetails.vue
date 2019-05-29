@@ -1,17 +1,18 @@
 <template lang="html">
   <el-container>
-    <el-header class="tittle">
+    <el-header class="tittle" v-model="title" v-for="i in name">
+      <!-- v-if="this.ruleForm.text!==''&&this.ruleForm.textarea!=='' -->
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      书画详情
+      {{i.title}}
     </el-header>
     <el-row class="book">
-      <el-col :span="24" v-for="book in books">
+      <el-col :span="24" >
         <div class="likePo">
           <img :src="books.thumb" class="bookimg">
           <div class="Like">
-            <v-like />
+           <v-like :article_id='article_ids'></v-like>
           </div>
         </div>
         <div class="bookTittle pdT6">{{books.title}}</div>
@@ -50,6 +51,13 @@
     },
     data() {
       return {
+        title:"书画详情",
+         article_ids:'',
+        name:[
+          {
+            title: "书画详情"
+          }
+        ],
         books: [
           // {
           //   imageUrl: "static/testImg/youhua.jpg",
@@ -67,11 +75,13 @@
       this.getImg();
     },methods:{
       getImg(){
+        var newId = this.$route.query.id;
         const that = this;
         axios
-        .get("/Api/Article/paint_detail?id=2")
+        .get("/Api/Article/paint_detail" + "?id=" + newId)
         .then(function(res){
           // console.log(res)
+          that.article_ids = res.data.data.is_collect;
           that.books = res.data.data;
         })
         .catch(function(error){

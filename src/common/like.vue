@@ -8,11 +8,11 @@
 <script>
 var local_admire = localStorage.getItem("admire"); //获取存储在本地的点赞状态
 export default {
-  props: ["article_idd"],
+  props: ["article_id"],
   data: function() {
     return {
       admire: local_admire,
-      article_idd: this.article_idd
+      article_ids: this.article_id
     };
   },
   methods: {
@@ -24,13 +24,16 @@ export default {
       this.$http
         .post("/Api/User/collect", {
           model: "article",
-          id: that.article_idd
+          id: that.article_ids
         })
         .then(res => {
           console.log(res);
-          if (res.data.code == 1) {
-           
-          }
+          console.log(that.article_id)
+          // if (res.data.code == 1) {
+          //   alert('点赞接口成功')
+          // }else if(res.data.code == 0){
+          //   alert('未点赞')
+          // }
           console.log("文章id");
         })
         .catch(error => {});

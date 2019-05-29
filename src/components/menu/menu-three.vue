@@ -10,7 +10,7 @@
         <el-row>
             <el-col :span="22" :offset="1">
                 <div v-for="item in items">
-                    <router-link :to="{ name:'种草详情',query: { id: item.id }}">
+                    <router-link :to="{ name:'讲堂详情',query: { id: item.id,title:item.title }}">
                         <el-row class="smallimg">
                             <el-col :span="12" class="pd">
                                 <p class="menu-strategy ">{{item.title}}</p>

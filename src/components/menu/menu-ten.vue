@@ -12,7 +12,7 @@
                 </el-input>
             </el-col>
             <el-col :span="24" v-for="Painting in Paintings" class="PaintingNav">
-                <router-link :to="{ name:'书画详情',query: { id: Painting.id }}">
+                <router-link :to="{ name:'书画详情',query: {  id: Painting.id,title:Painting.title  }}">
                     <img :src="Painting.thumb" class="PtImg ">
                     <div class="ptText pd1 ">《{{Painting.title}}》</div>
                     <div class="ptTxt">{{Painting.img_author}}|{{Painting.img_material}}</div>

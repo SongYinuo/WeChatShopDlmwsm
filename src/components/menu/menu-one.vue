@@ -12,7 +12,7 @@
         <el-tab-pane label="攻略" name="first">
           <el-row>
             <div v-for="item in items">
-              <router-link :to="{ name:'旅游攻略',query: { id: item.article_id }}">
+              <router-link :to="{ name:'旅游攻略',query: {id: item.article_id,title:item.title }}">
                 <el-row class="smallimg">
                   <el-col :span="12" class="pd">
                     <p class="menu-strategy " v-html="item.title">{{item.title}}</p>

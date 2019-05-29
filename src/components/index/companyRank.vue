@@ -25,11 +25,13 @@
                     <div>
                         <el-col :span="24" class="companyRowHearder mgTB2">
                             <img src="../../../static/testImg/first.png">
-                            <span>公司第一名</span>
+                            <span v-for="(k,index) in companyRanksArray" v-if="index == 0">{{k.title}}</span>
                         </el-col>
                         <el-col :span="24" class="firstCompanyPic">
                             <img src="../../../static/testImg/first.png" class="topIcon">
-                            <img src="../../../static/testImg/firstCompany.png">
+                            <div v-for="(k,index) in companyRanksArray" v-if="index == 0">
+                            <img :src="k.thumb"  class="first">
+                            </div>
                         </el-col>
                     </div>
                 </el-col>
@@ -37,21 +39,25 @@
                     <div>
                         <el-col :span="24" class="companyRowHearder mgTB2">
                             <img src="../../../static/testImg/second.png">
-                            <span>公司第二名</span>
+                           <span v-for="(k,index) in companyRanksArray" v-if="index == 1">{{k.title}}</span>
                         </el-col>
                         <el-col :span="24" class="secondCompanyPic">
                             <img src="../../../static/testImg/second.png" class="topIcon">
-                            <img src="../../../static/testImg/secondCompany.png">
+                           <div v-for="(k,index) in companyRanksArray" v-if="index == 1">
+                            <img :src="k.thumb" class="twophoto">
+                            </div>
                         </el-col>
                     </div>
                     <div>
                         <el-col :span="24" class="companyRowHearder mgTB2">
                             <img src="../../../static/testImg/thirdly.png">
-                            <span>公司第三名</span>
+                             <span v-for="(k,index) in companyRanksArray" v-if="index == 2">{{k.title}}</span>
                         </el-col>
                         <el-col :span="24" class="thirdlyCompanyPic">
                             <img src="../../../static/testImg/thirdly.png" class="topIcon">
-                            <img src="../../../static/testImg/secondCompany.png">
+                            <div v-for="(k,index) in companyRanksArray" v-if="index == 2">
+                            <img :src="k.thumb" class="twophoto" >
+                            </div>
                         </el-col>
                     </div>
                 </el-col>
@@ -64,7 +70,30 @@
 
 <script>
 import { Lazyload } from "mint-ui";
-export default {};
+import axios from "axios";
+export default {
+  data(){
+    return{
+      companyRanksArray:[],
+    }
+
+  },mounted(){
+    this.getData();
+  },methods:{
+    getData(){
+      const that = this;
+      axios 
+      .get("/Api/Index/company_sort?size=12")
+      .then(function(res){
+        console.log(res.data.data);
+        that.companyRanksArray = res.data.data;
+      }) 
+      .catch(function(error){
+
+      });
+    }
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -110,5 +139,9 @@ export default {};
     }
   }
 
+}.first{
+  height: 200px;
+}.twophoto{
+  height: 70px;
 }
 </style>

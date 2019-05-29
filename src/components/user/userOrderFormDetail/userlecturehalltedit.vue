@@ -20,9 +20,14 @@
       accept="image/*"
       :limit="9" >
       <i class="el-icon-plus"></i>
-      <div v-for="banner in photoUrl.user_show_url">
+      <div v-for="banner in photoUrl.img_show_url">
       <img :src="banner">
       </div>
+     
+      <el-col :span="24" class="of">
+            <video :src="photoUrl.video_show_url"  autoplay="autoplay" class="menu-video"></video>
+          </el-col>
+     
     </el-upload>
     <el-dialog :visible.sync="dialogVisible">
       <img width="100%" :src="dialogImageUrl">
@@ -34,13 +39,13 @@ import axios from "axios";
 export default {
   data() {
     return {
-      title: "编辑详情",
+      title: "讲堂编辑详情",
       uploadAction: "/Api/Api/img_upload",
       dialogImageUrl: "",
       photoUrl:[],
       name:[
         {
-          title:"编辑详情"
+          title:"讲堂编辑详情"
         }
       ],
       dialogVisible: false,
@@ -65,7 +70,7 @@ export default {
       var newId = this.$route.query.id;
       const that = this;
       axios
-      .get("/Api/User/article_detail" + "?article_id=" + newId)
+      .get("/Api/User/classroom_detail" + "?id=" + newId)
       .then(function(res){
         console.log(res.data.data);
         that.photoUrl = res.data.data;
@@ -109,4 +114,8 @@ export default {
 @import "../../../assets/index/style.less";
 @import "../../../assets/menu/details.less";
 @import "../../../assets/fz.less";
+ .of {
+    overflow: hidden;
+    margin-top: 20px;
+  }
 </style>

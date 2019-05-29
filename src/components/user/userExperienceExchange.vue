@@ -10,7 +10,7 @@
     <el-row>
       <el-col :span="22" :offset="1">
          <div v-for="array in arrays">
-            <router-link :to="{name: '种草详情',query: { id: array.article_id,title:array.title }}">
+            <router-link :to="{name: '心得详情',query: { id: array.article_id,title:array.title }}">
               <el-row>
                 <el-col :span="22">
                   <img :src="array.author_head_pic" v-on:error.once="moveErrorImg($event)" class="fl menuHeader">
@@ -86,7 +86,9 @@ export default {
           .catch(function (error) {
             // console.log(error)
           });
-      },
+      }, moveErrorImg: function(event) {
+      event.currentTarget.src = "static/testImg/defaultAvatar.png";
+    }
       }
   };
 
