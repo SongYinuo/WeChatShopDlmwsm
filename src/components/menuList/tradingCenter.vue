@@ -10,15 +10,15 @@
 
     <div class="listnav">
       <el-row>
-        <img :src="lists.listUrl" class="listimg">
+        <img :src="list_goods_img" class="listimg">
         <el-col :span="22" :offset="1">
 
-          <el-col :span="12" v-for="k in lists.listArray" class="listLi text-alignLeft">
+          <el-col :span="12" v-for="k in goods_list" class="listLi text-alignLeft">
 
-            <router-link :to="{ name:'详情页',query: { id: k.id }}">
-              <img :src="k.iconurl" class="pdB2">
-              <div class="listTxt pd1">{{k.text}}</div>
-              <div class="colorRed price text-alignLeft">￥{{k.num}}</div>
+            <router-link :to="{ name:'详情页',query: { id: k.goods_id }}">
+              <img :src="k.original_img" class="pdB2">
+              <div class="listTxt pd1">{{k.goods_name}}</div>
+              <div class="colorRed price text-alignLeft">￥{{k.shop_price}}</div>
               <el-col :span="24">
                 <el-button plain class="pdTRBL1">立即购买</el-button>
               </el-col>
@@ -34,52 +34,23 @@ import axios from "axios";
   export default {
     data() {
       return {
-        lists: {
-          listUrl: "static/testImg/banner01.png",
-          listArray: [
-            {
-              iconurl: "static/testImg/product-details01-2.jpg",
-              text: "万年古董珍藏 价值连城",
-              num: "110",
-              id: "10000"
-            },
-            {
-              iconurl: "static/testImg/product-details01-2.jpg",
-              text: "万年古董珍藏 价值连城",
-              num: "110",
-              id: "10001"
-            },
-            {
-              iconurl: "static/testImg/product-details01-2.jpg",
-              text: "万年古董珍藏 价值连城",
-              num: "110",
-              id: "10002"
-            },
-            {
-              iconurl: "static/testImg/product-details01-2.jpg",
-              text: "万年古董珍藏 价值连城",
-              num: "110",
-              id: "10003"
-            },
-            {
-              iconurl: "static/testImg/product-details01-2.jpg",
-              text: "万年古董珍藏 价值连城",
-              num: "110",
-              id: "10004"
-            }
-          ],
-        }
+        list_goods_img:'',
+        goods_list:[],
       };
     },
     mounted(){
+      var cart_id = this.$route.query.id
       this.getData()
+
     },
     methods:{
       getData:function(){
-        let that = this
-        axios.get('/Api/Goods/goods_channel_list').then(function(res){
+        var that = this
+         var cart_id = that.$route.query.id
+        axios.get('/Api/Goods/goods_list?id=' + cart_id).then(function(res){
           console.log(res)
-          console.log("111")
+          that.list_goods_img = res.data.data.cat_data.image,
+          that.goods_list = res.data.data.goods_list
         })
       }
     }

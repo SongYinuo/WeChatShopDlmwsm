@@ -43,33 +43,6 @@ import axios from "axios";
           aa: 'aa',
           tabkey: '手机 、 数码 、 通信',
           households: [
-            // {
-            //   label: '家居',
-            //   name: 'jiaju',
-            //   houseUrl: "static/testImg/banner01.png",
-            //   iconArray: [
-            //     {
-            //       iconurl: "static/testImg/greenFood.png",
-            //       text: "沙发",
-            //       id: "100001"
-            //     },
-            //     {
-            //       iconurl: "static/testImg/greenFood.png",
-            //       text: "摆设",
-            //       id: "100002"
-            //     },
-            //     {
-            //       iconurl: "static/testImg/greenFood.png",
-            //       text: "复古瓷碗",
-            //       id: "100003"
-            //     },
-            //     {
-            //       iconurl: "static/testImg/greenFood.png",
-            //       text: "搪瓷",
-            //       id: "100004"
-            //     }
-            //   ],
-            // },
           ]
         }
       }
