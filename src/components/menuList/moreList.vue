@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -31,52 +32,20 @@ export default {
             imgurl: "static/testImg/product-details01-3.jpg",
             title: "【来自农家院】产的优质绿色大米 10kg 两代包邮",
             price: 540
-          },
-          {
-            id: "hotShop10002",
-            imgurl: "static/testImg/product-details01-3.jpg",
-            title: "1【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            price: 140
-          },
-          {
-            id: "hotShop10003",
-            imgurl: "static/testImg/product-details01-3.jpg",
-            title: "2【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            price: 240
-          },
-          {
-            id: "hotShop10004",
-            imgurl: "static/testImg/product-details01.jpg",
-            title: "3【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            price: 340
-          },
-          {
-            id: "hotShop10005",
-            imgurl: "static/testImg/product-details01.jpg",
-            title: "4【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            price: 440
-          },
-          {
-            id: "hotShop10006",
-            imgurl: "static/testImg/product-details01.jpg",
-            title: "5【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            price: 640
-          },
-          {
-            id: "hotShop10007",
-            imgurl: "static/testImg/product-details01.jpg",
-            title: "6【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            price: 740
-          },
-          {
-            id: "hotShop10008",
-            imgurl: "static/testImg/product-details01.jpg",
-            title: "7【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            price: 840
           }
         ]
       }
     };
+  },
+  methods:{
+     getData:function(){
+        var that = this
+        axios.get('/Api/Goods/goods_list?id=' + cart_id).then(function(res){
+          console.log(res)
+          that.list_goods_img = res.data.data.cat_data.image,
+          that.goods_list = res.data.data.goods_list
+        })
+      }
   }
 };
 </script>

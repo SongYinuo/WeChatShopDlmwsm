@@ -245,14 +245,14 @@ export default new Router({
       title: '哈百年'
     }
   }, {
-    path: '/menu-eight',
+    path: '/menu-eight/:id',
     name: '交易中心',
     component: TransactionCenter,
     meta: {
       title: '交易中心'
     }
   }, {
-    path: '/tradingCenter',
+    path: '/tradingCenter/:id',
     name: '交易中心列表',
     component: TradingCenter,
     meta: {
