@@ -30,6 +30,7 @@
   </el-container>
 </template>
 <script>
+import axios from "axios";
   export default {
     data() {
       return {
@@ -69,6 +70,18 @@
           ],
         }
       };
+    },
+    mounted(){
+      this.getData()
+    },
+    methods:{
+      getData:function(){
+        let that = this
+        axios.get('/Api/Goods/goods_channel_list').then(function(res){
+          console.log(res)
+          console.log("111")
+        })
+      }
     }
   };
 </script>

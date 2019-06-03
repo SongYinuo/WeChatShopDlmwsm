@@ -9,7 +9,8 @@
       <el-main class="userCoupon">
         <el-row>
           <el-col :span="22" :offset="1" v-for="k in userCouponInfo" class="couponRow">
-             <router-link :to="{ name: '卡券详情',query: { id: k.article_id } }" v-if="k.vip===true">
+            <!--   v-if="k.vip===true" -->
+             <router-link :to="{ name: 'vip详情',query: { id: k.article_id } }">
                 <img :src="k.thumb">
                 <div class="pd2 text-alignCenter">{{k.title}}</div>
              </router-link>

@@ -74,6 +74,7 @@ const UserDetailscalligraphy = resolve => require(['@/components/user/userOrderF
 const MenuDetailslecture = resolve => require(['@/components/menu/menuDetails/menuDetailslecture.vue'], resolve)
 const Userlecturehalltedit = resolve => require(['@/components/user/userOrderFormDetail/userlecturehalltedit.vue'], resolve)
 const Usercalligraphypainting = resolve => require(['@/components/user/userOrderFormDetail/usercalligraphypainting.vue'], resolve)
+const UserVipDetail = resolve => require(['@/components/user/userVipDetail.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -376,6 +377,13 @@ export default new Router({
     meta: {
       title: '我的讲堂详情'
     }
+  },{
+    path: '/userVipDetail/:article_id',
+    name: 'vip详情',
+    component: UserVipDetail,
+    meta: {
+      title: 'vip详情'
+    }
   },
   {
     path: '/userDetailscalligraphy/:title/:id',
@@ -567,13 +575,14 @@ export default new Router({
     meta: {
       title: '已发布-鉴定'
     }
-  },{
+  },
+  {
     path: '/menuTheEditor/:title/:id',
     name: '编辑详情',
     component: MenuTheEditor,
     meta: {
       title: '编辑详情'
     }
-  }
+  },
   ]
 })
