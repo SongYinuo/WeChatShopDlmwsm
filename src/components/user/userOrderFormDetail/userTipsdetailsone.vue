@@ -1,6 +1,4 @@
 <template lang="html">
-
-
   <el-container>
     <el-header class="tittle" v-model="title" v-for="i in name">
       <!-- v-if="this.ruleForm.text!==''&&this.ruleForm.textarea!=='' -->
@@ -40,7 +38,7 @@
                 <div class="del">编辑</div>
               </el-col>
               <el-col :span="4" :offset="2">
-                <div type="danger" @click="prev()" class="icon">
+                <div type="danger" @click="submitForm()" class="icon">
                   <i class="el-icon-delete"></i>
                 </div>
                 <div class="del">删除</div>
@@ -117,17 +115,17 @@
       //     paginationType: "fraction"
       //   });
       // },
-      prev() {
-        this.$router.go(-1);
-      },
+      // prev() {
+      //   this.$router.go(-1);
+      // },
       getData() {
         var newId = this.$route.query.id;
         const that = this;
         axios
           .get("/Api/User/article_detail" + "?article_id=" + newId)
           .then(function (res) {
-            console.log("1111")
-            console.log(res);
+            // console.log("1111")
+            // console.log(res);
             that.article_ids = res.data.data.is_collect;
             console.log(that.article_ids)
             that.items = res.data.data;
@@ -142,7 +140,7 @@
         axios
           .get("/Api/User/article_detail" + "?article_id=" + newId)
           .then(function (res) {
-            console.log(res.data.data.user_url);
+            console.log(res.data);
             that.swiperList = res.data.data;
           })
           .catch(function (error) {
@@ -151,6 +149,16 @@
       },
       moveErrorImg: function (event) {
         event.currentTarget.src = "static/testImg/defaultAvatar.png";
+      },submitForm(formName){
+         var newId = this.$route.query.id;
+        let that = this;
+        that.$http
+          .post("/Api/User/article_delete" + "?article_id=" + newId, {
+            article_id:newId,
+          })
+          this.$router.go(-1);
+
+
       }
     }
   };

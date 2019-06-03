@@ -259,7 +259,7 @@ export default new Router({
       title: '交易中心列表'
     }
   },{
-    path: '/moreList',
+    path: '/moreList/:title/:id',
     name: '更多列表',
     component: MoreList,
     meta: {

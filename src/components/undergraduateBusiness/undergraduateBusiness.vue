@@ -28,7 +28,7 @@
                     </div> -->
                 </el-col>
                 <el-col :span="22" :offset="1" class="pd2">
-                    <router-link :to="{ name: '顺格格' }">
+                    <router-link :to="{ name: '顺格格' >
                         <el-button plain class="joinIn">我也要加入</el-button>
                      </router-link>
                 </el-col>

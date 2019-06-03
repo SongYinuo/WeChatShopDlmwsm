@@ -50,7 +50,7 @@
                 <div class="del">编辑</div>
               </el-col>
               <el-col :span="4" :offset="2">
-                <div type="danger" @click="prev()" class="icon">
+                <div type="danger" @click="submitForm()" class="icon">
                   <i class="el-icon-delete"></i>
                 </div>
                 <div class="del">删除</div>
@@ -100,9 +100,7 @@ export default {
     this.getImg();
   },
   methods: {
-    prev() {
-      this.$router.go(-1);
-    },
+   
     getImg() {
       var newId = this.$route.query.id;
       const that = this;
@@ -116,7 +114,17 @@ export default {
         .catch(function(error) {
           // console.log(error)
         });
-    }
+    },submitForm(formName){
+         var newId = this.$route.query.id;
+        let that = this;
+        that.$http
+          .post("/Api/User/paint_delete" + "?id=" + newId, {
+            id:newId,
+          })
+          this.$router.go(-1);
+
+
+      }
   }
 };
 </script>
