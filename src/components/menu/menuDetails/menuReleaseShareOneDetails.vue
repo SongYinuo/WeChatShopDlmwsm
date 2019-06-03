@@ -17,10 +17,6 @@
           :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :on-change="changeUpload">
           <i class="el-icon-plus"></i>
         </el-upload>
-        <!-- <el-upload class="pdB3" action="https://jsonplaceholder.typicode.com/posts/" accept="video/*"
-              list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
-              <i class="el-icon-plus"></i>
-            </el-upload> -->
          <el-col :span="22" :offset="1">
       <el-button type="warning" class="release"  @click="submitForm('ruleForm')">发布</el-button>
     </el-col>

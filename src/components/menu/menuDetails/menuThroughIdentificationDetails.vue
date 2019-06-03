@@ -1,46 +1,76 @@
 <template lang="html">
   <el-container>
-    <el-header class="tittle">
+    <el-header class="tittle" v-model="title" v-for="i in name">
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      已发布-鉴定
+      {{i.title}}
     </el-header>
     <el-row class="Identification">
       <el-col :span="22" :offset="1">
-        <div v-for="item in items">
-          <img :src="item.photoUrl" class="photo">
-          <div class="text pdT6 pdB3">{{item.text}}</div>
-          <div class="text pdT3 pdB3">{{item.txt}}</div>
-          <div class="text pdT3 pdB3">{{item.num}}</div>
-          <div class="text pdT3 pdB3">{{item.paragraph}}</div>
+        <div >
+          <div v-for="b in items.img_url">
+          <img :src="b" class="photo">
+          </div>
+          <div class="text pdT6 pdB3">{{items.title}}</div>
+          <div class="text pdT3 pdB3">{{items.contact_name}}</div>
+          <div class="text pdT3 pdB3">{{items.contact_phone}}</div>
+          <div class="text pdT3 pdB3">{{items.content}}</div>
         </div>
-        <el-button @click="prev()">删除</el-button>
+        <el-button @click="submitForm()">删除</el-button>
       </el-col>
     </el-row>
   </el-container>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
+        title: "已发布-心得",
+        name: [
+          {
+            title: "已发布-心得"
+          }
+        ],
       items: [
-        {
-          photoUrl: "static/testImg/secondCompany.png",
-          text: "红山玉",
-          txt: "高雅丽",
-          num: "17603606917",
-          paragraph:
-            "爷爷的爷爷的爷爷辈的，一直传承下来的，因家里 需要急需钱，所以需要变卖，寻求有缘人，希望平台可以帮忙发布拍卖。"
-        }
+        // {
+        //   photoUrl: "static/testImg/secondCompany.png",
+        //   text: "红山玉",
+        //   txt: "高雅丽",
+        //   num: "17603606917",
+        //   paragraph:
+        //     "爷爷的爷爷的爷爷辈的，一直传承下来的，因家里 需要急需钱，所以需要变卖，寻求有缘人，希望平台可以帮忙发布拍卖。"
+        // }
       ]
     };
+  },mounted(){
+    this.getText();
   },
   methods: {
-    prev() {
-      this.$router.go(-1);
-      console.log("删除")
-    }
+    
+    getText(){
+      var newId = this.$route.query.id;
+      const that = this;
+      axios
+       .get("/Api/User/prove_detail" + "?id=" + newId)
+       .then(function(res){
+         that.items = res.data.data;
+       })
+       .catch(function(error){
+
+       });
+    },submitForm(formName){
+         var newId = this.$route.query.id;
+        let that = this;
+        that.$http
+          .post("/Api/User/prove_delete" + "?id=" + newId, {
+            id:newId,
+          })
+          this.$router.go(-1);
+
+
+      }
   }
 };
 </script>
