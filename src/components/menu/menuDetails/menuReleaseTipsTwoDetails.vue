@@ -4,7 +4,7 @@
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      发布心得
+      发布
     </el-header>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
       <el-row class="Release">

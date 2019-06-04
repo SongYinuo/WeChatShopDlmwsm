@@ -7,13 +7,11 @@
         </el-col>
     </el-row>
 </template>
-
 <style lang="less">
 @import "../../assets/fz.less";
 @import "../../assets/index/style.less";
 @import "../../assets/search/search.less";
 </style>
-
 <script>
 export default {
   data() {

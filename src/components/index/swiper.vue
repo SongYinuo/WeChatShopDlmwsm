@@ -17,24 +17,23 @@ export default {
     };
   },
   mounted() {
-    // this.getImg();
     this.getSwiper();
   },
- 
+
   methods: {
-    getSwiper(){
-      const thit = this
+    getSwiper() {
+      const thit = this;
       axios({
-        methods: 'get',
+        methods: "get",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        url: '/Api/Index/advert'
-      }).then(function(res){
-        thit.swipeData = res.data.data;
-      }).catch(function(error){
-        // console.log(error)
+        url: "/Api/Index/advert"
       })
+        .then(function(res) {
+          thit.swipeData = res.data.data;
+        })
+        .catch(function(error) {});
     }
   }
 };
