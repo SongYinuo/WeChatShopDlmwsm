@@ -58,6 +58,27 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
+
+axios.interceptors.request.use((config) => {
+  Mint.Indicator.open({//打开loading
+      text: '加载中...',
+      spinnerType: 'fading-circle'
+  });
+  return config;
+}, (err) => {
+  return Promise.reject(err)
+
+})
+
+axios.interceptors.response.use((response) => {
+  Mint.Indicator.close();//关闭loading
+  return response;
+}, (err) => {
+  return Promise.reject(err);
+
+})
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

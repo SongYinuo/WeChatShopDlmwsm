@@ -8,9 +8,8 @@
             {{title}}
         </el-header>
         <el-row>
-             <el-col :span="24" class="num">讲堂（{{num.count}}）</el-col>
+            <el-col :span="24" class="num">讲堂（{{num.count}}）</el-col>
             <el-col :span="22" :offset="1">
-             
                 <div v-for="item in items">
                     <router-link :to="{ name:'我的讲堂详情',query: {  id: item.id,title:item.title  }}">
                         <el-row class="smallimg">
@@ -58,27 +57,31 @@ export default {
   methods: {
     getData() {
       const that = this;
-      axios
-        .get("/Api/User/classroom_list")
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/classroom_list"
+      })
         .then(function(res) {
-          console.log(res);
           that.items = res.data.data;
         })
-        .catch(function(error) {
-          console.log(error);
-        });
+        .catch(function(error) {});
     },
     getNum() {
       const that = this;
-      axios
-        .get("/Api/User/classroom_list")
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/classroom_list"
+      })
         .then(function(res) {
-          console.log(res);
           that.num = res.data;
         })
-        .catch(function(error) {
-          console.log(error);
-        });
+        .catch(function(error) {});
     }
   }
 };
@@ -110,7 +113,7 @@ export default {
   .fz(font-size, 34);
   color: #313131;
   font-weight: bold;
-  margin-left: 15px; 
+  margin-left: 15px;
 }
 .audit {
   position: absolute;

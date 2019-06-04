@@ -4,10 +4,10 @@
           <div class="back" @click="$router.go(-1)">
               <i class="el-icon-arrow-left"></i>
           </div>
-        心得
+        {{title}}
       </el-header>
-    
     <el-row>
+      <el-col :span="24" class="num">心得（{{num.count}}）</el-col>
       <el-col :span="22" :offset="1">
          <div v-for="array in arrays">
             <router-link :to="{name: '心得详情',query: { id: array.article_id,title:array.title }}">
@@ -65,83 +65,110 @@
 <script>
 import axios from "axios";
 export default {
-  data(){
-    return{
-       arrays: []
+  data() {
+    return {
+      title: "我的心得",
+      arrays: [],
+      num: []
     };
-  },mounted(){
+  },
+  mounted() {
     this.getData();
-  },methods:{
+    this.getNum();
+  },
+  methods: {
     handleClick(tab, event) {
-        // console.log(tab, event);
-      },
-     getData() {
-        const that = this;
-        axios
-          .get("/Api/User/article_list")
-          .then(function (res) {
-            console.log(res)
-            that.arrays = res.data.data;
-          })
-          .catch(function (error) {
-            // console.log(error)
-          });
-      }, moveErrorImg: function(event) {
+      // console.log(tab, event);
+    },
+    getData() {
+      const that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/article_list"
+      })
+        .then(function(res) {
+          that.arrays = res.data.data;
+        })
+        .catch(function(error) {});
+    },
+    getNum() {
+      const that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/article_list"
+      })
+        .then(function(res) {
+          that.num = res.data;
+        })
+        .catch(function(error) {});
+    },
+    moveErrorImg: function(event) {
       event.currentTarget.src = "static/testImg/defaultAvatar.png";
     }
-      }
-  };
-
+  }
+};
 </script>
 
 <style lang="less">
-  @import "../../assets/index/style.less";
-  @import "../../assets/header.less";
-  @import "../../assets/menu/menu.less";
+@import "../../assets/index/style.less";
+@import "../../assets/header.less";
+@import "../../assets/menu/menu.less";
 
-  .el-tabs__nav {
-    margin-left: 35%;
-  }
+.el-tabs__nav {
+  margin-left: 35%;
+}
 
-  .menuHead-smtxt {
-    margin-left: 45px;
-    .fz(font-size, 22);
-    color: #949494;
-    margin-top: -20px;
-  }
+.menuHead-smtxt {
+  margin-left: 45px;
+  .fz(font-size, 22);
+  color: #949494;
+  margin-top: -20px;
+}
 
-  .smalltxt-p {
-    .fz(font-size, 28);
-    color: #313131;
-    font-weight: bold;
-    margin-left: 45px;
-  }
+.smalltxt-p {
+  .fz(font-size, 28);
+  color: #313131;
+  font-weight: bold;
+  margin-left: 45px;
+}
 
-  .menuTime {
-    // position: absolute;
-    // bottom: 10px;
-    .fz(font-size, 24);
-    color: #adaeaf;
-  }
+.menuTime {
+  .fz(font-size, 24);
+  color: #adaeaf;
+}
 
-  .CommunityImg {
-    width: 32%;
-  }
+.CommunityImg {
+  width: 32%;
+}
 
-  .menu-video {
-    height: 310px;
-    width: 90%;
-  }
+.menu-video {
+  height: 310px;
+  width: 90%;
+}
 
-  .morePhoto,
-  .CommunityImg {
-    width: 90%;
-    margin-left: 10%;
-  }.audit {
+.morePhoto,
+.CommunityImg {
+  width: 90%;
+  margin-left: 10%;
+}
+.audit {
   position: absolute;
   color: #ee4040;
   right: 10px;
   top: 15px;
   .fz(font-size, 24);
+}
+
+.num {
+  .fz(font-size, 34);
+  color: #313131;
+  font-weight: bold;
+  margin-left: 15px;
 }
 </style>

@@ -27,50 +27,36 @@ import axios from "axios";
 export default {
   data() {
     return {
-        title: "已发布-心得",
-        name: [
-          {
-            title: "已发布-心得"
-          }
-        ],
-      items: [
-        // {
-        //   photoUrl: "static/testImg/secondCompany.png",
-        //   text: "红山玉",
-        //   txt: "高雅丽",
-        //   num: "17603606917",
-        //   paragraph:
-        //     "爷爷的爷爷的爷爷辈的，一直传承下来的，因家里 需要急需钱，所以需要变卖，寻求有缘人，希望平台可以帮忙发布拍卖。"
-        // }
-      ]
+      name: [
+        {
+          title: "我的古董鉴定"
+        }
+      ],
+      items: []
     };
-  },mounted(){
+  },
+  mounted() {
     this.getText();
   },
   methods: {
-    
-    getText(){
+    getText() {
       var newId = this.$route.query.id;
       const that = this;
       axios
-       .get("/Api/User/prove_detail" + "?id=" + newId)
-       .then(function(res){
-         that.items = res.data.data;
-       })
-       .catch(function(error){
-
-       });
-    },submitForm(formName){
-         var newId = this.$route.query.id;
-        let that = this;
-        that.$http
-          .post("/Api/User/prove_delete" + "?id=" + newId, {
-            id:newId,
-          })
-          this.$router.go(-1);
-
-
-      }
+        .get("/Api/User/prove_detail" + "?id=" + newId)
+        .then(function(res) {
+          that.items = res.data.data;
+        })
+        .catch(function(error) {});
+    },
+    submitForm(formName) {
+      var newId = this.$route.query.id;
+      let that = this;
+      that.$http.post("/Api/User/prove_delete" + "?id=" + newId, {
+        id: newId
+      });
+      this.$router.go(-1);
+    }
   }
 };
 </script>

@@ -1,61 +1,61 @@
 <template lang="html">
   <section>
     <div class="indexHotShop mgTB2">
-        <div class="indexSwiperHeader">
-          <el-row>
-            <el-col :span="22" :offset="1">
-              <el-col :span="16">
-                <div class="headerTitle pdB2 pdT2">热卖商城</div>
-              </el-col>
-              <el-col :span="8">
-                <div class="indexSwiperHeaderMore">
-                  <router-link :to="{ name: '热卖商城页', params: { id: hotId, value: hotTitle } }">
-                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
-                  </router-link>
-                </div>
-              </el-col>
+      <div class="indexSwiperHeader">
+        <el-row>
+          <el-col :span="22" :offset="1">
+            <el-col :span="16">
+              <div class="headerTitle pdB2 pdT2">热卖商城</div>
             </el-col>
-          </el-row>
-        </div>
-        <div class="indexSwiperRow">
-             <el-row>
-              <el-col :span="22" :offset="1">
-                  <div class="swiper-container">
-                     <div class="swiper-wrapper">
-                         <div class="swiper-slide" v-for="swiper in goods_list">
-                           <router-link :to="{ name: '详情页', query: { id: swiper.goods_id }}">
-                            <img :src="swiper.original_img" class="swiperListImg">
-                          </router-link>
-                          <div class="explainRow">
-                            <el-row>
-                              <el-col :span="14">
-                                <div class="explainTitle">
-                                    {{swiper.goods_name}}
-                                </div>
-                              </el-col>
-                              <el-col :span="4" :offset="1">
-                                <div class="explainPrice">
-                                  ￥{{swiper.shop_price}}
-                                </div>
-                              </el-col>
-                              <!-- <el-col :span="4">
-                                <div class="explainOriginalPrice">
-                                  <del>￥{{swiper.originalPrice}}</del>
-                                </div>
-                              </el-col>
-                              <el-col :span="24">
-                                <div class="explainAnnotation">
-                                {{swiper.textAnnotation}}
-                                </div>
-                              </el-col> -->
-                            </el-row>
-                          </div>
-                        </div>
-                     </div>
-                  </div>
-              </el-col>
-          </el-row>
-        </div>
+            <el-col :span="8">
+              <div class="indexSwiperHeaderMore">
+                <router-link :to="{ name: '热卖商城页', params: { id: hotId, value: hotTitle } }">
+                  <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                </router-link>
+              </div>
+            </el-col>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="indexSwiperRow">
+        <el-row>
+          <el-col :span="22" :offset="1">
+            <div class="swiper-container">
+               <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="swipers in swiperList" :key="swiper.goods_id">
+                   <router-link :to="{ name: '详情页', query: { id: swipers.goods_id }}">
+                    <img :src="swipers.original_img" class="swiperListImg">
+                  </router-link>
+                  <div class="explainRow">
+                    <el-row>
+                      <el-col :span="14">
+                        <div class="explainTitle">
+                          {{swipers.goods_name}}
+                        </div>
+                      </el-col>
+                      <el-col :span="4" :offset="1">
+                        <div class="explainPrice">
+                          ￥{{swipers.shop_price}}
+                        </div>
+                      </el-col>
+                      <el-col :span="4">
+                        <div class="explainOriginalPrice">
+                          <del>￥{{swipers.originalPrice}}</del>
+                        </div>
+                      </el-col>
+                      <el-col :span="24">
+                        <div class="explainAnnotation">
+                          {{swipers.textAnnotation}}
+                        </div>
+                      </el-col>
+                    </el-row>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
     </div>
   </section>
 </template>
@@ -63,63 +63,42 @@
 <script>
 import axios from "axios";
 export default {
-  name: "",
   data() {
     return {
-      hotTitle: '热卖',
-      hotId: 'HotA10001',
-      // 热卖榜
-      goods_list:[],
-      swiperList: [
-        {
-          id: "Hot10009",
-          title: "9热卖古典轻奢瓷器艺术品陈设饰品",
-          imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
-          // textAnnotation: "9热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制9",
-          price: "514",
-          originalPrice: "759"
-        },
-        {
-          id: "Hot10010",
-          title: "10热卖古典轻奢瓷器艺术品陈设饰品",
-          imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
-          // textAnnotation:
-          //   "10热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制10",
-          price: "514",
-          originalPrice: "759"
-        }
-      ]
+      hotTitle: "热卖",
+      hotId: "HotA10001",
+      swiperList: []
     };
   },
   mounted() {
-    this._initSwiper();
     this.getData();
+    this._initSwiper();
   },
   methods: {
     _initSwiper() {
-      this.swiper = new Swiper(".swiper-container", {
+      this.swiper = new Swiper(".swiper-container ", {
+        initialSlide: 0,
         slidesPerView: 1.2,
         spaceBetween: 16,
         pagination: ".swiper-pagination",
         paginationClickable: true,
-        spaceBetween: 12
+        spaceBetween: 12,
+        observer: true,
+        observeParents: true,
+        autoplay: 10000,
+        loop: true
       });
     },
-     getData(){
-    let that = this
+    getData() {
+      const thit = this;
       axios
-        .get("/Api/Goods/goods_list" + "?is_hot=" + 1 +'&size=' + 4)
-        .then(function(res){
-          // console.log(res)
-          console.log(res)
-          console.log("1111")
-          that.goods_list = res.data.data.goods_list
+        .get("/Api/Goods/goods_list" + "?is_hot=" + 1 + "&size=" + 4)
+        .then(function(res) {
+          thit.swiperList = res.data.data.goods_list;
         })
-        .catch(function(error){
-          // console.log(error)
-        });   
+        .catch(function(error) {});
+    }
   }
-  },
 };
 </script>
 
@@ -127,4 +106,48 @@ export default {
 @import "../../assets/fz.less";
 @import "../../assets/index/style.less";
 @import "../../assets/index/indexSwiper.less";
+
+.swiperListImg {
+  height: 200px;
+  border-radius: 8px;
+}
+
+.explainRow {
+  padding: 2vw 0;
+  line-height: 1.6;
+  .fz(font-size, 32);
+  border-bottom: 1px solid #eee;
+
+  .explainTitle {
+    text-align: left;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .explainPrice {
+    float: right;
+    margin-right: 4px;
+    line-height: 1.5;
+    .fz(font-size, 32);
+    color: #e4393c;
+  }
+
+  .explainOriginalPrice {
+    color: gray;
+    line-height: 2;
+    .fz(font-size, 22);
+  }
+
+  .explainAnnotation {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    color: gray;
+    margin-right: 0;
+    .fz(font-size, 22);
+  }
+}
 </style>
