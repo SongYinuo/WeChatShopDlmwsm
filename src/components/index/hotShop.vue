@@ -23,7 +23,7 @@
                   <div class="swiper-container">
                      <div class="swiper-wrapper">
                          <div class="swiper-slide" v-for="swiper in goods_list">
-                           <router-link :to="{ name: '详情页', query: { id: swiper.goods_id }}">
+                           <router-link :to="{ name: '详情页', query: { id: swiper.goods_id}}">
                             <img :src="swiper.original_img" class="swiperListImg">
                           </router-link>
                           <div class="explainRow">
@@ -38,16 +38,6 @@
                                   ￥{{swiper.shop_price}}
                                 </div>
                               </el-col>
-                              <!-- <el-col :span="4">
-                                <div class="explainOriginalPrice">
-                                  <del>￥{{swiper.originalPrice}}</del>
-                                </div>
-                              </el-col>
-                              <el-col :span="24">
-                                <div class="explainAnnotation">
-                                {{swiper.textAnnotation}}
-                                </div>
-                              </el-col> -->
                             </el-row>
                           </div>
                         </div>
@@ -70,25 +60,6 @@ export default {
       hotId: 'HotA10001',
       // 热卖榜
       goods_list:[],
-      swiperList: [
-        {
-          id: "Hot10009",
-          title: "9热卖古典轻奢瓷器艺术品陈设饰品",
-          imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
-          // textAnnotation: "9热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制9",
-          price: "514",
-          originalPrice: "759"
-        },
-        {
-          id: "Hot10010",
-          title: "10热卖古典轻奢瓷器艺术品陈设饰品",
-          imgUrl: "https://t10.baidu.com/it/u=3605678574,1074337534&fm=76",
-          // textAnnotation:
-          //   "10热卖古典轻奢瓷器艺术品陈设饰品,茱萸光滑,高端定制10",
-          price: "514",
-          originalPrice: "759"
-        }
-      ]
     };
   },
   mounted() {
