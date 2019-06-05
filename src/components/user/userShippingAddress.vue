@@ -11,24 +11,40 @@
               <el-col :span="22" :offset="1" class="bgCfff pdLR2TB1 positionR">
                 <el-col v-for="(item, index) in items" class="addInfo">
                   <el-col :span="22" :offset="1" class="pd2">
-                    <el-col :span="6" class="name">{{item.name}}</el-col>
-                    <el-col :span="18" class="phone text-alignRight">{{item.phone}}</el-col>
+                    <el-col :span="6" class="name">{{item.consignee}}</el-col>
+                    <el-col :span="18" class="phone text-alignRight">{{item.mobile}}</el-col>
                   </el-col>
                   <el-col class="addressTxt">
-                    <el-col :span="3" v-if="item.default==='默认'">
-                      <div class="bgUndertintYellow defaultIcon colorWhite addRowTxt text-alignCenter">{{item.default}}</div>
+                    <el-col :span="3" v-if="item.is_default=== 1">
+                      <div class="bgUndertintYellow defaultIcon colorWhite addRowTxt text-alignCenter">默认</div>
+                    </el-col>
+                     <el-col :span="3" v-if="item.is_default=== 0" style="display:none">
+                      <div class="bgUndertintYellow defaultIcon colorWhite addRowTxt text-alignCenter">默认</div>
                     </el-col>
                     <el-col :span="20" :offset="1" class="site pd2">
-                          {{item.addressUrl}}
+                          {{item.province_name}}{{item.city_name}}{{item.district_name}}
                     </el-col>
                   </el-col>
                   <el-col class="pdT3 pdB1">
-                    <el-col :span="8">
+                    <el-col :span="8"  >
                       <i class="el-icon-refresh-right"></i>
                       <i class="el-icon-refresh-left"></i>
-                      <span><el-radio v-model="radio" :label="item.label">默认地址</el-radio></span>
+                      <div >
+                        <!-- <span @change="default_click(index)">
+                          <el-radio v-model="radio" :label="3" v-if="item.is_default=== 1" >默认地址</el-radio>
+                          <el-radio v-model="radio" :label="6" v-if="item.is_default=== 0" ><div style="color:#fff">地址</div></el-radio>
+                        </span> -->
+                          <el-radio-group v-model="radio" @change="default_click(index)" >
+                            <el-radio :label="item.address_id" v-if="item.is_default=== 1" >
+                              默认地址
+                            </el-radio>
+                            <el-radio :label="item.address_id" v-if="item.is_default=== 0" >默认地址</el-radio>
+                             
+                          </el-radio-group>
+                      </div>
                     </el-col>
-                    <el-col :span="2" :offset="14">
+                    
+                    <el-col :span="2" :offset="13">
                       <i class="el-icon-delete" @click="deleteInfo"></i>
                     </el-col>
                   </el-col>
@@ -45,45 +61,53 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
+  inject: ['reload'],
   data() {
     return {
-      radio: "0",
-      items: [
-        {
-          name: "张三",
-          phone: "18536790386",
-          default: "默认",
-          addressUrl:
-            "0上海上海市浦东新区张江镇路上海上海市浦东新区张江镇路36号39号楼233室",
-          id: "120000",
-          label: "0"
-        },
-        {
-          name: "1张三",
-          phone: "18536790387",
-          default: "",
-          addressUrl:
-            "1上海上海市浦东新区张江镇路上海上海市浦东新区张江镇路36号39号楼233室",
-          id: "120001",
-          label: "1"
-        },
-        {
-          name: "2张三",
-          phone: "18536790388",
-          default: "",
-          addressUrl:
-            "2上海上海市浦东新区张江镇路上海上海市浦东新区张江镇路36号39号楼233室",
-          id: "120002",
-          label: "2"
-        }
-      ]
+      radio: 1,
+
+      items: []
     };
+  },
+  mounted() {
+    this.getImg();
+   
   },
   methods: {
     getDta() {},
     deleteInfo(index) {
       this.items.splice(index, 1);
+    },
+    getImg() {
+      const that = this;
+      axios.get("/Api/User/address_list").then(function(res) {
+        // console.log(res.data.data);
+        that.items = res.data.data;
+       
+      });
+    },
+    // 点击事件
+    default_click: function(index) {
+      var that = this;
+      // console.log("点击");
+      // console.log(index);
+      var address_id = that.items[index].address_id;
+      
+      axios
+        .get("/Api/User/set_default_address?id=" + address_id)
+        .then(function(res) {
+          // that.radio = address_id;
+          console.log(radio);
+        });
+        // this.reload();
+        this.$router.go(0)
+    }
+  },
+  computed: {
+    resultCategoryId() {
+      return this.categoryId;
     }
   }
 };
@@ -100,5 +124,8 @@ export default {
 .addRow {
   width: 100%;
   height: 100%;
+}
+.el-radio__label {
+  // color: #FFF;
 }
 </style>
