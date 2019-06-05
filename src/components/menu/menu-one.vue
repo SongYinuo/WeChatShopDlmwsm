@@ -68,7 +68,10 @@
             </router-link>
           </div>
           <el-col>
-            <router-link :to="{ name:'发布'}">
+            <!-- <router-link tag="a" :to="{path:'/目标路径',query{id:work_task.id}}"></router-link> -->
+              <!-- <router-link :to="{ name:'旅游攻略',query: {id: item.article_id,title:item.title }}"> -->
+                  <!-- <router-link :to="{ name:'发布',query:{cart_id:1002}}"> -->
+            <router-link :to="{ name:'发布', query : { cart_id : '1001'}}">
               <span class="flbtn"><img src="static/testImg/write@2x.png">发布</span>
             </router-link>
           </el-col>

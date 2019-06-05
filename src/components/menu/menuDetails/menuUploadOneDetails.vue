@@ -201,10 +201,14 @@ export default {
       //请求完成
       this.dialogImageUrl = URL.createObjectURL(file.raw);
       this.imgUrl = res.data;
-      this.imgUrl += this.imgUrl;
+      // this.imgUrl += this.imgUrl;
+      this.imgUrl = this.imgUrl;
       let basic = this.imgUrl;
       basic = basic.substring(0, basic.lastIndexOf(","));
+      console.log("图片")
       this.basic = basic;
+      console.log(this.basic)
+      console.log("1525")
     },
     submitForm(formName) {
       // console.log(that.uploadAction);
