@@ -4,7 +4,7 @@
             <div class="back" @click="$router.go(-1)">
                 <i class="el-icon-arrow-left"></i>
             </div>
-            书画摄影
+            {{title}}
         </el-header>
         <el-row class="indexSearchRow pdB2">
             <el-col :span="22" :offset="1">
@@ -43,6 +43,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      title: "书画摄影",
       input3: "",
       Paintings: [],
       num: []
@@ -55,27 +56,31 @@ export default {
   methods: {
     getData() {
       const that = this;
-      axios
-        .get("/Api/User/paint_list")
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/paint_list"
+      })
         .then(function(res) {
-          console.log(res);
           that.Paintings = res.data.data;
         })
-        .catch(function(error) {
-          console.log(error);
-        });
+        .catch(function(error) {});
     },
     getNum() {
       const that = this;
-      axios
-        .get("/Api/User/paint_list")
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/paint_list"
+      })
         .then(function(res) {
-          console.log(res);
           that.num = res.data;
         })
-        .catch(function(error) {
-          console.log(error);
-        });
+        .catch(function(error) {});
     }
   }
 };

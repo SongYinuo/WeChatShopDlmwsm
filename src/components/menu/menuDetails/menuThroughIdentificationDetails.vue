@@ -8,13 +8,13 @@
     </el-header>
     <el-row class="Identification">
       <el-col :span="22" :offset="1">
-        <div >
-          <div v-for="b in items.img_url">
-          <img :src="b" class="photo">
-          </div>
-          <div class="text pdT6 pdB3">{{items.title}}</div>
-          <div class="text pdT3 pdB3">{{items.contact_name}}</div>
-          <div class="text pdT3 pdB3">{{items.contact_phone}}</div>
+        <div>
+          <el-col :span="7" :offset="1" v-for="b in items.img_url" class="authenticateImgRow">
+            <img :src="b" class="photo">
+          </el-col>
+          <div class="text pdT6 pdB3"><span class="colorRed pdLR1">*</span>{{items.title}}</div>
+          <div class="text pdT3 pdB3"><span class="colorRed pdLR1">*</span>{{items.contact_name}}</div>
+          <div class="text pdT3 pdB3"><span class="colorRed pdLR1">*</span>{{items.contact_phone}}</div>
           <div class="text pdT3 pdB3">{{items.content}}</div>
         </div>
         <el-button @click="submitForm()">删除</el-button>
@@ -27,50 +27,36 @@ import axios from "axios";
 export default {
   data() {
     return {
-        title: "已发布-心得",
-        name: [
-          {
-            title: "已发布-心得"
-          }
-        ],
-      items: [
-        // {
-        //   photoUrl: "static/testImg/secondCompany.png",
-        //   text: "红山玉",
-        //   txt: "高雅丽",
-        //   num: "17603606917",
-        //   paragraph:
-        //     "爷爷的爷爷的爷爷辈的，一直传承下来的，因家里 需要急需钱，所以需要变卖，寻求有缘人，希望平台可以帮忙发布拍卖。"
-        // }
-      ]
+      name: [
+        {
+          title: "我的古董鉴定"
+        }
+      ],
+      items: []
     };
-  },mounted(){
+  },
+  mounted() {
     this.getText();
   },
   methods: {
-    
-    getText(){
+    getText() {
       var newId = this.$route.query.id;
       const that = this;
       axios
-       .get("/Api/User/prove_detail" + "?id=" + newId)
-       .then(function(res){
-         that.items = res.data.data;
-       })
-       .catch(function(error){
-
-       });
-    },submitForm(formName){
-         var newId = this.$route.query.id;
-        let that = this;
-        that.$http
-          .post("/Api/User/prove_delete" + "?id=" + newId, {
-            id:newId,
-          })
-          this.$router.go(-1);
-
-
-      }
+        .get("/Api/User/prove_detail" + "?id=" + newId)
+        .then(function(res) {
+          that.items = res.data.data;
+        })
+        .catch(function(error) {});
+    },
+    submitForm(formName) {
+      var newId = this.$route.query.id;
+      let that = this;
+      that.$http.post("/Api/User/prove_delete" + "?id=" + newId, {
+        id: newId
+      });
+      this.$router.go(-1);
+    }
   }
 };
 </script>
@@ -80,4 +66,8 @@ export default {
 @import "../../../assets/index/style.less";
 @import "../../../assets/menu/details.less";
 @import "../../../assets/fz.less";
+
+.authenticateImgRow:first-child {
+  margin-left: 0;
+}
 </style>

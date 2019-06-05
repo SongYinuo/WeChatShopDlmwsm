@@ -1,11 +1,10 @@
 <template lang="html">
-
   <el-container>
     <el-header class="tittle">
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      旅游文化
+      {{title}}
     </el-header>
     <el-col :span="22" :offset="1">
       <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -19,17 +18,15 @@
                     <div class="menu-strategy-small omit" v-html="item.content">{{item.content}}</div>
                     <div class="menuTime" v-html="item.confirm_time_text">{{item.confirm_time_text}}</div>
                   </el-col>
-
                   <el-col :span="8" :offset="4">
                     <img :src="item.thumb">
-
                   </el-col>
                 </el-row>
               </router-link>
             </div>
           </el-row>
         </el-tab-pane>
-      <el-tab-pane label="社区" name="second">
+        <el-tab-pane label="社区" name="second">
           <div v-for="array in arrays">
             <router-link :to="{name: '种草详情',query: { id: array.article_id }}">
               <el-row>
@@ -89,47 +86,51 @@ import axios from "axios";
 export default {
   data() {
     return {
+      title: "旅游文化",
       activeName: "first",
-      items: [
-    
-      ],
-      arrays: [
-
-      ],
- 
+      items: [],
+      arrays: []
     };
-  },mounted(){
+  },
+  mounted() {
     this.getData();
     this.getImg();
   },
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event);
-    },getData(){
+      // console.log(tab, event);
+    },
+    getData() {
       const that = this;
-      axios
-        .get("/Api/Article/article_list?cat_id=1002")
-        .then(function(res){
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Article/article_list?cat_id=1002"
+      })
+        .then(function(res) {
           that.items = res.data.data.admin_list;
         })
-        .catch(function(error){
-
-        });
-      
-    },getImg(){
+        .catch(function(error) {});
+    },
+    getImg() {
       const that = this;
-      axios
-        .get("/Api/Article/article_list?cat_id=1002")
-        .then(function(res){
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Article/article_list?cat_id=1002"
+      })
+        .then(function(res) {
           that.arrays = res.data.data.user_list;
         })
-        .catch(function(error){
-
-        });
-      
-    }, moveErrorImg:function (event) {
-                event.currentTarget.src = "static/testImg/defaultAvatar.png";
-            }
+        .catch(function(error) {});
+    },
+    moveErrorImg: function(event) {
+      event.currentTarget.src = "static/testImg/defaultAvatar.png";
+    }
   }
 };
 </script>
@@ -158,9 +159,11 @@ export default {
   color: #313131;
   font-weight: bold;
   margin-left: 45px;
-}.morePhoto,
-  .CommunityImg {
-    width: 90%;
-    margin-left: 10%;
-  }
+}
+
+.morePhoto,
+.CommunityImg {
+  width: 90%;
+  margin-left: 10%;
+}
 </style>

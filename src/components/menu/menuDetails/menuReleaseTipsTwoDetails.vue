@@ -4,7 +4,7 @@
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      发布心得
+      发布
     </el-header>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
       <el-row class="Release">
@@ -29,21 +29,20 @@
             <el-form-item prop="textarea">
               <el-input type="textarea" placeholder="说点什么吧" v-model="ruleForm.textarea" show-word-limit></el-input>
             </el-form-item>
-            <!-- <el-col :span="24" class="video">
-            <!-- <div class="videotxt pdB3">视频</div> -->
-            <!-- <el-form-item label="视频" label-width="60px">
-              <el-switch v-model="ruleForm.delivery" @change="test()"></el-switch>
+            <el-col :span="24" class="video">
+             <div class="videotxt pdB3">视频</div> 
+             <el-form-item label="视频" label-width="60px">
+              <el-switch v-model="photo" @change="test()"></el-switch>
             </el-form-item>
-            <el-upload class="pdB3" list-type="picture-card" :on-success="handleAvatarSuccessVideo"
-              :before-upload="beforeAvatarUploadVideo" :on-progress="onProgressVideo" name="upfile"
-              :on-preview="handlePictureCardPreviewVideo" :on-remove="handleRemoveVideo" :data="editorVideo"
-              accept="video/*" v-if="this.ruleForm.photo" :limit="1">
-              <i class="el-icon-plus"></i>
-            </el-upload> -->
+             <el-upload class="pdB3" action="http://192.168.1.5/api/user/test" list-type="picture-card"
+	              :on-preview="handlePictureCardPreview" :on-remove="handleRemove" ref="ruleForm.photo"
+	              v-if="this.ruleForm.photo">
+	              <i class="el-icon-plus"></i>
+            </el-upload>
             <el-dialog :visible.sync="dialogVisible">
               <img width="100%" :src="dialogImageUrl" alt="">
             </el-dialog>
-            <!-- </el-col> -->
+            </el-col>
           </el-form>
         </el-col>
         <el-col :span="22" :offset="1" class="pdT16">
@@ -60,6 +59,7 @@
   export default {
     data() {
       return {
+        
         editor: {
           model: "article"
         },
@@ -109,6 +109,7 @@
       };
     },
     methods: {
+    
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
@@ -210,7 +211,7 @@
 
       },
       test: function () {
-        this.ruleForm.photo = !this.ruleForm.photo;
+        this.ruleForm.photo = !this.ruleForm.photo
       }
     }
   };

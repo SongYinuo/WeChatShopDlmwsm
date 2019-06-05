@@ -1,7 +1,6 @@
 <template lang="html">
   <el-container>
-    <el-header class="tittle" v-model="title" v-for="i in name">
-      <!-- v-if="this.ruleForm.text!==''&&this.ruleForm.textarea!=='' -->
+    <el-header class="tittle" v-model="i.title" v-for="i in name">
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
@@ -74,7 +73,6 @@ export default {
   },
   data() {
     return {
-      title: "我的书画详情",
       dialogVisible: false,
       article_ids: "",
       name: [
@@ -82,49 +80,32 @@ export default {
           title: "我的书画详情"
         }
       ],
-      books: [
-        // {
-        //   imageUrl: "static/testImg/youhua.jpg",
-        //   tittle: "我想要最狂的风和最近的海",
-        //   txt: "哈桑六艺|40X40cm|2019",
-        //   smtxt: "艺术微喷",
-        //   details: "可触及但是又不可触碰的身体",
-        //   photoUrl: "static/testImg/shunPrincess.png",
-        //   photoTxt: "BB..颜无画",
-        //   attribute: "热门"
-        // }
-      ]
+      books: []
     };
   },
   mounted() {
     this.getImg();
   },
   methods: {
-   
     getImg() {
       var newId = this.$route.query.id;
       const that = this;
       axios
         .get("/Api/User/paint_detail" + "?id=" + newId)
         .then(function(res) {
-          // console.log(res)
           that.article_ids = res.data.data.is_collect;
           that.books = res.data.data;
         })
-        .catch(function(error) {
-          // console.log(error)
-        });
-    },submitForm(formName){
-         var newId = this.$route.query.id;
-        let that = this;
-        that.$http
-          .post("/Api/User/paint_delete" + "?id=" + newId, {
-            id:newId,
-          })
-          this.$router.go(-1);
-
-
-      }
+        .catch(function(error) {});
+    },
+    submitForm(formName) {
+      var newId = this.$route.query.id;
+      let that = this;
+      that.$http.post("/Api/User/paint_delete" + "?id=" + newId, {
+        id: newId
+      });
+      this.$router.go(-1);
+    }
   }
 };
 </script>
@@ -234,7 +215,8 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   width: 50%;
-}.el-dialog__body {
+}
+.el-dialog__body {
   padding: 0 0px;
   color: #606266;
   font-size: 14px;

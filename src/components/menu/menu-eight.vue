@@ -4,7 +4,7 @@
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      交易中心
+      {{title}}
     </el-header>
     <div class="trading">
       <el-tabs :tab-position="tabPosition" v-model="datas.tabkey">
@@ -17,7 +17,6 @@
             </el-col>
           </el-row>
           <div v-for="k in household.tmenu">
-
             <router-link :to="{ name:'交易中心列表',query: { id: k.id }}">
               <span class="tradingtab-icon">
                 <img :src="k.image">
@@ -25,42 +24,44 @@
               </span>
             </router-link>
           </div>
-
         </el-tab-pane>
-
       </el-tabs>
     </div>
   </el-container>
 </template>
 
 <script>
-import axios from "axios";
+  import axios from "axios";
   export default {
     data() {
       return {
+        title: "交易中心",
         tabPosition: "left",
         datas: {
-          aa: 'aa',
-          tabkey: '手机 、 数码 、 通信',
-          households: [
-          ]
+          tabkey: "手机 、 数码 、 通信",
+          households: []
         }
+      };
+    },
+    mounted() {
+      this.getData();
+    },
+    methods: {
+      getData: function () {
+        let that = this;
+        axios({
+          methods: "get",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          url: "/Api/Goods/index"
+        }).then(function (res) {
+          that.datas.households = res.data.data;
+        });
       }
-    },
-    mounted(){
-      this.getData()
-    },
-    methods:{
-        getData:function(){
-          let that = this
-          axios.get('/Api/Goods/index').then(function(res){
-            console.log("111")
-            console.log(res)
-            that.datas.households = res.data.data
-          })
-        }
     }
   };
+
 </script>
 
 <style lang="less">
@@ -77,11 +78,10 @@ import axios from "axios";
   .trading .el-tabs--left .el-tabs__active-bar.is-left,
   .el-tabs--left .el-tabs__nav-wrap.is-left::after {
     left: 0;
-
   }
 
   .trading .el-tabs__item:hover {
-    color: #DAB62E;
+    color: #dab62e;
     cursor: pointer;
     background-color: #fff;
   }
@@ -94,7 +94,6 @@ import axios from "axios";
 
   .tradingtab-adiv {
     border-radius: 3px;
-    background-color: #dab62e;
     margin-bottom: 38px;
   }
 
@@ -103,11 +102,14 @@ import axios from "axios";
     float: left;
     text-align: center;
   }
+
   .tradingtab-icon img {
     border-radius: 3px;
   }
+
   // 后加的内容
-  .tradingtab-icon img{
+  .tradingtab-icon img {
     height: 2.5rem;
   }
+
 </style>

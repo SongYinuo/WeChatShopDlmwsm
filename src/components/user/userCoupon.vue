@@ -4,12 +4,11 @@
           <div class="back" @click="$router.go(-1)">
               <i class="el-icon-arrow-left"></i>
           </div>
-        vip专区
+          {{title}}
       </el-header>
       <el-main class="userCoupon">
         <el-row>
           <el-col :span="22" :offset="1" v-for="k in userCouponInfo" class="couponRow">
-            <!--   v-if="k.vip===true" -->
              <router-link :to="{ name: 'vip详情',query: { id: k.article_id } }">
                 <img :src="k.thumb">
                 <div class="pd2 text-alignCenter">{{k.title}}</div>
@@ -40,34 +39,36 @@ import axios from "axios";
 export default {
   data() {
     return {
+      title: "vip专区",
       dialogShows: false,
       userCouponInfo: [],
-      // 是否接收到上一个页面传过来的参数
-     filters: {
-         vipid:''  //这里名字根据实际情况定义
-       }
+      filters: {
+        vipid: ""
+      }
     };
-  },mounted(){
+  },
+  mounted() {
     this.getData();
-  },methods: {
-    getData(){
-      // var newId = this.$route.query.id;
+  },
+  methods: {
+    getData() {
       const that = this;
       var is_vip = that.$route.query.is_vip;
-      axios.get("/Api/User/vip_list").then(function(res){
-        console.log(res)
-        // console.log(res.data.data.article_id)
-        that.userCouponInfo = res.data.data;
-        console.log("1255")
-        console.log(that.$route)
-        is_vip=that.$route.query.is_vip
-        that.filters.vipid = is_vip
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/vip_list"
       })
-      .catch(function(error){
-        console.log(error)
-      });
-    },
-  },
+        .then(function(res) {
+          that.userCouponInfo = res.data.data;
+          is_vip = that.$route.query.is_vip;
+          that.filters.vipid = is_vip;
+        })
+        .catch(function(error) {});
+    }
+  }
 };
 </script>
 
