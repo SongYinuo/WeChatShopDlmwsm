@@ -1,5 +1,9 @@
 <template lang="html">
   <div class="car">
+    <!-- slot分发内容 让子组件混合父组件的内容 -->
+    <!-- <v-header>
+        <h1 slot="title">购物车</h1>
+      </v-header> -->
     <el-header class="tittle">
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
@@ -14,8 +18,11 @@
               <el-col :span="3" class="mgT4">
                 <i class="el-icon-refresh-right"></i>
                 <i class="el-icon-refresh-left"></i>
-                <span @click="radio_click(index)">
-                  <img :src="item.selected == 0?'/static/check@2x.png':'/static/checked@2x.png'" style="width:1.2rem;margin-top:1rem;"/>
+                <span>
+                  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange(cart_list)">
+                    <el-checkbox :label="item.spec_key_name" :key="item.spec_key_name">{{item.spec_key_name}}</el-checkbox>
+                  </el-checkbox-group>
+                  <!-- <el-radio v-model="radio" :label="item.label"></el-radio> -->
                 </span>
               </el-col>
               <el-col :span="6" class="carListImg">
@@ -30,26 +37,30 @@
                 <div class="pdT4">
                   <el-col :span="8" class="colorRed">￥{{item.goods_price}}</el-col>
                   <el-col :span="16">
-                    <el-input-number v-model="item.goods_num" :min="1" :max="99">{{item.goods_num}}</el-input-number>
+                    <el-input-number v-model="item.num" @change="handleChange" :min="1" :max="99"></el-input-number>
                   </el-col>
                 </div>
               </el-col>
             </el-col>
-            
           </el-col>
         </el-col>
+        <!-- <template>
+  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+  </el-checkbox-group>
+</template> -->
         <el-col class="carFooter brT1 bgCfff">
           <el-col :span="4" class="text-alignCenter pd2">
-              <!-- <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox> -->
-              <img :src="checkAll == true ?'/static/check@2x.png':'/static/checked@2x.png'" style="width:1.2rem;margin-top:1rem;"  @click="select_all"/>
+              <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
           </el-col>
           <el-col :span="12" class="text-alignRight pd2">
             <div class="totalPrices">总计(不含运费): <span class="colorRed">￥1239</span></div>
             <div class="freight colorGray">运费：<span>￥100</span></div>
           </el-col>
           <el-col :span="8" class="accountsBtn">
-            <!-- @click="OnAccounts" -->
-            <el-button class="fr baUndertintBlack colorWhite">结账</el-button>
+            <el-button @click="OnAccounts" class="fr baUndertintBlack colorWhite">结账</el-button>
           </el-col>
         </el-col>
       </el-row>
@@ -69,6 +80,7 @@ import Nothing from "@/components/car/nothing.vue";
 import Something from "@/components/car/something.vue";
 import Footer from "@/components/car/footer.vue";
 import IndexFooter from "@/common/_footer.vue";
+
 export default {
   components: {
     "v-header": Header,
@@ -80,14 +92,13 @@ export default {
 
   data() {
     return {
+      radio: "0",
       IfPurchase: true,
       checkedCities: [],
       isIndeterminate: true,
       checkAll: false,
       // 购物车列表
       cart_list:[],
-      // 判断是不是全选状态
-      checkAll:true,
     };
   },
   mounted(){
@@ -112,68 +123,38 @@ export default {
     deleteInfo(index) {
       this.items.splice(index, 1);
     },
-    // 点击按钮的单击事件
-    radio_click:function(index){
-      console.log(index)
-      var that = this
-      console.log(123456)
-      // that.cart_list[]
-      console.log(that.cart_list[index].selected)
-      if(that.cart_list[index].selected == 1){
-        that.cart_list[index].selected = 0
-      }else{
-         that.cart_list[index].selected = 1
-      }
-       that.select_radio()
+    handleChange(value) {
+      console.log(value);
     },
-    // 监听全选按钮
-    select_all:function(){
-      var that = this
-      console.log("全选")
-      if(that.checkAll == true){
-         for(var i=0;i<that.cart_list.length;i++){
-          that.cart_list[i].selected = 1
-          that.checkAll = false
-      }
-      }else{
-        console.log("取消反选")
-          for(var i=0;i<that.cart_list.length;i++){
-          that.cart_list[i].selected = 0
-          that.checkAll = true
-      }
-    }
-  },
-  // 监听是否都选中的状态
-  // select_radio:function(){
-  //   console.log('监听')
-  //   var that = this
-  //    for(var i=0;i<that.cart_list.length;i++){
-  //        if(that.cart_list[i].selected == 0){
-  //         that.checkAll = true;
-  //         break;
-  //         return false;
-  //        }else{
-  //           that.checkAll = false
-  //        }
-  //     }
-  // },
-  select_radio:function(){
-    var that = this
-    for(var i=0;i<that.cart_list.length;i++){
-      if(that.cart_list[i].selected== 0){
-        that.checkAll = true;
-      }else{
-        that.checkAll = false;
-      }
+    OnAccounts() {
+      console.log(111);
+    },
+    handleCheckAllChange(val) {
+      console.log("333")
+      console.log(val)
+      this.checkedCities = val ? this.cart_list : [];
+      console.log(this.checkedCities)
+      this.isIndeterminate = true;
+    },
+    handleCheckedCitiesChange(value) {
+      console.log(value)
+      let checkedCount = value.length;
+      console.log(checkedCount)
+      this.checkAll = checkedCount === this.cart_list.length;
+      console.log(this.checkAll)
+      console.log(checkedCount)
+      console.log(this.cart_list.length)
+      this.isIndeterminate =this.cart_list.length;
+        checkedCount > 0 && checkedCount < this.cart_list.length;
     }
   },
   computed: {
     count() {
       return this.$store.state.detail.count;
     }
-  }
-}
-}
+  },
+
+};
 </script>
 
 <style lang="less">
@@ -236,6 +217,5 @@ export default {
   bottom: 48px;
   height: 60px;
   line-height: 1.2;
-  z-index: 200;
 }
 </style>

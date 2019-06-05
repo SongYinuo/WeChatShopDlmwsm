@@ -25,6 +25,9 @@ export default {
 
   beforeCreate(){
     this.$store.dispatch('setDatas');
+  },
+  mounted(){
+    var goods_id = this.$route.query.id
   }
 }
 </script>

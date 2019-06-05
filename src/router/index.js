@@ -583,6 +583,6 @@ export default new Router({
     meta: {
       title: '编辑详情'
     }
-  },
+  }
   ]
 })
