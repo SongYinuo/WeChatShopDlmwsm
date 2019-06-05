@@ -1,5 +1,4 @@
 <template lang="html">
-
   <el-container>
     <el-header class="tittle">
       <div class="back" @click="$router.go(-1)">

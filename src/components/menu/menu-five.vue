@@ -1,16 +1,15 @@
 <template lang="html">
-
-    <el-container>
-        <el-header class="tittle">
-            <div class="back" @click="$router.go(-1)">
-                <i class="el-icon-arrow-left"></i>
-            </div>
-            养生文化
-        </el-header>
-        <el-col :span="22" :offset="1">
-            <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="攻略" name="first">
-            <el-row>
+  <el-container>
+    <el-header class="tittle">
+      <div class="back" @click="$router.go(-1)">
+        <i class="el-icon-arrow-left"></i>
+      </div>
+      {{title}}
+    </el-header>
+    <el-col :span="22" :offset="1">
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="攻略" name="first">
+          <el-row>
             <div v-for="item in items">
               <router-link :to="{ name:'旅游攻略',query: { id: item.article_id }}">
                 <el-row class="smallimg">
@@ -78,101 +77,104 @@
             </el-col>
           </el-row>
         </el-tab-pane>
-            </el-tabs>
-        </el-col>
-    </el-container>
+      </el-tabs>
+    </el-col>
+  </el-container>
 </template>
 <script type="text/javascript">
 import axios from "axios";
-    export default {
-        data() {
-            return {
-                activeName: 'first',
-                items: [
-                   
-                ],
-                arrays: [
-                   
-
-                ],
-                
-            }
-        },mounted(){
-            this.getData();
-            this.getImg();
-        },
-
-        methods: {
-            handleClick(tab, event) {
-                // console.log(tab, event);
-            },getData(){
-                const that = this;
-                axios
-                .get("/Api/Article/article_list?cat_id=1004")
-                .then(function(res){
-                    that.items = res.data.data.admin_list;
-                })
-                .catch(function(error){
-
-                });
-               
-            },getImg(){
-                const that = this;
-                axios
-                .get("/Api/Article/article_list?cat_id=1004")
-                .then(function(res){
-                    that.arrays = res.data.data.user_list;
-                })
-                .catch(function(error){
-
-                });
-            }, moveErrorImg:function (event) {
-                event.currentTarget.src = "static/testImg/defaultAvatar.png";
-            }
-        }
+export default {
+  data() {
+    return {
+      title: "养生文化",
+      activeName: "first",
+      items: [],
+      arrays: []
     };
+  },
+  mounted() {
+    this.getData();
+    this.getImg();
+  },
+
+  methods: {
+    handleClick(tab, event) {
+      // console.log(tab, event);
+    },
+    getData() {
+      const that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Article/article_list?cat_id=1004"
+      })
+        .then(function(res) {
+          that.items = res.data.data.admin_list;
+        })
+        .catch(function(error) {});
+    },
+    getImg() {
+      const that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Article/article_list?cat_id=1004"
+      })
+        .then(function(res) {
+          that.arrays = res.data.data.user_list;
+        })
+        .catch(function(error) {});
+    },
+    moveErrorImg: function(event) {
+      event.currentTarget.src = "static/testImg/defaultAvatar.png";
+    }
+  }
+};
 </script>
 <style lang="less">
-    @import "../../assets/index/style.less";
-    @import "../../assets/header.less";
-    @import "../../assets/menu/menu.less";
-    .el-tabs__nav {
-    margin-left: 35%;
-  }
+@import "../../assets/index/style.less";
+@import "../../assets/header.less";
+@import "../../assets/menu/menu.less";
 
-  .menuHead-smtxt {
-    margin-left: 45px;
-    .fz(font-size, 22);
-    color: #949494;
-    margin-top: -20px;
-  }
+.el-tabs__nav {
+  margin-left: 35%;
+}
 
-  .smalltxt-p {
-    .fz(font-size, 28);
-    color: #313131;
-    font-weight: bold;
-    margin-left: 45px;
-  }
+.menuHead-smtxt {
+  margin-left: 45px;
+  .fz(font-size, 22);
+  color: #949494;
+  margin-top: -20px;
+}
 
-  .menuTime {
-    // position: absolute;
-    // bottom: 10px;
-    .fz(font-size, 24);
-    color: #adaeaf;
-  }
+.smalltxt-p {
+  .fz(font-size, 28);
+  color: #313131;
+  font-weight: bold;
+  margin-left: 45px;
+}
 
-  .CommunityImg {
-    width: 32%;
-  }
+.menuTime {
+  .fz(font-size, 24);
+  color: #adaeaf;
+}
+
+.CommunityImg {
+  width: 32%;
+}
+
 .menu-video {
   height: 310px;
   width: 90%;
 }
-  
 
-  .morePhoto,
-  .CommunityImg {
-    width: 90%;
-    margin-left: 10%;
-  }
+.morePhoto,
+.CommunityImg {
+  width: 90%;
+  margin-left: 10%;
+}
 </style>

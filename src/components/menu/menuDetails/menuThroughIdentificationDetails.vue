@@ -8,13 +8,13 @@
     </el-header>
     <el-row class="Identification">
       <el-col :span="22" :offset="1">
-        <div >
-          <div v-for="b in items.img_url">
-          <img :src="b" class="photo">
-          </div>
-          <div class="text pdT6 pdB3">{{items.title}}</div>
-          <div class="text pdT3 pdB3">{{items.contact_name}}</div>
-          <div class="text pdT3 pdB3">{{items.contact_phone}}</div>
+        <div>
+          <el-col :span="7" :offset="1" v-for="b in items.img_url" class="authenticateImgRow">
+            <img :src="b" class="photo">
+          </el-col>
+          <div class="text pdT6 pdB3"><span class="colorRed pdLR1">*</span>{{items.title}}</div>
+          <div class="text pdT3 pdB3"><span class="colorRed pdLR1">*</span>{{items.contact_name}}</div>
+          <div class="text pdT3 pdB3"><span class="colorRed pdLR1">*</span>{{items.contact_phone}}</div>
           <div class="text pdT3 pdB3">{{items.content}}</div>
         </div>
         <el-button @click="submitForm()">删除</el-button>
@@ -66,4 +66,8 @@ export default {
 @import "../../../assets/index/style.less";
 @import "../../../assets/menu/details.less";
 @import "../../../assets/fz.less";
+
+.authenticateImgRow:first-child {
+  margin-left: 0;
+}
 </style>

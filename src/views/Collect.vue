@@ -109,227 +109,230 @@
 </template>
 
 <script>
-  import Footer from "@/common/_footer.vue";
-  import axios from "axios";
-  export default {
-    components: {
-      "v-footer": Footer
-    },
-    data() {
-      return {
-        title: "收藏",
-        collect: {
-          activeName: "shangpin",
-          collectionClassified: [{
-              label: "商品",
-              name: "shangpin"
-            },
-            {
-              label: "攻略",
-              name: "gonglue"
-            },
-            {
-              label: "讲堂",
-              name: "jiangtang"
-            },
-            {
-              label: "书画",
-              name: "shuhua"
-            },
-            {
-              label: "种草",
-              name: "zhongcao"
-            }
-          ]
+import Footer from "@/common/_footer.vue";
+import axios from "axios";
+export default {
+  components: {
+    "v-footer": Footer
+  },
+  data() {
+    return {
+      title: "收藏",
+      collect: {
+        activeName: "shangpin",
+        collectionClassified: [
+          {
+            label: "商品",
+            name: "shangpin"
+          },
+          {
+            label: "攻略",
+            name: "gonglue"
+          },
+          {
+            label: "讲堂",
+            name: "jiangtang"
+          },
+          {
+            label: "书画",
+            name: "shuhua"
+          },
+          {
+            label: "种草",
+            name: "zhongcao"
+          }
+        ]
+      },
+      goodslist: [],
+      grow_grass: [],
+      strategyList: [],
+      bookList: [],
+      lectureRoom: []
+    };
+  },
+  mounted() {
+    // 商品
+    this.getProduct();
+    // 种草
+    this.getGrowGrass();
+    // 攻略
+    this.getStrategy();
+    // 书画
+    this.getBook();
+    // 讲堂
+    this.getLectureRoom();
+  },
+
+  methods: {
+    getProduct() {
+      var that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        goodslist: [],
-        grow_grass: [],
-        strategyList: [],
-        bookList: [],
-        lectureRoom: []
-      };
+        url: "/Api/User/goods_collect_list"
+      })
+        .then(function(res) {
+          that.goodslist = res.data.data;
+        })
+        .catch({});
     },
-    mounted() {
-      // 商品
-      this.getProduct();
-      // 种草
-      this.getGrowGrass();
-      // 攻略
-      this.getStrategy();
-      // 书画
-      this.getBook();
-      // 讲堂
-      this.getLectureRoom();
+    // 种草
+    getGrowGrass() {
+      var that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/article_collect_front_list"
+      })
+        .then(function(res) {
+          that.grow_grass = res.data.data;
+        })
+        .catch({});
     },
-
-    methods: {
-      getProduct() {
-        var that = this;
-        axios({
-            methods: "get",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            url: "/Api/User/goods_collect_list"
-          })
-          .then(function (res) {
-            that.goodslist = res.data.data;
-          })
-          .catch({});
-      },
-      // 种草
-      getGrowGrass() {
-        var that = this;
-        axios({
-            methods: "get",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            url: "/Api/User/article_collect_front_list"
-          })
-          .then(function (res) {
-            that.grow_grass = res.data.data;
-          })
-          .catch({});
-      },
-      // 攻略
-      getStrategy: function () {
-        var that = this;
-        axios({
-            methods: "get",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            url: "/Api/User/article_collect_back_list"
-          })
-          .then(function (res) {
-            that.strategyList = res.data.data;
-          })
-          .catch({});
-      },
-      // 书画
-      getBook() {
-        var that = this;
-        axios({
-            methods: "get",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            url: "/Api/User/paint_collect_list"
-          })
-          .then(function (res) {
-            that.bookList = res.data.data;
-          })
-          .catch({});
-      },
-      // 讲堂
-      getLectureRoom() {
-        var that = this;
-        axios({
-            methods: "get",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            url: "/Api/User/classroom_collect_list"
-          })
-          .then(function (res) {
-            that.lectureRoom = res.data.data;
-          })
-          .catch({});
-      },
-      handleClick(tab, event) {}
-    }
-  };
-
+    // 攻略
+    getStrategy: function() {
+      var that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/article_collect_back_list"
+      })
+        .then(function(res) {
+          that.strategyList = res.data.data;
+        })
+        .catch({});
+    },
+    // 书画
+    getBook() {
+      var that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/paint_collect_list"
+      })
+        .then(function(res) {
+          that.bookList = res.data.data;
+        })
+        .catch({});
+    },
+    // 讲堂
+    getLectureRoom() {
+      var that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/User/classroom_collect_list"
+      })
+        .then(function(res) {
+          that.lectureRoom = res.data.data;
+        })
+        .catch({});
+    },
+    handleClick(tab, event) {}
+  }
+};
 </script>
 
 <style lang="less">
-  @import "../assets/header.less";
-  @import "../assets/index/style.less";
-  @import "../assets/search/search.less";
+@import "../assets/header.less";
+@import "../assets/index/style.less";
+@import "../assets/search/search.less";
+
+.collectInfoProductDrawing {
+  position: relative;
+
+  .ptAttribute {
+    font-size: 11px;
+    width: 25px;
+    transform: rotate(-90deg);
+    position: absolute;
+    left: 4px;
+    top: -8px;
+    color: #fff;
+  }
+
+  .ptbg {
+    width: 0;
+    height: 0;
+    border-width: 25px;
+    border-style: solid;
+    border-color: transparent #ee4040 transparent transparent;
+    transform: rotate(45deg);
+    /*顺时针旋转90°*/
+    position: absolute;
+    left: -24.5px;
+    top: -25px;
+  }
+}
+
+.el-main {
+  padding: 0;
+}
+
+.collectInfo {
+  .el-tabs__item.is-active {
+    color: #ffc000;
+  }
+
+  .el-tabs__active-bar {
+    display: none;
+  }
+
+  .el-tabs__nav-wrap::after {
+    display: none;
+  }
+
+  .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
+    padding: 0 20px;
+  }
+
+  padding-bottom: 48px;
 
   .collectInfoProductDrawing {
-    position: relative;
-
-    .ptAttribute {
-      font-size: 11px;
-      width: 25px;
-      transform: rotate(-90deg);
-      position: absolute;
-      left: 4px;
-      top: -8px;
-      color: #fff;
-    }
-
-    .ptbg {
-      width: 0;
-      height: 0;
-      border-width: 25px;
-      border-style: solid;
-      border-color: transparent #ee4040 transparent transparent;
-      transform: rotate(45deg);
-      /*顺时针旋转90°*/
-      position: absolute;
-      left: -24.5px;
-      top: -25px;
-    }
-  }
-
-  .el-main {
-    padding: 0;
-  }
-
-  .collectInfo {
-    .el-tabs__active-bar {
-      display: none;
-    }
-
-    .el-tabs__nav-wrap::after {
-      display: none;
-    }
-
-    .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
-      padding: 0 20px;
-    }
-
-    padding-bottom: 48px;
-
-    .collectInfoProductDrawing {
-      img {
-        width: 100%;
-      }
-    }
-
-    .uUrlImg {
-      img {
-        width: 48px;
-        height: 48px;
-        border-radius: 4px;
-      }
-    }
-
-    .uTime {
-      .fz(font-size, 24);
-    }
-
-    .annotation {
-      .fz(font-size, 28);
-      line-height: 1.4;
-    }
-
-    .listImg {
-      img {
-        width: 100%;
-      }
-    }
-
-    .videoUrl {
+    img {
       width: 100%;
     }
+  }
 
-    .contentSize {
-      .fz(font-size, 24);
+  .uUrlImg {
+    img {
+      width: 48px;
+      height: 48px;
+      border-radius: 4px;
     }
   }
 
+  .uTime {
+    .fz(font-size, 24);
+  }
+
+  .annotation {
+    .fz(font-size, 28);
+    line-height: 1.4;
+  }
+
+  .listImg {
+    img {
+      width: 100%;
+    }
+  }
+
+  .videoUrl {
+    width: 100%;
+  }
+
+  .contentSize {
+    .fz(font-size, 24);
+  }
+}
 </style>
