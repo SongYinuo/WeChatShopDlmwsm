@@ -14,9 +14,9 @@
         </el-row> 
          <el-row>
         <el-col :span="24">
-          <el-col>
+          <!-- <el-col>
             <div class="tabMore" @click="dialogShow = true">更多</div>
-          </el-col> 
+          </el-col>  -->
           <el-tabs v-model="activeName" @tab-click="handleClick"> 
             <el-tab-pane :label="tabs.name" :name="tabs.name" name="first">
                <el-row v-for="(o, index) in tabs.sub_menu">
@@ -49,15 +49,6 @@
         </el-col> 
       </el-row>
        <el-dialog title="分类" :visible.sync="dialogShow" width="70%" top="0">
-        <!-- <el-row>
-          <el-col :span="22" :offset="1" class="pd2 text-alignLeft brB1"
-            v-for="(l, index) in texts.tmenu">
-            <router-link :to="{ name: 'tab栏目分类',query: { id: l.id,title:l.name }}">
-              <el-col :span="18">{{l.mobile_name}}</el-col>
-              <el-col :span="6" class="text-alignRight"><i class="el-icon-arrow-right"></i></el-col>
-            </router-link>
-          </el-col>
-        </el-row> -->
       </el-dialog> 
     </el-main>
     </el-container>

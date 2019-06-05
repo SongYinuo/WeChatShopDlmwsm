@@ -8,11 +8,11 @@
     </el-header>
     <el-main class="hotShop">
       <el-row>
-        <el-col :span="8" v-for="k in datas.hotShopListArray" class="hotShopRow pdTRBL2">
-          <router-link :to="{ name: '详情页', params: { id: k.id } }">
-            <img :src="k.imgurl">
-            <div class="pd2 overHidden">{{k.title}}</div>
-            <div class="pd1 colorRed">¥{{k.price}}</div>
+        <el-col :span="8" v-for="(k,index) in datas" class="hotShopRow pdTRBL2">
+          <router-link :to="{ name: '详情页',query: { id: k.goods_id,title:k.goods_name } }">
+            <img :src="k.original_img">
+            <div class="pd2 overHidden">{{k.goods_name}}</div>
+            <div class="pd1 colorRed">¥{{k.shop_price}}</div>
           </router-link>
         </el-col>
       </el-row>
@@ -25,27 +25,35 @@ import axios from "axios";
 export default {
   data() {
     return {
-      datas: {
-        hotShopListArray: [
-          {
-            id: "hotShop10001",
-            imgurl: "static/testImg/product-details01-3.jpg",
-            title: "【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            price: 540
-          }
-        ]
-      }
+      datas: [
+        // hotShopListArray: [
+        //   // {
+        //   //   id: "hotShop10001",
+        //   //   imgurl: "static/testImg/product-details01-3.jpg",
+        //   //   title: "【来自农家院】产的优质绿色大米 10kg 两代包邮",
+        //   //   price: 540
+        //   // }
+        // ]
+     ],
+    
     };
   },
+  mounted(){
+      this.getImg();
+  },
   methods:{
-     getData:function(){
-        var that = this
-        axios.get('/Api/Goods/goods_list?id=' + cart_id).then(function(res){
-          console.log(res)
-          that.list_goods_img = res.data.data.cat_data.image,
-          that.goods_list = res.data.data.goods_list
-        })
-      }
+     getImg(){
+       var newId = this.$route.query.id;
+       const that = this;
+       axios
+       .get("/Api/Goods/goods_list" + "?id=" + newId)
+       .then(function(res){
+         console.log(res.data.data.goods_list);
+         that.datas=res.data.data.goods_list;
+       }).catch(function(error){
+
+       })
+     }
   }
 };
 </script>
