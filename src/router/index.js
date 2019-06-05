@@ -534,7 +534,7 @@ export default new Router({
       title: '发布分享'
     }
   }, {
-    path: '/menuReleaseTipsTwoDetails',
+    path: '/menuReleaseTipsTwoDetails/:id',
     name: '发布心得',
     component: MenuReleaseTipsTwoDetails,
     meta: {

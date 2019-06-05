@@ -64,6 +64,7 @@ export default {
         url: "/Api/User/paint_list"
       })
         .then(function(res) {
+          console.log(res)
           that.Paintings = res.data.data;
         })
         .catch(function(error) {});
