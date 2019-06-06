@@ -29,20 +29,20 @@
             <el-form-item prop="textarea">
               <el-input type="textarea" placeholder="说点什么吧" v-model="ruleForm.textarea" show-word-limit></el-input>
             </el-form-item>
-            <el-col :span="24" class="video">
-             <div class="videotxt pdB3">视频</div> 
-             <el-form-item label="视频" label-width="60px">
-              <el-switch v-model="photo" @change="test()"></el-switch>
-            </el-form-item>
-             <el-upload class="pdB3" :action="InitializationAddVideoUrl" list-type="picture-card"
-	              :on-preview="handlePictureCardPreview" :on-remove="handleRemove" ref="ruleForm.photo"
-	              v-if="this.ruleForm.photo">
-	              <i class="el-icon-plus"></i>
-            </el-upload>
-            <el-dialog :visible.sync="dialogVisible">
-              <img width="100%" :src="dialogImageUrl" alt="">
-            </el-dialog>
-            </el-col>
+            <!-- <el-col :span="24" class="video">
+              <div class="videotxt pdB3">视频</div> 
+              <el-form-item label="视频" label-width="60px">
+                <el-switch v-model="photo" @change="test()"></el-switch>
+              </el-form-item>
+              <el-upload class="pdB3" action="http://192.168.1.5/api/user/test" list-type="picture-card"
+                  :on-preview="handlePictureCardPreview" :on-remove="handleRemove" ref="ruleForm.photo"
+                  v-if="this.ruleForm.photo">
+                  <i class="el-icon-plus"></i>
+              </el-upload>
+              <el-dialog :visible.sync="dialogVisible">
+                <img width="100%" :src="dialogImageUrl" alt="">
+              </el-dialog>
+            </el-col> -->
           </el-form>
         </el-col>
         <el-col :span="22" :offset="1" class="pdT16">
@@ -55,149 +55,143 @@
   </el-container>
 </template>
 <script>
-  import axios from "axios";
-  export default {
-    data() {
-      return {
-        editor: {
-          model: "article"
-        },
-        editorVideo: {
-          model: "prove"
-        },
-        InitializationAddImgUrl: "/Api/Api/img_upload",
-        InitializationAddVideoUrl: "",
-        qniuyyu: "/Api/Api/video_upload",
-        dialogVisible: false,
-        dialogImageUrl: "",
-        dialogVisible: false,
-        delivery: false,
-        photo: false,
+import axios from "axios";
+export default {
+  data() {
+    return {
+      editor: {
+        model: "article"
+      },
+      editorVideo: {
+        model: "prove"
+      },
+      InitializationAddImgUrl: "/Api/Api/img_upload",
+      // InitializationAddVideoUrl: "/Api/Api/video_upload",
+      qniuyyu: "http://upload-z1.qiniup.com",
+      dialogImageUrl: "",
+      dialogVisible: false,
+      dialogImageUrl: "",
+      dialogVisible: false,
+      delivery: false,
+      photo: false,
+      text: "",
+      textarea: "",
+      file: "",
+      ruleForm: {
         text: "",
         textarea: "",
         file: "",
-        productImgs: [],
-        ruleForm: {
-          text: "",
-          textarea: "",
-          file: "",
-          IUrl: "",
-          fileList: [],
-        },
-        rules: {
-          text: [
-            {
-              required: true,
-              message: "请填要输入的标题信息",
-              trigger: "blur"
-            },
-            {
-              min: 1,
-              max: 30,
-              message: "长度在 1 到 30 个字符",
-              trigger: "blur"
-            }
-          ],
-          textarea: [
-            {
-              required: true,
-              message: "请填要输入的文字信息",
-              trigger: "blur"
-            }
-          ]
-        },
-        cart_id:'',
-        basic:'',
-      };
+        IUrl: ""
+      },
+      rules: {
+        text: [
+          {
+            required: true,
+            message: "请填要输入的标题信息",
+            trigger: "blur"
+          },
+          {
+            min: 1,
+            max: 30,
+            message: "长度在 1 到 30 个字符",
+            trigger: "blur"
+          }
+        ],
+        textarea: [
+          {
+            required: true,
+            message: "请填要输入的文字信息",
+            trigger: "blur"
+          }
+        ]
+      },
+      cart_id: "",
+      basic: ""
+    };
+  },
+  mounted() {
+    console.log("接受参数");
+    console.log("123456")
+    console.log(this.$route.query.cart_id);
+    this.cart_id = this.$route.query.cart_id;
+
+  },
+  methods: {
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
     },
-    mounted(){
-      // console.log("接受参数")
-      // console.log(this.$route.query.cart_id)
-     this.cart_id = this.$route.query.cart_id
+    handleRemoveVideo(file, fileList) {
+      console.log(file, fileList);
     },
-    methods: {
-    
-      handleRemove(file, fileList) {
-        // console.log(file, fileList);
-      },
-      handleRemoveVideo(file, fileList) {
-        // console.log(file, fileList);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
-      handlePictureCardPreviewVideo(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
-      beforeAvatarUpload(file) {
-        //请求前
-        // console.log(file);
-        const isJPG =
-          file.type === "image/jpg" ||
-          file.type === "image/jpeg" ||
-          file.type === "image/gif" ||
-          file.type === "image/bmp" ||
-          file.type === "image/png";
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isJPG) {
-          this.$message.error("仅支持jpg，png，bmp，gif格式的图片！");
-        }
-        if (!isLt2M) {
-          this.$message.error("上传图片大小不能超过 2MB!");
-        }
-        return isJPG && isLt2M;
-      },
-      beforeAvatarUploadVideo(file) {
-        //请求前
-        // console.log(file);
-        const isVideo =
-          file.type === "image/video" ||
-          file.type === "image/mp4"
-        const isLt20M = file.size / 1024 / 1024 < 20;
-        if (!isVideo) {
-          this.$message.error("仅支持video，mp4视频！");
-        }
-        if (!isLt20M) {
-          this.$message.error("上传视频大小不能超过 20MB!");
-        }
-        return isVideo && isLt20M;
-      },
-      onProgress(event, file, fileList) {
-        //请求中
-      },
-      onProgressVideo(event, file, fileList) {
-        //请求中
-      },
-      handleAvatarSuccess(res, file) {
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    handlePictureCardPreviewVideo(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    beforeAvatarUpload(file) {
+      //请求前
+      console.log(file);
+      const isJPG =
+        file.type === "image/jpg" ||
+        file.type === "image/jpeg" ||
+        file.type === "image/gif" ||
+        file.type === "image/bmp" ||
+        file.type === "image/png";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isJPG) {
+        this.$message.error("仅支持jpg，png，bmp，gif格式的图片！");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
+    beforeAvatarUploadVideo(file) {
+      //请求前
+      console.log(file);
+      const isVideo = file.type === "image/video" || file.type === "image/mp4";
+      const isLt20M = file.size / 1024 / 1024 < 20;
+      if (!isVideo) {
+        this.$message.error("仅支持video，mp4视频！");
+      }
+      if (!isLt20M) {
+        this.$message.error("上传视频大小不能超过 20MB!");
+      }
+      return isVideo && isLt20M;
+    },
+    onProgress(event, file, fileList) {
+      //请求中
+    },
+    onProgressVideo(event, file, fileList) {
+      //请求中
+    },
+    handleAvatarSuccess(res, file,fileList) {
+      console.log(fileList.length)
+      var that = this
+       that.basic = "";
+       var imgImg = "";
+       for(var i=0;i<fileList.length;i++){
+        imgImg += fileList[i].response.data
+        var str =imgImg.substring(0, imgImg.lastIndexOf(','));
+        that.basic = str
+      }
+      console.log("图片")
+      console.log(that.basic)
+    },
+    handleAvatarSuccessVideo(res, file) {
       //请求完成
+      console.log("请求完成")
+      console.log(res, file);
       this.dialogImageUrl = URL.createObjectURL(file.raw);
-      this.imgUrl = res.data;
-      // this.imgUrl += this.imgUrl;
-      this.imgUrl = this.imgUrl;
-      let basic = this.imgUrl;
-      basic = basic.substring(0, basic.lastIndexOf(","));
-      // console.log("图片")
-      this.basic = basic;
-      // console.log(this.basic)
-      // console.log("1525")
     },
-      // handleAvatarSuccess(res, file) {
-      //   //请求完成
-      //   console.log(res, file);
-      //   this.dialogImageUrl = URL.createObjectURL(file.raw);
-      // },
-      handleAvatarSuccessVideo(res, file) {
-        //请求完成
-        // console.log(res, file);
-        this.dialogImageUrl = URL.createObjectURL(file.raw);
-      },
-      submitForm(formName) {
-        let that = this;
-         if (
+    submitForm(formName) {
+      let that = this;
+      if (
         that.ruleForm.text === "" ||
-        that. ruleForm.textarea === "" ||
+        that.ruleForm.textarea === "" ||
         that.basic === ""
       ) {
         that.$message({
@@ -205,48 +199,69 @@
           type: "warning"
         });
       } else {
-         that.$http
+        if(this.cart_id == 5000){
+          this.classroom()
+        }else{
+           that.$http
           .post("/Api/User/article_img_add", {
             title: that.ruleForm.text,
             content: that.ruleForm.textarea,
-            cat_id:that.cart_id,
-            user_url:that.basic
+            cat_id: that.cart_id,
+            user_url: that.basic
           })
-          .then(function (res) {
-            // console.log(res);
-          })
-          .catch(function (error) {
-            // console.log(error);
-          });
-      }
-        // console.log(this.ruleForm.text);
-        // console.log(this.ruleForm.textarea);
+          .then(function(res) {
 
-      },
-      test: function () {
-        this.ruleForm.photo = !this.ruleForm.photo
+            console.log(res);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+        }
       }
+      console.log(this.ruleForm.text);
+      console.log(this.ruleForm.textarea);
+    },
+    test: function() {
+      this.ruleForm.photo = !this.ruleForm.photo;
+    },
+    // 请求课堂的接口
+    classroom:function(){
+      var that = this
+       that.$http
+          .post("/Api/User/classroom_add", {
+            title: that.ruleForm.text,
+            content: that.ruleForm.textarea,
+            img_url: that.basic,
+            video_url:'51485jsdf',
+          })
+          .then(function(res) {
+             console.log(res);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
     }
-  };
+  }
+};
 </script>
 <style lang="less">
-  @import "../../../assets/index/indexSwiper.less";
-  @import "../../../assets/header.less";
-  @import "../../../assets/index/style.less";
-  @import "../../../assets/menu/details.less";
-  @import "../../../assets/fz.less";
+@import "../../../assets/index/indexSwiper.less";
+@import "../../../assets/header.less";
+@import "../../../assets/index/style.less";
+@import "../../../assets/menu/details.less";
+@import "../../../assets/fz.less";
 
-  .el-upload-list__item-actions {
-    display: none;
-  }
+.el-upload-list__item-actions {
+  display: none;
+}
 
-  .el-upload-list--picture-card .el-upload-list__item {
-    width: 30.6%;
-  }
+.el-upload-list--picture-card .el-upload-list__item {
+  width: 30.6%;
+}
 
-  .Release .el-input__inner,
-  .Release .el-textarea__inner {
-    font-size: 14px;
-    color: #333333;
-  }
+.Release .el-input__inner,
+.Release .el-textarea__inner {
+  font-size: 14px;
+  color: #333333;
+}
 </style>

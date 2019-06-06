@@ -105,7 +105,7 @@ export default {
         // 图片的地址
         imgUrl: {},
         // 后赋值的图片地址
-        basic: {}
+        basic: '',
       },
       rules: {
         name: [
@@ -202,18 +202,31 @@ export default {
       // console.log(event, file, fileList)
       //请求中
     },
-    handleAvatarSuccess(res, file) {
-      //请求完成
-      this.dialogImageUrl = URL.createObjectURL(file.raw);
-      this.imgUrl = res.data;
-      // this.imgUrl += this.imgUrl;
-      this.imgUrl = this.imgUrl;
-      let basic = this.imgUrl;
-      basic = basic.substring(0, basic.lastIndexOf(","));
-      // console.log("图片")
-      this.basic = basic;
-      // console.log(this.basic)
-      // console.log("1525")
+    // handleAvatarSuccess(res, file) {
+    //   //请求完成
+    //   this.dialogImageUrl = URL.createObjectURL(file.raw);
+    //   this.imgUrl = res.data;
+    //   // this.imgUrl += this.imgUrl;
+    //   this.imgUrl = this.imgUrl;
+    //   let basic = this.imgUrl;
+    //   basic = basic.substring(0, basic.lastIndexOf(","));
+    //   console.log("图片")
+    //   this.basic = basic;
+    //   console.log(this.basic)
+    //   console.log("1525")
+    // },
+     handleAvatarSuccess(res, file,fileList) {
+      console.log(fileList.length)
+      var that = this
+       that.basic = "";
+       var imgImg = "";
+       for(var i=0;i<fileList.length;i++){
+        imgImg += fileList[i].response.data
+        var str =imgImg.substring(0, imgImg.lastIndexOf(','));
+        that.basic = str
+      }
+      console.log("图片")
+      console.log(that.basic)
     },
     submitForm(formName) {
       // console.log(that.uploadAction);
