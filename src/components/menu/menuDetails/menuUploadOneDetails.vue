@@ -4,13 +4,13 @@
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      上传
+      {{title}}
     </el-header>
     <el-row class="upload uploadUp">
       <el-col :span="22" :offset="1">
         <el-upload list-type="picture-card" :action="uploadAction" :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload" :on-progress="onProgress" name="upfile"
-          :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :data="editor" accept="image/*" :limit="9"
+          :on-preview="handlePictureCardPreview" :on-remove="handleRemove" accept="image/*" :limit="9" :data="editor"
           class="bgRelease">
           <i class="el-icon-plus">添加图片</i>
         </el-upload>
@@ -20,12 +20,12 @@
       </el-col>
       <el-col :span="22" :offset="1">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
-          <el-form-item prop="name" label=" " label-width="10px">
+          <el-form-item prop="name" required label=" " label-width="10px">
             <el-input type="text" placeholder="作品名" v-model="ruleForm.name" maxlength="50" minlength="1"
               show-word-limit>
             </el-input>
           </el-form-item>
-          <el-form-item prop="nameAuthor" label=" " label-width="10px">
+          <el-form-item prop="nameAuthor" required label=" " label-width="10px">
             <el-input type="text" placeholder="作者名" v-model="ruleForm.nameAuthor" maxlength="20" minlength="1"
               show-word-limit>
             </el-input>
@@ -81,12 +81,17 @@
 <script>
 import axios from "axios";
 export default {
+  inject: ["reload"],
   data() {
     return {
-      uploadAction: "/Api/Api/img_upload",
       editor: {
-        model: "article"
+        model: "paint"
       },
+      title: "上传",
+      uploadAction: "/Api/Api/img_upload",
+      // editor: {
+      //   model: "article"
+      // },
       dialogImageUrl: "",
       dialogVisible: false,
       ruleForm: {
@@ -100,7 +105,7 @@ export default {
         // 图片的地址
         imgUrl: {},
         // 后赋值的图片地址
-        basic: {}
+        basic: '',
       },
       rules: {
         name: [
@@ -197,18 +202,31 @@ export default {
       // console.log(event, file, fileList)
       //请求中
     },
-    handleAvatarSuccess(res, file) {
-      //请求完成
-      this.dialogImageUrl = URL.createObjectURL(file.raw);
-      this.imgUrl = res.data;
-      // this.imgUrl += this.imgUrl;
-      this.imgUrl = this.imgUrl;
-      let basic = this.imgUrl;
-      basic = basic.substring(0, basic.lastIndexOf(","));
+    // handleAvatarSuccess(res, file) {
+    //   //请求完成
+    //   this.dialogImageUrl = URL.createObjectURL(file.raw);
+    //   this.imgUrl = res.data;
+    //   // this.imgUrl += this.imgUrl;
+    //   this.imgUrl = this.imgUrl;
+    //   let basic = this.imgUrl;
+    //   basic = basic.substring(0, basic.lastIndexOf(","));
+    //   console.log("图片")
+    //   this.basic = basic;
+    //   console.log(this.basic)
+    //   console.log("1525")
+    // },
+     handleAvatarSuccess(res, file,fileList) {
+      console.log(fileList.length)
+      var that = this
+       that.basic = "";
+       var imgImg = "";
+       for(var i=0;i<fileList.length;i++){
+        imgImg += fileList[i].response.data
+        var str =imgImg.substring(0, imgImg.lastIndexOf(','));
+        that.basic = str
+      }
       console.log("图片")
-      this.basic = basic;
-      console.log(this.basic)
-      console.log("1525")
+      console.log(that.basic)
     },
     submitForm(formName) {
       // console.log(that.uploadAction);
@@ -223,12 +241,12 @@ export default {
         that.basic === ""
       ) {
         that.$message({
-          message: "请输入当前要上传作品所需要的文字",
+          message: "请输入当前要上传作品所需要的信息",
           type: "warning"
         });
       } else {
         that.$http
-          .post("/Api/User/paint_add", {
+          .post("/Api/User/paint_add?", {
             title: that.ruleForm.name,
             img_author: that.ruleForm.nameAuthor,
             img_width: that.ruleForm.date1,
@@ -240,6 +258,7 @@ export default {
           })
           .then(res => {})
           .catch(error => {});
+        this.reload();
       }
     }
   }

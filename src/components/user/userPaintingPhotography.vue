@@ -64,10 +64,12 @@ export default {
         url: "/Api/User/paint_list"
       })
         .then(function(res) {
-          console.log(res)
+          // console.log(res)
           that.Paintings = res.data.data;
+          // console.log(that.Paintings)
         })
         .catch(function(error) {});
+
     },
     getNum() {
       const that = this;

@@ -1,6 +1,6 @@
 <template lang="html">
   <el-container>
-    <el-header class="tittle" v-model="title" v-for="i in name">
+    <el-header class="tittle" v-model="i.title" v-for="i in name">
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>

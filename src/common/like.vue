@@ -17,15 +17,19 @@ export default {
   },
   methods: {
     change: function() {
+      var newId = this.$route.query.id;
       let that = this;
       this.admire == false ? (this.admire = true) : (this.admire = false);
       localStorage.setItem("admire", this.admire); //储存状态到本地，关闭页面重新打开会显示点赞状态
       console.log("收藏");
       this.$http
-        .post("/Api/User/collect", {
-          model: "article",
-          id: that.article_ids
-        })
+        .post("/Api/User/collect" ,{
+
+              model:"classroom",
+              id:newId,
+        }
+       
+        )
         .then(res => {
           console.log(res);
           console.log(that.article_id)

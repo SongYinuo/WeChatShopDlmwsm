@@ -1,39 +1,30 @@
+
 <template lang="html">
   <el-container>
-      <el-header class="tittle" v-model="title" v-for="i in name">
+    <el-header class="tittle" v-model="i.title" v-for="i in name">
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      <!-- 编辑详情 -->
       {{i.title}}
     </el-header>
-    <el-upload
-      list-type="picture-card"
-      :action="uploadAction"
-      :on-success="handleAvatarSuccess"
-      :before-upload="beforeAvatarUpload"
-      :on-progress="onProgress"
-      name="upfile"
-      :on-preview="handlePictureCardPreview"
-      :on-remove="handleRemove"
-      :data="editor"
-      accept="image/*"
-      :limit="9" >
-      <i class="el-icon-plus"></i>
+    <el-upload list-type="picture-card" :action="uploadAction" :on-success="handleAvatarSuccess"
+      :before-upload="beforeAvatarUpload" :on-progress="onProgress" name="upfile" :on-preview="handlePictureCardPreview"
+      :on-remove="handleRemove" :data="editor" accept="image/*" :limit="9">
       <div v-for="banner in photoUrl.img_show_url">
-      <img :src="banner">
+        <img :src="banner">
       </div>
-     
+      <!-- <i class="el-icon-plus"></i> -->
       <el-col :span="24" class="of">
-            <video :src="photoUrl.video_show_url"  autoplay="autoplay" class="menu-video"></video>
-          </el-col>
-     
+        <video :src="photoUrl.video_show_url" autoplay="autoplay" class="menu-video"></video>
+      </el-col>
+
     </el-upload>
     <el-dialog :visible.sync="dialogVisible">
       <img width="100%" :src="dialogImageUrl">
     </el-dialog>
   </el-container>
 </template>
+
 <script>
 import axios from "axios";
 export default {
@@ -42,10 +33,10 @@ export default {
       title: "讲堂编辑详情",
       uploadAction: "/Api/Api/img_upload",
       dialogImageUrl: "",
-      photoUrl:[],
-      name:[
+      photoUrl: [],
+      name: [
         {
-          title:"讲堂编辑详情"
+          title: "讲堂编辑详情"
         }
       ],
       dialogVisible: false,
@@ -54,9 +45,8 @@ export default {
       }
     };
   },
- mounted() {
+  mounted() {
     this.getData();
-
   },
   methods: {
     handleRemove(file, fileList) {
@@ -66,15 +56,15 @@ export default {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
-    getData(){
+    getData() {
       var newId = this.$route.query.id;
       const that = this;
       axios
-      .get("/Api/User/classroom_detail" + "?id=" + newId)
-      .then(function(res){
-        console.log(res.data.data);
-        that.photoUrl = res.data.data;
-      })
+        .get("/Api/User/classroom_detail" + "?id=" + newId)
+        .then(function(res) {
+          // console.log(res.data.data);
+          that.photoUrl = res.data.data;
+        });
     },
     beforeAvatarUpload(file) {
       //请求前
@@ -102,10 +92,7 @@ export default {
       // console.log(res, file);
       this.dialogImageUrl = URL.createObjectURL(file.raw);
     }
-
-
-  },
- 
+  }
 };
 </script>
 <style lang="less">
@@ -114,8 +101,9 @@ export default {
 @import "../../../assets/index/style.less";
 @import "../../../assets/menu/details.less";
 @import "../../../assets/fz.less";
- .of {
-    overflow: hidden;
-    margin-top: 20px;
-  }
+
+.of {
+  overflow: hidden;
+  margin-top: 20px;
+}
 </style>

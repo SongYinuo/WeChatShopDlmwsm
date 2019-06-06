@@ -1,106 +1,170 @@
 <template lang="html">
-    <!-- <mt-header title="积分商城">
-    </mt-header> -->
-    <el-container>
-        <el-header class="tittle">
-          <div class="back" @click="$router.go(-1)">
-            <i class="el-icon-arrow-left"></i>
-          </div>
-        积分商城
-        </el-header>
-        <el-main class="hotShop">
-            <el-row>
-                <el-col :span="22" :offset="1" v-for="k in datas.hotShopListArray" class="hotShopRow pd2">
-                    <router-link :to="{ name: '详情页', params: { id: k.id } }">
-                      <el-col :span="7">
-                        <img :src="k.imgurl">
-                      </el-col>
-                      <el-col :span="16" :offset="1">
-                        <div class="pd2 overHidden">{{k.title}}</div>
-                        <div class="colorRed integralConversion">{{k.integralConversion}}</div>
-                        <div class="colorRed pd1">¥{{k.price}}</div>
-                      </el-col>
-                    </router-link>
-                </el-col>
-            </el-row>
-        </el-main>
-    </el-container>
+  <section>
+      <div class="indexIntegralShop mgTB2">
+        <div class="indexSwiperHeader">
+          <el-row>
+            <el-col :span="22" :offset="1">
+              <el-col :span="16">
+                <div class="headerTitle pdB2 pdT2">积分商城</div>
+              </el-col>
+              <el-col :span="8">
+                <div class="indexSwiperHeaderMore">
+                   <router-link :to="{ name: '积分商城页' }">
+                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
+                   </router-link>
+                </div>
+              </el-col>
+            </el-col>
+          </el-row>
+        </div>
+
+       <div class="indexSwiperRow">
+        <el-row>
+          <el-col :span="22" :offset="1" class="brB1">
+            <div class="swiper-container integralShopSwiper " id="integralShopSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="swiper in swiperList" :key="swiper.id">
+                       <router-link :to="{ name: '详情页', params: { id: swiper.id }}">
+                        <img :src="swiper.imgUrl" class="swiperListImg">
+                      </router-link>
+                      <el-row class="integralShopSwiperRow pd2">
+                          <el-col :span="24"> 
+                              <span class="integralShopSwiper-title pd1">{{swiper.title}}</span>
+                          </el-col>
+                          <el-col :span="24"> 
+                              <span class="integralShopSwiper-annotation colorRed pd1 lh1-2">{{swiper.textAnnotation}}</span>
+                          </el-col>
+                          <el-col :span="24"> 
+                              <span class="integralShopSwiper-price colorRed pd1 lh1-2">¥{{swiper.price}}</span>
+                          </el-col>
+                      </el-row>
+                    </div>
+                </div>
+             </div>
+          </el-col>
+       </el-row>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
+import { Lazyload } from "mint-ui";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
-  data() {
-    return {
-      datas: {
-        hotShopListArray: [
-          {
-            id: "integralShop10001",
-            imgurl: "static/testImg/product-details01-3.jpg",
-            title: "【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            integralConversion: "300积分可抵31元",
-            price: 540
-          },
-          {
-            id: "integralShop10002",
-            imgurl: "static/testImg/product-details01-3.jpg",
-            title: "1【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            integralConversion: "301积分可抵32元",
-            price: 140
-          },
-          {
-            id: "integralShop10003",
-            imgurl: "static/testImg/product-details01-3.jpg",
-            title: "2【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            integralConversion: "302积分可抵33元",
-            price: 240
-          },
-          {
-            id: "integralShop10004",
-            imgurl: "static/testImg/product-details01.jpg",
-            title: "3【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            integralConversion: "303积分可抵34元",
-            price: 340
-          },
-          {
-            id: "integralShop10005",
-            imgurl: "static/testImg/product-details01.jpg",
-            title: "4【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            integralConversion: "304积分可抵35元",
-            price: 440
-          },
-          {
-            id: "integralShop10006",
-            imgurl: "static/testImg/product-details01.jpg",
-            title: "5【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            integralConversion: "305积分可抵36元",
-            price: 640
-          },
-          {
-            id: "integralShop10007",
-            imgurl: "static/testImg/product-details01.jpg",
-            title: "6【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            integralConversion: "306积分可抵37元",
-            price: 740
-          },
-          {
-            id: "integralShop10008",
-            imgurl: "static/testImg/product-details01.jpg",
-            title: "7【来自农家院】产的优质绿色大米 10kg 两代包邮",
-            integralConversion: "307积分可抵38元",
-            price: 840
-          }
-        ]
+  props: {
+    banner: {
+      type: String,
+      default: ""
+    },
+    list: {
+      type: Array,
+      default: function() {
+        return [];
       }
-    };
+    }
   }
 };
 </script>
 
 <style lang="less" scoped>
+@import "../../assets/fz.less";
 @import "../../assets/index/style.less";
-@import "../../assets/header.less";
-@import "../../assets/hotShop/hotShop.less";
-.el-main {
-  padding: 0;
-}
+@import "../../assets/index/indexSwiper.less";
 </style>
+<script>
+export default {
+  name: "",
+  data() {
+    return {
+      swiperList: [
+        {
+          id: 'IntegralA100001',
+          title: "1神龟",
+          imgUrl: "static/testImg/productImg.png",
+          textAnnotation: "1300积分送30",
+          price: "414"
+        },
+        {
+          id: 'IntegralA100002',
+          title: "2神龟",
+          imgUrl: "static/testImg/productImg.png",
+          textAnnotation: "21300积分送30",
+          price: "415"
+        },
+        {
+          id: 'IntegralA100003',
+          title: "3神龟",
+          imgUrl: "static/testImg/productImg.png",
+          textAnnotation: "31300积分送30",
+          price: "416"
+        },
+        {
+          id: 'IntegralA100004',
+          title: "4神龟",
+          imgUrl: "static/testImg/productImg.png",
+          textAnnotation: "41300积分送30",
+          price: "417"
+        },
+        {
+          id: 'IntegralA100005',
+          title: "5神龟",
+          imgUrl: "static/testImg/productImg.png",
+          textAnnotation: "51300积分送30",
+          price: "418"
+        },
+        {
+          id: 'IntegralA100006',
+          title: "6神龟",
+          imgUrl: "static/testImg/productImg.png",
+          textAnnotation: "61300积分送30",
+          price: "419"
+        },
+        {
+          id: 'IntegralA100007',
+          title: "7神龟",
+          imgUrl: "static/testImg/productImg.png",
+          textAnnotation: "71300积分送30",
+          price: "420"
+        },
+        {
+          id: 'IntegralA100008',
+          title: "8神龟",
+          imgUrl: "static/testImg/productImg.png",
+          textAnnotation: "81300积分送30",
+          price: "414"
+        },
+        {
+          id: 'IntegralA100009',
+          title: "9神龟",
+          imgUrl: "static/testImg/productImg.png",
+          textAnnotation: "91300积分送30",
+          price: "414"
+        },
+        {
+          id: 'IntegralA1000010',
+          title: "10神龟",
+          imgUrl: "static/testImg/productImg.png",
+          textAnnotation: "11300积分送30",
+          price: "414"
+        }
+      ]
+    };
+  },
+  mounted() {
+    this._initSwiper();
+  },
+  methods: {
+    _initSwiper() {
+      this.swiper = new Swiper(".indexIntegralShop #integralShopSwiper", {
+        spaceBetween: 16,
+        slidesPerView : 3.04,
+        pagination: ".swiper-pagination",
+        paginationClickable: true,
+        loop: true,
+        autoplay: 5000
+      });
+    }
+  }
+};
+</script>
