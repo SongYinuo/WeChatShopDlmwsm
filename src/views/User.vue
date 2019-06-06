@@ -7,10 +7,10 @@
                       <el-col :span="4">
                         <span class="userHeadPortraitImg">
                           <img :src="userInfo.headPortraitUrl" v-if="userInfo.login===true">
-                          <img src="../../static/testImg/defaultAvatar.png" v-if="userInfo.login===false">
+                          <img src="/static/testImg/defaultAvatar.png" v-if="userInfo.login===false">
                             <span class="userAuthenticationImg">
                               <router-link :to="{ name: 'Vip' }">
-                                <img src="../../static/testImg/userVip.png" v-if="userList.is_vip===1">
+                                <img src="/static/testImg/userVip.png" v-if="userInfo.login===true">
                               </router-link>
                             </span>
                         </span>
@@ -127,27 +127,27 @@ export default {
       userInfo: {
         login: true,
         headPortraitUrl: "static/testImg/travel.png",
-        name: "行骗艺术家",
+        name: "你好",
         vip: true,
         linkMenu: [
           {
             title: "心得",
-            num: 122,
+            num: 10,
             routerLink: "userExperienceExchange"
           },
           {
             title: "用户讲堂",
-            num: 123,
+            num: 10,
             routerLink: "userLectureRoom"
           },
           {
             title: "书画摄影",
-            num: 162,
+            num: 10,
             routerLink: "userPaintingPhotography"
           },
           {
             title: "古董鉴定",
-            num: 172,
+            num: 10,
             routerLink: "userAntiqueAppraisal"
           }
         ],
@@ -190,8 +190,7 @@ export default {
         },
         url: "/Api/Api/index"
       }).then(function(res){
-        console.log("这是什么")
-        console.log(res)
+        // console.log(res)
         that.userList = res.data.data.user
       })
     }
@@ -216,8 +215,6 @@ export default {
     .fz(font-size, 24);
   }
   .userOrderForm {
-    .orderFormTitle {
-    }
     .orderFormMore {
       .fz(font-size, 28);
     }

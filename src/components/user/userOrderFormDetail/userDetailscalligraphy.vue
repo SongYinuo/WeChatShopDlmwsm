@@ -40,14 +40,14 @@
         <span slot="footer" class="dialog-footer">
           <el-row>
             <el-col :span="22" :offset="1">
-              <el-col :span="4" :offset="2">
+              <!-- <el-col :span="4" :offset="2">
                 <router-link :to="{name:'书画编辑详情',query: { id: books.id,title:books.title }}">
                   <div type="primary" @click="dialogVisible = false" class="icon">
                     <i class="el-icon-edit"></i>
                   </div>
                 </router-link>
                 <div class="del">编辑</div>
-              </el-col>
+              </el-col> -->
               <el-col :span="4" :offset="2">
                 <div type="danger" @click="submitForm()" class="icon">
                   <i class="el-icon-delete"></i>

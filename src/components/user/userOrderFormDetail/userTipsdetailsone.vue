@@ -29,14 +29,14 @@
         <span slot="footer" class="dialog-footer">
           <el-row>
             <el-col :span="22" :offset="1">
-              <el-col :span="4" :offset="2">
+              <!-- <el-col :span="4" :offset="2">
                 <router-link :to="{name:'编辑详情',query: { id: swiperList.article_id,title:swiperList.title }}">
                   <div type="primary" @click="dialogVisible = false" class="icon">
                     <i class="el-icon-edit"></i>
                   </div>
                 </router-link>
                 <div class="del">编辑</div>
-              </el-col>
+              </el-col> -->
               <el-col :span="4" :offset="2">
                 <div type="danger" @click="submitForm()" class="icon">
                   <i class="el-icon-delete"></i>
@@ -127,7 +127,7 @@
             // console.log("1111")
             // console.log(res);
             that.article_ids = res.data.data.is_collect;
-            console.log(that.article_ids)
+            // console.log(that.article_ids)
             that.items = res.data.data;
           })
           .catch(function (error) {
@@ -140,7 +140,7 @@
         axios
           .get("/Api/User/article_detail" + "?article_id=" + newId)
           .then(function (res) {
-            console.log(res.data);
+            // console.log(res.data);
             that.swiperList = res.data.data;
           })
           .catch(function (error) {

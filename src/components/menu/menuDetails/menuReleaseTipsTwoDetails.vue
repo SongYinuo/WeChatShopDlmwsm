@@ -9,11 +9,11 @@
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
       <el-row class="Release">
         <el-col :span="22" :offset="1">
-          <el-form-item prop="file" class="upload-img-form" ref="uploadElement">
-            <el-upload :action=InitializationAddImgUrl list-type="picture-card" :on-success="handleAvatarSuccess"
+          <el-form-item prop="file" class="upload-img-form" ref="ruleForm">
+            <el-upload :action="InitializationAddImgUrl" list-type="picture-card" :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload" :on-progress="onProgress" name="upfile"
               :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :data="editor" accept="image/*"
-              :limit="9">
+              :limit="9" v-model="ruleForm.IUrl">
               <el-button slot="trigger">
                 <i class="el-icon-plus">添加图片</i>
               </el-button>
@@ -34,7 +34,7 @@
              <el-form-item label="视频" label-width="60px">
               <el-switch v-model="photo" @change="test()"></el-switch>
             </el-form-item>
-             <el-upload class="pdB3" action="http://192.168.1.5/api/user/test" list-type="picture-card"
+             <el-upload class="pdB3" :action="InitializationAddVideoUrl" list-type="picture-card"
 	              :on-preview="handlePictureCardPreview" :on-remove="handleRemove" ref="ruleForm.photo"
 	              v-if="this.ruleForm.photo">
 	              <i class="el-icon-plus"></i>
@@ -59,7 +59,6 @@
   export default {
     data() {
       return {
-        
         editor: {
           model: "article"
         },
@@ -67,9 +66,8 @@
           model: "prove"
         },
         InitializationAddImgUrl: "/Api/Api/img_upload",
-        // InitializationAddVideoUrl: "/Api/Api/video_upload",
-        qniuyyu: "http://upload-z1.qiniup.com",
-        dialogImageUrl: "",
+        InitializationAddVideoUrl: "",
+        qniuyyu: "/Api/Api/video_upload",
         dialogVisible: false,
         dialogImageUrl: "",
         dialogVisible: false,
@@ -78,11 +76,13 @@
         text: "",
         textarea: "",
         file: "",
+        productImgs: [],
         ruleForm: {
           text: "",
           textarea: "",
           file: "",
-          IUrl: ""
+          IUrl: "",
+          fileList: [],
         },
         rules: {
           text: [
@@ -111,17 +111,17 @@
       };
     },
     mounted(){
-      console.log("接受参数")
-      console.log(this.$route.query.cart_id)
+      // console.log("接受参数")
+      // console.log(this.$route.query.cart_id)
      this.cart_id = this.$route.query.cart_id
     },
     methods: {
     
       handleRemove(file, fileList) {
-        console.log(file, fileList);
+        // console.log(file, fileList);
       },
       handleRemoveVideo(file, fileList) {
-        console.log(file, fileList);
+        // console.log(file, fileList);
       },
       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.url;
@@ -133,7 +133,7 @@
       },
       beforeAvatarUpload(file) {
         //请求前
-        console.log(file);
+        // console.log(file);
         const isJPG =
           file.type === "image/jpg" ||
           file.type === "image/jpeg" ||
@@ -151,7 +151,7 @@
       },
       beforeAvatarUploadVideo(file) {
         //请求前
-        console.log(file);
+        // console.log(file);
         const isVideo =
           file.type === "image/video" ||
           file.type === "image/mp4"
@@ -178,10 +178,10 @@
       this.imgUrl = this.imgUrl;
       let basic = this.imgUrl;
       basic = basic.substring(0, basic.lastIndexOf(","));
-      console.log("图片")
+      // console.log("图片")
       this.basic = basic;
-      console.log(this.basic)
-      console.log("1525")
+      // console.log(this.basic)
+      // console.log("1525")
     },
       // handleAvatarSuccess(res, file) {
       //   //请求完成
@@ -190,7 +190,7 @@
       // },
       handleAvatarSuccessVideo(res, file) {
         //请求完成
-        console.log(res, file);
+        // console.log(res, file);
         this.dialogImageUrl = URL.createObjectURL(file.raw);
       },
       submitForm(formName) {
@@ -213,14 +213,14 @@
             user_url:that.basic
           })
           .then(function (res) {
-            console.log(res);
+            // console.log(res);
           })
           .catch(function (error) {
-            console.log(error);
+            // console.log(error);
           });
       }
-        console.log(this.ruleForm.text);
-        console.log(this.ruleForm.textarea);
+        // console.log(this.ruleForm.text);
+        // console.log(this.ruleForm.textarea);
 
       },
       test: function () {
