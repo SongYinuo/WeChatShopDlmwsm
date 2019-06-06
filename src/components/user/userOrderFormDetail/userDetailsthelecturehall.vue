@@ -1,6 +1,4 @@
 <template lang="html">
-
-
   <el-container>
     <el-header class="tittle" v-model="title" v-for="i in name">
       <!-- v-if="this.ruleForm.text!==''&&this.ruleForm.textarea!=='' -->
@@ -20,10 +18,6 @@
       <el-carousel-item  v-for="banner in swiperList.img_show_url"  v-if="swiperList.img_show_url.length===1" > 
         <img :src="banner" >
       </el-carousel-item>
-      <!-- <el-col :span="24" class="of">
-            <video :src="swiperList.video_url"  autoplay="autoplay" class="menu-video"
-              v-if="swiperList.user_type===2"></video>
-          </el-col> -->
     </el-carousel>
   </div>
       <el-button icon="el-icon-more" circle type="text" @click="dialogVisible = true"></el-button>
@@ -59,10 +53,6 @@
                 <span class="fl detxt">{{items.confirm_time_text}}</span>
               </div>
             </el-col>
-            <div class="MenuLike">
-              <!-- article_idd -->
-              <v-like :article_id='article_ids'></v-like>
-            </div>
             <el-row>
               <el-col :span="22">
                 <div class="deParagraph pdT6">{{items.title}}</div>
@@ -79,12 +69,8 @@
   </el-container>
 </template>
 <script>
-  import Like from "@/common/like.vue";
   import axios from "axios";
   export default {
-     components: {
-      "v-like": Like
-    },
     data() {
       return {
         title: "我的讲堂详情",
@@ -100,43 +86,22 @@
         article_ids:'',
       };
     },
-    // beforeCreate(){
-    //    this.getData();
-    // },
     mounted() {
-      // this._initSwiper();
       this.getData();
       this.getImg();
-      // this.getGoodsInfoData();
     },
     methods: {
       handleClose(done) { },
-      // _initSwiper() {
-      //   this.swiper = new Swiper(".swiper-container", {
-      //     type: "fraction",
-      //     loop: true,
-      //     autoplay: 3000,
-      //     pagination: ".swiper-pagination",
-      //     paginationType: "fraction"
-      //   });
-      // },
-     
       getData() {
         var newId = this.$route.query.id;
         const that = this;
         axios
           .get("/Api/User/classroom_detail" + "?id=" + newId)
           .then(function (res) {
-            //   console.log(newId)
-            // console.log("1111")
-            // console.log(res);
             that.article_ids = res.data.data.is_collect;
-            // console.log(that.article_ids)
-            // console.log(res.data.data);
             that.items = res.data.data;
           })
           .catch(function (error) {
-            // console.log(error)
           });
       },
       getImg() {
@@ -149,7 +114,6 @@
             that.swiperList = res.data.data;
           })
           .catch(function (error) {
-            // console.log(error)
           });
       },
       moveErrorImg: function (event) {
@@ -162,8 +126,6 @@
             id:newId,
           })
           this.$router.go(-1);
-
-
       }
     }
   };
