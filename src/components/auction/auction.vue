@@ -217,8 +217,7 @@ export default {
   .el-tabs__header {
     margin-bottom: 4px;
   }
-  .el-tabs__active-bar {
-  }
+  
   .el-tabs__item {
     width: 25%;
   }
