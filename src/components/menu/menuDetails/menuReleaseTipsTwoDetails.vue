@@ -9,11 +9,11 @@
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
       <el-row class="Release">
         <el-col :span="22" :offset="1">
-          <el-form-item prop="file" class="upload-img-form" ref="uploadElement">
-            <el-upload :action=InitializationAddImgUrl list-type="picture-card" :on-success="handleAvatarSuccess"
+          <el-form-item prop="file" class="upload-img-form" ref="ruleForm">
+            <el-upload :action="InitializationAddImgUrl" list-type="picture-card" :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload" :on-progress="onProgress" name="upfile"
               :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :data="editor" accept="image/*"
-              :limit="9">
+              :limit="9" v-model="ruleForm.IUrl">
               <el-button slot="trigger">
                 <i class="el-icon-plus">添加图片</i>
               </el-button>
