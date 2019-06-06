@@ -7,10 +7,10 @@
       {{title}}
     </el-header>
     <el-main class="collectInfo">
-      <el-row>
-        <el-col :span="22" :offset="1">
-          <el-tabs v-model="collect.activeName">
-            <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
+        <el-row>
+            <el-col :span="22" :offset="1"  >
+              <el-tabs v-model="collect.activeName" @tab-click="handleClick">
+                  <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='商品'">
               <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in goodslist">
                 <el-col :span="6" class="collectInfoProductDrawing">
@@ -23,87 +23,15 @@
                   <div class="pd2 colorRed">￥{{o.shop_price}}</div>
                 </el-col>
               </el-col>
-            </el-tab-pane>
-            <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
-              v-if="k.label==='种草'">
-              <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in grow_grass">
-                <el-col :span="4" class="uUrlImg">
-                  <img :src="o.author_head_pic">
-                </el-col>
-                <router-link :to="{ name: '种草详情',query: { id: o.article_id } }" v-if="o.user_type==1">
-                  <el-col :span="19" :offset="1">
-                    <div class="mgT2 colorGray colorYellow">{{o.author}}</div>
-                    <div class="pd1 colorGray uTime">{{o.confirm_time_text}}</div>
-                    <div class="pd2">{{o.title}}</div>
-                    <div class="pd2 overHidden contentSize">{{o.content}}</div>
-                  </el-col>
-                </router-link>
-                <el-col class="annotation">{{o.annotation}}</el-col>
-                <el-col :span="7" :offset="1" class="listImg pd1" v-if="o.user_type==1" v-for="i in o.user_url">
-                  <img :src="i">
-                </el-col>
-                <el-col v-if="o.user_type==2">
-                  <router-link :to="{ name: '种草详情视频',query: { id: o.article_id } }" v-if="o.author_head_pic!==''">
-                    <el-col :span="19" :offset="1">
-                      <div class="mgT2 colorGray colorYellow">{{o.author}}</div>
-                      <div class="pd1 colorGray uTime">{{o.confirm_time_text}}</div>
-                      <div class="pd2">{{o.title}}</div>
-                      <div class="pd2 overHidden contentSize">{{o.content}}</div>
-                      <video :src="o.user_url" controls="controls" class="videoUrl"></video>
-                    </el-col>
-                  </router-link>
-                </el-col>
-              </el-col>
-            </el-tab-pane>
-            <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
-              v-if="k.label==='攻略'">
-              <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in strategyList">
-                <el-col :span="12">
-                  <div class="mgT10">{{o.title}}</div>
-                  <div class="pd2">{{o.content}}</div>
-                  <div class="mgT10">{{o.confirm_time_text}}</div>
-                </el-col>
-                <el-col :span="11" :offset="1" class="collectInfoProductDrawing">
-                  <router-link :to="{ name: '种草详情',query: { id: o.article_id, title: k.title } }">
-                    <img :src="o.author_head_pic">
-                  </router-link>
-                </el-col>
-              </el-col>
-            </el-tab-pane>
-            <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
-              v-if="k.label==='讲堂'">
-              <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in lectureRoom">
-                <el-col :span="12">
-                  <div class="mgT10">{{o.title}}</div>
-                  <div class="mgT10">{{o.confirm_time_text}}</div>
-                </el-col>
-                <el-col :span="11" :offset="1" class="collectInfoProductDrawing">
-                  <router-link :to="{ name: '讲堂详情',query: { id: o.id, title: k.title } }">
-                    <img :src="o.thumb">
-                  </router-link>
-                </el-col>
-              </el-col>
-            </el-tab-pane>
-            <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
-              v-if="k.label==='书画'">
-              <el-col :span="24" class="collectInfoProductDrawing" v-for="o in bookList">
-                <div class="ptbg" v-if="o.is_hot===1">
-                  <span class="ptAttribute">热门</span>
-                </div>
-                <div class="ptbg" v-if="o.is_hot===-1" style="display:none">
-                  <span class="ptAttribute">热门</span>
-                </div>
-                <router-link :to="{ name: '书画详情',query: { id: o.id, title: k.title } }">
-                  <img :src="o.thumb">
-                </router-link>
-                <el-col class="mgT4 overHidden">{{o.title}}</el-col>
-                <el-col class="pd2 overHidden">{{o.img_author}} - {{o.img_material}}</el-col>
-              </el-col>
-            </el-tab-pane>
-          </el-tabs>
-        </el-col>
+                </el-tab-pane>
+                <el-tab-pane label="攻略" name="gonglue">攻略</el-tab-pane>
+                <el-tab-pane label="讲堂" name="jiangtang">讲堂</el-tab-pane>
+                <el-tab-pane label="书画" name="book">书画</el-tab-pane>
+                <el-tab-pane label="种草" name="zhongcao">种草</el-tab-pane>
+              </el-tabs>
+          </el-col>
       </el-row>
-    </el-main>
+      </el-main>
     <v-footer />
   </div>
 </template>
@@ -164,6 +92,9 @@ export default {
   },
 
   methods: {
+    handleClick(tab, event) {
+      console.log(tab, event);
+    },
     getProduct() {
       var that = this;
       axios({
@@ -247,7 +178,6 @@ export default {
 @import "../assets/header.less";
 @import "../assets/index/style.less";
 @import "../assets/search/search.less";
-
 .collectInfoProductDrawing {
   position: relative;
 
@@ -334,5 +264,13 @@ export default {
   .contentSize {
     .fz(font-size, 24);
   }
+}.el-tabs__nav-wrap::after{
+  display: none;
+}.el-tabs__item.is-active{
+  color: #DAB62E;
+  border-color: #DAB62E;
+}.el-tabs__active-bar{
+  background-color: #DAB62E;
+  border-color: #DAB62E;
 }
 </style>

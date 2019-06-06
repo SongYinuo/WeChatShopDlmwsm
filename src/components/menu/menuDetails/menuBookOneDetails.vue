@@ -12,13 +12,10 @@
         <div class="likePo">
           <img :src="books.thumb" class="bookimg">
           <div class="Like">
-           <!-- <v-like :article_id='article_ids'></v-like> -->
            <div id="admire">
-             <img v-if="!admire"  src="static/testImg/Focus2.png" class="likeimage" @click="change()" >
-            <img src="static/testImg/Focus1.png" class="likeimage" v-else  @click="change()" >
-            
-            
-          </div>
+                  <img  v-if="books.is_collect===0" src="static/testImg/Focus1.png" class="likeimage"  @click="change()" >
+                  <img src="static/testImg/Focus2.png" class="likeimage" v-else @click="change()" >
+              </div>
           </div>
         </div>
         <div class="bookTittle pdT6">{{books.title}}</div>
@@ -39,135 +36,90 @@
             <el-col :span="18" :offset="1">
               <span class="bookPhotoTxt">{{books.author}}</span>
             </el-col>
-
           </el-col>
         </el-row>
       </el-col>
     </el-row>
-
   </el-container>
 </template>
 <script>
- import axios from "axios";
-  // import Like from "@/common/like.vue";
-   var local_admire = localStorage.getItem("admire"); //获取存储在本地的点赞状态
-  export default {
-    props: ["article_id"],
-    inject: ['reload'],
-  //   data: function() {
-  //   return {
-     
-  //   };
-  // },
-    
-    data() {
-      return {
-        title:"书画详情",
-         article_ids:'',
-          admire: local_admire,
-          article_ids: this.article_id,
-        name:[
-          {
-            title: "书画详情"
-          }
-        ],
-        books: [
-          // {
-          //   imageUrl: "static/testImg/youhua.jpg",
-          //   tittle: "我想要最狂的风和最近的海",
-          //   txt: "哈桑六艺|40X40cm|2019",
-          //   smtxt: "艺术微喷",
-          //   details: "可触及但是又不可触碰的身体",
-          //   photoUrl: "static/testImg/shunPrincess.png",
-          //   photoTxt: "BB..颜无画",
-          //   attribute: "热门"
-          // }
-        ]
-      };
-    },mounted(){
-      this.getImg();
-    },methods:{
-      getImg(){
-        var newId = this.$route.query.id;
-       
-        const that = this;
-        axios
+import axios from "axios";
+export default {
+  props: ["article_id"],
+  inject: ["reload"],
+  data() {
+    return {
+      title: "书画详情",
+      article_ids: "",
+      admire: "",
+      name: [
+        {
+          title: "书画详情"
+        }
+      ],
+      books: [
+      ]
+    };
+  },
+  mounted() {
+    this.getImg();
+  },
+  methods: {
+    getImg() {
+      var newId = this.$route.query.id;
+      const that = this;
+      axios
         .get("/Api/Article/paint_detail" + "?id=" + newId)
-        .then(function(res){
-          // console.log(res)
-         
+         .then(function(res) {
           that.article_ids = res.data.data.is_collect;
-          console.log(res.data.data.is_collect);
-           if (that.article_ids === 1) {
-              local_admire = admire;
-              alert("收藏");
-              console.log(1)
-            } else {
-              local_admire = !admire;
-               alert("取消收藏");
-               console.log(0)
-            }
-          
-          that.books = res.data.data;
+           that.books = res.data.data;
         })
-        .catch(function(error){
-          // console.log(error)
-        });  
-         
-              
-      },change: function() {
+        .catch(function(error) {
+        });
+    },
+     change: function() {
       var newId = this.$route.query.id;
       let that = this;
       this.admire == false ? (this.admire = true) : (this.admire = false);
-      
-      // console.log("收藏");
       this.$http
-        .post("/Api/User/collect" ,{
-
-              model:"paint",
-              id:newId,
-        }
-       
-        ) 
-        .then(res => {
-          console.log(res);
-          console.log(that.article_id)
-          // if (res.data.code == 1) {
-          //   alert('点赞接口成功')
-          // }else if(res.data.code == 0){
-          //   alert('未点赞')
-          // }
-          console.log("文章id");
+        .post("/Api/User/collect", {
+          model: "paint",
+          id: newId,
         })
-
-        .catch(error => {});
-        this.reload()
+        .then(res => {
         
+        }) 
+        .catch(error => {});
+         alert("返回我的收藏，查看收藏内容")
+        this.$router.go(0)
     }
-    }
-  };
+  }
+};
 </script>
 <style lang="less">
-  @import "../../../assets/index/indexSwiper.less";
-  @import "../../../assets/header.less";
-  @import "../../../assets/index/style.less";
-  @import "../../../assets/menu/details.less";
+@import "../../../assets/index/indexSwiper.less";
+@import "../../../assets/header.less";
+@import "../../../assets/index/style.less";
+@import "../../../assets/menu/details.less";
 .book .ptAttribute {
-    font-size: 11px;
-    position: absolute;
-    left: -37px;
-    top: -28px;
-    color: #fff;
-    z-index: 99;
-    width: 50px;
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-180deg);
-}.book .bookPortrait img{
-      border-radius: 50px;
-      margin-bottom: 10px;
-}.book .bookPhotoTxt{
+  font-size: 11px;
+  position: absolute;
+  left: -37px;
+  top: -28px;
+  color: #fff;
+  z-index: 99;
+  width: 50px;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-180deg);
+}
+.book .bookPortrait img {
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+.book .bookPhotoTxt {
   line-height: 40px;
-}.likeimage {
+}
+.likeimage {
   width: 100%;
 }
 </style>

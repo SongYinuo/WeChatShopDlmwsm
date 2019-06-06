@@ -57,10 +57,6 @@
                 <span class="fl detxt">{{items.confirm_time_text}}</span>
               </div>
             </el-col>
-            <div class="MenuLike">
-              <!-- article_idd -->
-              <v-like :article_id='article_ids'></v-like>
-            </div>
             <el-row>
               <el-col :span="22">
                 <div class="deParagraph pdT6">{{items.title}}</div>
@@ -74,12 +70,8 @@
   </el-container>
 </template>
 <script>
-  import Like from "@/common/like.vue";
   import axios from "axios";
   export default {
-     components: {
-      "v-like": Like
-    },
     data() {
       return {
         title: "心得详情",
@@ -95,43 +87,24 @@
         article_ids:'',
       };
     },
-    // beforeCreate(){
-    //    this.getData();
-    // },
     mounted() {
       // this._initSwiper();
       this.getData();
       this.getImg();
-      // this.getGoodsInfoData();
     },
     methods: {
       handleClose(done) { },
-      // _initSwiper() {
-      //   this.swiper = new Swiper(".swiper-container", {
-      //     type: "fraction",
-      //     loop: true,
-      //     autoplay: 3000,
-      //     pagination: ".swiper-pagination",
-      //     paginationType: "fraction"
-      //   });
-      // },
-      // prev() {
-      //   this.$router.go(-1);
-      // },
       getData() {
         var newId = this.$route.query.id;
         const that = this;
         axios
           .get("/Api/User/article_detail" + "?article_id=" + newId)
           .then(function (res) {
-            // console.log("1111")
-            // console.log(res);
             that.article_ids = res.data.data.is_collect;
             console.log(that.article_ids)
             that.items = res.data.data;
           })
           .catch(function (error) {
-            // console.log(error)
           });
       },
       getImg() {
@@ -157,8 +130,6 @@
             article_id:newId,
           })
           this.$router.go(-1);
-
-
       }
     }
   };

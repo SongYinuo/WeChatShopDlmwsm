@@ -32,7 +32,10 @@
               </div>
             </el-col>
             <div class="MenuLike">
-              <v-like :article_id='article_ids'></v-like>
+              <div id="admire">
+                  <img  v-if="items.is_collect===0" src="static/testImg/Focus1.png" class="likeimage"  @click="change()" >
+                  <img src="static/testImg/Focus2.png" class="likeimage" v-else @click="change()" >
+              </div>
             </div>
             <el-row>
               <el-col :span="22">
@@ -47,12 +50,10 @@
   </el-container>
 </template>
 <script>
-import Like from "@/common/like.vue";
 import axios from "axios";
 export default {
-  components: {
-    "v-like": Like
-  },
+   props: ["article_id"],
+  inject: ["reload"],
   data() {
     return {
       dialogVisible: false,
@@ -64,7 +65,8 @@ export default {
         }
       ],
       items: [],
-      article_ids: ""
+      article_ids: "",
+      admire: "",
     };
   },
   mounted() {
@@ -84,7 +86,8 @@ export default {
           that.article_ids = res.data.data.is_collect;
           that.items = res.data.data;
         })
-        .catch(function(error) {});
+        .catch(function(error) {
+        });
     },
     getImg() {
       var newId = this.$route.query.id;
@@ -98,7 +101,24 @@ export default {
     },
     moveErrorImg: function(event) {
       event.currentTarget.src = "static/testImg/defaultAvatar.png";
+    },
+    change: function() {
+      var newId = this.$route.query.id;
+      let that = this;
+      this.admire == false ? (this.admire = true) : (this.admire = false);
+      this.$http
+        .post("/Api/User/collect", {
+          model: "article",
+          id: newId,
+        })
+        .then(res => {
+        
+        }) 
+        .catch(error => {});
+         alert("返回我的收藏，查看收藏内容")
+        this.$router.go(0)
     }
+
   }
 };
 </script>

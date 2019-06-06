@@ -28,8 +28,10 @@
               </div>
             </el-col>
             <div class="MenuLike">
-              <!-- article_idd -->
-              <v-like :article_id='article_ids'></v-like>
+              <div id="admire">
+                  <img  v-if="items.is_collect===0" src="static/testImg/Focus1.png" class="likeimage"  @click="change()" >
+                  <img src="static/testImg/Focus2.png" class="likeimage" v-else @click="change()" >
+              </div>
             </div>
             <el-row>
               <el-col :span="22">
@@ -47,46 +49,35 @@
   </el-container>
 </template>
 <script>
-import Like from "@/common/like.vue";
 import axios from "axios";
 export default {
-  components: {
-    "v-like": Like
-  },
+  props: ["article_id"],
+  inject: ["reload"],
   data() {
     return {
       dialogVisible: false,
       content: "sichaoyun",
       swiperList: [],
-      name: [
+     title: "讲堂详情",
+      items: [],
+      article_ids: "",
+      admire: "",
+      
+       name: [
         {
           title: "讲堂详情"
         }
       ],
-      items: [],
-      article_ids: ""
     };
   },
   mounted() {
-    this.getData();
     this.getImg();
+    this.getData();
   },
   methods: {
     handleClose(done) {},
     prev() {
       this.$router.go(-1);
-    },
-    getData() {
-      var newId = this.$route.query.id;
-      const that = this;
-      axios
-        .get("/Api/Article/classroom_detail" + "?id=" + newId)
-        .then(function(res) {
-          that.article_ids = res.data.data.is_collect;
-          that.items = res.data.data;
-        })
-        .catch(function(error) {
-        });
     },
     getImg() {
       var newId = this.$route.query.id;
@@ -98,9 +89,38 @@ export default {
         })
         .catch(function(error) {
         });
+    }, getData() {
+      var newId = this.$route.query.id;
+      const that = this;
+      axios
+        .get("/Api/Article/classroom_detail" + "?id=" + newId)
+        .then(function(res) {
+          that.article_ids = res.data.data.is_collect;
+          that.items = res.data.data;
+        })
+        .catch(function(error) {
+        });
     },
     moveErrorImg: function(event) {
       event.currentTarget.src = "static/testImg/defaultAvatar.png";
+    }, created: function() {
+     this.getImg();
+    },
+    change: function() {
+      var newId = this.$route.query.id;
+      let that = this;
+      this.admire == false ? (this.admire = true) : (this.admire = false);
+      this.$http
+        .post("/Api/User/collect", {
+          model: "classroom",
+          id: newId,
+        })
+        .then(res => {
+        
+        }) 
+        .catch(error => {});
+         alert("返回我的收藏，查看收藏内容")
+        this.$router.go(0)
     }
   }
 };
