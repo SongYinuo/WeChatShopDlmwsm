@@ -1,170 +1,98 @@
 <template lang="html">
-  <section>
-      <div class="indexIntegralShop mgTB2">
-        <div class="indexSwiperHeader">
-          <el-row>
-            <el-col :span="22" :offset="1">
-              <el-col :span="16">
-                <div class="headerTitle pdB2 pdT2">积分商城</div>
-              </el-col>
-              <el-col :span="8">
-                <div class="indexSwiperHeaderMore">
-                   <router-link :to="{ name: '积分商城页' }">
-                      <a>查看更多<i class="el-icon-arrow-right"></i></a>
-                   </router-link>
-                </div>
-              </el-col>
-            </el-col>
-          </el-row>
-        </div>
-
-       <div class="indexSwiperRow">
-        <el-row>
-          <el-col :span="22" :offset="1" class="brB1">
-            <div class="swiper-container integralShopSwiper " id="integralShopSwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="swiper in swiperList" :key="swiper.id">
-                       <router-link :to="{ name: '详情页', params: { id: swiper.id }}">
-                        <img :src="swiper.imgUrl" class="swiperListImg">
-                      </router-link>
-                      <el-row class="integralShopSwiperRow pd2">
-                          <el-col :span="24"> 
-                              <span class="integralShopSwiper-title pd1">{{swiper.title}}</span>
-                          </el-col>
-                          <el-col :span="24"> 
-                              <span class="integralShopSwiper-annotation colorRed pd1 lh1-2">{{swiper.textAnnotation}}</span>
-                          </el-col>
-                          <el-col :span="24"> 
-                              <span class="integralShopSwiper-price colorRed pd1 lh1-2">¥{{swiper.price}}</span>
-                          </el-col>
-                      </el-row>
-                    </div>
-                </div>
-             </div>
+ <el-container class="integral">
+    <el-row class="title">
+          <el-col :span="22" :offset="1">
+            <div class="title">积分商城
+            <router-link :to="{ name: '更多积分商品' }">
+              <span class="more">查看更多></span>
+            </router-link>
+            </div>
           </el-col>
-       </el-row>
-      </div>
-    </div>
-  </section>
+         <el-col :span="22" class="list" >
+         <el-col :span="7" :offset="1" v-for="swiper in swiperList.goods_list">
+          <router-link :to="{ name: '详情页',query:{id:swiper.goods_id} }">
+            <img :src="swiper.original_img" >
+            <div class="integralTitle overHidden">{{swiper.goods_name}}</div>
+            <p class="integralTextAnnotation">{{swiper.exchange_integral}}</p>
+            <span class="integralPrice">￥{{swiper.shop_price}}</span>
+          </router-link>
+        </el-col>
+      </el-col>
+    </el-row>
+    </el-container>
 </template>
-
 <script>
-import { Lazyload } from "mint-ui";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+import axios from "axios"
 export default {
-  props: {
-    banner: {
-      type: String,
-      default: ""
-    },
-    list: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    }
-  }
-};
-</script>
-
-<style lang="less" scoped>
-@import "../../assets/fz.less";
-@import "../../assets/index/style.less";
-@import "../../assets/index/indexSwiper.less";
-</style>
-<script>
-export default {
-  name: "",
+  // name: "",
   data() {
     return {
       swiperList: [
-        {
-          id: 'IntegralA100001',
-          title: "1神龟",
-          imgUrl: "static/testImg/productImg.png",
-          textAnnotation: "1300积分送30",
-          price: "414"
-        },
-        {
-          id: 'IntegralA100002',
-          title: "2神龟",
-          imgUrl: "static/testImg/productImg.png",
-          textAnnotation: "21300积分送30",
-          price: "415"
-        },
-        {
-          id: 'IntegralA100003',
-          title: "3神龟",
-          imgUrl: "static/testImg/productImg.png",
-          textAnnotation: "31300积分送30",
-          price: "416"
-        },
-        {
-          id: 'IntegralA100004',
-          title: "4神龟",
-          imgUrl: "static/testImg/productImg.png",
-          textAnnotation: "41300积分送30",
-          price: "417"
-        },
-        {
-          id: 'IntegralA100005',
-          title: "5神龟",
-          imgUrl: "static/testImg/productImg.png",
-          textAnnotation: "51300积分送30",
-          price: "418"
-        },
-        {
-          id: 'IntegralA100006',
-          title: "6神龟",
-          imgUrl: "static/testImg/productImg.png",
-          textAnnotation: "61300积分送30",
-          price: "419"
-        },
-        {
-          id: 'IntegralA100007',
-          title: "7神龟",
-          imgUrl: "static/testImg/productImg.png",
-          textAnnotation: "71300积分送30",
-          price: "420"
-        },
-        {
-          id: 'IntegralA100008',
-          title: "8神龟",
-          imgUrl: "static/testImg/productImg.png",
-          textAnnotation: "81300积分送30",
-          price: "414"
-        },
-        {
-          id: 'IntegralA100009',
-          title: "9神龟",
-          imgUrl: "static/testImg/productImg.png",
-          textAnnotation: "91300积分送30",
-          price: "414"
-        },
-        {
-          id: 'IntegralA1000010',
-          title: "10神龟",
-          imgUrl: "static/testImg/productImg.png",
-          textAnnotation: "11300积分送30",
-          price: "414"
-        }
+        
       ]
     };
   },
   mounted() {
-    this._initSwiper();
+    this.getList();
   },
   methods: {
-    _initSwiper() {
-      this.swiper = new Swiper(".indexIntegralShop #integralShopSwiper", {
-        spaceBetween: 16,
-        slidesPerView : 3.04,
-        pagination: ".swiper-pagination",
-        paginationClickable: true,
-        loop: true,
-        autoplay: 5000
-      });
+    getList(){
+     var that= this;
+     axios({
+       method:"get",
+       hesders:{
+          "Content-Type":"application/x-www-form-urlencoded"
+       },
+       url:"/Api/Goods/goods_list?size=3&is_point=1"
+     })
+     .then(function(res){
+          that.swiperList=res.data.data;
+     })
+     .catch({})
+     
     }
+    
   }
 };
 </script>
+<style lang="less">
+@import "../../assets/header.less";
+@import "../../assets/index/style.less";
+@import "../../assets/fz.less";
+@import "../../assets/index/style.less";
+@import "../../assets/index/indexSwiper.less";
+.integral{
+ img{
+   width: 100%;
+   height: 140px;
+   border: #E9E9E9 solid 1px;
+   border-radius: 4px;
+ }.integralTitle{
+   color: #313131;
+   .fz(font-size, 28);
+   font-weight: bold;
+   margin-top: 10px;
+ }.integralTextAnnotation{
+   color: #DA4E44;
+   .fz(font-size, 24);
+ }.integralPrice{
+    color: #DA4E44;
+   .fz(font-size, 20);
+   margin-bottom: 10px;
+ }.title{
+   color: #313131;
+   .fz(font-size, 36);
+   font-weight: bold;
+   padding-bottom: 17px;
+ }.more{
+   color: #313131;
+   .fz(font-size,20px);
+   float: right;
+   font-weight: 100;
+   padding-right: 20px;
+ }.list{
+   border-bottom: #E9E9E9 1px solid;
+ }
+}
+
+</style>

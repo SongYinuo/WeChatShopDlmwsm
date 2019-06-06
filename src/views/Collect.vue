@@ -7,10 +7,10 @@
       {{title}}
     </el-header>
     <el-main class="collectInfo">
-        <el-row>
-            <el-col :span="22" :offset="1"  >
-              <el-tabs v-model="collect.activeName" @tab-click="handleClick">
-                  <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
+      <el-row>
+        <el-col :span="22" :offset="2">
+          <el-tabs v-model="collect.activeName" @tab-click="handleClick">
+            <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='商品'">
               <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in goodslist">
                 <el-col :span="6" class="collectInfoProductDrawing">
@@ -23,15 +23,79 @@
                   <div class="pd2 colorRed">￥{{o.shop_price}}</div>
                 </el-col>
               </el-col>
-                </el-tab-pane>
-                <el-tab-pane label="攻略" name="gonglue">攻略</el-tab-pane>
-                <el-tab-pane label="讲堂" name="jiangtang">讲堂</el-tab-pane>
-                <el-tab-pane label="书画" name="book">书画</el-tab-pane>
-                <el-tab-pane label="种草" name="zhongcao">种草</el-tab-pane>
-              </el-tabs>
-          </el-col>
+            </el-tab-pane>
+              <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
+              v-if="k.label==='攻略'">
+              <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in strategyList">
+                <el-col :span="12">
+                  <div class="strategyTitle">{{o.title}}</div>
+                  <div class="pd2 strategyContent">{{o.content}}</div>
+                  <div class="mgT10 strategyTime">{{o.confirm_time_text}}</div>
+                </el-col>
+                <el-col :span="10" :offset="1" class="collectInfoProductDrawing">
+                  <router-link :to="{ name: '旅游攻略',query: { id: o.article_id, title: o.title } }">
+                    <img :src="o.author_head_pic" class="strategyImg">
+                  </router-link>
+                </el-col>
+              </el-col>
+            </el-tab-pane>
+            <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
+              v-if="k.label==='种草'">
+              <el-col :span="22" :offset="1" v-for="o in grow_grass" class="pdt20">
+                  <router-link :to="{ name: '种草详情',query: { id: o.article_id } }" >
+                          <img :src="o.author_head_pic" class="headerImg" v-on:error.once="moveErrorImg($event)">
+                          <div class="headerText">
+                          <div class="mgT2 colorGray colorYellow userName">{{o.author}}</div>
+                          <div class="pd1 colorGray uTime">{{o.confirm_time_text}}</div>
+                          <div class="pd2 userTitle">{{o.title}}</div>
+                          <div class="pd2 overHidden contentSize">{{o.content}}</div>
+                          </div>
+                          <el-col :span="20" :offset="4">
+                            <el-col :span="8" class="listImg " v-if="o.user_type==1" v-for="i in o.user_url">
+                              <img :src="i">
+                            </el-col>
+                          </el-col>
+                          <el-col :span="20" :offset="4"  v-if="o.user_type==2" >
+                             <video :src="o.user_url" controls="controls" class="videoUrl"></video>
+                          </el-col>
+                  </router-link>
+              </el-col>
+            </el-tab-pane>
+          
+            <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
+              v-if="k.label==='讲堂'">
+              <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in lectureRoom">
+                <el-col :span="12">
+                  <div class=" strategyTitle">{{o.title}}</div>
+                  <div class="mgT10 strategyTime">{{o.confirm_time_text}}</div>
+                </el-col>
+                <el-col :span="10" :offset="1" class="collectInfoProductDrawing">
+                  <router-link :to="{ name: '讲堂详情',query: { id: o.id, title: k.title } }">
+                    <img :src="o.thumb" class="classImg">
+                  </router-link>
+                </el-col>
+              </el-col>
+            </el-tab-pane>
+            <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
+              v-if="k.label==='书画'">
+              <el-col :span="24" class="collectInfoProductDrawing" v-for="o in bookList">
+                <div class="ptbg" v-if="o.is_hot===1">
+                  <span class="ptAttribute">热门</span>
+                </div>
+                <div class="ptbg" v-if="o.is_hot===-1" style="display:none">
+                  <span class="ptAttribute">热门</span>
+                </div>
+                <router-link :to="{ name: '书画详情',query: { id: o.id, title: k.title } }">
+                  <img :src="o.thumb">
+                </router-link>
+                <el-col class="mgT4 overHidden">{{o.title}}</el-col>
+                <el-col class="pd2 overHidden">{{o.img_author}} - {{o.img_material}}</el-col>
+              </el-col>
+            </el-tab-pane>
+          </el-tabs>
+        </el-col>
       </el-row>
-      </el-main>
+    </el-main>
     <v-footer />
   </div>
 </template>
@@ -92,9 +156,6 @@ export default {
   },
 
   methods: {
-    handleClick(tab, event) {
-      console.log(tab, event);
-    },
     getProduct() {
       var that = this;
       axios({
@@ -121,6 +182,7 @@ export default {
       })
         .then(function(res) {
           that.grow_grass = res.data.data;
+         
         })
         .catch({});
     },
@@ -169,7 +231,12 @@ export default {
         })
         .catch({});
     },
-    handleClick(tab, event) {}
+   handleClick(tab, event) {
+        // console.log(tab, event);
+      },
+    moveErrorImg: function (event) {
+        event.currentTarget.src = "static/testImg/defaultAvatar.png";
+      }
   }
 };
 </script>
@@ -178,6 +245,8 @@ export default {
 @import "../assets/header.less";
 @import "../assets/index/style.less";
 @import "../assets/search/search.less";
+
+
 .collectInfoProductDrawing {
   position: relative;
 
@@ -212,28 +281,17 @@ export default {
 .collectInfo {
   .el-tabs__item.is-active {
     color: #ffc000;
+   
   }
-
-  .el-tabs__active-bar {
-    display: none;
-  }
-
   .el-tabs__nav-wrap::after {
     display: none;
   }
-
-  .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
-    padding: 0 20px;
-  }
-
   padding-bottom: 48px;
-
   .collectInfoProductDrawing {
     img {
       width: 100%;
     }
   }
-
   .uUrlImg {
     img {
       width: 48px;
@@ -241,36 +299,71 @@ export default {
       border-radius: 4px;
     }
   }
-
   .uTime {
     .fz(font-size, 24);
   }
-
   .annotation {
     .fz(font-size, 28);
     line-height: 1.4;
   }
-
   .listImg {
+  padding-left: 8px;
     img {
       width: 100%;
     }
   }
-
   .videoUrl {
     width: 100%;
   }
-
   .contentSize {
     .fz(font-size, 24);
-  }
-}.el-tabs__nav-wrap::after{
-  display: none;
-}.el-tabs__item.is-active{
-  color: #DAB62E;
-  border-color: #DAB62E;
+  }.headerImg{
+    float: left;
+    width: 40px;
+    border-radius: 4px;
+}.headerText{
+  margin-left: 50px;
+}.pdt20{
+  padding-top: 20px;
+}.userName{
+  .fz(font-size, 26);
+}.uTime {
+    .fz(font-size, 22);
+}.userTitle{
+   .fz(font-size, 28);
+   color: #313131;
+   font-weight: bold;
+}.contentSize {
+    .fz(font-size, 24);
+}.strategyImg{
+  border-radius: 4px;
+  width: 120px;
+}.strategyTitle{
+  .fz(font-size, 30);
+  font-weight: bold;
+  color: #313131;
+}.strategyContent{
+  .fz(font-size, 24);
+}.strategyTime{
+  .fz(font-size, 24);
+  color: #ADAEAF;
+}.classImg{
+  border-radius: 4px;
+  width: 120px;
 }.el-tabs__active-bar{
-  background-color: #DAB62E;
-  border-color: #DAB62E;
+   color: #ffc000;
+   background-color: #ffc000;
+   width: 30px !important;
+   
+}.el-tabs__nav-wrap:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #e4e7ed;
+    z-index: 1;
+}
 }
 </style>

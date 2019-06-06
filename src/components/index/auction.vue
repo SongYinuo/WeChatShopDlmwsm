@@ -15,7 +15,7 @@
         <el-col :span="24">
             <div>
                 <router-link :to="{ name: '拍卖会页' }">
-                    <img src="../../../static/testImg/banner02.png">
+                    <img :src="auction.thumb">
                 </router-link>
             </div>
         </el-col>
@@ -26,7 +26,7 @@
               </div>
           </el-col>
           <el-col :span="18" :offset="3">
-              <p class="auctionExplain">第二十二季拍卖大会是空前未有的一场大型的拍卖会产品玲琅满目，欢迎大家准时参加。</p>
+              <p class="auctionExplain">{{auction.description}}</p>
           </el-col>
         </el-col>
     </el-row>
@@ -36,7 +36,31 @@
 
 <script>
 import { Lazyload } from "mint-ui";
-export default {};
+import axios from "axios"
+export default {
+data(){
+  return{
+    auction:[]
+  }
+},mounted(){
+  this.getlist();
+},methods:{
+    getlist(){
+      var that = this;
+      axios({
+        methods:"get",
+        headers:{
+          "Content-Type":"application/x-www-form-urlencoded"
+        },
+        url:"/Api/Index/auction"
+      })
+      .then(function(res){
+        that.auction = res.data.data;
+        console.log(res.data.data);
+      })
+    }
+}
+};
 </script>
 
 <style lang="less" scoped>
