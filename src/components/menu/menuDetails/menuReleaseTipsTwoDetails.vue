@@ -105,8 +105,15 @@
               trigger: "blur"
             }
           ]
-        }
+        },
+        cart_id:'',
+        basic:'',
       };
+    },
+    mounted(){
+      // console.log("接受参数")
+      // console.log(this.$route.query.cart_id)
+     this.cart_id = this.$route.query.cart_id
     },
     methods: {
     
@@ -164,51 +171,56 @@
         //请求中
       },
       handleAvatarSuccess(res, file) {
-        //请求完成
-        // console.log(res, file);
-        this.dialogImageUrl = URL.createObjectURL(file.raw);
-      },
+      //请求完成
+      this.dialogImageUrl = URL.createObjectURL(file.raw);
+      this.imgUrl = res.data;
+      // this.imgUrl += this.imgUrl;
+      this.imgUrl = this.imgUrl;
+      let basic = this.imgUrl;
+      basic = basic.substring(0, basic.lastIndexOf(","));
+      // console.log("图片")
+      this.basic = basic;
+      // console.log(this.basic)
+      // console.log("1525")
+    },
+      // handleAvatarSuccess(res, file) {
+      //   //请求完成
+      //   console.log(res, file);
+      //   this.dialogImageUrl = URL.createObjectURL(file.raw);
+      // },
       handleAvatarSuccessVideo(res, file) {
         //请求完成
         // console.log(res, file);
         this.dialogImageUrl = URL.createObjectURL(file.raw);
       },
       submitForm(formName) {
-        // axios({
-        //   method: "post",
-        //   headers: {
-        //     "Content-Type": "application/x-www-form-urlencoded"
-        //   },
-        //   url: "/Api/User/article_img_add",
-        //   formData: {
-        //     cat_id: 1004,
-        //     title: this.ruleForm.text,
-        //     content: this.ruleForm.textarea,
-        //     user_url: this.ruleForm.IUrl
-        //   }
-        // })
         let that = this;
-        that.$http
-          .post("/Api/User/article_img_add?", {
+         if (
+        that.ruleForm.text === "" ||
+        that. ruleForm.textarea === "" ||
+        that.basic === ""
+      ) {
+        that.$message({
+          message: "请输入当前要上传作品所需要的文字",
+          type: "warning"
+        });
+      } else {
+         that.$http
+          .post("/Api/User/article_img_add", {
             title: that.ruleForm.text,
             content: that.ruleForm.textarea,
-            cat_id: 1001,
-            user_url:  that.ruleForm.IUrl
+            cat_id:that.cart_id,
+            user_url:that.basic
           })
           .then(function (res) {
             // console.log(res);
-            // if (this.ruleForm.text === "" || this.ruleForm.textarea === "") {
-            //   alert("请填要输入的信息");
-            // } else {
-            //   alert("提交完成");
-            // }
           })
           .catch(function (error) {
             // console.log(error);
           });
+      }
         // console.log(this.ruleForm.text);
         // console.log(this.ruleForm.textarea);
-        // console.log(this.ruleForm.IUrl);
 
       },
       test: function () {

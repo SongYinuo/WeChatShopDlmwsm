@@ -17,7 +17,7 @@
         <el-col :span="24" class="placeholder"></el-col>
       </el-row>
       <el-row>
-        <router-link :to="{name:'发布心得'}">
+        <router-link :to="{name:'发布心得', query : {cart_id:cart_id}}">
           <el-col class="decil text-alignCenter" :span="4" :offset="6"><i class="el-icon-picture-outline deIcon"></i>
           </el-col>
         </router-link>
@@ -49,8 +49,13 @@
     },
     data() {
       return {
-
+        cart_id:'',
       }
+    },
+    mounted(){
+      console.log("接受参数")
+      console.log(this.$route.query.cart_id)
+      this.cart_id = this.$route.query.cart_id
     },
     methods: {
       prev() {

@@ -12,7 +12,13 @@
         <div class="likePo">
           <img :src="books.thumb" class="bookimg">
           <div class="Like">
-           <v-like :article_id='article_ids'></v-like>
+           <!-- <v-like :article_id='article_ids'></v-like> -->
+           <div id="admire">
+             <img v-if="!admire"  src="static/testImg/Focus2.png" class="likeimage" @click="change()" >
+            <img src="static/testImg/Focus1.png" class="likeimage" v-else  @click="change()" >
+            
+            
+          </div>
           </div>
         </div>
         <div class="bookTittle pdT6">{{books.title}}</div>
@@ -43,16 +49,23 @@
 </template>
 <script>
  import axios from "axios";
-  import Like from "@/common/like.vue";
- 
+  // import Like from "@/common/like.vue";
+   var local_admire = localStorage.getItem("admire"); //获取存储在本地的点赞状态
   export default {
-    components: {
-      "v-like": Like
-    },
+    props: ["article_id"],
+    inject: ['reload'],
+  //   data: function() {
+  //   return {
+     
+  //   };
+  // },
+    
     data() {
       return {
         title:"书画详情",
          article_ids:'',
+          admire: local_admire,
+          article_ids: this.article_id,
         name:[
           {
             title: "书画详情"
@@ -76,19 +89,61 @@
     },methods:{
       getImg(){
         var newId = this.$route.query.id;
+       
         const that = this;
         axios
         .get("/Api/Article/paint_detail" + "?id=" + newId)
         .then(function(res){
           // console.log(res)
+         
           that.article_ids = res.data.data.is_collect;
+          console.log(res.data.data.is_collect);
+           if (that.article_ids === 1) {
+              local_admire = admire;
+              alert("收藏");
+              console.log(1)
+            } else {
+              local_admire = !admire;
+               alert("取消收藏");
+               console.log(0)
+            }
+          
           that.books = res.data.data;
         })
         .catch(function(error){
           // console.log(error)
-        });   
+        });  
+         
               
-      }
+      },change: function() {
+      var newId = this.$route.query.id;
+      let that = this;
+      this.admire == false ? (this.admire = true) : (this.admire = false);
+      
+      // console.log("收藏");
+      this.$http
+        .post("/Api/User/collect" ,{
+
+              model:"paint",
+              id:newId,
+        }
+       
+        ) 
+        .then(res => {
+          console.log(res);
+          console.log(that.article_id)
+          // if (res.data.code == 1) {
+          //   alert('点赞接口成功')
+          // }else if(res.data.code == 0){
+          //   alert('未点赞')
+          // }
+          console.log("文章id");
+        })
+
+        .catch(error => {});
+        this.reload()
+        
+    }
     }
   };
 </script>
@@ -112,5 +167,7 @@
       margin-bottom: 10px;
 }.book .bookPhotoTxt{
   line-height: 40px;
+}.likeimage {
+  width: 100%;
 }
 </style>
