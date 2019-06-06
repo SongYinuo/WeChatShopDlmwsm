@@ -4,13 +4,14 @@
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      鉴定
+      {{title}}
     </el-header>
-    <el-row class="upload">
-      <el-col :span="22" :offset="1" class="phptos">
-        <el-upload list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove"
-          :action=domain :http-request=upqiniu :show-file-list="false" :before-upload="beforeUpload" :limit="9"
-          accept="image/*" class="bgRelease">
+    <el-row class="upload uploadUp">
+      <el-col :span="22" :offset="1">
+          <el-upload list-type="picture-card" :action="uploadAction" :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload" :on-progress="onProgress" name="upfile"
+          :on-preview="handlePictureCardPreview" :on-remove="handleRemove" accept="image/*" :limit="9" :data="editor"
+          class="bgRelease">
           <i class="el-icon-plus">添加图片</i>
         </el-upload>
         <el-dialog :visible.sync="dialogVisible">
@@ -19,40 +20,38 @@
       </el-col>
       <el-col :span="22" :offset="1">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
-          <el-form-item prop="name" label=" " label-width="10px">
-            <el-input type="text" placeholder="古董名称" v-model="ruleForm.name" maxlength="10" show-word-limit>
+          <el-form-item prop="name" required label=" " label-width="10px">
+            <el-input type="text" placeholder="古董名称" v-model="ruleForm.name" maxlength="50" minlength="1" show-word-limit>
             </el-input>
           </el-form-item>
-          <el-form-item prop="nameAuthor" label=" " label-width="10px">
-            <el-input type="text" placeholder="联系人" v-model="ruleForm.nameAuthor" maxlength="10" show-word-limit>
+          <el-form-item prop="nameAuthor" required label=" " label-width="10px">
+            <el-input type="text" placeholder="联系人" v-model="ruleForm.nameAuthor" maxlength="20" minlength="1" show-word-limit>
             </el-input>
           </el-form-item>
-          <el-form-item label=" " required label-width="10px">
-            <el-col :span="24">
-              <el-form-item prop="year1">
-                <el-input type="text" placeholder="联系方式" v-model="ruleForm.year1" style="width: 100%;"></el-input>
-              </el-form-item>
-            </el-col>
+          <el-form-item prop="phone" required  label=" " label-width="10px">
+              <el-input type="number" placeholder="联系方式" v-model="ruleForm.phone" style="width: 100%;">
+              </el-input>
           </el-form-item>
           <el-form-item prop="messageText" class="messageTexts">
             <el-col :span="24">
-              <el-input type="textarea" placeholder="说点什么吧" v-model="ruleForm.messageText" maxlength="50"
+              <el-input type="textarea" placeholder="说点什么吧" v-model="ruleForm.messageText" :rows="2" minlength="1"
                 show-word-limit>
               </el-input>
             </el-col>
           </el-form-item>
+          <!--
           <el-col :span="24" class="video">
             <div class="videotxt pdB3">视频</div>
-            <el-upload class="pdB3" action="https://jsonplaceholder.typicode.com/posts/" accept="video/*"
-              list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+            <el-upload class="pdB3" :action="uploadVideo" accept="video/*"
+              list-type="picture-card" :on-preview="handleVideoCardPreview" :on-remove="handleVideoRemove" :data="editor" 
+              :on-success="handleAvatarVideoSuccess" :on-progress="onVideoProgress" name="upfile"
+              :limit="limitVideo"> 
               <i class="el-icon-plus"></i>
             </el-upload>
-            <el-dialog :visible.sync="dialogVisible">
-              <img width="100%" :src="dialogImageUrl" alt="">
-            </el-dialog>
           </el-col>
+          -->
           <el-col :span="22" :offset="1">
-            <el-button type="warning" class="releasevideo" @click="submitForm('ruleForm')">发布</el-button>
+            <el-button type="warning" class="release" @click="submitForm('ruleForm')">发布</el-button>
           </el-col>
         </el-form>
       </el-col>
@@ -61,155 +60,226 @@
   </el-container>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        imageUrl: "",
-        // 七牛云的上传地址，根据自己所在地区选择，我这里是华南区
-        domain: "https://upload-z2.qiniup.com",
-        // 这是七牛云空间的外链默认域名
-        qiniuaddr: "p3z6q1uw1.bkt.clouddn.com",
-        dialogImageUrl: "",
-        dialogVisible: false,
-        ruleForm: {
-          name: "",
-          nameAuthor: "",
-          year1: "",
-          region: "",
-          messageText: ""
-        },
-        rules: {
-          name: [
-            {
-              required: true,
-              message: "请输入古董",
-              trigger: "blur"
-            },
-            {
-              min: 2,
-              max: 5,
-              message: "长度在 2 到 5 个字符",
-              trigger: "blur"
-            }
-          ],
-          nameAuthor: [
-            {
-              required: true,
-              message: "请输入联系人名称",
-              trigger: "blur"
-            },
-            {
-              min: 2,
-              max: 5,
-              message: "长度在 2 到 5 个字符",
-              trigger: "blur"
-            }
-          ],
-          year1: [
-            {
-              required: true,
-              message: "请输入联系电话",
-              trigger: "change"
-            }
-          ],
-          region: [
-            {
-              required: true,
-              message: "请选择活动区域",
-              trigger: "change"
-            }
-          ],
-          messageText: [
-            {
-              required: true,
-              message: "说点什么吧",
-              trigger: "blur"
-            }
-          ]
-        }
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
+import axios from "axios";
+export default {
+  inject: ["reload"],
+  data() {
+    return {
+      editor: {
+        model: "prove"
       },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
+      qiniuData: {
+        key: "",
+        token: ""
       },
-      submitForm(formName) {
-        let that = this;
-        that.$http
-          .post("/Api/User/prove_add", {
-            title: that.ruleForm.name,
-            img_author: that.ruleForm.nameAuthor,
-            img_width: that.ruleForm.date1,
-            img_height: that.ruleForm.date2,
-            img_material: that.ruleForm.year1,
-            img_year: that.ruleForm.year1,
-            content: that.ruleForm.messageText,
-            thumb: that.basic
-          })
-          .then(res => {
-            console.log(res)
-          })
-          .catch(error => { });
+      // upload_qiniu_url: "http://upload-z1.qiniup.com",
+      limitVideo: 1,
+      title: "鉴定",
+      uploadAction: "/Api/Api/img_upload",
+      // 七牛云的上传地址，根据自己所在地区选择，我这里是华南区
+      // domain: "https://upload-z2.qiniup.com",
+      // 这是七牛云空间的外链默认域名
+      // qiniuaddr: "p3z6q1uw1.bkt.clouddn.com",
+      dialogImageUrl: "",
+      dialogVisible: false,
+      // dialogVideoUrl: "",
+      // uploadVideo: "/Api/Api/video_upload",
+      ruleForm: {
+        name: "",
+        nameAuthor: "",
+        phone: "",
+        messageText: "",
+        imgUrl: {},
+        basic: {},
+        // basicVideo: {},
+        // videoUrl: {}
       },
-      upqiniu(req) {
-        console.log(req);
-        const config = {
-          headers: {
-            "Content-Type": "multipart/form-data"
+      rules: {
+        name: [
+          {
+            required: true,
+            message: "请输入古董名称",
+            trigger: "blur"
+          },
+          {
+            min: 1,
+            max: 50,
+            message: "长度在 1 到 50 个字符",
+            trigger: "blur"
           }
-        };
-        let filetype = "";
-        if (req.file.type === "image/png") {
-          filetype = "png";
-        } else {
-          filetype = "jpg";
-        }
-        // 重命名要上传的文件
-        const keyname =
-          "lytton" +
-          new Date() +
-          Math.floor(Math.random() * 100) +
-          "." +
-          filetype;
-        // 从后端获取上传凭证token
-        this.axios
-          .post("/Article/article_img_add?", formData, config)
-          .then(res => {
-            console.log(res, res.url);
-            const formdata = new FormData();
-            formdata.append("file", req.file);
-            formdata.append("token", res.data);
-            formdata.append("key", keyname);
-            // 获取到凭证之后再将文件上传到七牛云空间
-            this.axios.post(this.domain, formdata, config).then(res => {
-              this.imageUrl = "http://" + this.qiniuaddr + "/" + res.data.key;
-              console.log(this.imageUrl);
-            });
-          });
-      },
-      // 验证文件合法性
-      beforeUpload(file) {
-        const isJPG = file.type === "image/jpeg" || file.type === "image/png";
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isJPG) {
-          this.$message.error("上传头像图片只能是 JPG 格式!");
-        }
-        if (!isLt2M) {
-          this.$message.error("上传头像图片大小不能超过 2MB!");
-        }
-        return isJPG && isLt2M;
+        ],
+        nameAuthor: [
+          {
+            required: true,
+            message: "请输入联系人名称",
+            trigger: "blur"
+          },
+          {
+            min: 1,
+            max: 20,
+            message: "长度在 1 到 20 个字符",
+            trigger: "blur"
+          }
+        ],
+        phone: [
+          {
+            required: true,
+            message: "请输入联系电话手机号码",
+            trigger: "change"
+          }
+        ],
+        messageText: [
+          {
+            required: true,
+            message: "说点什么吧",
+            trigger: "blur"
+          }
+        ]
+      }
+    };
+  },
+  // created() {
+  //   this.getQiniuToken();
+  // },
+  methods: {
+    handleRemove(file, fileList) {
+      // console.log(file, fileList);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    beforeAvatarUpload(file) {
+      //请求前
+      // console.log(file);
+      const isJPG =
+        file.type === "image/jpg" ||
+        file.type === "image/jpeg" ||
+        file.type === "image/gif" ||
+        file.type === "image/bmp" ||
+        file.type === "image/png";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isJPG) {
+        this.$message.error("仅支持jpg，png，bmp，gif格式的图片！");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
+    onProgress(event, file, fileList) {
+      // console.log(event, file, fileList)
+      //请求中
+    },
+    handleAvatarSuccess(res, file) {
+      //请求完成
+      this.dialogImageUrl = URL.createObjectURL(file.raw);
+      this.imgUrl = res.data;
+      this.imgUrl = this.imgUrl;
+      let basic = this.imgUrl;
+      basic = basic.substring(0, basic.lastIndexOf(","));
+      this.basic = basic;
+    },
+    submitForm(formName) {
+      var that = this;
+      if (
+        that.ruleForm.name === "" ||
+        that.ruleForm.nameAuthor === "" ||
+        that.ruleForm.phone === "" ||
+        that.ruleForm.messageText === "" ||
+        that.basic === ""
+      ) {
+        that.$message({
+          message: "请输入当前要上传作品所需要的信息",
+          type: "warning"
+        });
+      } else {
+        that.$http
+          .post("/Api/User/prove_add?", {
+            title: that.ruleForm.name,
+            contact_name: that.ruleForm.nameAuthor,
+            contact_phone: that.ruleForm.phone,
+            content: that.ruleForm.messageText,
+            img_url: that.basic
+            // video_url: that.basicVideo
+          })
+          .then(res => {})
+          .catch(error => {});
+        this.reload();
       }
     }
-  };
+  }
+};
 </script>
 <style lang="less">
-  @import "../../../assets/index/indexSwiper.less";
-  @import "../../../assets/header.less";
-  @import "../../../assets/index/style.less";
-  @import "../../../assets/menu/details.less";
-  @import "../../../assets/fz.less";
+@import "../../../assets/index/indexSwiper.less";
+@import "../../../assets/header.less";
+@import "../../../assets/index/style.less";
+@import "../../../assets/menu/details.less";
+@import "../../../assets/fz.less";
+
+.uploadUp {
+  padding-bottom: 40px;
+
+  .el-form-item {
+    padding-bottom: 24px;
+  }
+
+  .size .el-input__inner {
+    background-color: transparent;
+  }
+
+  .material .el-input__inner {
+    background-color: transparent;
+  }
+
+  .el-dialog {
+    width: 100%;
+  }
+
+  .bgRelease ul li {
+    width: 31.5%;
+  }
+
+  .bgRelease ul li:nth-child(3n + 3) {
+    margin-right: 0;
+  }
+  .video .el-upload-list--picture-card .el-upload-list__item {
+    width: 100px;
+    height: 100px;
+  }
+  .video
+    .el-upload-list--picture-card
+    .el-upload-list__item-actions
+    .el-upload-list__item-preview {
+    display: none;
+  }
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+.video-avatar {
+  width: 400px;
+  height: 200px;
+}
 </style>

@@ -152,4 +152,7 @@ h6 {
 .ac {
   text-align: center;
 }
+.mint-indicator-wrapper {
+  z-index: 10000;
+}
 </style>

@@ -31,14 +31,14 @@
         <span slot="footer" class="dialog-footer">
           <el-row>
             <el-col :span="22" :offset="1">
-              <el-col :span="4" :offset="2">
+              <!-- <el-col :span="4" :offset="2">
                 <router-link :to="{name:'讲堂编辑详情',query: { id: swiperList.id,title:swiperList.title }}">
                   <div type="primary" @click="dialogVisible = false" class="icon">
                     <i class="el-icon-edit"></i>
                   </div>
                 </router-link>
                 <div class="del">编辑</div>
-              </el-col>
+              </el-col> -->
               <el-col :span="4" :offset="2">
                 <div type="danger" @click="submitForm()" class="icon">
                   <i class="el-icon-delete"></i>
@@ -145,7 +145,7 @@
         axios
           .get("/Api/User/classroom_detail" + "?id=" + newId)
           .then(function (res) {
-            console.log(res.data.data.img_url);
+            // console.log(res.data.data.img_url);
             that.swiperList = res.data.data;
           })
           .catch(function (error) {

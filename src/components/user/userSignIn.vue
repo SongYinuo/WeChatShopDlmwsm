@@ -56,6 +56,7 @@
 <script>
 import Axios from "axios";
 export default {
+  inject: ["reload"],
   data() {
     return {
       title: "签到",
@@ -133,9 +134,11 @@ export default {
         // that.bookList = res.data.data
         if (res.data.code == 1) {
           that.signSuccess = "签到已成功";
+          this.reload();
           // console.log(that.signSuccess);
         } else {
           that.signSuccess = "签到已成功";
+          this.reload();
         }
       });
     }

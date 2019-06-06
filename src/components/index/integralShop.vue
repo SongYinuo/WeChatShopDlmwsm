@@ -156,7 +156,7 @@ export default {
   },
   methods: {
     _initSwiper() {
-      this.swiper = new Swiper("#integralShopSwiper", {
+      this.swiper = new Swiper(".indexIntegralShop #integralShopSwiper", {
         spaceBetween: 16,
         slidesPerView : 3.04,
         pagination: ".swiper-pagination",
