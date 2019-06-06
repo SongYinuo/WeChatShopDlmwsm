@@ -4,7 +4,7 @@
           <div class="back" @click="$router.go(-1)">
             <i class="el-icon-arrow-left"></i>
           </div>
-          收货地址
+          {{title}}
         </el-header>
         <el-main class="addRow">
           <el-row>
@@ -26,7 +26,7 @@
                     </el-col>
                   </el-col>
                   <el-col class="pdT3 pdB1">
-                    <el-col :span="8"  >
+                    <el-col :span="8" class="siteIcon">
                       <i class="el-icon-refresh-right"></i>
                       <i class="el-icon-refresh-left"></i>
                       <div >
@@ -35,16 +35,15 @@
                           <el-radio v-model="radio" :label="6" v-if="item.is_default=== 0" ><div style="color:#fff">地址</div></el-radio>
                         </span> -->
                           <el-radio-group v-model="radio" @change="default_click(index)" >
-                            <el-radio :label="item.address_id" v-if="item.is_default=== 1" >
+                            <el-radio :label="item.address_id" :index="item.is_default" v-if="item.is_default=== 1" v-bind:class="item.is_default=== 1?'red':''">
                               默认地址
                             </el-radio>
-                            <el-radio :label="item.address_id" v-if="item.is_default=== 0" >默认地址</el-radio>
+                            <el-radio :label="item.address_id" :index="item.is_default" v-if="item.is_default=== 0" >默认地址</el-radio>
                              
                           </el-radio-group>
                       </div>
                     </el-col>
-                    
-                    <el-col :span="2" :offset="13">
+                    <el-col :span="2" :offset="13" class="delteIcon">
                       <i class="el-icon-delete" @click="deleteInfo"></i>
                     </el-col>
                   </el-col>
@@ -67,7 +66,7 @@ export default {
   data() {
     return {
       radio: 1,
-
+      title: "收货地址",
       items: []
     };
   },
@@ -125,7 +124,10 @@ export default {
   width: 100%;
   height: 100%;
 }
-.el-radio__label {
-  // color: #FFF;
+
+.red .el-radio__inner{
+  padding: 4px;
+  background-color: #409eff;
+  padding: 4px;
 }
 </style>
