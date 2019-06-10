@@ -18,6 +18,8 @@ const UserForCollection = resolve => require(['@/components/user/userForCollecti
 const UserTake = resolve => require(['@/components/user/userTake.vue'], resolve)
 const UserAfter = resolve => require(['@/components/user/userAfter.vue'], resolve)
 const UserShippingAddress = resolve => require(['@/components/user/userShippingAddress.vue'], resolve)
+const UserAddressDetails = resolve => require(['@/components/user/userOrderFormDetail/userAddressDetails.vue'], resolve)
+const UserEditAddressDetails = resolve => require(['@/components/user/userOrderFormDetail/userEditAddressDetails.vue'], resolve)
 const UserPromotionCenter = resolve => require(['@/components/user/userPromotionCenter.vue'], resolve)
 const UserSignIn = resolve => require(['@/components/user/userSignIn.vue'], resolve)
 const UserCoupon = resolve => require(['@/components/user/userCoupon.vue'], resolve)
@@ -91,10 +93,10 @@ export default new Router({
     meta: {
       title: '分类页'
     },
-    children: [{
-      path: '/category/:tab',
-      component: CategoryMain
-    }]
+    // children: [{
+    //   path: '/category/:tab',
+    //   component: CategoryMain
+    // }]
   }, {
     path: '/car',
     name: '购物车页',
@@ -497,6 +499,20 @@ export default new Router({
     component: UserShippingAddress,
     meta: {
       title: '用户收货地址'
+    }
+  }, {
+    path: '/userShippingAddress/userAddressDetails/:id',
+    name: '收货地址详情',
+    component: UserAddressDetails,
+    meta: {
+      title: '收货地址详情'
+    }
+  }, {
+    path: '/userShippingAddress/userEditAddressDetails/:id',
+    name: '编辑地址',
+    component: UserEditAddressDetails,
+    meta: {
+      title: '编辑地址'
     }
   }, {
     path: '/userShippingAddress/userNewAddress',

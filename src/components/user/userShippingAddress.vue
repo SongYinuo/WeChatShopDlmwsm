@@ -21,9 +21,11 @@
                      <el-col :span="3" v-if="item.is_default=== 0" style="display:none">
                       <div class="bgUndertintYellow defaultIcon colorWhite addRowTxt text-alignCenter">默认</div>
                     </el-col>
+                    <router-link :to="{ name: '收货地址详情', params: { id: item.address_id } }">
                     <el-col :span="20" :offset="1" class="site pd2">
                           {{item.province_name}}{{item.city_name}}{{item.district_name}}
                     </el-col>
+                    </router-link>
                   </el-col>
                   <el-col class="pdT3 pdB1">
                     <el-col :span="8" class="siteIcon">
@@ -44,7 +46,7 @@
                       </div>
                     </el-col>
                     <el-col :span="2" :offset="13" class="delteIcon">
-                      <i class="el-icon-delete" @click="deleteInfo"></i>
+                      <i class="el-icon-delete" @click="deleteInfo(item.address_id)"></i>
                     </el-col>
                   </el-col>
                 </el-col>
@@ -52,7 +54,7 @@
               <el-col class="newBtn" :span="22" :offset="1">
                 <router-link :to="{ name: '新增地址' }">
                 <el-button type="primary" class="bgUndertintYellow brRNone">新增收货地址</el-button>
-                </router-link >
+                </router-link>
               </el-col>
           </el-row>
         </el-main>
@@ -72,19 +74,21 @@ export default {
   },
   mounted() {
     this.getImg();
-   
   },
   methods: {
-    getDta() {},
-    deleteInfo(index) {
-      this.items.splice(index, 1);
-    },
     getImg() {
       const that = this;
       axios.get("/Api/User/address_list").then(function(res) {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         that.items = res.data.data;
-       
+      });
+    },
+    deleteInfo(id) {
+      // this.items.splice(index, 1);
+      const newId = id;
+      axios.get("/Api/User/address_delete?id=" + newId, {
+      }).then(function(res) {
+        console.log(res);
       });
     },
     // 点击事件
@@ -93,20 +97,15 @@ export default {
       // console.log("点击");
       // console.log(index);
       var address_id = that.items[index].address_id;
-      
       axios
         .get("/Api/User/set_default_address?id=" + address_id)
         .then(function(res) {
-          // that.radio = address_id;
-          console.log(radio);
+          this.$message({
+            message: "删除成功",
+            type: "success"
+          });
+          this.reload();
         });
-        // this.reload();
-        this.$router.go(0)
-    }
-  },
-  computed: {
-    resultCategoryId() {
-      return this.categoryId;
     }
   }
 };

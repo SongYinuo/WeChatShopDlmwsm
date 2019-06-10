@@ -29,7 +29,7 @@
                 <span>{{k.title}}</span>
               </el-col>
               <el-col :span="24" class="firstCompanyPic" v-for="(k,index) in companyRanksArray" v-if="index == 0">
-                <router-link :to="{ name: '公司排名详情',query: { id: k.article_id }  }">
+                <router-link :to="{ name: '公司排名详情', query: { id: k.article_id }  }">
                   <img src="../../../static/testImg/first.png" class="topIcon">
                   <div v-for="(k,index) in companyRanksArray" v-if="index == 0">
                     <img :src="k.thumb" class="first">
