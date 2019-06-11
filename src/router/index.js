@@ -185,10 +185,10 @@ export default new Router({
     }
   }, {
     path: '/integralShop',
-    name: '积分商城页',
+    name: '更多积分商品',
     component: IntegralShop,
     meta: {
-      title: '积分商城页'
+      title: '更多积分商品'
     }
   }, {
     path: '/undergraduateBusiness',
