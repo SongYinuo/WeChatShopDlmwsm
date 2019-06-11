@@ -134,12 +134,12 @@ export default {
         // that.bookList = res.data.data
         if (res.data.code == 1) {
           that.signSuccess = "签到已成功";
-          this.$router.go(0)
+          that.$router.go(0);
           // this.reload();
           // console.log(that.signSuccess);
         } else {
           that.signSuccess = "签到已成功";
-          this.$router.go(0)
+          that.$router.go(0);
         }
       });
     }
