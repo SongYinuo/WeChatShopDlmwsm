@@ -20,7 +20,7 @@
       <div class="indexSwiperRow">
         <el-row>
           <el-col :span="22" :offset="1">
-            <div class="swiper-container">
+            <div class="swiper-container" id="swiper-container2">
                <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="swipers in swiperList" :key="swiper.goods_id">
                    <router-link :to="{ name: '详情页', query: { id: swipers.goods_id }}">
@@ -76,11 +76,9 @@ export default {
   },
   methods: {
     _initSwiper() {
-      this.swiper = new Swiper(".swiper-container ", {
-        initialSlide: 0,
+      this.swiper = new Swiper("#swiper-container2", {
         slidesPerView: 1.2,
         spaceBetween: 16,
-        pagination: ".swiper-pagination",
         paginationClickable: true,
         spaceBetween: 12,
         observer: true,

@@ -14,7 +14,7 @@ export default {
   computed: {
     fetchLoading() {
       return this.$store.state.detail.fetchLoading;
-    }
+    },
   },
   provide() {
     return {
@@ -32,9 +32,9 @@ export default {
       this.$nextTick(function() {
         this.isRouterAlive = true;
       });
-    }
-  }
-};
+    },
+}
+}
 </script>
 
 <style lang="less">
