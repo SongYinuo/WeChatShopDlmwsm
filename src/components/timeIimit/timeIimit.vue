@@ -1,12 +1,10 @@
 <template lang="html">
-    <!-- <mt-header title="限时抢购">
-    </mt-header> -->
     <el-container>
         <el-header class="tittle">
           <div class="back" @click="$router.go(-1)">
             <i class="el-icon-arrow-left"></i>
           </div>
-        限时抢购
+        {{title}}
         </el-header>
         <el-main class="timeLimit">
             <el-row>
@@ -17,37 +15,41 @@
                         <el-radio-button label="bottom">bottom</el-radio-button>
                         <el-radio-button label="left">left</el-radio-button>
                     </el-radio-group> -->
-                      <el-tabs v-model="datas.tabKey"  type="card">
-                            <el-tab-pane v-for="k in datas.timeLimits.timeLimitsArray" :label="k.timeFramesLabel" :name="k.timeFramesName">
-                                <el-row class="timeLimitRow pdB2">
+                      <el-tabs v-model="datas.tabKey" type="card">
+                            <el-tab-pane v-for="(k,index) in datas" :label="k.start_time|formatDate" :name="k.name" :index="index" style="position: relative, z-index: -1">
+                                <el-row class="timeLimitRow pdB2" v-if="k.prom_status===1||k.prom_status===2" style="position: relative, z-index:1">
+                                    <span v-if="k.prom_status===1" class="spanText text-alignCenter">抢购中</span>
+                                    <span v-if="k.prom_status===2" class="spanText text-alignCenter">即将开枪</span>
                                     <el-col :span="24">
                                         <el-col :span="24" class="timeLimitAdvertisingImg">
-                                            <img :src="k.advertisingImgUrl">
+                                            <img :src="k.thumb">
                                         </el-col>
                                         <el-col :span="24">
-                                            <p class="stateText bgGray colorWhite pdTRBL1">疯抢中</p>
+                                            <p class="stateText bgGray colorWhite pdTRBL1" v-if="k.prom_status===1">疯抢中</p>
+                                            <p class="stateText bgGray colorWhite pdTRBL1" v-if="k.prom_status===2">即将开始</p>
                                             <!-- <p class="stateText bgGray colorWhite pdTRBL1">已抢光</p> -->
                                         </el-col>
                                     </el-col>
                                 </el-row>
                                 <el-row class="timeLimitproductRow">
-                                    <el-col :span="22" :offset="1" v-for="o in k.productArray" class="pd2">
+                                    <el-col :span="22" :offset="1" v-for="o in k.goods_list" class="pd2">
                                         <el-col :span="7" class="productImg">
-                                            <img :src="o.productUrl">
+                                            <img :src="o.goods_image">
                                         </el-col>
                                         <el-col :span="16" :offset="1" class="productText">
-                                             <router-link :to="{ name: '详情页', params: { id: o.id } }">
+                                             <router-link :to="{ name: '详情页', params: { id: o.link_id } }">
                                                 <div class="pdT4">
-                                                    <div class="title overHidden">{{o.title}}</div>
+                                                    <div class="title overHidden">{{o.goods_name}}</div>
                                                     <div class="explainTitle colorGray">{{o.explanatory}}</div>
                                                     <el-row>
                                                         <el-col :span="16">
-                                                            <div class="price colorRed letterSpacing1">¥{{o.price}}</div>
-                                                            <div class="originalPrice letterSpacing1"><del>¥{{o.originalPrice}}</del></div>
+                                                            <div class="price colorRed letterSpacing1">¥{{o.goods_price}}</div>
+                                                            <div class="originalPrice letterSpacing1"><del>¥{{o.shop_price}}</del></div>
                                                         </el-col>
                                                         <el-col :span="7" :offset="1">
                                                             <div class="rushBtn">
-                                                                <el-button type="danger" class="btn">抢购中</el-button>
+                                                                <el-button type="danger" class="btn" v-if="o.store_count>0">抢购中</el-button>
+                                                                <el-button type="info" class="btn" v-if="o.store_count<=0">去看看</el-button>
                                                             </div>
                                                         </el-col>
                                                     </el-row>
@@ -65,401 +67,59 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
+  filters: {
+    //过滤器
+    //时间戳转日期
+    formatDate: function(value) {
+      let date = new Date(value * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let y = date.getFullYear();
+      let MM = date.getMonth() + 1;
+      MM = MM < 10 ? "0" + MM : MM;
+      let d = date.getDate();
+      d = d < 10 ? "0" + d : d;
+      let h = date.getHours();
+      h = h < 10 ? "0" + h : h;
+      let m = date.getMinutes();
+      m = m < 10 ? "0" + m : m;
+      let s = date.getSeconds();
+      s = s < 10 ? "0" + s : s;
+      // return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s;//多种时间格式的拼接
+      return h + ":" + m;
+    }
+  },
   data() {
     return {
+      title: "限时抢购",
       datas: {
-        tabKey: "10:00",
+        tabKey: "测试活动",
         timeLimits: {
-          timeLimitsArray: [
-            {
-              timeFramesLabel: "10:00",
-              timeFramesName: "10:00",
-              state: "已开抢",
-              advertisingImgUrl: "static/testImg/pic1@2x.png",
-              productArray: [
-                {
-                  id: "xianshi100001",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "401",
-                  originalPrice: "645"
-                },
-                {
-                  id: "xianshi100002",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "1【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "1401",
-                  originalPrice: "1645"
-                },
-                {
-                  id: "xianshi100003",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "2【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "2两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "2401",
-                  originalPrice: "2645"
-                },
-                {
-                  id: "xianshi100004",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "3【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "3两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "3401",
-                  originalPrice: "3645"
-                },
-                {
-                  id: "xianshi100005",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "4【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "4两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "4401",
-                  originalPrice: "4645"
-                },
-                {
-                  id: "xianshi100006",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "6【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "6401",
-                  originalPrice: "6645"
-                },
-                {
-                  id: "xianshi100007",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "7【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "7401",
-                  originalPrice: "7645"
-                }
-              ]
-            },
-            {
-              timeFramesLabel: "12:00",
-              timeFramesName: "12:00",
-              state: "已开抢",
-              advertisingImgUrl: "static/testImg/pic1@2x.png",
-              productArray: [
-                {
-                  id: "xianshi100002",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "02【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "2001",
-                  originalPrice: "20641"
-                },
-                {
-                  id: "xianshi100002",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "20【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "20401",
-                  originalPrice: "20642"
-                },
-                {
-                  id: "xianshi100003",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "20【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "2两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "20401",
-                  originalPrice: "20643"
-                },
-                {
-                  id: "xianshi100004",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "20【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "3两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "20401",
-                  originalPrice: "20644"
-                },
-                {
-                  id: "xianshi100005",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "20【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "4两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "20401",
-                  originalPrice: "20645"
-                },
-                {
-                  id: "xianshi100006",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "20【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "20401",
-                  originalPrice: "20646"
-                },
-                {
-                  id: "xianshi100007",
-                  productUrl: "static/testImg/product-details01-2.jpg",
-                  title: "20【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "20401",
-                  originalPrice: "20647"
-                }
-              ]
-            },
-            {
-              timeFramesLabel: "14:00",
-              timeFramesName: "14:00",
-              state: "抢购中",
-              advertisingImgUrl: "static/testImg/pic1@2x.png",
-              productArray: [
-                {
-                  id: "xianshi100001",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "401",
-                  originalPrice: "645"
-                },
-                {
-                  id: "xianshi100002",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "1【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "1401",
-                  originalPrice: "1645"
-                },
-                {
-                  id: "xianshi100003",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "2【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "2两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "2401",
-                  originalPrice: "2645"
-                },
-                {
-                  id: "xianshi100004",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "3【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "3两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "3401",
-                  originalPrice: "3645"
-                },
-                {
-                  id: "xianshi100005",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "4【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "4两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "4401",
-                  originalPrice: "4645"
-                },
-                {
-                  id: "xianshi100006",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "6【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "6401",
-                  originalPrice: "6645"
-                },
-                {
-                  id: "xianshi100007",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "7【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "7401",
-                  originalPrice: "7645"
-                }
-              ]
-            },
-            {
-              timeFramesLabel: "16:00",
-              timeFramesName: "16:00",
-              state: "即将开抢",
-              advertisingImgUrl: "static/testImg/pic1@2x.png",
-              productArray: [
-                {
-                  id: "xianshi100001",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "401",
-                  originalPrice: "645"
-                },
-                {
-                  id: "xianshi100002",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "1【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "1401",
-                  originalPrice: "1645"
-                },
-                {
-                  id: "xianshi100003",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "2【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "2两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "2401",
-                  originalPrice: "2645"
-                },
-                {
-                  id: "xianshi100004",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "3【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "3两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "3401",
-                  originalPrice: "3645"
-                },
-                {
-                  id: "xianshi100005",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "4【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "4两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "4401",
-                  originalPrice: "4645"
-                },
-                {
-                  id: "xianshi100006",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "6【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "6401",
-                  originalPrice: "6645"
-                },
-                {
-                  id: "xianshi100007",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "7【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "7401",
-                  originalPrice: "7645"
-                }
-              ]
-            },
-            {
-              timeFramesLabel: "18:00",
-              timeFramesName: "18:00",
-              state: "即将开抢",
-              advertisingImgUrl: "static/testImg/pic1@2x.png",
-              productArray: [
-                {
-                  id: "xianshi100001",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "401",
-                  originalPrice: "645"
-                },
-                {
-                  id: "xianshi100002",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "1【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "1401",
-                  originalPrice: "1645"
-                },
-                {
-                  id: "xianshi100003",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "2【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "2两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "2401",
-                  originalPrice: "2645"
-                },
-                {
-                  id: "xianshi100004",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "3【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "3两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "3401",
-                  originalPrice: "3645"
-                },
-                {
-                  id: "xianshi100005",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "4【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "4两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "4401",
-                  originalPrice: "4645"
-                },
-                {
-                  id: "xianshi100006",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "6【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "6401",
-                  originalPrice: "6645"
-                },
-                {
-                  id: "xianshi100007",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "7【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "7401",
-                  originalPrice: "7645"
-                }
-              ]
-            },
-            {
-              timeFramesLabel: "20:00",
-              timeFramesName: "20:00",
-              state: "即将开抢",
-              advertisingImgUrl: "static/testImg/pic1@2x.png",
-              productArray: [
-                {
-                  id: "xianshi100001",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "401",
-                  originalPrice: "645"
-                },
-                {
-                  id: "xianshi100002",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "1【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "1401",
-                  originalPrice: "1645"
-                },
-                {
-                  id: "xianshi100003",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "2【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "2两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "2401",
-                  originalPrice: "2645"
-                },
-                {
-                  id: "xianshi100004",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "3【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "3两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "3401",
-                  originalPrice: "3645"
-                },
-                {
-                  id: "xianshi100005",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "4【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "4两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "4401",
-                  originalPrice: "4645"
-                },
-                {
-                  id: "xianshi100006",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "6【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "6401",
-                  originalPrice: "6645"
-                },
-                {
-                  id: "xianshi100007",
-                  productUrl: "static/testImg/product-details01.jpg",
-                  title: "7【来自农家院】产的优质绿色大米 10kg 两代包邮",
-                  explanatory: "6两包包邮，仅限大陆各地，港澳台不包邮。",
-                  price: "7401",
-                  originalPrice: "7645"
-                }
-              ]
-            }
-          ]
         }
       }
     };
+  },
+  mounted() {
+    window.scrollTo(0, 0);
+    this.getData();
+  },
+  methods: {
+    getData() {
+      const thia = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Index/prom_list"
+      }).then(function(res) {
+        thia.datas = res.data.data;
+        thia.tabKey = 1;
+        console.log(res);
+        console.log(thia.datas);
+        console.log(thia.tabKey);
+      });
+    }
   }
 };
 </script>
@@ -474,6 +134,14 @@ export default {
 .timeLimit {
   .el-tabs__header {
     margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .el-tabs__nav-scroll {
+    // border-top: 1px solid #E4E7ED;
+  }
+  .el-tabs--card > .el-tabs__header .el-tabs__nav {
+    border: none;
   }
   .el-tabs--card > .el-tabs__header .el-tabs__item {
     border: none;
@@ -481,6 +149,7 @@ export default {
   .el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
     background-color: red;
     color: #fff;
+    border-top: 1px solid red;
   }
   .el-tabs__nav-wrap.is-scrollable {
     padding: 0;
@@ -490,6 +159,20 @@ export default {
   }
   .el-tabs__nav-next {
     display: none;
+  }
+  .el-tabs__item {
+    line-height: 24px;
+  }
+  .spanText {
+    position: absolute;
+    margin-top: -20px;
+    z-index: 100;
+    left: 20px;
+    .fz(font-size, 20);
+    color: white;
+  }
+  .show {
+    display: block;
   }
 }
 </style>

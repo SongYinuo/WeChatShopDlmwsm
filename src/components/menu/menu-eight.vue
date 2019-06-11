@@ -19,7 +19,7 @@
           <div v-for="k in household.tmenu">
             <router-link :to="{ name:'交易中心列表',query: { id: k.id }}">
               <span class="tradingtab-icon">
-                <img :src="k.image">
+                <img :src="k.thumb">
                 <div class="menu-strategy tc">{{k.name}}</div>
               </span>
             </router-link>
