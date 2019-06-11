@@ -37,7 +37,7 @@
           </el-form-item>
           <el-form-item>
             <el-col class="saveBtn" :span="22">
-              <el-button type="primary" class="bgGray brRNone" @click="onSubmit">立即创建</el-button>
+              <el-button type="primary" class="bgUndertintYellow brRNone" @click="onSubmit">立即创建</el-button>
             </el-col>
           </el-form-item>
         </el-form>
@@ -103,7 +103,6 @@ export default {
       });
     },
     getDistrict(value) {
-      // alert ();
       var thia = this;
       axios({
         methods: "get",

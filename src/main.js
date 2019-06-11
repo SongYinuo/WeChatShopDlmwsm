@@ -17,6 +17,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 
 import VueWechatTitle from 'vue-wechat-title'
 import http from '@/http/http.js'
+
 Vue.use(ElementUi)
 
 Vue.use(Mint)
@@ -29,7 +30,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$api = api
 
-Vue.prototype.$http= axios
+Vue.prototype.$http = axios
 
 // 用钩子函数beforeEach()对路由进行判断
 // router.beforeEach((to, from, next) => {
@@ -50,11 +51,33 @@ Vue.prototype.$http= axios
 //     }
 // })
 
+// axios({
+//   methods: "get",
+//   headers: {
+//     "Content-Type": "application/x-www-form-urlencoded"
+//   },
+//   url: "/Api/Api/index"
+// }).then(function (res) {
+//   // console.log(res.data.data.user.user_id)
+//   // console.log(location.href)
+//   // console.log(router.history.current.fullPath)
+//   if (res.data.data.user.user_id <= 0) {
+//     location.href = "http://" + window.location.host + "/Api/api/wx_login?route=" + router.history.current.fullPath
+//   }
+//   else {
+//     // console.log(res.data.msg)
+//   }
+//   // console.log(res.data.user.user_id)
+
+// }).catch(function (error) {
+//   // console.log(error)
+// });
+
 // 页面修改时修改浏览器标签栏
 router.beforeEach((to, from, next) => {
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
   if (to.meta.title) {
-      document.title = to.meta.title
+    document.title = to.meta.title
   }
   next()
 })
@@ -62,8 +85,8 @@ router.beforeEach((to, from, next) => {
 
 axios.interceptors.request.use((config) => {
   Mint.Indicator.open({//打开loading
-      text: '加载中...',
-      spinnerType: 'fading-circle'
+    text: '加载中...',
+    spinnerType: 'fading-circle'
   });
   return config;
 }, (err) => {
