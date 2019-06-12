@@ -11,7 +11,7 @@
         <el-tab-pane label="攻略" name="first">
           <el-row>
             <div v-for="item in items">
-              <router-link :to="{ name:'旅游攻略',query: { id: item.article_id }}">
+              <router-link :to="{ name:'旅游攻略',params: { id: item.article_id }}">
                 <el-row class="smallimg">
                   <el-col :span="12" class="pd">
                     <p class="menu-strategy " v-html="item.title">{{item.title}}</p>
@@ -28,7 +28,7 @@
         </el-tab-pane>
         <el-tab-pane label="社区" name="second">
           <div v-for="array in arrays">
-            <router-link :to="{name: '种草详情',query: { id: array.article_id }}">
+            <router-link :to="{name: '种草详情',params: { id: array.article_id }}">
               <el-row>
                 <el-col :span="22">
                   <img :src="array.author_head_pic" v-on:error.once="moveErrorImg($event)" class="fl menuHeader">

@@ -7,15 +7,12 @@
       </div>
      交易中心栏目列表
     </el-header>
-
     <div class="listnav">
       <el-row>
         <img :src="list_goods_img" class="listimg">
         <el-col :span="22" :offset="1">
-
           <el-col :span="12" v-for="k in goods_list" class="listLi text-alignLeft">
-
-            <router-link :to="{ name:'详情页',query: { id: k.goods_id }}">
+            <router-link :to="{ name:'详情页',params: { id: k.goods_id }}">
               <img :src="k.original_img" class="pdB2">
               <div class="listTxt pd1">{{k.goods_name}}</div>
               <div class="colorRed price text-alignLeft">￥{{k.shop_price}}</div>
@@ -39,14 +36,13 @@ import axios from "axios";
       };
     },
     mounted(){
-      var cart_id = this.$route.query.id
+      var cart_id = this.$route.params.id
       this.getData()
-
     },
     methods:{
       getData:function(){
         var that = this
-         var cart_id = that.$route.query.id
+        var cart_id = that.$route.params.id
         axios.get('/Api/Goods/goods_list?id=' + cart_id).then(function(res){
           console.log(res)
           that.list_goods_img = res.data.data.cat_data.image,

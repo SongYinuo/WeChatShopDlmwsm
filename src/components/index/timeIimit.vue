@@ -1,6 +1,6 @@
 <template lang="html">
   <section>
-    <div class="indexTimeLimit mgTB2" v-if="swiperList.prom_status===1||swiperList.prom_status===2">
+    <div class="indexTimeLimit mgTB2" id="indexTimeLimit" v-if="swiperList.prom_status===1||swiperList.prom_status===2">
       <div class="indexSwiperHeader">
         <el-row>
           <el-col :span="22" :offset="1">
@@ -11,8 +11,7 @@
               <div class="countDown">
                 <span class="countDown pd2">
                   <count-down v-on:start_callback="countDownS_cb(1)" v-on:end_callback="countDownE_cb(1)"
-                    :currentTime="timestamp" :startTime="swiperList.prom.start_time" :endTime="swiperList.prom.end_time"
-                    :tipText="'活动开始'" :tipTextEnd="'活动结束'" :endText="'活动结束'" :dayTxt="'天'" :hourTxt="':'"
+                    :currentTime="timestamp" :startTime="swiperList.prom.start_time" :endTime="swiperList.prom.end_time" :end-text="'活动开始'" :dayTxt="'天'" :hourTxt="':'"
                     :minutesTxt="''"></count-down>
                 </span>
               </div>
@@ -28,49 +27,47 @@
         </el-row>
       </div>
       <div class="indexSwiperRow">
-        <el-row>
-          <el-col :span="22" :offset="1">
-            <div class="swiper-container" id="swiper-container1">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="swiper in swiperList.prom.goods_list" :key="swiper.link_id">
-                  <router-link :to="{ name: '详情页', query: { id: swiper.link_id }}">
-                    <img :src="swiper.goods_image" class="swiperListImg">
-                  </router-link>
-                  <div class="explainRow">
-                    <el-row>
-                      <el-col :span="14">
-                        <div class="explainTitle">
-                          {{swiper.goods_name}}
-                        </div>
-                      </el-col>
-                      <el-col :span="4" :offset="1">
-                        <div class="explainPrice">
-                          ¥{{swiper.goods_price}}
-                        </div>
-                      </el-col>
-                      <el-col :span="4">
-                        <div class="explainOriginalPrice text-alignRight">
-                          <del>¥{{swiper.shop_price}}</del>
-                        </div>
-                      </el-col>
-                      <el-col :span="24">
-                        <div class="explainAnnotation lh4 pdT2">
-                          {{swiper.goods_remark}}
-                        </div>
-                      </el-col>
-                    </el-row>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
+            <!-- <div  id="swiper1" class="swiper-container"> -->
+              <div style="height:260px; width:90%; margin-left:5%">
+                <mt-swipe :auto="10000">
+                  <mt-swipe-item v-for="(item,index) in swiperList.prom.goods_list" :key="index" class="mtSwiper">
+                    <router-link :to="{ name: '详情页', params: { id: item.link_id }}">
+                      <img :src="item.goods_image" class="swiperListImg">
+                    </router-link>
+                    <div class="explainRow">
+                      <el-row>
+                        <el-col :span="14">
+                          <div class="explainTitle overHidden pd2">
+                            {{item.goods_name}}
+                          </div>
+                        </el-col>
+                        <el-col :span="4" :offset="1">
+                          <div class="explainPrice">
+                            ¥{{item.goods_price}}
+                          </div>
+                        </el-col>
+                        <el-col :span="4">
+                          <div class="explainOriginalPrice text-alignRight">
+                            <del>¥{{item.shop_price}}</del>
+                          </div>
+                        </el-col>
+                        <el-col :span="24">
+                          <div class="explainAnnotation lh4 pdT2 overHidden">
+                            {{item.goods_remark}}
+                          </div>
+                        </el-col>
+                      </el-row>
+                    </div>
+                  </mt-swipe-item>
+                </mt-swipe>
+             </div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import 'swiper/dist/css/swiper.css';
 import countDown from "vue2-countdown";
 import axios from "axios";
 export default {
@@ -86,22 +83,23 @@ export default {
   mounted() {
     window.scrollTo(0, 0);
     this.getData();
-    this._initSwipera();
+    this._initSwiperaw();
   },
   methods: {
     newDate() {},
-    _initSwipera() {
-      var swiper = new Swiper(".indexTimeLimit #swiper-container1", {
-        slidesPerView: 1.2,
-        spaceBetween: 16,
-        paginationClickable: true,
-        spaceBetween: 12,
-        observer: true,
-        observeParents: true,
-        autoplay: 10000,
-        loop: true
+    _initSwiperaw() {
+      var swiper1  = new Swiper("#swiper1", {
+        // slidesPerView: 1.2,
+        // spaceBetween: 16,
+        // paginationClickable: true,
+        // spaceBetween: 12,
+        // observer: true,
+        // observeParents: true,
+        // autoplay: 10000,
+        // loop: true
       });
     },
+
     getData() {
       const thit = this;
       axios({
@@ -126,10 +124,19 @@ export default {
 @import "../../assets/fz.less";
 @import "../../assets/index/style.less";
 @import "../../assets/index/indexSwiper.less";
-
 .swiperListImg {
   height: 200px;
   border-radius: 8px;
+  width: 100%;
+}
+
+.indexTimeLimit {
+  .mint-swipe-indicators {
+    display: none;
+  }
+  .mint-swipe-items-wrap {
+    overflow: visible;
+  }
 }
 
 .countDown div span {

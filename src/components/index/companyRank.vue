@@ -29,7 +29,7 @@
                 <span>{{k.title}}</span>
               </el-col>
               <el-col :span="24" class="firstCompanyPic" v-for="(k,index) in companyRanksArray" v-if="index == 0">
-                <router-link :to="{ name: '公司排名详情', query: { id: k.article_id }  }">
+                <router-link :to="{ name: '公司排名详情', params: { id: k.article_id }  }">
                   <img src="../../../static/testImg/first.png" class="topIcon">
                   <div v-for="(k,index) in companyRanksArray" v-if="index == 0">
                     <img :src="k.thumb" class="first">
@@ -46,7 +46,7 @@
                 <span>{{k.title}}</span>
               </el-col>
               <el-col :span="24" class="secondCompanyPic" v-for="(k,index) in companyRanksArray" v-if="index == 1">
-                <router-link :to="{ name: '公司排名详情', query: { id: k.article_id }  }">
+                <router-link :to="{ name: '公司排名详情', params: { id: k.article_id }  }">
                   <img src="../../../static/testImg/second.png" class="topIcon">
                   <div v-for="(k,index) in companyRanksArray" v-if="index == 1">
                     <img :src="k.thumb" class="twophoto">
@@ -61,7 +61,7 @@
                 <span>{{k.title}}</span>
               </el-col>
               <el-col :span="24" class="thirdlyCompanyPic" v-for="(k,index) in companyRanksArray" v-if="index == 2">
-                <router-link :to="{ name: '公司排名详情',query: { id: k.article_id }  }">
+                <router-link :to="{ name: '公司排名详情',params: { id: k.article_id }  }">
                   <img src="../../../static/testImg/thirdly.png" class="topIcon">
                   <div v-for="(k,index) in companyRanksArray" v-if="index == 2">
                     <img :src="k.thumb" class="twophoto">

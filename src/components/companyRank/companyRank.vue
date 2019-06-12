@@ -17,7 +17,7 @@
             <img src="../../../static/testImg/second.png" v-if="index == 1">
             <img src="../../../static/testImg/thirdly.png" v-if="index == 2">
           </span>
-          <router-link :to="{ name: '公司排名详情', query: { id: k.article_id } }">
+          <router-link :to="{ name: '公司排名详情', params: { id: k.article_id } }">
             <el-col :span="17" :offset="1" class="companyText">
               <div class="companyName overHidden lh1-6 pdT1" v-html="k.title">{{k.title}}</div>
               <div class="companyCaption colorGray mgT1 img1" v-html="k.content">{{k.content}}</div>

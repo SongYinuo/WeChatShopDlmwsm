@@ -170,7 +170,7 @@ export default new Router({
       title: '最具有影响力排名页'
     }
   }, {
-    path: '/companyDetails/:id',
+    path: '/companyRank/companyDetails/:id',
     name: '公司排名详情',
     component: CompanyDetails,
     meta: {
@@ -212,7 +212,7 @@ export default new Router({
       title: '旅游'
     }
   }, {
-    path: '/menu-three:title',
+    path: '/menu-three',
     name: '讲堂',
     component: LectureRoom,
     meta: {
@@ -247,7 +247,7 @@ export default new Router({
       title: '哈百年'
     }
   }, {
-    path: '/menu-eight/:id',
+    path: '/menu-eight',
     name: '交易中心',
     component: TransactionCenter,
     meta: {

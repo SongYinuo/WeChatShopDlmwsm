@@ -14,7 +14,7 @@
                {{k}}
                  <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in collect.collectionClassified.goodslist">
                   <el-col :span="6" class="collectInfoProductDrawing">
-                    <router-link :to="{ name: '详情页',query: { id: o.id, title: k.label } }">
+                    <router-link :to="{ name: '详情页',params: { id: o.id, title: k.label } }">
                       <img :src="o.original_img">
                     </router-link>
                   </el-col>

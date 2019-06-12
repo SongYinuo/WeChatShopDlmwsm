@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 export default {
   data() {
     return {
@@ -84,114 +84,115 @@ export default {
         auctionAdvertisingArray: [
           {
             label: "必抢爆款",
-            name: "biqiangbaokuan",
+            name: "biqiangbaokuan"
           },
-           {
+          {
             label: "万年古董",
-            name: "wanniangudong",
-          },{
+            name: "wanniangudong"
+          },
+          {
             label: "人气爆品",
-            name: "renqibaopin",
-          },{
+            name: "renqibaopin"
+          },
+          {
             label: "囤货必备",
-            name: "tunhuobibei",
+            name: "tunhuobibei"
           }
-
         ]
       },
-      auctionImg:[],
+      auctionImg: [],
       // banner图
-      auctionText:[],
+      auctionText: [],
       // 必抢爆款
-      auctionTxt:[],
+      auctionTxt: [],
       // 万年古董
-      auctionPopularity:[],
+      auctionPopularity: [],
       // 人气爆品
-      auctionStockpile:[],
+      auctionStockpile: []
       // 囤货必备
-
     };
   },
- 
-  mounted(){
+
+  mounted() {
     this.getImg();
-     // banner图
+    // banner图
     this.getList();
-     // 必抢爆款
+    // 必抢爆款
     this.gettxt();
     // 万年古董
-     this.getPopularity();
+    this.getPopularity();
     // 人气爆品
-     this.getStockpile();
+    this.getStockpile();
     // 囤货必备
-
-  },methods:{
-    getImg(){
-      var that = this;
-      axios({
-        methods:"get",
-        headers:{
-          "Content-Type":"application/x-www-form-urlencoded"
-        },
-        url:"/Api/Index/auction_list"
-
-      })
-      .then(function(res){
-        that.auctionImg=res.data.data.auction;
-       
-      })
-    },
-    getList(){
+  },
+  methods: {
+    getImg() {
       var that = this;
       axios({
         methods: "get",
-        headers:{
-          "Content-Type":"application/x-www-form-urlencoded"
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        url:"/Api/Index/auction_list"
-      })
-      .then(function(res){
-        that.auctionText=res.data.data.goods_list;
-      }).catch({})
+        url: "/Api/Index/auction_list"
+      }).then(function(res) {
+        that.auctionImg = res.data.data.auction;
+      });
     },
-    gettxt(){
-       var that = this;
-      axios({
-        methods: "get",
-        headers:{
-          "Content-Type":"application/x-www-form-urlencoded"
-        },
-        url:"/Api/Index/auction_list"
-      })
-      .then(function(res){
-        that.auctionTxt=res.data.data.goods_list;
-      }).catch({})
-    },
-    getPopularity(){
-       var that = this;
-      axios({
-        methods: "get",
-        headers:{
-          "Content-Type":"application/x-www-form-urlencoded"
-        },
-        url:"/Api/Index/auction_list"
-      })
-      .then(function(res){
-        that.auctionPopularity=res.data.data.goods_list;
-      }).catch({})
-    },
-    getStockpile(){
+    getList() {
       var that = this;
       axios({
         methods: "get",
-        headers:{
-          "Content-Type":"application/x-www-form-urlencoded"
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        url:"/Api/Index/auction_list"
+        url: "/Api/Index/auction_list"
       })
-      .then(function(res){
-        that.auctionStockpile=res.data.data.goods_list;
-      }).catch({})
+        .then(function(res) {
+          that.auctionText = res.data.data.goods_list;
+        })
+        .catch({});
+    },
+    gettxt() {
+      var that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Index/auction_list"
+      })
+        .then(function(res) {
+          that.auctionTxt = res.data.data.goods_list;
+        })
+        .catch({});
+    },
+    getPopularity() {
+      var that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Index/auction_list"
+      })
+        .then(function(res) {
+          that.auctionPopularity = res.data.data.goods_list;
+        })
+        .catch({});
+    },
+    getStockpile() {
+      var that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Index/auction_list"
+      })
+        .then(function(res) {
+          that.auctionStockpile = res.data.data.goods_list;
+        })
+        .catch({});
     }
   }
 };
@@ -204,20 +205,16 @@ export default {
   padding: 0;
 }
 .auctionRow {
- 
   .el-tabs__active-bar {
     display: none;
   }
   .el-tabs__nav-wrap::after {
     display: none;
   }
-  .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
-    padding: 0 20px;
-  }
   .el-tabs__header {
     margin-bottom: 4px;
   }
-  
+
   .el-tabs__item {
     width: 25%;
   }
@@ -227,16 +224,13 @@ export default {
   .el-tabs__nav-wrap::after {
     background-color: transparent;
   }
-  .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
-    padding: 0 20px;
-  }
   .el-tabs--top .el-tabs__item.is-top:last-child {
     padding: 0 20px;
   }
   .advertising {
     .advertisingImg {
       img {
-         width: 100%;
+        width: 100%;
       }
     }
   }
@@ -253,18 +247,17 @@ export default {
       }
     }
   }
-  .el-tabs__item.is-active{
-  color: #DAB62E;
-}.el-tabs__active-bar{
+  .el-tabs__item.is-active {
+    color: #dab62e;
+  }
+  .el-tabs__active-bar {
     display: block;
-    background-color:#DAB62E;
+    background-color: #dab62e;
   }
   .el-tabs__active-bar {
     color: #ffc000;
     background-color: #ffc000;
     width: 55px !important;
-}.el-tabs--top .el-tabs__item.is-top:nth-child(2){
-  padding-left: 0;
-}
+  }
 }
 </style>

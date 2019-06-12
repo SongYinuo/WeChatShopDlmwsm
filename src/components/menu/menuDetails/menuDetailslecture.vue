@@ -58,16 +58,15 @@ export default {
       dialogVisible: false,
       content: "sichaoyun",
       swiperList: [],
-     title: "讲堂详情",
+      // title: "讲堂详情",
       items: [],
       article_ids: "",
       admire: "",
-      
-       name: [
+      name: [
         {
           title: "讲堂详情"
         }
-      ],
+      ]
     };
   },
   mounted() {
@@ -80,17 +79,17 @@ export default {
       this.$router.go(-1);
     },
     getImg() {
-      var newId = this.$route.query.id;
+      var newId = this.$route.params.id;
       const that = this;
       axios
         .get("/Api/Article/classroom_detail" + "?id=" + newId)
         .then(function(res) {
           that.swiperList = res.data.data;
         })
-        .catch(function(error) {
-        });
-    }, getData() {
-      var newId = this.$route.query.id;
+        .catch(function(error) {});
+    },
+    getData() {
+      var newId = this.$route.params.id;
       const that = this;
       axios
         .get("/Api/Article/classroom_detail" + "?id=" + newId)
@@ -98,29 +97,27 @@ export default {
           that.article_ids = res.data.data.is_collect;
           that.items = res.data.data;
         })
-        .catch(function(error) {
-        });
+        .catch(function(error) {});
     },
     moveErrorImg: function(event) {
       event.currentTarget.src = "static/testImg/defaultAvatar.png";
-    }, created: function() {
-     this.getImg();
+    },
+    created: function() {
+      this.getImg();
     },
     change: function() {
-      var newId = this.$route.query.id;
+      var newId = this.$route.params.id;
       let that = this;
       this.admire == false ? (this.admire = true) : (this.admire = false);
       this.$http
         .post("/Api/User/collect", {
           model: "classroom",
-          id: newId,
+          id: newId
         })
-        .then(res => {
-        
-        }) 
+        .then(res => {})
         .catch(error => {});
-         alert("返回我的收藏，查看收藏内容")
-        this.$router.go(0)
+      alert("返回我的收藏，查看收藏内容");
+      this.$router.go(0);
     }
   }
 };
