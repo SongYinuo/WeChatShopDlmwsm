@@ -8,8 +8,8 @@
             </router-link>
             </div>
           </el-col>
-         <el-col :span="22" class="list" >
-         <el-col :span="7" :offset="1" v-for="swiper in swiperList.goods_list">
+         <el-col :span="22" :offset="1" class="list" >
+         <el-col :span="8"  v-for="swiper in swiperList.goods_list" class="listText">
           <router-link :to="{ name: '详情页',query:{id:swiper.goods_id} }">
             <img :src="swiper.original_img" >
             <div class="integralTitle overHidden">{{swiper.goods_name}}</div>
@@ -81,8 +81,7 @@ export default {
    margin-bottom: 10px;
  }.title{
    color: #313131;
-   .fz(font-size, 36);
-   font-weight: bold;
+   .fz(font-size, 42);
    padding-bottom: 17px;
  }.more{
    color: #313131;
@@ -92,6 +91,10 @@ export default {
    padding-right: 20px;
  }.list{
    border-bottom: #E9E9E9 1px solid;
+   box-sizing: border-box;
+ }.listText{
+   padding-right: 10px;
+   padding-bottom: 10px;
  }
 }
 
