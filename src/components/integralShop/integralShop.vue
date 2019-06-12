@@ -8,7 +8,7 @@
     </el-header>
     <el-row class="morePoints">
       <el-col :span="22" :offset="1" v-for="swiper in swiperList.goods_list" class="list">
-        <router-link :to="{ name: '详情页',query:{id:swiper.goods_id} }">
+        <router-link :to="{ name: '详情页',params:{id:swiper.goods_id} }">
           <el-col :span="8">
             <img :src="swiper.original_img">
           </el-col>

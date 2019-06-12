@@ -31,10 +31,10 @@ export default {
   },
   methods: {
     getData() {
-      var newId = this.$route.query.id;
+      var newId = this.$route.params.id;
       const that = this;
       axios
-        .get("/Api/Index/company_detail" + "?article_id=" + newId)
+        .get("/Api/Index/company_detail?article_id=" + newId)
         .then(function(res) {
           that.detailsInfo = res.data.data;
         })

@@ -67,11 +67,12 @@ export default {
   },
   methods: {
     getData() {
-      var newId = this.$route.query.id;
+      var newId = this.$route.params.id;
       const that = this;
       axios
         .get("/Api/Article/article_detail" + "?article_id=" + newId)
         .then(function(res) {
+          console.log(res)
           that.itemtxts = res.data.data;
         });
     }

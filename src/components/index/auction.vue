@@ -56,7 +56,6 @@ data(){
       })
       .then(function(res){
         that.auction = res.data.data;
-        console.log(res.data.data);
       })
     }
 }

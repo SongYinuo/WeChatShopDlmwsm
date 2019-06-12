@@ -9,7 +9,7 @@
     <el-main class="hotShop">
       <el-row>
         <el-col :span="8" v-for="(k,index) in datas" class="hotShopRow pdTRBL2">
-          <router-link :to="{ name: '详情页',query: { id: k.goods_id,title:k.goods_name } }">
+          <router-link :to="{ name: '详情页',params: { id: k.goods_id,title:k.goods_name } }">
             <img :src="k.original_img">
             <div class="pd2 overHidden">{{k.goods_name}}</div>
             <div class="pd1 colorRed">¥{{k.shop_price}}</div>

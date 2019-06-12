@@ -52,7 +52,7 @@
 <script>
 import axios from "axios";
 export default {
-   props: ["article_id"],
+  props: ["article_id"],
   inject: ["reload"],
   data() {
     return {
@@ -66,7 +66,7 @@ export default {
       ],
       items: [],
       article_ids: "",
-      admire: "",
+      admire: ""
     };
   },
   mounted() {
@@ -78,7 +78,7 @@ export default {
       this.$router.go(-1);
     },
     getData() {
-      var newId = this.$route.query.id;
+      var newId = this.$route.params.id;
       const that = this;
       axios
         .get("/Api/Article/article_detail" + "?article_id=" + newId)
@@ -86,11 +86,10 @@ export default {
           that.article_ids = res.data.data.is_collect;
           that.items = res.data.data;
         })
-        .catch(function(error) {
-        });
+        .catch(function(error) {});
     },
     getImg() {
-      var newId = this.$route.query.id;
+      var newId = this.$route.params.id;
       const that = this;
       axios
         .get("/Api/Article/article_detail" + "?article_id=" + newId)
@@ -103,22 +102,19 @@ export default {
       event.currentTarget.src = "static/testImg/defaultAvatar.png";
     },
     change: function() {
-      var newId = this.$route.query.id;
+      var newId = this.$route.params.id;
       let that = this;
       this.admire == false ? (this.admire = true) : (this.admire = false);
       this.$http
         .post("/Api/User/collect", {
           model: "article",
-          id: newId,
+          id: newId
         })
-        .then(res => {
-        
-        }) 
+        .then(res => {})
         .catch(error => {});
-         alert("返回我的收藏，查看收藏内容")
-        this.$router.go(0)
+      alert("返回我的收藏，查看收藏内容");
+      this.$router.go(0);
     }
-
   }
 };
 </script>

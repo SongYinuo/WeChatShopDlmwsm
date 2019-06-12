@@ -20,10 +20,10 @@
       <div class="indexSwiperRow">
         <el-row>
           <el-col :span="22" :offset="1">
-            <div class="swiper-container" id="swiper-container2">
+            <div class="swiper-container">
                <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="swipers in swiperList" :key="swiper.goods_id">
-                   <router-link :to="{ name: '详情页', query: { id: swipers.goods_id }}">
+                   <router-link :to="{ name: '详情页', params: { id: swipers.goods_id }}">
                     <img :src="swipers.original_img" class="swiperListImg">
                   </router-link>
                   <div class="explainRow">
@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     _initSwiper() {
-      this.swiper = new Swiper("#swiper-container2", {
+      this.swiper = new Swiper(".swiper-container", {
         slidesPerView: 1.2,
         spaceBetween: 16,
         paginationClickable: true,
@@ -104,6 +104,16 @@ export default {
 @import "../../assets/fz.less";
 @import "../../assets/index/style.less";
 @import "../../assets/index/indexSwiper.less";
+.mint-swipe {
+  width: 100%;
+  height: 50vw;
+  a,
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
 
 .swiperListImg {
   height: 200px;

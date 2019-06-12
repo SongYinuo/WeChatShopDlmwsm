@@ -16,6 +16,7 @@ import 'swiper/src/less/swiper.less';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 
 import VueWechatTitle from 'vue-wechat-title'
+
 import http from '@/http/http.js'
 
 Vue.use(ElementUi)
