@@ -11,20 +11,21 @@
         <el-col :span="22" :offset="1">
           <el-form ref="editForm" :model="editForm">
             <el-form-item>
-              <el-input placeholder="收货人姓名" v-model="editForm.formName" @focus="changeFouceValue" @change="changeValue"></el-input>
+              <!-- <el-input placeholder="收货人姓名" v-model="editForm.formName" @focus="changeFouceValue" v-on:input="change()" type="text" ></el-input>-->
+              <el-input placeholder="收货人姓名" v-model="editForm.formName"  type="text" ></el-input>
             </el-form-item>
             <el-form-item>
-              <el-input v-model="editForm.formPhone" placeholder="手机号码" type="number"></el-input>
+              <el-input v-model="editForm.formPhone" placeholder="手机号码"  ></el-input>
             </el-form-item>
             <el-form-item>
               <el-col :span="8">
-                <el-select v-model="editForm.formProvinceValue" placeholder="所在省" @change="getCity">
+                <el-select v-model="editForm.formProvinceValue" placeholder="所在省"  v-on:input="getCity">
                   <el-option v-for="item in editForm.formProvince" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
               </el-col>
               <el-col :span="8">
-                <el-select v-model="editForm.formvalueCity" placeholder="所在市/直辖市" @change="getDistrict">
+                <el-select v-model="editForm.formvalueCity" placeholder="所在市/直辖市" v-on:input="getDistrict">
                   <el-option v-for="item in editForm.formCity" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
@@ -69,7 +70,8 @@ export default {
         city: [],
         valueCity: "",
         district: [],
-        valueDistrict: ""
+        valueDistrict: "",
+        value:""
       },
       editForm: {
         formPhone: "",
@@ -83,7 +85,22 @@ export default {
         formDesc: ""
       }
     };
+  },  computed: {
+      newName() {
+        return this.editForm.formName;
+      }
+    },
+  watch: {
+   newName(val) {
+        this.value = val;
+        console.log(this.value);
+      }
+} ,mounted(){
+    this.getData();
+    this.getProvince();
+    this.getCity();
   },
+
   created() {
     this.getData();
     this.getProvince();
@@ -101,13 +118,17 @@ export default {
         url: "/Api/User/address_detail?id=" + id
       })
         .then(function(res) {
-          that.editForm = res.data.data; //将获取的数据赋值
+          // that.editForm = res.data.data; //将获取的数据赋值
           that.editForm.formPhone = res.data.data.mobile;
           that.editForm.formName = res.data.data.consignee;
           that.editForm.formProvinceValue = res.data.data.province_name;
           that.editForm.formvalueCity = res.data.data.city_name;
           that.editForm.formvalueDistrict = res.data.data.district_name;
           that.editForm.formDesc = res.data.data.address;
+          that.editForm.id = res.data.data.address_id;
+          that.editForm.district = res.data.data.district;
+        //  console.log(res.data.data);
+        //  console.log(res.data.data.district);
         })
         .catch(function(response) {});
     },
@@ -132,9 +153,12 @@ export default {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        url: "/Api/Api/get_region?parent_id=" + val
+        url: "/Api/Api/get_region?parent_id=" + val,
+        
       }).then(function(res) {
         thia.editForm.formCity = res.data.data;
+        //  console.log(res.data.data);
+        
       });
     },
     getDistrict(value) {
@@ -147,6 +171,7 @@ export default {
         url: "/Api/Api/get_region?parent_id=" + value
       }).then(function(res) {
         thia.editForm.formDistrict = res.data.data;
+        // console.log(this.editForm.formName);
       });
     },
     onSubmit() {
@@ -157,23 +182,18 @@ export default {
           mobile: thir.editForm.formPhone,
           province: thir.editForm.formProvinceValue,
           city: thir.editForm.formvalueCity,
-          district: thir.editForm.valueDistrict,
-          address: thir.editForm.formDesc
+          district: thir.editForm.district,
+          address: thir.editForm.formDesc,
+          id:thir.editForm.id,
         })
         .then(res => {})
         .catch(error => {});
       this.reload();
-      console.log("submit!");
+      // console.log("submit!");
     },
-    changeFouceValue(evt){
-      console.log(evt)
-      this.form.formName = evt.path[0].innerText;
-    },
-    changeValue(evt) {
-      console.log(evt)
-    }
-
+    
   }
+
 };
 </script>
 

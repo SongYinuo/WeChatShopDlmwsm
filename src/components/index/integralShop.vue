@@ -4,7 +4,7 @@
           <el-col :span="22" :offset="1">
             <div class="title">积分商城
             <router-link :to="{ name: '更多积分商品' }">
-              <span class="more">查看更多></span>
+              <span class="more">查看更多<i class="el-icon-arrow-right"></i></span>
             </router-link>
             </div>
           </el-col>
@@ -84,11 +84,10 @@ export default {
    .fz(font-size, 42);
    padding-bottom: 17px;
  }.more{
-   color: #313131;
-   .fz(font-size,20px);
+   .fz(font-size,34px);
    float: right;
-   font-weight: 100;
-   padding-right: 20px;
+  //  padding-right: 20px;
+   color: #666;
  }.list{
    border-bottom: #E9E9E9 1px solid;
    box-sizing: border-box;

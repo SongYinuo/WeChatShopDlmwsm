@@ -119,7 +119,7 @@ export default {
     onSubmit() {
       var thir = this;
       axios
-        .post("Api/User/address_add", {
+        .post("/Api/User/address_add", {
           consignee: thir.form.name,
           mobile: thir.form.phone,
           province: thir.form.provinceValue,
