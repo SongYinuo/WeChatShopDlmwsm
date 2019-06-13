@@ -25,7 +25,7 @@
                   <el-col :span="24">
                     <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{o.title}}</div>
                     <el-col class="listRome fr" :span="6" v-if="index<6">
-                      <router-link :to="{ name: '更多列表' }">
+                      <router-link :to="{ name: '更多列表',query: { id: o.id,title:o.name } }">
                         查看更多
                         <i class="el-icon-arrow-right"></i>
                       </router-link>
