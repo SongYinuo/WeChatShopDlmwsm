@@ -18,7 +18,7 @@
           <el-col>
             <div class="tabMore" @click="dialogShow = true">更多</div>
           </el-col>
-          <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tabs v-model="activeName">
            <el-tab-pane :label="k.mobile_name" :name="k.name" v-for="(k, index) in tabs">
                 <el-row v-for="o in k.sub_menu">
                 <el-row>
@@ -68,25 +68,21 @@
 import axios from "axios";
 export default {
   data() {
-    // var bbb=this.tabs[0]
     return {
       dialogShow: false,
       activeName: "",
       datas: [],
-       tabs: [],
+      tabs: [],
       texts: []
     };
-  },mounted() {
+  },
+  mounted() {
     this.getText();
-    // this.getFirst();
     this.getData();
     this.getImg();
-   
   },
   methods: {
-    handleClick(tab, event) {
-      // console.log(tab, event);
-    },getText() {
+    getText() {
       const that = this;
       axios({
         methods: "get",
@@ -102,15 +98,6 @@ export default {
           // console.log(error)
         });
     },
-    // getFirst(){
-    //   const that = this;
-    //   axios({
-    //     methods:"get",
-    //     headers:{
-    //       "Content-Type":"application/x-www-form-urlencoded"
-    //     },
-    //   })
-    // },
     getData() {
       const that = this;
       axios({
@@ -122,6 +109,7 @@ export default {
       })
         .then(function(res) {
           that.tabs = res.data.data.channel_list.tmenu;
+          that.activeName = that.tabs[0].mobile_name;
         })
         .catch(function(error) {
           // console.log(error)
