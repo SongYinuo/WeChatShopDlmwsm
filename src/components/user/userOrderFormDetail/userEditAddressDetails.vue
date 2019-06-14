@@ -55,7 +55,6 @@
 <script>
 import axios from "axios";
 export default {
-  inject: ["reload"],
   data() {
     return {
       title: "编辑地址详情",

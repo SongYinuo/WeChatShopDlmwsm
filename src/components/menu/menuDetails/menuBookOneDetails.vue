@@ -79,7 +79,7 @@ export default {
     },
      change: function() {
       var newId = this.$route.query.id;
-      let that = this;
+      const that = this;
       this.admire == false ? (this.admire = true) : (this.admire = false);
       this.$http
         .post("/Api/User/collect", {
@@ -87,11 +87,13 @@ export default {
           id: newId,
         })
         .then(res => {
-        
+          that.$message({
+            message: "返回我的收藏，查看收藏内",
+            type: "success"
+          });
+          that.reload();
         }) 
         .catch(error => {});
-         alert("返回我的收藏，查看收藏内容")
-        this.$router.go(0)
     }
   }
 };

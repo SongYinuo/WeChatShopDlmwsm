@@ -29,28 +29,34 @@
   </el-container>
 </template>
 <script>
-  import axios from "axios";
-  export default {
-    data() {
-      return {
-        title: "编辑详情",
-        name: [
-          {
-            title: "编辑详情"
-          }
-        ],
-        editor: {
-          model: "article"
-        },
-        img: [
-         
-          // { name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }, 
-          // { name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }
-          ]
-      };
+import axios from "axios";
+export default {
+  data() {
+    return {
+      title: "编辑详情",
+      name: [
+        {
+          title: "编辑详情"
+        }
+      ],
+      editor: {
+        model: "article"
+      },
+      img: [
+        // { name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' },
+        // { name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }
+      ]
+    };
+  },
+  mounted() {
+    this.getImg();
+  },
+  methods: {
+    handleRemove(file, fileList) {
+      // console.log(file, fileList);
     },
-    mounted(){
-      this.getImg();
+    handlePreview(file) {
+      // console.log(file);
     },
     methods: {
       handleRemove(file, fileList) {
@@ -68,12 +74,12 @@
       }
     }
   }
-
+};
 </script>
 <style lang="less">
-  @import "../../../assets/index/indexSwiper.less";
-  @import "../../../assets/header.less";
-  @import "../../../assets/index/style.less";
-  @import "../../../assets/menu/details.less";
-  @import "../../../assets/fz.less";
+@import "../../../assets/index/indexSwiper.less";
+@import "../../../assets/header.less";
+@import "../../../assets/index/style.less";
+@import "../../../assets/menu/details.less";
+@import "../../../assets/fz.less";
 </style>
