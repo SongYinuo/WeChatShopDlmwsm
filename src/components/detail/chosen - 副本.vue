@@ -23,8 +23,8 @@
       <el-col :span="22" :offset="1">
         <el-col class="specificationRow brB1">
           <el-col :span="18">
-            <span v-if="Name == 0">未选</span>
-             <span v-else>{{zong_han}}</span>
+            <span>已选</span>
+            <span>未选</span>
           </el-col>
           <el-col :span="6" class="text-alignRight">
             <el-button type="text" @click="dialogFormVisible = true">请选择</el-button>
@@ -46,11 +46,10 @@
           <el-row class="detailsRow-specification" v-for="(k,index,ids) in filter_spec">
             <el-col :span="24" style="padding-top:5vw;">
               <el-col :span="8" class="specificationProductImg">
-                <img :src="img_data" v-if="ids == 0">
+                <img :src="k[0].src">
               </el-col>
               <el-col :span="16">
-                <span class="colorRed specificationProductText" v-if="ids == 0 && prom =='' && filter_spec != ''">¥{{phone_price}}</span>
-                <span class="colorRed specificationProductText" v-if="ids == 0 && filter_spec == ''">¥{{goods.shop_price}}</span>
+                <span class="colorRed specificationProductText">¥{{data.specification.price}}123</span>
               </el-col>
             </el-col>
             <el-col :span="24">
@@ -58,7 +57,7 @@
                 <div class="pd1">{{index}}</div>
                 <el-form-item prop="resourceA">
                   <el-radio-group v-model="Name[ids]">
-                    <el-radio class="radio mgTB2 width33-3 text-alignCenter" v-for="(f,index) in k" style="width:30%;" :label="f.item" :name="f.item" @change="radio_click(f,index)"
+                    <el-radio class="radio mgTB2 width33-3 text-alignCenter" v-for="(f,index) in k" style="width:30%;" :label="f.item" @change="radio_click(value)"
                     ></el-radio>
                   </el-radio-group>
                 </el-form-item>
@@ -80,7 +79,7 @@
 import { MessageBox } from "mint-ui";
 import { mapState } from "vuex";
 export default {
-  props: ["goods", "filter_spec","spec_goods_price","prom"],
+  props: ["goods", "filter_spec"],
   data() {
     return {
       dialogFormVisible: false,
@@ -157,80 +156,28 @@ export default {
       Name:[],
       // 图片
       img_data:'',
-      // 商品价格
-      list_price:[],
-      // 默认价格
-      default_price:[],
-      // 默认价格数组
-      price_deta:[],
-      // 显示的价格
-      phone_price:'',
-      // 点击属性实现的价格
-      price_attr:[],
-      // 下标
-      indexJoin:'',
-      // 是否有活动
-      prom:[],
-      // 默认传值
-      color_list:[],
-      // 显示价格的字符串
-      font_zi:[],
-      zong_han:'未选',
     };
   },
   methods: {
     submitForm(formName) {
-      var that = this
       this.$refs[formName].validate(valid => {
         if (valid) {
+          alert("submit!");
           this.dialogFormVisible = false;
-          that.$emit('lithToFather',that.Name)
-          for(var i=0;i<that.Name.length;i++){
-            that.font_zi.push(that.Name[i])
-            console.log("添加")
-            console.log(that.font_zi.join(','))
-          }
-        that.zong_han = that.font_zi.join(',')
         } else {
           // console.log("error submit!!");
           return false;
         }
       });
     },
-    radio_click: function(name,index) {
-      console.log(name.item)
-      var that = this
-      // 父组件传值
-       // 向父元素传值
-        console.log("传值")
-        console.log(name.item);
-      // 父组件传值
-      var monery = [];
-      var monert_list = [];
-      var monery_id = [];
-      var objAttr = Object.values(that.filter_spec)
-        that.price_attr.push(name.item_id)
-        const sliceArr = that.price_attr.slice(-3)
-        sliceArr.sort(function(a,b){
-          return a - b
-        })
-        var listJoin = sliceArr.join('_');
-        console.log(listJoin)
-      for(var i=0;i<that.list_price.length;i++){
-        console.log(that.list_price[i])
-        // console.log("12589")
-        // console.log(list_price[i])
-        monery.push(that.list_price[i].key)
-        monert_list.push(that.list_price[i])   
-      }
-       that.indexJoin = monery.indexOf(listJoin)
-        that.phone_price = monert_list[that.indexJoin].price
-      if(name.src == ""){
-        return
-      }else{
-        that.img_data = name.src
-      }
+    radio_click: function(value) {
+      console.log("123456");
     }
+    // 选择属性
+    // radio_click:function(){
+    //   var that = this
+    //   console.log("123456")
+    // }
   },
   mounted() {
     var that = this;
@@ -240,52 +187,39 @@ export default {
   watch: {
     // 使用监听的方式，监听数据的变化
     goods(val) {
-      console.log("商品")
-      console.log(val)
       var that = this;
       that.goods = val;
     },
     filter_spec(val) {
       var that = this;
       that.filter_spec = val;
+      console.log("重新编辑")
       var filter_spec_attr = Object.values(that.filter_spec)
+      console.log(filter_spec_attr.length)
       var filter_item = [];
       var filter_img = [];
-      // 默认价钱数组
-      var price_list = [];
       for(var i=0;i<filter_spec_attr.length;i++){
+        console.log("哈哈哈")
         console.log(filter_spec_attr[i])
         filter_item = filter_spec_attr[i]
+        console.log(666)
+        console.log(filter_item)
         this.Name.push(filter_item[0].item)
+        console.log("222")
         console.log(this.Name)
         this.img_data = filter_item[0].item;
+        console.log("图片")
+        console.log(filter_item[0].src)
+        console.log(this.img_data)
         filter_img.push(filter_item[0].src)
-        that.default_price.push(filter_spec_attr[i][0].item_id)
-        that.color_list.push(filter_spec_attr[i].item)
+        console.log(filter_img)
       }
-      console.log(that.color_list)
-      that.default_price = that.default_price.join("_");
+      console.log("这是")
       this.img_data = filter_img[0]
+      console.log(this.img_data)
+      console.log(filter_item)
+      console.log(filter_item[0].item)
        that.ruleForm.resourceA = filter_item[0].item
-    },
-    // 价格
-    spec_goods_price(val){
-      var that = this
-      that.list_price = Object.values(val)
-      var monery = [];
-      var monert_list = [];
-      for(var i=0;i<that.list_price.length;i++){
-        monery.push(that.list_price[i].key)
-        monert_list.push(that.list_price[i])
-      }
-      var monery_index = monery.indexOf(that.default_price)
-      that.phone_price = monert_list[monery_index].price
-    },
-    // 是否有活动价格
-    prom(val){
-      console.log("活动")
-      console.log(val)
-      this.prom = val
     }
   }
 };

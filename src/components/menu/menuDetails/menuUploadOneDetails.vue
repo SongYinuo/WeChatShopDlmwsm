@@ -199,11 +199,8 @@ export default {
       return isJPG && isLt2M;
     },
     onProgress(event, file, fileList) {
-      // console.log(event, file, fileList)
-      //请求中
     },
     handleAvatarSuccess(res, file) {
-      //请求完成
       this.dialogImageUrl = URL.createObjectURL(file.raw);
       this.imgUrl = res.data;
       this.imgUrl = this.imgUrl;
@@ -212,7 +209,6 @@ export default {
       this.basic = basic;
     },
     submitForm(formName) {
-      // console.log(that.uploadAction);
       var that = this;
       if (
         that.ruleForm.name === "" ||
@@ -253,30 +249,23 @@ export default {
 @import "../../../assets/index/style.less";
 @import "../../../assets/menu/details.less";
 @import "../../../assets/fz.less";
-
 .uploadUp {
   padding-bottom: 40px;
-
   .el-form-item {
     padding-bottom: 24px;
   }
-
   .size .el-input__inner {
     background-color: transparent;
   }
-
   .material .el-input__inner {
     background-color: transparent;
   }
-
   .el-dialog {
     width: 100%;
   }
-
   .bgRelease ul li {
     width: 31.5%;
   }
-
   .bgRelease ul li:nth-child(3n + 3) {
     margin-right: 0;
   }
