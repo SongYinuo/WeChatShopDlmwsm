@@ -19,7 +19,7 @@
               <div class="tabMore" @click="dialogShow = true">更多</div>
             </el-col>
             <el-tabs v-model="activeName" @tab-click="handleClick">
-              <el-tab-pane :label="k.mobile_name" :name="k.name" v-for="(k, index) in tabs">
+              <el-tab-pane :label="k.mobile_name" :name="k.name" v-for="(k, index) in tabs" >
                 <el-row v-for="o in k.sub_menu">
                   <el-row>
                     <el-col :span="24">
@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       dialogShow: false,
-      activeName: "面膜",
+      activeName: "",
       datas: [],
       tabs: [],
       texts: []
@@ -112,6 +112,7 @@ export default {
       })
         .then(function(res) {
           that.tabs = res.data.data.channel_list.tmenu;
+          that.activeName = that.tabs[0].mobile_name;
         })
         .catch(function(error) {
           // console.log(error)

@@ -18,7 +18,7 @@
           <el-col>
             <div class="tabMore" @click="dialogShow = true">更多</div>
           </el-col>
-          <el-tabs v-model="datas.activeName" @tab-click="handleClick">
+          <el-tabs v-model="activeName">
             <el-tab-pane  :label="k.mobile_name" :name="k.name" v-for="(k, index) in tabs">
               <el-row v-for="o in k.sub_menu">
                 <el-row>
@@ -49,7 +49,7 @@
           </el-tabs>
         </el-col>
       </el-row>
-<el-dialog title="分类" :visible.sync="dialogShow" width="70%" top="0">
+      <el-dialog title="分类" :visible.sync="dialogShow" width="70%" top="0">
         <el-row>
           <el-col :span="22" :offset="1" class="pd2 text-alignLeft brB1"
              v-for="(l, index) in texts.tmenu">
@@ -71,22 +71,19 @@ export default {
   data() {
     return {
       dialogShow: false,
-       activeName: "hongchang",
+      activeName: "",
       datas: [],
-     tabs:[],
-     texts:[],
+      tabs: [],
+      texts: []
     };
   },
-  mounted(){
-  this.getText();
-  this.getData();
-  this.getImg();
+  mounted() {
+    this.getText();
+    this.getData();
+    this.getImg();
   },
   methods: {
-    handleClick(tab, event) {
-      // console.log(tab, event);
-    },
-     getText() {
+    getText() {
       const that = this;
       axios({
         methods: "get",
@@ -113,6 +110,7 @@ export default {
       })
         .then(function(res) {
           that.tabs = res.data.data.channel_list.tmenu;
+          that.activeName = that.tabs[0].mobile_name;
         })
         .catch(function(error) {
           // console.log(error)
