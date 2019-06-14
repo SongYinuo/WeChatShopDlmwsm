@@ -92,9 +92,6 @@ export default {
         },
         url: "/Api/User/sign"
       }).then(function(res) {
-        // console.log("功率");
-        // console.log(typeof res.data.data.keep_award);
-        // that.bookList = res.data.data
         that.signData = res.data.data.list;
         that.getTiem = res.data.data;
         var the_keep_day = res.data.data.keep_days;
@@ -110,19 +107,13 @@ export default {
         }
 
         that.keep_day = the_keep_day.split("");
-        // console.log(that.keep_day);
-
         that.sign_status = res.data.data.is_sign;
-        // console.log(that.signData);
         // 新加的内容开始
         var numbers = String(res.data.data.keep_award);
         // 新家的内容结束
       });
     },
     greet: function(event) {
-      // this.userSignIn.IfSignIn === false;
-      // alert("签到成功");
-      // console.log(this.userSignIn.IfSignIn);
       let that = this;
       Axios({
         methods: "get",
@@ -131,14 +122,9 @@ export default {
         },
         url: "/Api/User/sign_handle"
       }).then(function(res) {
-        // console.log("签到成功");
-        // console.log(res);
-        // that.bookList = res.data.data
         if (res.data.code == 1) {
           that.signSuccess = "签到已成功";
           that.$router.go(0);
-          // this.reload();
-          // console.log(that.signSuccess);
         } else {
           that.signSuccess = "签到已成功";
           that.$router.go(0);

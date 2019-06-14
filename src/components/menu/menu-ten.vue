@@ -61,7 +61,6 @@ export default {
           that.Paintings = res.data.data;
         })
         .catch(function(error) {
-          // console.log(error);
         });
     }
   }

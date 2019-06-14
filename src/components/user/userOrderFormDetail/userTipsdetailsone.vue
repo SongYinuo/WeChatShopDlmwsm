@@ -101,7 +101,6 @@
           .get("/Api/User/article_detail" + "?article_id=" + newId)
           .then(function (res) {
             that.article_ids = res.data.data.is_collect;
-            // console.log(that.article_ids)
             that.items = res.data.data;
           })
           .catch(function (error) {
@@ -113,11 +112,9 @@
         axios
           .get("/Api/User/article_detail" + "?article_id=" + newId)
           .then(function (res) {
-            // console.log(res.data);
             that.swiperList = res.data.data;
           })
           .catch(function (error) {
-            // console.log(error)
           });
       },
       moveErrorImg: function (event) {

@@ -83,7 +83,6 @@ export default {
       })
         .then(function(res) {
           thia.form.province = res.data.data; //将获取的数据赋值
-          console.log(thia.form.province);
         })
         .catch(function(response) {});
     },
@@ -97,9 +96,7 @@ export default {
         },
         url: "/Api/Api/get_region?parent_id=" + val // +
       }).then(function(res) {
-        console.log(res);
         thia.form.city = res.data.data; //将获取的数据赋值
-        console.log(thia.form.city);
       });
     },
     getDistrict(value) {
@@ -111,9 +108,7 @@ export default {
         },
         url: "/Api/Api/get_region?parent_id=" + value // +
       }).then(function(res) {
-        console.log(res);
         thia.form.district = res.data.data; //将获取的数据赋值
-        console.log(thia.form.district);
       });
     },
     onSubmit() {
@@ -129,8 +124,6 @@ export default {
         })
         .then(res => {})
         .catch(error => {});
-      // this.reload();
-      console.log("submit!");
     }
   }
 };

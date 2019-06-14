@@ -232,7 +232,6 @@ export default {
         .catch({});
     },
    handleClick(tab, event) {
-        // console.log(tab, event);
       },
     moveErrorImg: function (event) {
         event.currentTarget.src = "static/testImg/defaultAvatar.png";

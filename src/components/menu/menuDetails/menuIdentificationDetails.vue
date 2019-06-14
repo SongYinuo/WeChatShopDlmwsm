@@ -143,15 +143,12 @@ export default {
   // },
   methods: {
     handleRemove(file, fileList) {
-      // console.log(file, fileList);
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
     beforeAvatarUpload(file) {
-      //请求前
-      // console.log(file);
       const isJPG =
         file.type === "image/jpg" ||
         file.type === "image/jpeg" ||
@@ -168,8 +165,6 @@ export default {
       return isJPG && isLt2M;
     },
     onProgress(event, file, fileList) {
-      // console.log(event, file, fileList)
-      //请求中
     },
     handleAvatarSuccess(res, file) {
       //请求完成

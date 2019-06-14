@@ -48,7 +48,6 @@ export default {
        axios
        .get("/Api/Goods/goods_list" + "?id=" + newId)
        .then(function(res){
-         console.log(res.data.data.goods_list);
          that.datas=res.data.data.goods_list;
        }).catch(function(error){
 

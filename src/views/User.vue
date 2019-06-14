@@ -190,9 +190,7 @@ export default {
         },
         url: "/Api/Api/index"
       }).then(function(res) {
-        console.log(res);
         that.userList = res.data.data.user;
-        console.log(that.userList);
       });
     },
     getUserData() {

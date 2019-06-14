@@ -79,7 +79,6 @@ export default {
     getImg() {
       const that = this;
       axios.get("/Api/User/address_list").then(function(res) {
-        console.log(res.data.data);
         that.items = res.data.data;
       });
     },
@@ -88,14 +87,11 @@ export default {
       const newId = id;
       axios.get("/Api/User/address_delete?id=" + newId, {
       }).then(function(res) {
-        console.log(res);
       });
     },
     // 点击事件
     default_click: function(index) {
       var that = this;
-      // console.log("点击");
-      // console.log(index);
       var address_id = that.items[index].address_id;
       axios
         .get("/Api/User/set_default_address?id=" + address_id)
