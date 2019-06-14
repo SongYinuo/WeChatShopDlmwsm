@@ -50,6 +50,7 @@ export default {
       axios
         .get("/Api/User/address_detail?id=" + address_id)
         .then(function(res) {
+          that.data = res.data.data;
         })
         .catch(function(error) {});
     }

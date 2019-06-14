@@ -9,35 +9,35 @@
     <el-main>
       <el-row class="newAddRow">
         <el-col :span="22" :offset="1">
-          <el-form ref="editForm" :model="editForm">
-            <el-form-item>
+          <el-form ref="editForm" :model="editForm" :rules="rules">
+            <el-form-item prop="nameAuthor">
               <!-- <el-input placeholder="收货人姓名" v-model="editForm.formName" @focus="changeFouceValue" v-on:input="change()" type="text" ></el-input>-->
-              <el-input placeholder="收货人姓名" v-model="editForm.formName"  type="text" ></el-input>
+              <el-input placeholder="收货人姓名" v-model="editForm.formName" type="text"></el-input>
+            </el-form-item>
+            <el-form-item prop="date1">
+              <el-input type="number" v-model="editForm.formPhone" placeholder="手机号码" ></el-input>
             </el-form-item>
             <el-form-item>
-              <el-input v-model="editForm.formPhone" placeholder="手机号码"  ></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-col :span="8">
+              <el-col :span="8" prop="date2">
                 <el-select v-model="editForm.formProvinceValue" placeholder="所在省"  @change="getCity">
                   <el-option v-for="item in editForm.formProvince" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="8" prop="year1">
                 <el-select v-model="editForm.formvalueCity" placeholder="所在市/直辖市" @change="getDistrict">
                   <el-option v-for="item in editForm.formCity" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="8" prop="year2">
                 <el-select v-model="editForm.formvalueDistrict" placeholder="所在区域">
                   <el-option v-for="item in editForm.formDistrict" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
               </el-col>
             </el-form-item>
-            <el-form-item>
+            <el-form-item prop="messageText">
               <el-input type="textarea" v-model="editForm.formDesc" :rows="7" placeholder="街道、小区门牌等详细地址"></el-input>
             </el-form-item>
             <el-form-item>
@@ -60,19 +60,6 @@ export default {
     return {
       title: "编辑地址详情",
       data: {},
-      form: {
-        name: "",
-        phone: "",
-        region: "",
-        desc: "",
-        province: [],
-        provinceValue: "",
-        city: [],
-        valueCity: "",
-        district: [],
-        valueDistrict: "",
-        value:""
-      },
       editForm: {
         formPhone: "",
         formName: "",
@@ -83,18 +70,76 @@ export default {
         formDistrict: [],
         formvalueDistrict: "",
         formDesc: ""
+      },
+      rules: {
+        nameAuthor: [
+          {
+            required: true,
+            message: "请输入姓名",
+            trigger: "blur"
+          },
+          {
+            min: 1,
+            max: 50,
+            message: "长度在 1 到 50 个字符",
+            trigger: "blur"
+          }
+        ],
+        date1: [
+          {
+            required: true,
+            message: "请输入手机号",
+            trigger: "blur"
+          },
+          {
+            pattern: /^1[3|4|5|7|8][0-9]\d{8}$/,
+            message: "手机号格式不对",
+            trigger: "blur"
+          }
+        ],
+        date2: [
+          {
+            required: true,
+            message: "请输入所在省",
+            trigger: "blur"
+          }
+        ],
+        year1: [
+          {
+            required: true,
+            message: "请输入所在市",
+            trigger: "blur"
+          }
+        ],
+        year2: [
+          {
+            required: true,
+            message: "请输入所在区",
+            trigger: "blur"
+          }
+        ],
+
+        messageText: [
+          {
+            required: true,
+            message: "请输入详细留言",
+            trigger: "blur"
+          }
+        ]
       }
     };
-  },  computed: {
-      newName() {
-        return this.editForm.formName;
-      }
-    },
+  },
+  computed: {
+    newName() {
+      return this.editForm.formName;
+    }
+  },
   watch: {
-   newName(val) {
-        this.value = val;
-      }
-} ,mounted(){
+    newName(val) {
+      this.value = val;
+    }
+  },
+  mounted() {
     this.getData();
     this.getProvince();
     this.getCity();
@@ -150,8 +195,7 @@ export default {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        url: "/Api/Api/get_region?parent_id=" + val,
-        
+        url: "/Api/Api/get_region?parent_id=" + val
       }).then(function(res) {
         thia.editForm.formCity = res.data.data;
       });
@@ -170,24 +214,36 @@ export default {
     },
     onSubmit() {
       var thir = this;
-      axios
-        .post("/Api/User/address_edit", {
-          consignee: thir.editForm.formName,
-          mobile: thir.editForm.formPhone,
-          province: thir.editForm.formProvinceValue,
-          city: thir.editForm.formvalueCity,
-          district: thir.editForm.formvalueDistrict,
-          address: thir.editForm.formDesc,
-          id:thir.editForm.id,
-          
-        })
-        .then(res => {})
-        .catch(error => {});
-      this.reload();
-    },
-    
+      if (
+        thir.editForm.formName === "" ||
+        thir.editForm.formPhone === "" ||
+        thir.editForm.formProvinceValue === "" ||
+        thir.editForm.formvalueCity === "" ||
+        thir.editForm.formvalueDistrict === "" ||
+        thir.editForm.formvalueDistrict === "" ||
+        thir.editForm.formDesc === ""
+      ) {
+        thir.$message({
+          message: "请输入当前要修改的信息",
+          type: "warning"
+        });
+      } else {
+        axios
+          .post("/Api/User/address_edit", {
+            consignee: thir.editForm.formName,
+            mobile: thir.editForm.formPhone,
+            province: thir.editForm.formProvinceValue,
+            city: thir.editForm.formvalueCity,
+            district: thir.editForm.formvalueDistrict,
+            address: thir.editForm.formDesc,
+            id: thir.editForm.id
+          })
+          .then(res => {})
+          .catch(error => {});
+        this.reload();
+      }
+    }
   }
-
 };
 </script>
 
