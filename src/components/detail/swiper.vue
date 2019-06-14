@@ -2,10 +2,10 @@
   <section class="detailsDtails">
     <div class="swiper">
       <mt-swipe :auto="4000">
-        <mt-swipe-item v-for="k in datas.swiperUrl" :key="k.id">
-           <img :src="k.img">
+        <mt-swipe-item v-for="k in goods_images_list">
+           <img :src="k.image_url">
         </mt-swipe-item>
-        <span class="hotIcon bgRed pdLR2TB1 colorWhite" v-if="datas.state==='热销'">热销</span>
+        <!-- <span class="hotIcon bgRed pdLR2TB1 colorWhite" v-if="datas.state==='热销'">热销</span> -->
       </mt-swipe>
       <div class="back" @click="$router.go(-1)">
         <span class="icon-go"></span>
@@ -16,24 +16,17 @@
 
 <script>
 export default {
+  props:['goods_images_list'],
   data() {
     return {
-      datas: {
-        // state: '热销',
-        swiperUrl: [
-          { img: "static/testImg/product-details01.jpg", text: "1" },
-          { img: "static/testImg/product-details01-1.jpg", text: "2" },
-          { img: "static/testImg/product-details01-2.jpg", text: "3" },
-          { img: "static/testImg/product-details01-3.jpg", text: "4" }
-        ]
-      }
+        // goods_images_list: [
+        // ]
     };
-  }
-  // computed: {
-  //   swiper () {
-  //     return this.$store.state.detail.productDatas.swiper
-  //   }
-  // }
+  },
+  created(){
+    var that = this
+  console.log(that.goods_images_list)
+  },
 };
 </script>
 

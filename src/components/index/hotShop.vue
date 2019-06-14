@@ -22,7 +22,7 @@
           <el-col :span="22" :offset="1">
             <div class="swiper-container">
                <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="swipers in swiperList" :key="swiper.goods_id">
+                <div class="swiper-slide" v-for="swipers in swiperList" :key="swipers.goods_id">
                    <router-link :to="{ name: '详情页', query: { id: swipers.goods_id }}">
                     <img :src="swipers.original_img" class="swiperListImg">
                   </router-link>
@@ -94,6 +94,7 @@ export default {
       axios
         .get("/Api/Goods/goods_list" + "?is_hot=" + 1 + "&size=" + 4)
         .then(function(res) {
+          console.log(res)
           thit.swiperList = res.data.data.goods_list;
         })
         .catch(function(error) {});
