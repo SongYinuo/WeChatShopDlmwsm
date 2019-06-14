@@ -45,7 +45,7 @@
               :style="{'color':item.date == '今日'?'#FFAC00':'#DBDBDB'}">{{item.date}}</el-button>
           </div>
         </el-col>
-        <el-col class="text-alignCenter pdT12">
+        <el-col class="text-alignCenter pdT6">
           <el-button round class="signInBtn bgRedOrange colorWhite bgYellow" v-on:click="greet"
             :style="{'background-color':sign_status == 1 ?'#bbb':'#FFD800'}">{{sign_status == 1 ? '签到已成功' :'马上签到'}}
           </el-button>

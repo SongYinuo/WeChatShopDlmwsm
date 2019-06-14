@@ -219,6 +219,9 @@ export default {
 @import "../assets/user/icon/carstyle.css";
 @import "../assets/user/user.less";
 .user {
+  .userName {
+     .fz(font-size, 28);
+  }
   .userHeaderImg {
     border-radius: 50%;
   }
