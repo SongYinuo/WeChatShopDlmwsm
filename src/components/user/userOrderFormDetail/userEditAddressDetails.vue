@@ -19,13 +19,13 @@
             </el-form-item>
             <el-form-item>
               <el-col :span="8">
-                <el-select v-model="editForm.formProvinceValue" placeholder="所在省"  @change="getCity">
+                <el-select v-model="editForm.formProvinceValue" placeholder="所在省"  v-on:input="getCity">
                   <el-option v-for="item in editForm.formProvince" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
               </el-col>
               <el-col :span="8">
-                <el-select v-model="editForm.formvalueCity" placeholder="所在市/直辖市" @change="getDistrict">
+                <el-select v-model="editForm.formvalueCity" placeholder="所在市/直辖市" v-on:input="getDistrict">
                   <el-option v-for="item in editForm.formCity" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
@@ -55,7 +55,6 @@
 <script>
 import axios from "axios";
 export default {
-  inject: ["reload"],
   data() {
     return {
       title: "编辑地址详情",
@@ -71,7 +70,7 @@ export default {
         valueCity: "",
         district: [],
         valueDistrict: "",
-        value:""
+        value: ""
       },
       editForm: {
         formPhone: "",
@@ -85,16 +84,18 @@ export default {
         formDesc: ""
       }
     };
-  },  computed: {
-      newName() {
-        return this.editForm.formName;
-      }
-    },
+  },
+  computed: {
+    newName() {
+      return this.editForm.formName;
+    }
+  },
   watch: {
-   newName(val) {
-        this.value = val;
-      }
-} ,mounted(){
+    newName(val) {
+      this.value = val;
+    }
+  },
+  mounted() {
     this.getData();
     this.getProvince();
     this.getCity();
@@ -150,8 +151,7 @@ export default {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        url: "/Api/Api/get_region?parent_id=" + val,
-        
+        url: "/Api/Api/get_region?parent_id=" + val
       }).then(function(res) {
         thia.editForm.formCity = res.data.data;
       });
@@ -178,16 +178,13 @@ export default {
           city: thir.editForm.formvalueCity,
           district: thir.editForm.formvalueDistrict,
           address: thir.editForm.formDesc,
-          id:thir.editForm.id,
-          
+          id: thir.editForm.id
         })
         .then(res => {})
         .catch(error => {});
       this.reload();
-    },
-    
+    }
   }
-
 };
 </script>
 
