@@ -29,54 +29,52 @@
   </el-container>
 </template>
 <script>
-  import axios from "axios";
-  export default {
-    data() {
-      return {
-        title: "编辑详情",
-        name: [
-          {
-            title: "编辑详情"
-          }
-        ],
-        editor: {
-          model: "article"
-        },
-        img: [
-         
-          // { name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }, 
-          // { name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }
-          ]
-      };
-    },
-    mounted(){
-      this.getImg();
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        // console.log(file, fileList);
+import axios from "axios";
+export default {
+  data() {
+    return {
+      title: "编辑详情",
+      name: [
+        {
+          title: "编辑详情"
+        }
+      ],
+      editor: {
+        model: "article"
       },
-      handlePreview(file) {
-        // console.log(file);
-      },
-      getImg(){
-        var newId = this.$route.query.id;
-        const that = this;
-        axios
-          .get("/Api/User/article_detail" + "?article_id=" + newId)
-          .then(function(res){
-        console.log(res.data.data.user_show_url);
-        that.img = res.data.data;
-      })
-      }
+      img: [
+        // { name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' },
+        // { name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }
+      ]
+    };
+  },
+  mounted() {
+    this.getImg();
+  },
+  methods: {
+    handleRemove(file, fileList) {
+      // console.log(file, fileList);
+    },
+    handlePreview(file) {
+      // console.log(file);
+    },
+    getImg() {
+      var newId = this.$route.query.id;
+      const that = this;
+      axios
+        .get("/Api/User/article_detail" + "?article_id=" + newId)
+        .then(function(res) {
+          console.log(res.data.data.user_show_url);
+          that.img = res.data.data;
+        });
     }
   }
-
+};
 </script>
 <style lang="less">
-  @import "../../../assets/index/indexSwiper.less";
-  @import "../../../assets/header.less";
-  @import "../../../assets/index/style.less";
-  @import "../../../assets/menu/details.less";
-  @import "../../../assets/fz.less";
+@import "../../../assets/index/indexSwiper.less";
+@import "../../../assets/header.less";
+@import "../../../assets/index/style.less";
+@import "../../../assets/menu/details.less";
+@import "../../../assets/fz.less";
 </style>

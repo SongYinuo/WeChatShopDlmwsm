@@ -104,8 +104,13 @@ export default {
         phone: [
           {
             required: true,
-            message: "请输入联系电话手机号码",
-            trigger: "change"
+            message: "请输入手机号",
+            trigger: "blur"
+          },
+          {
+            pattern: /^1[3|4|5|7|8][0-9]\d{8}$/,
+            message: "手机号格式不对",
+            trigger: "blur"
           }
         ],
         messageText: [
@@ -165,7 +170,6 @@ export default {
         that.ruleForm.name === "" ||
         that.ruleForm.nameAuthor === "" ||
         that.ruleForm.phone === "" ||
-        that.ruleForm.messageText === "" ||
         that.basic === ""
       ) {
         that.$message({

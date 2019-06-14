@@ -10,7 +10,6 @@
       <el-col v-for="video in videos">
         <video :src="video.videoUrl" controls="controls" class="deVideos"></video>
       </el-col>
-
       <el-col :span="22" :offset="1" class="pdT6">
         <div v-for="item in items" class="copyVideo">
           <el-col :span="16">
@@ -25,13 +24,11 @@
           </div>
           <el-row>
             <el-col :span="22">
-
               <div class="deText pdT6">{{item.ptext}}</div>
             </el-col>
           </el-row>
         </div>
       </el-col>
-
     </el-row>
   </el-container>
 </template>

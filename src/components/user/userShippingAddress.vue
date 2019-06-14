@@ -6,13 +6,13 @@
           </div>
           {{title}}
         </el-header>
-        <el-main class="addRow">
+        <el-main class="addRow addressListRow">
           <el-row>
               <el-col :span="22" :offset="1" class="bgCfff pdLR2TB1 positionR">
                 <el-col v-for="(item, index) in items" class="addInfo">
                   <el-col :span="22" :offset="1" class="pd2">
-                    <el-col :span="6" class="name">{{item.consignee}}</el-col>
-                    <el-col :span="18" class="phone text-alignRight">{{item.mobile}}</el-col>
+                    <el-col :span="12" class="name">{{item.consignee}}</el-col>
+                    <el-col :span="12" class="phone text-alignRight">{{item.mobile}}</el-col>
                   </el-col>
                   <el-col class="addressTxt">
                     <el-col :span="3" v-if="item.is_default=== 1">
@@ -41,7 +41,6 @@
                               默认地址
                             </el-radio>
                             <el-radio :label="item.address_id" :index="item.is_default" v-if="item.is_default=== 0" >默认地址</el-radio>
-                             
                           </el-radio-group>
                       </div>
                     </el-col>
@@ -64,7 +63,7 @@
 <script>
 import axios from "axios";
 export default {
-  inject: ['reload'],
+  inject: ["reload"],
   data() {
     return {
       radio: 1,
@@ -79,32 +78,31 @@ export default {
     getImg() {
       const that = this;
       axios.get("/Api/User/address_list").then(function(res) {
-        console.log(res.data.data);
         that.items = res.data.data;
       });
     },
     deleteInfo(id) {
-      // this.items.splice(index, 1);
+      const that = this;
       const newId = id;
-      axios.get("/Api/User/address_delete?id=" + newId, {
-      }).then(function(res) {
-        console.log(res);
+      axios.get("/Api/User/address_delete?id=" + newId, {}).then(function(res) {
+        that.$message({
+          message: "删除成功",
+          type: "success"
+        });
+        that.reload();
       });
     },
-    // 点击事件
     default_click: function(index) {
-      var that = this;
-      // console.log("点击");
-      // console.log(index);
-      var address_id = that.items[index].address_id;
+      const that = this;
+      const address_id = that.items[index].address_id;
       axios
         .get("/Api/User/set_default_address?id=" + address_id)
         .then(function(res) {
-          this.$message({
-            message: "删除成功",
+          that.$message({
+            message: "设置成功",
             type: "success"
           });
-          this.reload();
+          that.reload();
         });
     }
   }
@@ -124,7 +122,11 @@ export default {
   height: 100%;
 }
 
-.red .el-radio__inner{
+.addressListRow {
+  padding-bottom: 60px;
+}
+
+.red .el-radio__inner {
   padding: 4px;
   background-color: #409eff;
   padding: 4px;

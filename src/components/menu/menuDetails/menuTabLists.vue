@@ -59,40 +59,39 @@ export default {
   data() {
     return {
       dialogShow: false,
-      activeName: 'first',
-       name:[
-          {
-            title: "栏目分类"
-          }
-        ],
+      activeName: "first",
+      name: [
+        {
+          title: "栏目分类"
+        }
+      ],
       menuTab: [],
-      tabs:[],
-      parent:[],
-
+      tabs: [],
+      parent: []
     };
   },
-  mounted(){
+  mounted() {
     this.getData();
     // this.getImg();
-
   },
   methods: {
     handleClick(tab, event) {
       // console.log(tab, event);
-    },getData(){
+    },
+    getData() {
       var newId = this.$route.query.id;
       const that = this;
       axios
-      .get("/Api/Goods/goods_channel_list" + "?cat_id=" + newId)  
-      .then(function(res){
-        // console.log(res.data.data);
-        that.menuTab = res.data.data.cat_data;
-         that.tabs = res.data.data.channel_list;
-      })  .catch(function(error){
+        .get("/Api/Goods/goods_channel_list" + "?cat_id=" + newId)
+        .then(function(res) { 
+          // console.log(res.data.data);
+          that.menuTab = res.data.data.cat_data;
+          that.tabs = res.data.data.channel_list;
+        })
+        .catch(function(error) {
           // console.log(error)
-        });   
-
-    },
+        });
+    }
     // getImg(){
     //   // var newId  = this.$$route.query.id;
     //   const that = this;

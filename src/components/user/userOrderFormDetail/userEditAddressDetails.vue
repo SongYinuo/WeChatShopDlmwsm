@@ -19,13 +19,13 @@
             </el-form-item>
             <el-form-item>
               <el-col :span="8">
-                <el-select v-model="editForm.formProvinceValue" placeholder="所在省"  @change="getCity">
+                <el-select v-model="editForm.formProvinceValue" placeholder="所在省"  v-on:input="getCity">
                   <el-option v-for="item in editForm.formProvince" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
               </el-col>
               <el-col :span="8">
-                <el-select v-model="editForm.formvalueCity" placeholder="所在市/直辖市" @change="getDistrict">
+                <el-select v-model="editForm.formvalueCity" placeholder="所在市/直辖市" v-on:input="getDistrict">
                   <el-option v-for="item in editForm.formCity" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
@@ -55,7 +55,6 @@
 <script>
 import axios from "axios";
 export default {
-  inject: ["reload"],
   data() {
     return {
       title: "编辑地址详情",
@@ -93,7 +92,7 @@ export default {
   watch: {
    newName(val) {
         this.value = val;
-        console.log(this.value);
+        // console.log(this.value);
       }
 } ,mounted(){
     this.getData();
@@ -185,12 +184,14 @@ export default {
           district: thir.editForm.formvalueDistrict,
           address: thir.editForm.formDesc,
           id:thir.editForm.id,
-          
         })
         .then(res => {})
         .catch(error => {});
-      this.reload();
       // console.log("submit!");
+      // this.getData();
+      // alert("返回上一页查看更改")
+      thir.$message.success("已修改成功,正在回到上一页查看");
+      thir.$router.go(-1)
     },
     
   }
