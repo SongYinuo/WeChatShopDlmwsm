@@ -159,7 +159,6 @@
     },
     methods: {
       handleClick(tab, event) {
-        console.log(tab, event);
       },
       handleClose(done) {
         this.$confirm("确认关闭？")

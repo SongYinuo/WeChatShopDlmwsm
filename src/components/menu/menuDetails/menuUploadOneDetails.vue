@@ -174,15 +174,12 @@ export default {
   },
   methods: {
     handleRemove(file, fileList) {
-      // console.log(file, fileList);
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
     beforeAvatarUpload(file) {
-      //请求前
-      // console.log(file);
       const isJPG =
         file.type === "image/jpg" ||
         file.type === "image/jpeg" ||

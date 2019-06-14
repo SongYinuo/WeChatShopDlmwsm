@@ -93,7 +93,6 @@ export default {
   watch: {
    newName(val) {
         this.value = val;
-        console.log(this.value);
       }
 } ,mounted(){
     this.getData();
@@ -127,8 +126,6 @@ export default {
           that.editForm.formDesc = res.data.data.address;
           that.editForm.id = res.data.data.address_id;
           that.editForm.district = res.data.data.district_name;
-        //  console.log(res.data.data);
-        //  console.log(res.data.data.district);
         })
         .catch(function(response) {});
     },
@@ -157,8 +154,6 @@ export default {
         
       }).then(function(res) {
         thia.editForm.formCity = res.data.data;
-        //  console.log(res.data.data);
-        
       });
     },
     getDistrict(value) {
@@ -171,7 +166,6 @@ export default {
         url: "/Api/Api/get_region?parent_id=" + value
       }).then(function(res) {
         thia.editForm.formDistrict = res.data.data;
-        // console.log(this.editForm.formName);
       });
     },
     onSubmit() {
@@ -190,7 +184,6 @@ export default {
         .then(res => {})
         .catch(error => {});
       this.reload();
-      // console.log("submit!");
     },
     
   }

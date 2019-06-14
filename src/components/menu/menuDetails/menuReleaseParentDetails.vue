@@ -53,8 +53,6 @@
       }
     },
     mounted(){
-      console.log("接受参数")
-      console.log(this.$route.query.cart_id)
       this.cart_id = this.$route.query.cart_id
     },
     methods: {

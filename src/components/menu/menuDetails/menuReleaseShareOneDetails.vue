@@ -46,29 +46,17 @@ export default {
   },
   methods: {
     handleRemove(file, fileList) {
-      console.log(file, fileList);
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
      handleRemove(file, fileList) {
-      console.log(file, fileList);
     }, 
     changeUpload: function(file, fileList) {
       this.fileList = fileList;
-      console.log(this.fileList);
-      console.log(file);},
+      },
     submitForm(formName) {
-      // this.$refs[formName].validate(valid => {
-      //   if (valid) {
-      //     // alert('submit!');
-      //     console.log(this.ruleForm.name);
-      //   } else {
-      //     console.log("error submit!!");
-      //     return false;
-      //   }
-      // });
       let that = this;
       that.$http
       .post("/Api/User/article_video_add",{
@@ -77,7 +65,6 @@ export default {
       
     },
     upqiniu(req) {
-        console.log(req);
         const config = {
           headers: {
             "Content-Type": "multipart/form-data"
@@ -86,7 +73,6 @@ export default {
         this.axios
           .post("/Api/User/article_video_add", formData, config)
           .then(res => {
-            console.log(res, res.url);
             const formdata = new FormData();
             formdata.append("file", req.file);
             formdata.append("token", res.data);
@@ -94,7 +80,6 @@ export default {
             // 获取到凭证之后再将文件上传到七牛云空间
             this.axios.post(this.domain, formdata, config).then(res => {
               this.imageUrl = "http://" + this.qiniuaddr + "/" + res.data.key;
-              console.log(this.imageUrl);
             });
           });
         },beforeUpload(file){

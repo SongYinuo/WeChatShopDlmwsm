@@ -126,8 +126,6 @@ export default {
       this.dialogVisible = true;
     },
     beforeAvatarUpload(file) {
-      //请求前
-      // console.log(file);
       const isJPG =
         file.type === "image/jpg" ||
         file.type === "image/jpeg" ||
@@ -144,8 +142,6 @@ export default {
       return isJPG && isLt2M;
     },
     onProgress(event, file, fileList) {
-      // console.log(event, file, fileList)
-      //请求中
     },
     handleAvatarSuccess(res, file,fileList) {
       console.log("123456")

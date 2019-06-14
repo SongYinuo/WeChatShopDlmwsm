@@ -44,7 +44,6 @@ import axios from "axios";
         var that = this
         var cart_id = that.$route.params.id
         axios.get('/Api/Goods/goods_list?id=' + cart_id).then(function(res){
-          console.log(res)
           that.list_goods_img = res.data.data.cat_data.image,
           that.goods_list = res.data.data.goods_list
         })
