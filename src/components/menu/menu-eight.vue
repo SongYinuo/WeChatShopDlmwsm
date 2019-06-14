@@ -7,8 +7,8 @@
       {{title}}
     </el-header>
     <div class="trading">
-      <el-tabs :tab-position="tabPosition" v-model="datas.tabkey">
-        <el-tab-pane v-for="household in datas.households" :label="household.mobile_name" :name="household.name">
+      <el-tabs :tab-position="tabPosition" v-model="tabkey">
+        <el-tab-pane v-for="(household,index) in datas.households" :label="household.mobile_name" :name="household.name" >
           <el-row>
             <el-col :span="22" :offset="1" class="tradingtab-antique">
               <div class="tradingtab-adiv">
@@ -31,86 +31,83 @@
 </template>
 
 <script>
-  import axios from "axios";
-  export default {
-    data() {
-      return {
-        title: "交易中心",
-        tabPosition: "left",
-        datas: {
-          tabkey: "手机 、 数码 、 通信",
-          households: []
-        }
-      };
-    },
-    mounted() {
-      this.getData();
-    },
-    methods: {
-      getData: function () {
-        let that = this;
-        axios({
-          methods: "get",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          url: "/Api/Goods/index"
-        }).then(function (res) {
-          console.log(res);
-          that.datas.households = res.data.data;
-        });
+import axios from "axios";
+export default {
+  data() {
+    return {
+      title: "交易中心",
+      tabPosition: "left",
+      tabkey: "食品",
+      datas: {
+        households: []
       }
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData: function() {
+      const that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Goods/index"
+      }).then(function(res) {
+        that.datas.households = res.data.data;
+      });
     }
-  };
-
+  }
+};
 </script>
 
 <style lang="less">
-  @import "../../assets/index/style.less";
-  @import "../../assets/header.less";
-  @import "../../assets/menu/menu.less";
+@import "../../assets/index/style.less";
+@import "../../assets/header.less";
+@import "../../assets/menu/menu.less";
 
-  .trading .el-tabs__nav {
-    margin-left: 0%;
-    background-color: #f5f5f4;
-    left: 0;
-  }
+.trading .el-tabs__nav {
+  margin-left: 0%;
+  background-color: #f5f5f4;
+  left: 0;
+}
 
-  .trading .el-tabs--left .el-tabs__active-bar.is-left,
-  .el-tabs--left .el-tabs__nav-wrap.is-left::after {
-    left: 0;
-  }
+.trading .el-tabs--left .el-tabs__active-bar.is-left,
+.el-tabs--left .el-tabs__nav-wrap.is-left::after {
+  left: 0;
+}
 
-  .trading .el-tabs__item:hover {
-    color: #dab62e;
-    cursor: pointer;
-    background-color: #fff;
-  }
+.trading .el-tabs__item:hover {
+  color: #dab62e;
+  cursor: pointer;
+  background-color: #fff;
+}
 
-  .tradingtab-adiv img {
-    width: 80%;
+.tradingtab-adiv img {
+  width: 80%;
 
-    padding-left: 10%;
-  }
+  padding-left: 10%;
+}
 
-  .tradingtab-adiv {
-    border-radius: 3px;
-    margin-bottom: 38px;
-  }
+.tradingtab-adiv {
+  border-radius: 3px;
+  margin-bottom: 38px;
+}
 
-  .trading .tradingtab-icon {
-    width: 33%;
-    float: left;
-    text-align: center;
-  }
+.trading .tradingtab-icon {
+  width: 33%;
+  float: left;
+  text-align: center;
+}
 
-  .tradingtab-icon img {
-    border-radius: 3px;
-  }
+.tradingtab-icon img {
+  border-radius: 3px;
+}
 
-  // 后加的内容
-  .tradingtab-icon img {
-    height: 2.5rem;
-  }
-
+// 后加的内容
+.tradingtab-icon img {
+  height: 2.5rem;
+}
 </style>
