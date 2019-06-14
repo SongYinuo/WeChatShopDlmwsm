@@ -7,7 +7,7 @@
       {{title}}
     </el-header>
     <el-row>
-      <el-col :span="22" :offset="1">
+      <el-col :span="22" :offset="1" class="count">
         <div>
           <div class="smallTittle">我的发布（{{count}}）</div>
           <div v-for="item in households">
@@ -63,6 +63,7 @@ export default {
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/menu/menu.less";
+.count{
 
 .menuTime {
   position: absolute;
@@ -94,5 +95,6 @@ export default {
   position: absolute;
   right: 5px;
   top: 5px;
+}
 }
 </style>

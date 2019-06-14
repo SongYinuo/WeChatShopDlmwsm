@@ -6,7 +6,7 @@
       </div>
       {{title}}
     </el-header>
-    <el-col :span="22" :offset="1">
+    <el-col :span="22" :offset="1" class="one">
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="攻略" name="first">
           <el-row>
@@ -146,7 +146,7 @@
   @import "../../assets/index/style.less";
   @import "../../assets/header.less";
   @import "../../assets/menu/menu.less";
-
+.one{
   .el-tabs__nav {
     margin-left: 35%;
   }
@@ -184,5 +184,5 @@
     width: 90%;
     margin-left: 10%;
   }
-
+}
 </style>

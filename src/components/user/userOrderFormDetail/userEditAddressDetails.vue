@@ -19,13 +19,13 @@
             </el-form-item>
             <el-form-item>
               <el-col :span="8">
-                <el-select v-model="editForm.formProvinceValue" placeholder="所在省"  v-on:input="getCity">
+                <el-select v-model="editForm.formProvinceValue" placeholder="所在省"  @change="getCity">
                   <el-option v-for="item in editForm.formProvince" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
               </el-col>
               <el-col :span="8">
-                <el-select v-model="editForm.formvalueCity" placeholder="所在市/直辖市" v-on:input="getDistrict">
+                <el-select v-model="editForm.formvalueCity" placeholder="所在市/直辖市" @change="getDistrict">
                   <el-option v-for="item in editForm.formCity" :key="item.id" :label="item.name" :value="item.id">
                   </el-option>
                 </el-select>
@@ -126,7 +126,7 @@ export default {
           that.editForm.formvalueDistrict = res.data.data.district_name;
           that.editForm.formDesc = res.data.data.address;
           that.editForm.id = res.data.data.address_id;
-          that.editForm.district = res.data.data.district;
+          that.editForm.district = res.data.data.district_name;
         //  console.log(res.data.data);
         //  console.log(res.data.data.district);
         })
@@ -182,9 +182,10 @@ export default {
           mobile: thir.editForm.formPhone,
           province: thir.editForm.formProvinceValue,
           city: thir.editForm.formvalueCity,
-          district: thir.editForm.district,
+          district: thir.editForm.formvalueDistrict,
           address: thir.editForm.formDesc,
           id:thir.editForm.id,
+          
         })
         .then(res => {})
         .catch(error => {});

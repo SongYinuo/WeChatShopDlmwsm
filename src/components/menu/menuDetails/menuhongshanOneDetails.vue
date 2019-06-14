@@ -85,9 +85,10 @@ export default {
 @import "../../../assets/search/search.less";
 @import "../../../assets/menu/menu.less";
 @import "../../../assets/menu/details.less";
-
+.strategy{
 img,
 video {
   width: 100%;
+}
 }
 </style>

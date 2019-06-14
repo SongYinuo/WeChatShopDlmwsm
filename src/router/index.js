@@ -77,6 +77,7 @@ const MenuDetailslecture = resolve => require(['@/components/menu/menuDetails/me
 const Userlecturehalltedit = resolve => require(['@/components/user/userOrderFormDetail/userlecturehalltedit.vue'], resolve)
 const Usercalligraphypainting = resolve => require(['@/components/user/userOrderFormDetail/usercalligraphypainting.vue'], resolve)
 const UserVipDetail = resolve => require(['@/components/user/userVipDetail.vue'], resolve)
+const UserIntegral = resolve => require(['@/components/user/userIntegral.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -385,6 +386,13 @@ export default new Router({
     component: UserVipDetail,
     meta: {
       title: 'vip详情'
+    }
+  },{
+    path: '/userIntegral',
+    name: '积分明细',
+    component: UserIntegral,
+    meta: {
+      title: '积分明细'
     }
   },
   {

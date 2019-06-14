@@ -6,7 +6,7 @@
           </div>
         {{title}}
       </el-header>
-    <el-row>
+    <el-row class="heart">
       <el-col :span="24" class="num">心得（{{num.count}}）</el-col>
       <el-col :span="22" :offset="1">
          <div v-for="array in arrays">
@@ -119,7 +119,8 @@ export default {
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/menu/menu.less";
-
+.heart{
+ 
 .el-tabs__nav {
   margin-left: 35%;
 }
@@ -170,5 +171,7 @@ export default {
   color: #313131;
   font-weight: bold;
   margin-left: 15px;
+}
+ 
 }
 </style>

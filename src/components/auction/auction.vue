@@ -201,10 +201,11 @@ export default {
 <style lang="less">
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
-.el-main {
+
+.auctionRow {
+  .el-main {
   padding: 0;
 }
-.auctionRow {
   .el-tabs__active-bar {
     display: none;
   }
@@ -252,12 +253,12 @@ export default {
   }
   .el-tabs__active-bar {
     display: block;
-    background-color: #dab62e;
-  }
-  .el-tabs__active-bar {
     color: #ffc000;
     background-color: #ffc000;
     width: 55px !important;
+  }
+  .el-tabs__nav{
+        margin-left: 0%;
   }
 }
 </style>

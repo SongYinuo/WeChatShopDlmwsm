@@ -6,7 +6,7 @@
             </div>
             {{title}}
         </el-header>
-        <el-row class="indexSearchRow pdB2">
+        <el-row class="indexSearchRow pdB2 book">
             <el-col :span="22" :offset="1">
                 <el-col :span="24" class="num">书画摄影（{{num.count}}）</el-col>
             </el-col>
@@ -94,6 +94,7 @@ export default {
 @import "../../assets/header.less";
 @import "../../assets/search/search.less";
 @import "../../assets/menu/menu.less";
+.book{
 .PaintingNav .ptAttribute[data-v-370c618c] {
   font-size: 11px;
   position: absolute;
@@ -118,5 +119,6 @@ export default {
   right: 10px;
   top: 15px;
   .fz(font-size, 24);
+}
 }
 </style>

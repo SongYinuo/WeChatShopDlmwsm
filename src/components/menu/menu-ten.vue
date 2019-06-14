@@ -73,7 +73,7 @@ export default {
 @import "../../assets/header.less";
 @import "../../assets/search/search.less";
 @import "../../assets/menu/menu.less";
-
+.indexSearchRow{
 .ptbg .ptAttribute[data-v-5a4365ff] {
   font-size: 9px;
   position: absolute;
@@ -88,5 +88,6 @@ export default {
 
 .PaintingNav .ptbg[data-v-5a4365ff] {
   top: 0.6vw;
+}
 }
 </style>
