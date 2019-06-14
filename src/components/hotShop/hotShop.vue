@@ -37,13 +37,9 @@ export default {
       axios
         .get("/Api/Goods/goods_list" + "?is_hot=" + 1)
         .then(function(res){
-          // console.log(res)
-          console.log(res)
-          console.log("1111")
           that.goods_list = res.data.data.goods_list
         })
         .catch(function(error){
-          // console.log(error)
         });   
 
 }

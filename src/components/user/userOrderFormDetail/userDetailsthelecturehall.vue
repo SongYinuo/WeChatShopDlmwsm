@@ -110,7 +110,6 @@
         axios
           .get("/Api/User/classroom_detail" + "?id=" + newId)
           .then(function (res) {
-            // console.log(res.data.data.img_url);
             that.swiperList = res.data.data;
           })
           .catch(function (error) {

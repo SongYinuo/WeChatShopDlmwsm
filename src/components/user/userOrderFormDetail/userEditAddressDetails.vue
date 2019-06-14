@@ -70,7 +70,7 @@ export default {
         valueCity: "",
         district: [],
         valueDistrict: "",
-        value:""
+        value: ""
       },
       editForm: {
         formPhone: "",
@@ -84,17 +84,18 @@ export default {
         formDesc: ""
       }
     };
-  },  computed: {
-      newName() {
-        return this.editForm.formName;
-      }
-    },
+  },
+  computed: {
+    newName() {
+      return this.editForm.formName;
+    }
+  },
   watch: {
-   newName(val) {
-        this.value = val;
-        // console.log(this.value);
-      }
-} ,mounted(){
+    newName(val) {
+      this.value = val;
+    }
+  },
+  mounted() {
     this.getData();
     this.getProvince();
     this.getCity();
@@ -126,8 +127,6 @@ export default {
           that.editForm.formDesc = res.data.data.address;
           that.editForm.id = res.data.data.address_id;
           that.editForm.district = res.data.data.district_name;
-        //  console.log(res.data.data);
-        //  console.log(res.data.data.district);
         })
         .catch(function(response) {});
     },
@@ -152,12 +151,9 @@ export default {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        url: "/Api/Api/get_region?parent_id=" + val,
-        
+        url: "/Api/Api/get_region?parent_id=" + val
       }).then(function(res) {
         thia.editForm.formCity = res.data.data;
-        //  console.log(res.data.data);
-        
       });
     },
     getDistrict(value) {
@@ -170,7 +166,6 @@ export default {
         url: "/Api/Api/get_region?parent_id=" + value
       }).then(function(res) {
         thia.editForm.formDistrict = res.data.data;
-        // console.log(this.editForm.formName);
       });
     },
     onSubmit() {
@@ -183,19 +178,13 @@ export default {
           city: thir.editForm.formvalueCity,
           district: thir.editForm.formvalueDistrict,
           address: thir.editForm.formDesc,
-          id:thir.editForm.id,
+          id: thir.editForm.id
         })
         .then(res => {})
         .catch(error => {});
-      // console.log("submit!");
-      // this.getData();
-      // alert("返回上一页查看更改")
-      thir.$message.success("已修改成功,正在回到上一页查看");
-      thir.$router.go(-1)
-    },
-    
+      this.reload();
+    }
   }
-
 };
 </script>
 

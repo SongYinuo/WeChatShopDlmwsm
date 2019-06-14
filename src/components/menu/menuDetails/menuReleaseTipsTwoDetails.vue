@@ -111,10 +111,8 @@
     methods: {
     
       handleRemove(file, fileList) {
-        // console.log(file, fileList);
       },
       handleRemoveVideo(file, fileList) {
-        // console.log(file, fileList);
       },
       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.url;
@@ -125,8 +123,6 @@
         this.dialogVisible = true;
       },
       beforeAvatarUpload(file) {
-        //请求前
-        // console.log(file);
         const isJPG =
           file.type === "image/jpg" ||
           file.type === "image/jpeg" ||
@@ -143,8 +139,6 @@
         return isJPG && isLt2M;
       },
       beforeAvatarUploadVideo(file) {
-        //请求前
-        // console.log(file);
         const isVideo =
           file.type === "image/video" ||
           file.type === "image/mp4"
@@ -165,28 +159,13 @@
       },
       handleAvatarSuccess(res, file) {
         //请求完成
-        // console.log(res, file);
         this.dialogImageUrl = URL.createObjectURL(file.raw);
       },
       handleAvatarSuccessVideo(res, file) {
         //请求完成
-        // console.log(res, file);
         this.dialogImageUrl = URL.createObjectURL(file.raw);
       },
       submitForm(formName) {
-        // axios({
-        //   method: "post",
-        //   headers: {
-        //     "Content-Type": "application/x-www-form-urlencoded"
-        //   },
-        //   url: "/Api/User/article_img_add",
-        //   formData: {
-        //     cat_id: 1004,
-        //     title: this.ruleForm.text,
-        //     content: this.ruleForm.textarea,
-        //     user_url: this.ruleForm.IUrl
-        //   }
-        // })
         let that = this;
         that.$http
           .post("/Api/User/article_img_add?", {
@@ -196,20 +175,9 @@
             user_url:  that.ruleForm.IUrl
           })
           .then(function (res) {
-            // console.log(res);
-            // if (this.ruleForm.text === "" || this.ruleForm.textarea === "") {
-            //   alert("请填要输入的信息");
-            // } else {
-            //   alert("提交完成");
-            // }
           })
           .catch(function (error) {
-            // console.log(error);
           });
-        // console.log(this.ruleForm.text);
-        // console.log(this.ruleForm.textarea);
-        // console.log(this.ruleForm.IUrl);
-
       },
       test: function () {
         this.ruleForm.photo = !this.ruleForm.photo
@@ -229,10 +197,8 @@
             video_url:'51485jsdf',
           })
           .then(function(res) {
-             console.log(res);
           })
           .catch(function(error) {
-            console.log(error);
           });
     }
   }

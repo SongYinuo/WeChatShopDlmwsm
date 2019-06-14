@@ -58,15 +58,20 @@ export default {
     handlePreview(file) {
       // console.log(file);
     },
-    getImg() {
-      var newId = this.$route.query.id;
-      const that = this;
-      axios
-        .get("/Api/User/article_detail" + "?article_id=" + newId)
-        .then(function(res) {
-          console.log(res.data.data.user_show_url);
-          that.img = res.data.data;
-        });
+    methods: {
+      handleRemove(file, fileList) {
+      },
+      handlePreview(file) {
+      },
+      getImg(){
+        var newId = this.$route.query.id;
+        const that = this;
+        axios
+          .get("/Api/User/article_detail" + "?article_id=" + newId)
+          .then(function(res){
+        that.img = res.data.data;
+      })
+      }
     }
   }
 };

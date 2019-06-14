@@ -192,7 +192,6 @@ export default {
           }
         that.zong_han = that.font_zi.join(',')
         } else {
-          // console.log("error submit!!");
           return false;
         }
       });

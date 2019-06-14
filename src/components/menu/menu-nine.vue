@@ -95,7 +95,6 @@ export default {
           that.datas = res.data.data.cat_data;
         })
         .catch(function(error) {
-          // console.log(error)
         });
     },
     getData() {
@@ -112,7 +111,6 @@ export default {
           that.activeName = that.tabs[0].mobile_name;
         })
         .catch(function(error) {
-          // console.log(error)
         });
     },
     getImg() {
@@ -128,7 +126,6 @@ export default {
           that.texts = res.data.data.channel_list;
         })
         .catch(function(error) {
-          // console.log(error)
         });
     }
   }
