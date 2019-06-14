@@ -89,7 +89,6 @@ export default {
   //  padding-right: 20px;
    color: #666;
  }.list{
-   border-bottom: #E9E9E9 1px solid;
    box-sizing: border-box;
  }.listText{
    padding-right: 10px;

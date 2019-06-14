@@ -24,7 +24,9 @@
                 <span class="colorWhite signIn">天签到</span>
               </el-col>
               <el-col class="pdT12">
-                <span class="bgRedOrange colorWhite integralTotalAmount">积分总额：{{getTiem.user_points}}分</span>
+                <router-link :to="{name:'积分明细'}">
+                  <span class="bgRedOrange colorWhite integralTotalAmount">积分总额：{{getTiem.user_points}}分</span>
+                </router-link>
               </el-col>
             </el-col>
           </div>

@@ -7,7 +7,7 @@
             </div>
             {{title}}
         </el-header>
-        <el-row>
+        <el-row class="myclass">
             <el-col :span="24" class="num">讲堂（{{num.count}}）</el-col>
             <el-col :span="22" :offset="1">
                 <div v-for="item in items">
@@ -90,7 +90,7 @@ export default {
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/menu/menu.less";
-
+.myclass{
 .menuTime {
   .fz(font-size, 24);
   color: #adaeaf;
@@ -121,5 +121,6 @@ export default {
   right: 10px;
   top: 15px;
   .fz(font-size, 24);
+}
 }
 </style>

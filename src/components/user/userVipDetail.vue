@@ -6,7 +6,7 @@
       </div>
       {{title}}
     </el-header>
-    <el-row>
+    <el-row class="Vip">
       <el-col v-html="article_list.content"></el-col>
       <el-col class="make">{{article_list.title}}</el-col>
     </el-row>
@@ -43,6 +43,7 @@ export default {
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/menu/menu.less";
+.Vip{
 .back {
   margin-right: 30%;
 }
@@ -65,5 +66,6 @@ export default {
   width: 80%;
   display: block;
   margin: 0 auto;
+}
 }
 </style>
