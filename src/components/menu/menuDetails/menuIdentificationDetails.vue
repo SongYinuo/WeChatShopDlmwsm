@@ -39,17 +39,6 @@
               </el-input>
             </el-col>
           </el-form-item>
-          <!--
-          <el-col :span="24" class="video">
-            <div class="videotxt pdB3">视频</div>
-            <el-upload class="pdB3" :action="uploadVideo" accept="video/*"
-              list-type="picture-card" :on-preview="handleVideoCardPreview" :on-remove="handleVideoRemove" :data="editor" 
-              :on-success="handleAvatarVideoSuccess" :on-progress="onVideoProgress" name="upfile"
-              :limit="limitVideo"> 
-              <i class="el-icon-plus"></i>
-            </el-upload>
-          </el-col>
-          -->
           <el-col :span="22" :offset="1">
             <el-button type="warning" class="release" @click="submitForm('ruleForm')">发布</el-button>
           </el-col>
@@ -72,18 +61,11 @@ export default {
         key: "",
         token: ""
       },
-      // upload_qiniu_url: "http://upload-z1.qiniup.com",
       limitVideo: 1,
       title: "鉴定",
       uploadAction: "/Api/Api/img_upload",
-      // 七牛云的上传地址，根据自己所在地区选择，我这里是华南区
-      // domain: "https://upload-z2.qiniup.com",
-      // 这是七牛云空间的外链默认域名
-      // qiniuaddr: "p3z6q1uw1.bkt.clouddn.com",
       dialogImageUrl: "",
       dialogVisible: false,
-      // dialogVideoUrl: "",
-      // uploadVideo: "/Api/Api/video_upload",
       ruleForm: {
         name: "",
         nameAuthor: "",
@@ -91,8 +73,6 @@ export default {
         messageText: "",
         imgUrl: {},
         basic: {},
-        // basicVideo: {},
-        // videoUrl: {}
       },
       rules: {
         name: [
@@ -138,9 +118,6 @@ export default {
       }
     };
   },
-  // created() {
-  //   this.getQiniuToken();
-  // },
   methods: {
     handleRemove(file, fileList) {
     },
@@ -166,14 +143,17 @@ export default {
     },
     onProgress(event, file, fileList) {
     },
-    handleAvatarSuccess(res, file) {
-      //请求完成
-      this.dialogImageUrl = URL.createObjectURL(file.raw);
-      this.imgUrl = res.data;
-      this.imgUrl = this.imgUrl;
-      let basic = this.imgUrl;
-      basic = basic.substring(0, basic.lastIndexOf(","));
-      this.basic = basic;
+    handleAvatarSuccess(res, file,fileList) {
+      console.log("123456")
+      var that = this
+      var imgImg = "";
+      for(var i=0;i<fileList.length;i++){
+        console.log(fileList[i])
+        imgImg += fileList[i].response.data
+      }
+       imgImg = imgImg.substring(0, imgImg.lastIndexOf(','));
+       console.log(imgImg)
+       that.basic = imgImg
     },
     submitForm(formName) {
       var that = this;
@@ -212,30 +192,23 @@ export default {
 @import "../../../assets/index/style.less";
 @import "../../../assets/menu/details.less";
 @import "../../../assets/fz.less";
-
 .uploadUp {
   padding-bottom: 40px;
-
   .el-form-item {
     padding-bottom: 24px;
   }
-
   .size .el-input__inner {
     background-color: transparent;
   }
-
   .material .el-input__inner {
     background-color: transparent;
   }
-
   .el-dialog {
     width: 100%;
   }
-
   .bgRelease ul li {
     width: 31.5%;
   }
-
   .bgRelease ul li:nth-child(3n + 3) {
     margin-right: 0;
   }
