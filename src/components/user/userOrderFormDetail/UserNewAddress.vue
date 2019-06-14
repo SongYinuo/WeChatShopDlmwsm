@@ -17,7 +17,7 @@
             <b class="colorRed">*</b>
             <el-input type="number" v-model="form.phone" placeholder="手机号码"></el-input>
           </el-form-item>
-          <el-form-item phone="provinceValue">
+          <el-form-item prop="provinceValue">
             <el-col :span="8">
                 <el-select v-model="form.provinceValue" placeholder="所在省" @change="getCity">
                     <el-option v-for="item in form.province" :key="item.id" :label="item.name" :value="item.id" ></el-option>
