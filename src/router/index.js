@@ -65,6 +65,7 @@ const MenuReleaseTipsTwoDetails = resolve => require(['@/components/menu/menuDet
 const MenuUploadOneDetails = resolve => require(['@/components/menu/menuDetails/menuUploadOneDetails.vue'], resolve)
 const MenuhongshanThreeDetails = resolve => require(['@/components/menu/menuDetails/menuhongshanThreeDetails.vue'], resolve)
 const MenuReleaseParentDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseParentDetails.vue'], resolve)
+const MenuReleaseTipsTwoClassRoomDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseTipsTwoClassRoomDetails.vue'], resolve)
 const PosterQRcode = resolve => require(['@/components/detail/posterQRcode.vue'], resolve)
 const MenuTabLists = resolve => require(['@/components/menu/menuDetails/MenuTabLists.vue'], resolve)
 const MenuIdentificationDetails = resolve => require(['@/components/menu/menuDetails/menuIdentificationDetails.vue'], resolve)
@@ -323,6 +324,13 @@ export default new Router({
     component: MenuReleaseParentDetails,
     meta: {
       title: '发布'
+    }
+  },{
+    path: '/menuReleaseTipsTwoClassRoomDetails',
+    name: '发布讲堂',
+    component: MenuReleaseTipsTwoClassRoomDetails,
+    meta: {
+      title: '发布讲堂'
     }
   }, {
     path: '/menuBookOneDetails/:title/:id',

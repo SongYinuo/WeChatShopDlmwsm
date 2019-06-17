@@ -67,7 +67,7 @@
             </router-link>
           </div>
           <el-col>
-            <router-link :to="{ name:'发布',query:{cart_id:1002}}">
+            <router-link :to="{ name:'发布',params:{cart_id:1002}}">
               <span class="flbtn"><img src="static/testImg/write@2x.png">发布</span>
             </router-link>
           </el-col>
@@ -97,8 +97,7 @@ export default {
     this.getImg();
   },
   methods: {
-    handleClick(tab, event) {
-    },
+    handleClick(tab, event) {},
     getData() {
       const that = this;
       axios({
@@ -137,33 +136,33 @@ export default {
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/menu/menu.less";
-.two{
-.menuTime {
-  position: absolute;
-  bottom: 10px;
-  .fz(font-size, 24);
-  color: #adaeaf;
-}
+.two {
+  .menuTime {
+    position: absolute;
+    bottom: 10px;
+    .fz(font-size, 24);
+    color: #adaeaf;
+  }
 
-.menuHead-smtxt {
-  margin-left: 45px;
-  .fz(font-size, 22);
-  color: #949494;
-  margin-top: -20px;
-  text-overflow: ellipsis;
-}
+  .menuHead-smtxt {
+    margin-left: 45px;
+    .fz(font-size, 22);
+    color: #949494;
+    margin-top: -20px;
+    text-overflow: ellipsis;
+  }
 
-.smalltxt-p {
-  .fz(font-size, 28);
-  color: #313131;
-  font-weight: bold;
-  margin-left: 45px;
-}
+  .smalltxt-p {
+    .fz(font-size, 28);
+    color: #313131;
+    font-weight: bold;
+    margin-left: 45px;
+  }
 
-.morePhoto,
-.CommunityImg {
-  width: 90%;
-  margin-left: 10%;
-}
+  .morePhoto,
+  .CommunityImg {
+    width: 90%;
+    margin-left: 10%;
+  }
 }
 </style>

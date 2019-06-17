@@ -81,7 +81,7 @@
            
           </div>
           <el-col>
-            <router-link :to="{ name:'发布', query : { cart_id : '1001'}}">
+            <router-link :to="{ name:'发布', params : { cart_id : '1001'}}">
               <span class="flbtn"><img src="static/testImg/write@2x.png">发布</span>
             </router-link>
           </el-col>
