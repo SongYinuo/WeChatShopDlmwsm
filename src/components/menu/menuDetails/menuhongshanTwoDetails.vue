@@ -17,10 +17,6 @@
             v-if="swiperList.user_type===1 && swiperList.user_url.length===1">
             <img :src="banner">
           </el-carousel-item>
-          <el-col :span="24" class="of">
-            <video :src="swiperList.user_url" autoplay="autoplay" class="menu-video"
-              v-if="swiperList.user_type===2"></video>
-          </el-col>
         </el-carousel>
       </div>
       <el-row>
