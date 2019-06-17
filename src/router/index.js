@@ -297,7 +297,7 @@ export default new Router({
       title: '种草详情'
     }
   }, {
-    path: '/menuhongshanThreeDetails',
+    path: '/menuhongshanThreeDetails/:title/:id',
     name: '种草详情视频',
     component: MenuhongshanThreeDetails,
     meta: {

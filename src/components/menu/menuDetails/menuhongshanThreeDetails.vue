@@ -7,24 +7,29 @@
       种草详情视频
     </el-header>
     <el-row class="videos">
-      <el-col v-for="video in videos">
-        <video :src="video.videoUrl" controls="controls" class="deVideos"></video>
+      <el-col >
+        <video :src="videos.user_url" controls="controls" class="deVideos" autoplay="autoplay"></video>
       </el-col>
       <el-col :span="22" :offset="1" class="pdT6">
-        <div v-for="item in items" class="copyVideo">
+        <div  class="copyVideo">
           <el-col :span="16">
-            <img :src="item.photoUrl" class="fl deimg">
+            <img :src="videos.author_head_pic" class="fl deimg">
             <div class="fl pdLR2">
-              <span class="fl detittle">{{item.tittle}}</span>
-              <span class="fl detxt">{{item.txt}}</span>
+              <span class="fl detittle">{{videos.author}}</span>
+              <span class="fl detxt">{{videos.confirm_time_text}}</span>
             </div>
           </el-col>
+          <el-col :span="4" :offset="20">
           <div class="MenuLike">
-            <v-like />     
+            <div id="admire">
+                <img v-if="videos.is_collect===0" src="static/testImg/Focus1.png" class="likeimage" @click="change()">
+                <img  src="static/testImg/Focus2.png" class="likeimage" v-else @click="change()">
+            </div> 
           </div>
+          </el-col>
           <el-row>
             <el-col :span="22">
-              <div class="deText pdT6">{{item.ptext}}</div>
+              <div class="deText pdT6">{{videos.content}}</div>
             </el-col>
           </el-row>
         </div>
@@ -33,30 +38,59 @@
   </el-container>
 </template>
 <script>
-  import Like from "@/common/like.vue";
+import axios from "axios";
   export default {
-    components: {
-      "v-like": Like
-    },
+  props: ["article_id"],
+  inject: ["reload"],
     data() {
       return {
+        dialogVisible: false,
         videos: [
-          {
-            videoUrl: "static/testImg/pigsmall.mp4"
-          }
         ],
-        items: [
-          {
-            photoUrl: "static/testImg/shunPrincess.png",
-            tittle: "BB..颜无画",
-            txt: "5天前",
-
-            ptext:
-              "到底是什么景点呢？不卖关子了，这个景点就是红山。下面由我为大家介绍一下红山的文化。"
-          }
-        ]
       };
+    },
+    mounted() {
+      this.getImg();
+    },
+    methods: {
+      getImg(){
+        var newId = this.$route.params.id;
+        const that = this;
+       axios({
+         methods:"get",
+         headers:{
+           "Content-Type":"application/x-www-form-urlencoded"
+         },
+         url:"/Api/Article/article_detail" + "?article_id=" + newId
+       })
+       .then(function(res){
+         that.videos = res.data.data;
+         console.log(res.data.data);
+       })
+       .catch(function(error){})
+      },moveErrorImg: function(event) {
+      event.currentTarget.src = "static/testImg/defaultAvatar.png";
+    },
+    change: function() {
+      var newId = this.$route.params.id;
+      const that = this;
+      this.admire == false ? (this.admire = true) : (this.admire = false);
+      this.$http
+        .post("/Api/User/collect", {
+          model: "article",
+          id: newId
+        })
+        .then(res => {
+          that.$message({
+            message: "返回我的收藏，查看收藏内容",
+            type: "success"
+          });
+          that.reload();
+          console.log(newId);
+        })
+        .catch(error => {});
     }
+    },
   };
 </script>
 <style lang="less">
@@ -64,4 +98,11 @@
   @import "../../../assets/header.less";
   @import "../../../assets/index/style.less";
   @import "../../../assets/menu/details.less";
+.videos{
+  .likeimage{
+    width: 24px;
+    position: absolute;
+    right: -100px;
+  }
+}
 </style>
