@@ -4,7 +4,7 @@
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      发布
+      发布讲堂
     </el-header>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
       <el-row class="Release">
@@ -47,7 +47,7 @@
         </el-col>
         <el-col :span="22" :offset="1" class="pdT16">
           <el-form-item>
-            <el-button type="warning" class="release" @click="submitForm('ruleForm')">发布</el-button>
+            <el-button type="warning" class="release" @click="classroom('ruleForm')">发布</el-button>
           </el-form-item>
         </el-col>
       </el-row>
@@ -60,11 +60,11 @@ export default {
   data() {
     return {
       editor: {
-        model: "article"
+        model: "classroom"
       },
-      editorVideo: {
-        model: "prove"
-      },
+      // editorVideo: {
+      //   model: "prove"
+      // },
       InitializationAddImgUrl: "/Api/Api/img_upload",
       qniuyyu: "http://upload-z1.qiniup.com",
       dialogImageUrl: "",
@@ -104,13 +104,13 @@ export default {
           }
         ]
       },
-      cart_id: "",
+      // cart_id: "",
       basic: ""
     };
   },
-  mounted() {
-    this.cart_id = this.$route.params.cart_id;
-  },
+  // mounted() {
+  //   this.cart_id = this.$route.params.cart_id;
+  // },
   methods: {
     handleRemove(file, fileList) {},
     // handleRemoveVideo(file, fileList) {
@@ -173,41 +173,16 @@ export default {
     //   //请求完成
     //   this.dialogImageUrl = URL.createObjectURL(file.raw);
     // },
-    submitForm(formName) {
-      let that = this;
-      if (
-        that.ruleForm.text === "" ||
-        that.ruleForm.textarea === "" ||
-        that.basic === ""
-      ) {
-        that.$message({
-          message: "请输入当前要上传作品所需要的文字",
-          type: "warning"
-        });
-      } else {
-        that.$http
-          .post("/Api/User/article_img_add", {
-            title: that.ruleForm.text,
-            content: that.ruleForm.textarea,
-            cat_id: that.cart_id,
-            user_url: that.basic
-          })
-          .then(function(res) {})
-          .catch(function(error) {});
-      }
-    },
-    // test: function() {
-    //   this.ruleForm.photo = !this.ruleForm.photo;
-    // },
+
     // 请求课堂的接口
-    classroom: function() {
+    classroom: function(formName) {
       var that = this;
       that.$http
-        .post("/Api/User/classroom_add", {
+        .post("/Api/User/classroom_add?", {
           title: that.ruleForm.text,
           content: that.ruleForm.textarea,
           img_url: that.basic,
-          video_url: "51485jsdf"
+          video_url: "1"
         })
         .then(function(res) {})
         .catch(function(error) {});
