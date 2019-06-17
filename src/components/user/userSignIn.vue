@@ -39,9 +39,9 @@
           </div>
           <div class="text-alignCenter SignInIntegralDescription colorGray">连续签到7天可额外获得{{getTiem.sign_award}}积分</div>
           <div class="pdT12">
-            <el-button type="primary" circle v-for="item in signData" class="color"
+            <el-button type="primary" disabled circle v-for="item in signData" style="font-size:12px;" class="color"
               :style="{'background-color':item.date == '今日'?'#FFAC00':'#DBDBDB'}">+{{item.point}}</el-button>
-            <el-button circle v-for="item in signData" class="cdata" style="margin-left:0;"
+            <el-button circle disabled v-for="item in signData" class="cdata" style="margin-left:0;font-size:12px;"
               :style="{'color':item.date == '今日'?'#FFAC00':'#DBDBDB'}">{{item.date}}</el-button>
           </div>
         </el-col>
