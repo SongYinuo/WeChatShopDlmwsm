@@ -11,7 +11,7 @@
               <div class="countDown">
                 <span class="countDown pd2">
                   <count-down v-on:start_callback="countDownS_cb(1)" v-on:end_callback="countDownE_cb(1)"
-                    :currentTime="timestamp" :startTime="swiperList.prom.start_time" :endTime="swiperList.prom.end_time" :end-text="'活动开始'" :dayTxt="'天'" :hourTxt="':'"
+                    :currentTime="timestamp" :startTime="swiperList.prom.start_time" :endTime="swiperList.prom.end_time" :end-text="'活动结束'" :dayTxt="'天'" :hourTxt="':'"
                     :minutesTxt="''"></count-down>
                 </span>
               </div>
