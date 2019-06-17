@@ -39,36 +39,37 @@
 </template>
 <script>
 import axios from "axios";
-  export default {
+export default {
   props: ["article_id"],
   inject: ["reload"],
-    data() {
-      return {
-        dialogVisible: false,
-        videos: [
-        ],
-      };
+  data() {
+    return {
+      dialogVisible: false,
+      videos: [],
+      article_ids: "",
+      admire: ""
+    };
+  },
+  mounted() {
+    this.getImg();
+  },
+  methods: {
+    getImg() {
+      var newId = this.$route.params.id;
+      const that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Article/article_detail" + "?article_id=" + newId
+      })
+        .then(function(res) {
+          that.videos = res.data.data;
+        })
+        .catch(function(error) {});
     },
-    mounted() {
-      this.getImg();
-    },
-    methods: {
-      getImg(){
-        var newId = this.$route.params.id;
-        const that = this;
-       axios({
-         methods:"get",
-         headers:{
-           "Content-Type":"application/x-www-form-urlencoded"
-         },
-         url:"/Api/Article/article_detail" + "?article_id=" + newId
-       })
-       .then(function(res){
-         that.videos = res.data.data;
-         console.log(res.data.data);
-       })
-       .catch(function(error){})
-      },moveErrorImg: function(event) {
+    moveErrorImg: function(event) {
       event.currentTarget.src = "static/testImg/defaultAvatar.png";
     },
     change: function() {
@@ -86,20 +87,19 @@ import axios from "axios";
             type: "success"
           });
           that.reload();
-          console.log(newId);
         })
         .catch(error => {});
     }
-    },
-  };
+  }
+};
 </script>
 <style lang="less">
-  @import "../../../assets/index/indexSwiper.less";
-  @import "../../../assets/header.less";
-  @import "../../../assets/index/style.less";
-  @import "../../../assets/menu/details.less";
-.videos{
-  .likeimage{
+@import "../../../assets/index/indexSwiper.less";
+@import "../../../assets/header.less";
+@import "../../../assets/index/style.less";
+@import "../../../assets/menu/details.less";
+.videos {
+  .likeimage {
     width: 24px;
     position: absolute;
     right: -100px;
