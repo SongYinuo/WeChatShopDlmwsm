@@ -8,7 +8,7 @@
             </router-link>
             </div>
           </el-col>
-         <el-col :span="22" :offset="1" class="list" >
+         <el-col :span="22" :offset="1" class="list brB1">
          <el-col :span="8"  v-for="swiper in swiperList.goods_list" class="listText">
           <router-link :to="{ name: '详情页',params:{id:swiper.goods_id} }">
             <img :src="swiper.original_img" >
