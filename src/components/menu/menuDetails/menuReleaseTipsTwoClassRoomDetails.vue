@@ -184,7 +184,13 @@ export default {
           img_url: that.basic,
           video_url: "1"
         })
-        .then(function(res) {})
+        .then(function(res) {
+          that.$message({
+            message: "上传成功",
+            type: "success"
+          });
+          that.reload();
+        })
         .catch(function(error) {});
     }
   }
