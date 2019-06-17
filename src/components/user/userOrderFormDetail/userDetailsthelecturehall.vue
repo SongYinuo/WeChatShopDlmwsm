@@ -61,9 +61,9 @@
             </el-row>
           </div>
         </el-col>
-        <el-col :span="24" class="of">
+        <!-- <el-col :span="24" class="of">
             <video :src="swiperList.video_show_url"  autoplay="autoplay" class="menu-video"></video>
-          </el-col>
+          </el-col> -->
       </el-row>
     </el-row>
   </el-container>

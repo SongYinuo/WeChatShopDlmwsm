@@ -57,6 +57,7 @@
 <script>
 import axios from "axios";
 export default {
+  inject: ["reload"],
   data() {
     return {
       editor: {
@@ -174,7 +175,7 @@ export default {
     //   this.dialogImageUrl = URL.createObjectURL(file.raw);
     // },
     submitForm(formName) {
-      let that = this;
+      const that = this;
       if (
         that.ruleForm.text === "" ||
         that.ruleForm.textarea === "" ||
@@ -192,26 +193,34 @@ export default {
             cat_id: that.cart_id,
             user_url: that.basic
           })
-          .then(function(res) {})
+          .then(function(res) {
+            that.$message({
+              message: "上传成功",
+              type: "success"
+            });
+            that.reload();
+          })
           .catch(function(error) {});
       }
-    },
+    }
     // test: function() {
     //   this.ruleForm.photo = !this.ruleForm.photo;
     // },
     // 请求课堂的接口
-    classroom: function() {
-      var that = this;
-      that.$http
-        .post("/Api/User/classroom_add", {
-          title: that.ruleForm.text,
-          content: that.ruleForm.textarea,
-          img_url: that.basic,
-          video_url: "51485jsdf"
-        })
-        .then(function(res) {})
-        .catch(function(error) {});
-    }
+    // classroom: function() {
+    //   var that = this;
+    //   that.$http
+    //     .post("/Api/User/classroom_add", {
+    //       title: that.ruleForm.text,
+    //       content: that.ruleForm.textarea,
+    //       img_url: that.basic,
+    //       video_url: "51485jsdf"
+    //     })
+    //     .then(function(res) {
+
+    //     })
+    //     .catch(function(error) {});
+    // }
   }
 };
 </script>
