@@ -388,7 +388,7 @@ export default new Router({
       title: 'vip详情'
     }
   },{
-    path: '/userIntegral',
+    path: '/userIntegral/:id',
     name: '积分明细',
     component: UserIntegral,
     meta: {

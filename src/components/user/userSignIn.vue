@@ -24,7 +24,7 @@
                 <span class="colorWhite signIn">天签到</span>
               </el-col>
               <el-col class="pdT12">
-                <router-link :to="{name:'积分明细'}">
+                <router-link :to="{name:'积分明细', params:{ id: getTiem.user_points }}">
                   <span class="bgRedOrange colorWhite integralTotalAmount">积分总额：{{getTiem.user_points}}分</span>
                 </router-link>
               </el-col>
@@ -45,7 +45,7 @@
               :style="{'color':item.date == '今日'?'#FFAC00':'#DBDBDB'}">{{item.date}}</el-button>
           </div>
         </el-col>
-        <el-col class="text-alignCenter pdT6">
+        <el-col class="text-alignCenter pd6">
           <el-button round class="signInBtn bgRedOrange colorWhite bgYellow" v-on:click="greet"
             :style="{'background-color':sign_status == 1 ?'#bbb':'#FFD800'}">{{sign_status == 1 ? '签到已成功' :'马上签到'}}
           </el-button>
