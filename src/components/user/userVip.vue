@@ -56,7 +56,7 @@ export default {
         // .post(url, data)
         .then(res => {
           if (res.code == 200) {
-            const callpay = res.data.jsApiParameters;
+            const callpay = res.data.data;
             if (typeof WeixinJSBridge == "undefined") {
               if (document.addEventListener) {
                 document.addEventListener(
