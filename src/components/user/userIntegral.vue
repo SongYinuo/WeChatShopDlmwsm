@@ -11,53 +11,98 @@
             <el-col class="bg"  :span="24">
                 
                 <el-col :span="8" :offset="8" class="textNum">
-                    <span class="text">积分 </span><span  class="num">{{item.num}}</span>
+                    <span class="text">积分 </span><span  class="num">{{number}}</span>
                 </el-col>
             </el-col>
             <el-col :span="22" :offset="1">
-                <el-timeline :reverse="reverse">
+                <el-timeline :reverse="reverse" v-for="(activitie,index) in activities">
                     <el-timeline-item
-                    v-for="(activity, index) in activities"
-                    :key="index"
-                    :timestamp="activity.timestamp">
-                    <div class="grade">{{activity.grade}}</div>
-                    <div class="content">{{activity.content}}</div>
+        
+                    :timestamp="activities[index].change_time|formatDate">
+                    <div class="grade" v-if="(activities[index].pay_points)<0" style="color:red">{{activities[index].pay_points}}</div>
+                    <div class="grade" v-else style="color:black">{{activities[index].pay_points}}</div>
+                    <div class="content">{{activities[index].desc}}</div>
                     </el-timeline-item>
+                    <!-- {{activities[index].change_time|formatDate}} -->
                 </el-timeline>
             </el-col>
         </el-row>
     </el-container>
 </template>
 <script>
+import axios from "axios";
+import Axios from 'axios';
 export default {
+   filters: {
+      formatDate: function (value) {
+        let date = new Date(value * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        let y = date.getFullYear();
+        let MM = date.getMonth() + 1;
+        MM = MM < 10 ? "0" + MM : MM;
+        let d = date.getDate();
+        d = d < 10 ? "0" + d : d;
+        let h = date.getHours();
+        h = h < 10 ? "0" + h : h;
+        let m = date.getMinutes();
+        m = m < 10 ? "0" + m : m;
+        let s = date.getSeconds();
+        s = s < 10 ? "0" + s : s;
+        // return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s;//多种时间格式的拼接
+        return h + ":" + m;
+      }
+    },
   data() {
     return {
       reverse: false,
       activities: [
-        {
-           grade:"+1", 
-          content: "连续签到1天奖励",
-          timestamp: "2018-04-15"
-        },
-        {
-         grade:"-100", 
-          content: "购买商品【绿色大米】积分抵扣",
-          timestamp: "2018-04-13"
-        },
-        {
-          grade:"+80", 
-          content: "创建成功",
-          timestamp: "2018-04-11"
-        }
-      ],
+        // {
+        //    grade:"+1", 
+        //   content: "连续签到1天奖励",
+        //   timestamp: "2018-04-15"
+        // },
+        // {
+        //  grade:"-100", 
+        //   content: "购买商品【绿色大米】积分抵扣",
+        //   timestamp: "2018-04-13"
+        // },
+        // {
+        //   grade:"+80", 
+        //   content: "创建成功",
+        //   timestamp: "2018-04-11"
+        // }
+      ],number:[],
       items: [
         {
           images: "static/testImg/qiandao@2x.png",
-          num: "2100"
+          // num: "2100"
         }
       ]
     };
-  }
+  },mounted() {
+    this.getImg();
+  },
+  methods: {
+    getImg(){
+       var newId = this.$route.params.id;
+       console.log(this.$route.params.id);
+       
+      const that = this;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+      Axios({
+        method:"get",
+        headers:{
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url:"/Api/User/point_list"
+      }).then(function(res){
+          that.activities = res.data.data;
+          that.number=newId;
+          // console.log(res.data.data);
+          // console.log(typeof(that.activities))
+          // console.log(that.activities[0].change_time)
+      }).catch(function(error){});
+      
+    }
+  },
 };
 </script>
 <style lang="less">
