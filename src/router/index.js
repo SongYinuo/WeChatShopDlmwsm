@@ -79,6 +79,7 @@ const Userlecturehalltedit = resolve => require(['@/components/user/userOrderFor
 const Usercalligraphypainting = resolve => require(['@/components/user/userOrderFormDetail/usercalligraphypainting.vue'], resolve)
 const UserVipDetail = resolve => require(['@/components/user/userVipDetail.vue'], resolve)
 const UserIntegral = resolve => require(['@/components/user/userIntegral.vue'], resolve)
+const UserCarRouterLink = resolve => require(['@/components/user/userOrderFormDetail/userCarRouterLink.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -614,6 +615,14 @@ export default new Router({
     component: MenuTheEditor,
     meta: {
       title: '编辑详情'
+    }
+  },
+  {
+    path: '/UserCarRouterLink',
+    name: '购物车详情',
+    component: UserCarRouterLink,
+    meta: {
+      title: '购物车详情'
     }
   }
   ]
