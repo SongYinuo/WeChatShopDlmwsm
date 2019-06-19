@@ -4,7 +4,7 @@
     <v-chose :goods="goods" :filter_spec="filter_spec" :spec_goods_price="spec_goods_price" :prom="prom" @lithToFather="lithToFather"/>
     <v-content/>
     <!-- <v-baseline/> -->
-    <v-footer/>
+    <v-footer :price_list="price_list"/>
   </div>
 </template>
 
@@ -34,12 +34,15 @@ export default {
       spec_goods_price:[],
       // 是否有活动
       prom:[],
-      
+      price_list:[],
     }
   },
   methods:{
     // 监听子组件传过来的参数
-    lithToFather:function(data){
+    lithToFather:function(argument,data){
+      console.log(argument)
+      this.price_list = argument.join("_")
+      console.log(this.price_list)
       console.log("接受的参数为")
       console.log(data)
       if(data.length != 0){
