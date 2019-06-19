@@ -16,15 +16,15 @@
               </div>
             </el-col>
             <el-col :span="21" :offset="1">
-              <div v-if="detailsInfo.placeOfReceipt!=''&&detailsInfo.consignee!=''">
+              <div v-if="address_list !=''">
                 <el-col :span="14">
-                  <div class="detailsInfoConsignee">收货人：{{detailsInfo.consignee}}</div>
+                  <div class="detailsInfoConsignee">收货人：{{address_list.consignee}}</div>
                 </el-col>
                 <el-col :span="8" class="text-alignRight">
-                  <div class="detailsInfoConsigneePhone">{{detailsInfo.consigneePhone}}</div>
+                  <div class="detailsInfoConsigneePhone">{{address_list.mobile}}</div>
                 </el-col>
               </div>
-              <div v-if="detailsInfo.placeOfReceipt===''&&detailsInfo.consignee===''">
+              <div v-if="address_list ==''">
                 <el-col :span="22">
                 选择收货地址
                 </el-col>
@@ -36,36 +36,36 @@
                     </div>
                   </router-link>
               </el-col>
-              <el-col class="detailsInfoPlaceOfReceipt pd2 lh1-2 colorGray" v-if="detailsInfo.placeOfReceipt!=''&&detailsInfo.consignee!=''">
-                {{detailsInfo.placeOfReceipt}}
+              <el-col class="detailsInfoPlaceOfReceipt pd2 lh1-2 colorGray" v-if="address_list !=''">
+               {{address_list.province_name}}{{address_list.city_name}}{{address_list.district_name}}{{address_list.address}}
               </el-col>
             </el-col>
           </el-col>
           </el-col>
       </el-row>
-      <el-row class="brB10 pdB2" v-for="o in detailsInfo.listArray">
+      <el-row class="brB10 pdB2" v-for="item in goods_list">
         <el-col :span="22" :offset="1" class="pd2">
           <el-col :span="6" class="userAllOrderFormListImg">
-            <router-link :to="{ name: '详情页', params: { id: o.id } }">
-              <img :src="o.productImg">
+            <router-link :to="{ name: '详情页', params: { id: item.goods_id} }">
+              <img :src="item.thumb">
             </router-link>
           </el-col>
           <el-col :span="17" :offset="1" class="pdLR1">
             <el-row>
               <el-col :span="16" class="mgT1">
-                <div class="pd1 productTitle">{{o.title}}</div>
+                <div class="pd1 productTitle">{{item.goods_name}}</div>
                 <div>
-                  <span class="colorGray productSpecification">{{o.specificationSize}} ; </span>
-                  <span class="colorGray productSpecification">{{o.specificationShape}} ; </span>
+                  <!-- <span class="colorGray productSpecification">{{o.specificationSize}} ; </span> -->
+                  <span class="colorGray productSpecification">{{item.spec_key_name}} ; </span>
                 </div>
               </el-col>
               <el-col :span="7" :offset="1" class="mgT2">
-                <div class="text-alignRight price">¥{{o.price}}</div>
-                <div class="text-alignRight amount">x{{o.amount}}</div>
-                <div class="refundText colorYellow text-alignRight pdT1" v-if="o.state==='退款成功'">退款成功</div>
+                <div class="text-alignRight price">¥{{item.goods_price}}</div>
+                <div class="text-alignRight amount">x{{item.goods_num}}</div>
+                <!-- <div class="refundText colorYellow text-alignRight pdT1" v-if="o.state==='退款成功'">退款成功</div> -->
               </el-col>
               <el-col class="pd2">
-                <el-col :span="20" :offset="4" class="text-alignRight">共{{o.amount}}件商品 合计：{{o.price}}</el-col>
+                <el-col :span="20" :offset="4" class="text-alignRight">共{{item.goods_num}}件商品 合计：{{item.member_goods_price}}</el-col>
               </el-col>
             </el-row>
           </el-col>
@@ -75,17 +75,17 @@
         <el-col class="detailsPaymentInfo" :span="22" :offset="1">
           <el-col class="pd2 mgT2 brB1">
             <el-col :span="16">商品总额</el-col>
-            <el-col :span="8" class="text-alignRight">¥{{detailsInfo.totalAmount}}</el-col>
+            <el-col :span="8" class="text-alignRight">¥{{goods_detail_message.order_amount}}</el-col>
           </el-col>
           <el-col class="pd2 brB1">
             <el-col :span="4">积分</el-col>
-            <el-col :span="12" class="colorGray mgT1" style="font-size:12px;">共{{detailsInfo.integral}},最大抵扣{{detailsInfo.maxIntegral}}</el-col>
-            <el-col :span="8" class="text-alignRight">¥{{detailsInfo.transportationExpense}}</el-col>
+            <el-col :span="12" class="colorGray mgT1" style="font-size:12px;">共{{user_pay_points}},最大抵扣{{goods_detail_message.integral_money}}</el-col>
+            <el-col :span="8" class="text-alignRight">{{goods_detail_message.use_point}}</el-col>
           </el-col>
-          <el-col class="pd2 brB1">
+          <!-- <el-col class="pd2 brB1">
             <el-col :span="16">运费</el-col>
             <el-col :span="8" class="text-alignRight">¥{{detailsInfo.transportationExpense}}</el-col>
-          </el-col>
+          </el-col> -->
           <el-col class="pd2 brB1">
             <el-col :span="16">配送方式</el-col>
             <el-col :span="8" class="text-alignRight">{{detailsInfo.distribution}}</el-col>
@@ -105,7 +105,7 @@
           <el-col class="lh1-6">
             <el-col :span="16" class="text-alignRight mgT2">
               <span>应付总额</span>
-              <span class="text-alignRight colorRed">¥{{detailsInfo.copeWithPrice}}</span>
+              <span class="text-alignRight colorRed">¥{{goods_detail_message.order_amount}}</span>
             </el-col>
           <el-col :span="8" class="orderFormDeatilsBtn text-alignRight">
             <el-button @click="submitCarDetails()" class="bgUndertintYellow colorWhite brR1" style="border-radius:0">立即支付
@@ -119,6 +119,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -147,51 +148,58 @@ export default {
         consigneePhone: "15124550264",
         placeOfReceipt: "上海市张江镇路368号39号楼233室",
         distribution: "物流配送",
-        listArray: [
-          {
-            id: "userOrderForm100001",
-            orderFormId: "orderForm000003",
-            productImg: "static/testImg/oringe-2.jpg",
-            title: "【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
-            specificationSize: "50cm*80cm",
-            specificationShape: "鹰雕像",
-            price: 402,
-            amount: 1,
-            state: "退款/退货",
-            stateText: "待付款"
-          },
-          {
-            id: "userOrderForm100001",
-            orderFormId: "orderForm000003",
-            productImg: "static/testImg/food1.jpg",
-            title: "【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
-            specificationSize: "50cm*80cm",
-            specificationShape: "鹰雕像",
-            price: 402,
-            amount: 1,
-            state: "待付款",
-            stateText: "待付款"
-          },
-          {
-            id: "userOrderForm100001",
-            orderFormId: "orderForm000003",
-            productImg: "static/testImg/vegetables-1.jpg",
-            title: "【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
-            specificationSize: "50cm*80cm",
-            specificationShape: "鹰雕像",
-            price: 402,
-            amount: 1,
-            state: "待收货",
-            stateText: "待付款"
-          }
-        ]
-      }
+      },
+      // 商品列表
+      goods_list: [],
+      goods_detail_message:'',
+      // 用户共多少积分
+      user_pay_points:'',
+      // 收货地址列表
+      address_list:'',
     };
   },
   methods: {
+    // 获取页面信息
+    getData(){
+      var that = this
+       axios
+        .get("/Api/Cart/cart_submit" + "?address_id=" + '')
+        .then(function(res){
+          console.log("112")
+         console.log(res)
+         that.goods_list = res.data.data.cart_list
+         that.goods_detail_message = res.data.data.result
+         that.user_pay_points = res.data.data.user_pay_points
+         that.address_list = res.data.data.address
+        })
+        .catch(function(error){
+        });   
+    },
+     // 立即支付
     submitCarDetails() {
       console.log(this.textarea);
-    }
+      console.log("支付")
+       axios
+        .post("/Api/Cart/cart_submit",{
+          address_id:''
+        })
+        .then(function(res){
+          console.log("112")
+         console.log(res)
+         if(res.data.code == 1){
+           console.log("成功")
+           axios.get('/Api/Payment/order_pay?order_id=' + res.data.data.order_id).then(function(ress){
+             console.log(ress)
+           })
+         }
+        })
+        .catch(function(error){
+        });
+    },
+  },
+  mounted(){
+    var that = this
+    that.getData()
   }
 };
 </script>
