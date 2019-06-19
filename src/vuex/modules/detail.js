@@ -166,9 +166,6 @@ const getters = {
 
 }
 
-
-
-
 export default {
   state,
   actions,
