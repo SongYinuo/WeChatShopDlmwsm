@@ -580,7 +580,7 @@ export default new Router({
       title: '上传'
     }
   }, {
-    path: '/details/posterQRcode/:posterQRcodeId/:titleName/:id',
+    path: '/details/posterQRcode/:id',
     name: '分享二维码',
     component: PosterQRcode,
     meta: {

@@ -32,7 +32,7 @@
     <el-row>
     <el-dialog title="" class="detailsDialogRow" :visible.sync="shardRow" width="100%" top="0" :append-to-body='true'>
       <el-row slot="footer" class="dialog-footer pd4">
-        <router-link :to="{ name: '分享二维码', params: { id: id, titleName: menuLinkTitle, posterQRcodeId: posterQRcodeId } }">
+        <router-link :to="{ name: '分享二维码',params: { id: good_id,} }">
           <el-col :span="12" class="text-alignCenter">
             <el-col class="shardImg"><img src="../../../static/testImg/sharePosters.png"></el-col>
             <div class="shardText pd2" @click="sharePosters">生成分享海报</div>
@@ -56,12 +56,17 @@ export default {
   data() {
     return {
       shardRow: false,
-      id: "Id123456",
+      // id: "Id123456",
       menuLinkTitle: "二维码",
       posterQRcodeId: "posterQRcode122201120",
       // 商品id
       good_id:'',
+    
     };
+  },
+  mounted(){
+    var  that = this
+     that.good_id =  that.$route.params.id;
   },
   methods: {
     sharePosters() {
@@ -81,10 +86,6 @@ export default {
       var that = this
       that.$http.post('/Api/Cart/cart_add',{goods_id:that.good_id,goods_num:2}).then(res =>{}).catch(error=>{})
     }
-  },
-  mounted(){
-    var that = this
-    that.good_id =  that.$route.query.id
   }
 };
 </script>
