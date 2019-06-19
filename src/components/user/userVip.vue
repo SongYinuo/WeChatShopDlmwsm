@@ -45,56 +45,9 @@ export default {
   },
   methods: {
     wxpay() {
-      axios({
-        methods: "post",
-        async: "false",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        url: "/Api/Payment/vip_pay"
-      })
-        // .post(url, data)
-        .then(res => {
-          if (res.code == 200) {
-            const callpay = res.data.data;
-            if (typeof WeixinJSBridge == "undefined") {
-              if (document.addEventListener) {
-                document.addEventListener(
-                  "WeixinJSBridgeReady",
-                  onBridgeReady,
-                  false
-                );
-              } else if (document.attachEvent) {
-                document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
-                document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
-              }
-            } else {
-              onBridgeReady();
-              // this.onBridgeReady(pay_params);
-            }
-          } else {
-            alert("微信支付调起失败！");
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    
     },
-    onBridgeReady(params) {
-      const pay_params = JSON.parse(params);
-      WeixinJSBridge.invoke("getBrandWCPayRequest", jsApiParameters, function(
-        res
-      ) {
-        //WeixinJSBridge.log(res.err_msg);
-        if (res.err_msg == "get_brand_wcpay_request:ok") {
-          // location.href='$go_url';
-        } else {
-          alert(res.err_code + res.err_desc + res.err_msg+"1");
-          // location.href='$back_url';
-         
-        }
-      });
-    }
+   
   }
 };
 </script>
