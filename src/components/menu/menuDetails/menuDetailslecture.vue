@@ -58,7 +58,6 @@ export default {
       dialogVisible: false,
       content: "sichaoyun",
       swiperList: [],
-      // title: "讲堂详情",
       items: [],
       article_ids: "",
       admire: "",
@@ -107,17 +106,21 @@ export default {
     },
     change: function() {
       var newId = this.$route.params.id;
-      let that = this;
+      const that = this;
       this.admire == false ? (this.admire = true) : (this.admire = false);
       this.$http
         .post("/Api/User/collect", {
           model: "classroom",
           id: newId
         })
-        .then(res => {})
+        .then(res => {
+          that.$message({
+            message: "返回我的收藏，查看收藏内容",
+            type: "success"
+          });
+          that.reload();
+        })
         .catch(error => {});
-      alert("返回我的收藏，查看收藏内容");
-      this.$router.go(0);
     }
   }
 };

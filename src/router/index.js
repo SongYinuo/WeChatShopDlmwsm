@@ -65,6 +65,7 @@ const MenuReleaseTipsTwoDetails = resolve => require(['@/components/menu/menuDet
 const MenuUploadOneDetails = resolve => require(['@/components/menu/menuDetails/menuUploadOneDetails.vue'], resolve)
 const MenuhongshanThreeDetails = resolve => require(['@/components/menu/menuDetails/menuhongshanThreeDetails.vue'], resolve)
 const MenuReleaseParentDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseParentDetails.vue'], resolve)
+const MenuReleaseTipsTwoClassRoomDetails = resolve => require(['@/components/menu/menuDetails/menuReleaseTipsTwoClassRoomDetails.vue'], resolve)
 const PosterQRcode = resolve => require(['@/components/detail/posterQRcode.vue'], resolve)
 const MenuTabLists = resolve => require(['@/components/menu/menuDetails/MenuTabLists.vue'], resolve)
 const MenuIdentificationDetails = resolve => require(['@/components/menu/menuDetails/menuIdentificationDetails.vue'], resolve)
@@ -78,6 +79,7 @@ const Userlecturehalltedit = resolve => require(['@/components/user/userOrderFor
 const Usercalligraphypainting = resolve => require(['@/components/user/userOrderFormDetail/usercalligraphypainting.vue'], resolve)
 const UserVipDetail = resolve => require(['@/components/user/userVipDetail.vue'], resolve)
 const UserIntegral = resolve => require(['@/components/user/userIntegral.vue'], resolve)
+const UserCarRouterLink = resolve => require(['@/components/user/userOrderFormDetail/userCarRouterLink.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -297,7 +299,7 @@ export default new Router({
       title: '种草详情'
     }
   }, {
-    path: '/menuhongshanThreeDetails',
+    path: '/menuhongshanThreeDetails/:title/:id',
     name: '种草详情视频',
     component: MenuhongshanThreeDetails,
     meta: {
@@ -323,6 +325,13 @@ export default new Router({
     component: MenuReleaseParentDetails,
     meta: {
       title: '发布'
+    }
+  },{
+    path: '/menuReleaseTipsTwoClassRoomDetails',
+    name: '发布讲堂',
+    component: MenuReleaseTipsTwoClassRoomDetails,
+    meta: {
+      title: '发布讲堂'
     }
   }, {
     path: '/menuBookOneDetails/:title/:id',
@@ -388,7 +397,7 @@ export default new Router({
       title: 'vip详情'
     }
   },{
-    path: '/userIntegral',
+    path: '/userIntegral/:id',
     name: '积分明细',
     component: UserIntegral,
     meta: {
@@ -606,6 +615,14 @@ export default new Router({
     component: MenuTheEditor,
     meta: {
       title: '编辑详情'
+    }
+  },
+  {
+    path: '/UserCarRouterLink',
+    name: '购物车详情',
+    component: UserCarRouterLink,
+    meta: {
+      title: '购物车详情'
     }
   }
   ]

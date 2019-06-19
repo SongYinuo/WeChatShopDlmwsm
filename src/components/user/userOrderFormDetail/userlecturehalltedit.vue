@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     handleRemove(file, fileList) {
-      // console.log(file, fileList);
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
@@ -62,13 +61,11 @@ export default {
       axios
         .get("/Api/User/classroom_detail" + "?id=" + newId)
         .then(function(res) {
-          // console.log(res.data.data);
           that.photoUrl = res.data.data;
         });
     },
     beforeAvatarUpload(file) {
       //请求前
-      // console.log(file);
       const isJPG =
         file.type === "image/jpg" ||
         file.type === "image/jpeg" ||
@@ -89,7 +86,6 @@ export default {
     },
     handleAvatarSuccess(res, file) {
       //请求完成
-      // console.log(res, file);
       this.dialogImageUrl = URL.createObjectURL(file.raw);
     }
   }

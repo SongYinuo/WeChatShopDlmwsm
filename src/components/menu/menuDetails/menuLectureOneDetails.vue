@@ -42,7 +42,6 @@ export default {
     one() {
       const that = this;
       axios.get("/Api/User/see").then(function(res) {
-        console.log(res,res.data);
       });
     },
     two() {
@@ -50,7 +49,6 @@ export default {
       axios
         .get("/Api/User/login_test?username=13133335555")
         .then(function(res) {
-          console.log(res);
         });
     },
     three() {
@@ -58,7 +56,6 @@ export default {
       axios
         .get("/Api/User/login_test?username=13133336666")
         .then(function(res) {
-          console.log(res);
         });
     },
     four() {
@@ -66,13 +63,11 @@ export default {
       axios
         .get("/Api/User/login_test?username=13133337777")
         .then(function(res) {
-          console.log(res);
         });
     },
     five() {
       const that = this;
       axios.get("/Api/User/logout_test").then(function(res) {
-        console.log(res);
       });
     }
   }

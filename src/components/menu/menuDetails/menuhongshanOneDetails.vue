@@ -30,7 +30,6 @@
             </router-link>
           </div>
         </el-col>
-
       </el-row>
     </div>
   </el-container>
@@ -72,7 +71,6 @@ export default {
       axios
         .get("/Api/Article/article_detail" + "?article_id=" + newId)
         .then(function(res) {
-          console.log(res)
           that.itemtxts = res.data.data;
         });
     }

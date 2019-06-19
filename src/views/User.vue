@@ -190,9 +190,7 @@ export default {
         },
         url: "/Api/Api/index"
       }).then(function(res) {
-        console.log(res);
         that.userList = res.data.data.user;
-        console.log(that.userList);
       });
     },
     getUserData() {
@@ -221,6 +219,9 @@ export default {
 @import "../assets/user/icon/carstyle.css";
 @import "../assets/user/user.less";
 .user {
+  .userName {
+     .fz(font-size, 28);
+  }
   .userHeaderImg {
     border-radius: 50%;
   }

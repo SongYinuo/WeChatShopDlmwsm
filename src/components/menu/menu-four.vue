@@ -67,7 +67,7 @@
             </router-link>
           </div>
           <el-col>
-            <router-link :to="{ name:'发布',query:{cart_id :1003}}">
+            <router-link :to="{ name:'发布',params:{cart_id :1003}}">
               <span class="flbtn"><img src="static/testImg/write@2x.png">发布</span>
             </router-link>
           </el-col>
@@ -98,7 +98,6 @@ export default {
   },
   methods: {
     handleClick(tab, event) {
-      // console.log(tab, event);
     },
     getData() {
       const that = this;

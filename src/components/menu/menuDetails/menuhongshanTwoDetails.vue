@@ -8,19 +8,17 @@
     </el-header>
     <el-row class="details">
       <div class="block">
-      <el-carousel trigger="click">
-        <el-carousel-item  v-for="banner in swiperList.user_url"  v-if="swiperList.user_type===1 && swiperList.user_url.length > 1">
-          <img :src="banner" >
-        </el-carousel-item>
-        <el-carousel-item  v-for="banner in swiperList.user_url"  v-if="swiperList.user_type===1 && swiperList.user_url.length===1" > 
-          <img :src="banner" >
-        </el-carousel-item>
-        <el-col :span="24" class="of">
-              <video :src="swiperList.user_url"  autoplay="autoplay" class="menu-video"
-                v-if="swiperList.user_type===2"></video>
-            </el-col>
-      </el-carousel>
-  </div>
+        <el-carousel trigger="click">
+          <el-carousel-item v-for="banner in swiperList.user_url"
+            v-if="swiperList.user_type===1 && swiperList.user_url.length > 1">
+            <img :src="banner">
+          </el-carousel-item>
+          <el-carousel-item v-for="banner in swiperList.user_url"
+            v-if="swiperList.user_type===1 && swiperList.user_url.length===1">
+            <img :src="banner">
+          </el-carousel-item>
+        </el-carousel>
+      </div>
       <el-row>
         <el-col :span="22" :offset="1" class="pdT6">
           <div class="copy">
@@ -33,8 +31,8 @@
             </el-col>
             <div class="MenuLike">
               <div id="admire">
-                  <img  v-if="items.is_collect===0" src="static/testImg/Focus1.png" class="likeimage"  @click="change()" >
-                  <img src="static/testImg/Focus2.png" class="likeimage" v-else @click="change()" >
+                <img v-if="items.is_collect===0" src="static/testImg/Focus1.png" class="likeimage" @click="change()">
+                <img src="static/testImg/Focus2.png" class="likeimage" v-else @click="change()">
               </div>
             </div>
             <el-row>
@@ -103,17 +101,21 @@ export default {
     },
     change: function() {
       var newId = this.$route.params.id;
-      let that = this;
+      const that = this;
       this.admire == false ? (this.admire = true) : (this.admire = false);
       this.$http
         .post("/Api/User/collect", {
           model: "article",
           id: newId
         })
-        .then(res => {})
+        .then(res => {
+          that.$message({
+            message: "返回我的收藏，查看收藏内容",
+            type: "success"
+          });
+          that.reload();
+        })
         .catch(error => {});
-      alert("返回我的收藏，查看收藏内容");
-      this.$router.go(0);
     }
   }
 };
@@ -141,12 +143,15 @@ export default {
 .swimg {
   width: 100%;
 }
+
 .el-carousel__indicators {
   display: none;
 }
+
 img {
   width: 100%;
 }
+
 .block .el-carousel__arrow {
   top: 40%;
 }

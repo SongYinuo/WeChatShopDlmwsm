@@ -8,11 +8,11 @@
             </router-link>
             </div>
           </el-col>
-         <el-col :span="22" :offset="1" class="list" >
+         <el-col :span="22" :offset="1" class="list brB1">
          <el-col :span="8"  v-for="swiper in swiperList.goods_list" class="listText">
           <router-link :to="{ name: '详情页',params:{id:swiper.goods_id} }">
             <img :src="swiper.original_img" >
-            <div class="integralTitle overHidden">{{swiper.goods_name}}</div>
+            <div class="integralTitle overHidden pd2">{{swiper.goods_name}}</div>
             <p class="integralTextAnnotation">{{swiper.exchange_integral}}</p>
             <span class="integralPrice">￥{{swiper.shop_price}}</span>
           </router-link>
@@ -22,36 +22,32 @@
     </el-container>
 </template>
 <script>
-import axios from "axios"
+import axios from "axios";
 export default {
   // name: "",
   data() {
     return {
-      swiperList: [
-        
-      ]
+      swiperList: []
     };
   },
   mounted() {
     this.getList();
   },
   methods: {
-    getList(){
-     var that= this;
-     axios({
-       method:"get",
-       hesders:{
-          "Content-Type":"application/x-www-form-urlencoded"
-       },
-       url:"/Api/Goods/goods_list?size=3&is_point=1"
-     })
-     .then(function(res){
-          that.swiperList=res.data.data;
-     })
-     .catch({})
-     
+    getList() {
+      var that = this;
+      axios({
+        method: "get",
+        hesders: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Goods/goods_list?size=3&is_point=1"
+      })
+        .then(function(res) {
+          that.swiperList = res.data.data;
+        })
+        .catch({});
     }
-    
   }
 };
 </script>
@@ -61,39 +57,43 @@ export default {
 @import "../../assets/fz.less";
 @import "../../assets/index/style.less";
 @import "../../assets/index/indexSwiper.less";
-.integral{
- img{
-   width: 100%;
-   height: 140px;
-   border: #E9E9E9 solid 1px;
-   border-radius: 4px;
- }.integralTitle{
-   color: #313131;
-   .fz(font-size, 28);
-   font-weight: bold;
-   margin-top: 10px;
- }.integralTextAnnotation{
-   color: #DA4E44;
-   .fz(font-size, 24);
- }.integralPrice{
-    color: #DA4E44;
-   .fz(font-size, 20);
-   margin-bottom: 10px;
- }.title{
-   color: #313131;
-   .fz(font-size, 42);
-   padding-bottom: 17px;
- }.more{
-   .fz(font-size,34px);
-   float: right;
-  //  padding-right: 20px;
-   color: #666;
- }.list{
-   box-sizing: border-box;
- }.listText{
-   padding-right: 10px;
-   padding-bottom: 10px;
- }
+.integral {
+  img {
+    width: 100%;
+    height: 140px;
+    border: #e9e9e9 solid 1px;
+    border-radius: 4px;
+  }
+  .integralTitle {
+    color: #313131;
+    .fz(font-size, 28);
+  }
+  .integralTextAnnotation {
+    color: #da4e44;
+    .fz(font-size, 28);
+  }
+  .integralPrice {
+    color: #da4e44;
+    .fz(font-size, 20);
+    margin-bottom: 10px;
+  }
+  .title {
+    color: #313131;
+    .fz(font-size, 42);
+    padding-bottom: 17px;
+  }
+  .more {
+    .fz(font-size, 34px);
+    float: right;
+    //  padding-right: 20px;
+    color: #666;
+  }
+  .list {
+    box-sizing: border-box;
+  }
+  .listText {
+    padding-right: 10px;
+    padding-bottom: 10px;
+  }
 }
-
 </style>

@@ -246,7 +246,6 @@ export default {
         // .catch(function(error) {
         // });
         } else {
-          // console.log("error submit!!");
           return false;
         }
       });

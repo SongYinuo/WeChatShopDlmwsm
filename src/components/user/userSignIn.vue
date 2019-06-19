@@ -24,7 +24,7 @@
                 <span class="colorWhite signIn">天签到</span>
               </el-col>
               <el-col class="pdT12">
-                <router-link :to="{name:'积分明细'}">
+                <router-link :to="{name:'积分明细', params:{ id: getTiem.user_points }}">
                   <span class="bgRedOrange colorWhite integralTotalAmount">积分总额：{{getTiem.user_points}}分</span>
                 </router-link>
               </el-col>
@@ -39,13 +39,13 @@
           </div>
           <div class="text-alignCenter SignInIntegralDescription colorGray">连续签到7天可额外获得{{getTiem.sign_award}}积分</div>
           <div class="pdT12">
-            <el-button type="primary" circle v-for="item in signData" class="color"
+            <el-button type="primary" disabled circle v-for="item in signData" style="font-size:12px;" class="color"
               :style="{'background-color':item.date == '今日'?'#FFAC00':'#DBDBDB'}">+{{item.point}}</el-button>
-            <el-button circle v-for="item in signData" class="cdata" style="margin-left:0;"
+            <el-button circle disabled v-for="item in signData" class="cdata" style="margin-left:0;font-size:12px;"
               :style="{'color':item.date == '今日'?'#FFAC00':'#DBDBDB'}">{{item.date}}</el-button>
           </div>
         </el-col>
-        <el-col class="text-alignCenter pdT12">
+        <el-col class="text-alignCenter pd6">
           <el-button round class="signInBtn bgRedOrange colorWhite bgYellow" v-on:click="greet"
             :style="{'background-color':sign_status == 1 ?'#bbb':'#FFD800'}">{{sign_status == 1 ? '签到已成功' :'马上签到'}}
           </el-button>
@@ -92,9 +92,6 @@ export default {
         },
         url: "/Api/User/sign"
       }).then(function(res) {
-        // console.log("功率");
-        // console.log(typeof res.data.data.keep_award);
-        // that.bookList = res.data.data
         that.signData = res.data.data.list;
         that.getTiem = res.data.data;
         var the_keep_day = res.data.data.keep_days;
@@ -110,19 +107,13 @@ export default {
         }
 
         that.keep_day = the_keep_day.split("");
-        // console.log(that.keep_day);
-
         that.sign_status = res.data.data.is_sign;
-        // console.log(that.signData);
         // 新加的内容开始
         var numbers = String(res.data.data.keep_award);
         // 新家的内容结束
       });
     },
     greet: function(event) {
-      // this.userSignIn.IfSignIn === false;
-      // alert("签到成功");
-      // console.log(this.userSignIn.IfSignIn);
       let that = this;
       Axios({
         methods: "get",
@@ -131,14 +122,9 @@ export default {
         },
         url: "/Api/User/sign_handle"
       }).then(function(res) {
-        // console.log("签到成功");
-        // console.log(res);
-        // that.bookList = res.data.data
         if (res.data.code == 1) {
           that.signSuccess = "签到已成功";
           that.$router.go(0);
-          // this.reload();
-          // console.log(that.signSuccess);
         } else {
           that.signSuccess = "签到已成功";
           that.$router.go(0);

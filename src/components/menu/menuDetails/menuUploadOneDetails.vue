@@ -10,7 +10,7 @@
       <el-col :span="22" :offset="1">
         <el-upload list-type="picture-card" :action="uploadAction" :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload" :on-progress="onProgress" name="upfile"
-          :on-preview="handlePictureCardPreview" :on-remove="handleRemove" accept="image/*" :limit="9" :data="editor"
+          :on-preview="handlePictureCardPreview" :on-remove="handleRemove" accept="image/*" :limit="1" :data="editor"
           class="bgRelease">
           <i class="el-icon-plus">添加图片</i>
         </el-upload>
@@ -64,7 +64,7 @@
           </el-form-item>
           <el-form-item prop="messageText" class="messageTexts">
             <el-col :span="24">
-              <el-input type="textarea" placeholder="说点什么吧" v-model="ruleForm.messageText" :rows="2" minlength="1"
+              <el-input type="textarea" placeholder="说点什么吧" v-model="ruleForm.messageText" :rows="4" minlength="1"
                 show-word-limit>
               </el-input>
             </el-col>
@@ -89,9 +89,6 @@ export default {
       },
       title: "上传",
       uploadAction: "/Api/Api/img_upload",
-      // editor: {
-      //   model: "article"
-      // },
       dialogImageUrl: "",
       dialogVisible: false,
       ruleForm: {
@@ -105,7 +102,7 @@ export default {
         // 图片的地址
         imgUrl: {},
         // 后赋值的图片地址
-        basic: '',
+        basic: ""
       },
       rules: {
         name: [
@@ -174,15 +171,12 @@ export default {
   },
   methods: {
     handleRemove(file, fileList) {
-      // console.log(file, fileList);
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
     beforeAvatarUpload(file) {
-      //请求前
-      // console.log(file);
       const isJPG =
         file.type === "image/jpg" ||
         file.type === "image/jpeg" ||
@@ -198,8 +192,7 @@ export default {
       }
       return isJPG && isLt2M;
     },
-    onProgress(event, file, fileList) {
-    },
+    onProgress(event, file, fileList) {},
     handleAvatarSuccess(res, file) {
       this.dialogImageUrl = URL.createObjectURL(file.raw);
       this.imgUrl = res.data;
@@ -235,7 +228,12 @@ export default {
             content: that.ruleForm.messageText,
             thumb: that.basic
           })
-          .then(res => {})
+          .then(res => {
+            that.$message({
+              message: "上传成功",
+              type: "success"
+            });
+          })
           .catch(error => {});
         this.reload();
       }

@@ -1,9 +1,11 @@
 <template lang="html">
-  <div>
-    <router-link :to="{ name:'故事分类' }">人家是有底线的 -.-
+    <div>
+      <router-link :to="{ name:'故事分类' }">人家是有底线的 -.-
       </router-link>
     </div>
-
+    <!-- <div>
+    人家是有底线的 -.-
+    </div> -->
 </template>
 
 <script>

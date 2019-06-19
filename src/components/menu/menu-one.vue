@@ -29,8 +29,10 @@
         </el-tab-pane>
         <el-tab-pane label="社区" name="second">
           <div v-for="array in arrays">
-            <router-link :to="{name: '种草详情',params: { id: array.article_id,title:array.title }}">
+           
               <el-row>
+                 <router-link :to="{name: '种草详情',params: { id: array.article_id,title:array.title }}" v-if="array.user_type===1 " >
+                 <!-- <router-link :to="{name:'种草详情视频',params: { id: array.article_id,title:array.title }}" v-if="array.user_type===2"> -->
                 <el-col :span="22">
                   <img :src="array.author_head_pic" v-on:error.once="moveErrorImg($event)" class="fl menuHeader">
                   <div class="fl menuHead-txt">{{array.author}}</div>
@@ -38,6 +40,8 @@
                   <p class="smalltxt-p cl fl">{{array.content}}</p>
                   <div class="cl smalltxt-div">{{array.title}}</div>
                 </el-col>
+                  <!-- </router-link> -->
+                 </router-link>
               </el-row>
               <el-row type="flex" class="row-bg smallimg ">
                 <el-row>
@@ -59,19 +63,25 @@
                   </div>
                 </el-row>
                 <el-row>
+                  <router-link :to="{name:'种草详情视频',params: { id: array.article_id,title:array.title }}" v-if="array.user_type===2">
+                  <el-col :span="22">
+                  <img :src="array.author_head_pic" v-on:error.once="moveErrorImg($event)" class="fl menuHeader">
+                  <div class="fl menuHead-txt">{{array.author}}</div>
+                  <div class="fl cl menuHead-smtxt omit">{{array.confirm_time_text}}</div>
+                  <p class="smalltxt-p cl fl">{{array.content}}</p>
+                  <div class="cl smalltxt-div">{{array.title}}</div>
+                </el-col>
                   <el-col :span="21" :offset="3">
                     <video :src="array.user_url" controls="controls" class="menu-video"
                       v-if="array.user_type===2"></video>
                   </el-col>
+                  </router-link>
                 </el-row>
               </el-row>
-            </router-link>
+           
           </div>
           <el-col>
-            <!-- <router-link tag="a" :to="{path:'/目标路径',query{id:work_task.id}}"></router-link> -->
-              <!-- <router-link :to="{ name:'旅游攻略',query: {id: item.article_id,title:item.title }}"> -->
-                  <!-- <router-link :to="{ name:'发布',query:{cart_id:1002}}"> -->
-            <router-link :to="{ name:'发布', query : { cart_id : '1001'}}">
+            <router-link :to="{ name:'发布', params : { cart_id : '1001'}}">
               <span class="flbtn"><img src="static/testImg/write@2x.png">发布</span>
             </router-link>
           </el-col>
@@ -105,7 +115,6 @@
 
     methods: {
       handleClick(tab, event) {
-        // console.log(tab, event);
       },
       getData() {
         const that = this;
@@ -149,6 +158,8 @@
 .one{
   .el-tabs__nav {
     margin-left: 35%;
+  }.menuHeader{
+    width: 44px;
   }
 
   .menuHead-smtxt {

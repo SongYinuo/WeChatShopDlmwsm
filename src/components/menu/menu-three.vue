@@ -24,7 +24,7 @@
         </div>
       </el-col>
       <el-col>
-        <router-link :to="{ name:'发布心得'}">
+        <router-link :to="{ name:'发布讲堂'}">
           <span class="flbtn"><img src="static/testImg/write@2x.png">讲个故事</span>
         </router-link>
       </el-col>
@@ -66,27 +66,25 @@ export default {
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/menu/menu.less";
-.class{
- 
-.menuTime {
-  .fz(font-size, 24);
-  color: #adaeaf;
-}
+.class {
+  .menuTime {
+    .fz(font-size, 24);
+    color: #adaeaf;
+  }
 
-.menuBtn {
-  border-radius: 30px;
-  background-color: #dab62e;
-  .fz(font-size, 34);
-  margin-right: 20px;
-}
+  .menuBtn {
+    border-radius: 30px;
+    background-color: #dab62e;
+    .fz(font-size, 34);
+    margin-right: 20px;
+  }
 
-.menuBtn img {
-  width: 24px;
-}
+  .menuBtn img {
+    width: 24px;
+  }
 
-.smallimg img {
-  margin-top: 10px;
-}
- 
+  .smallimg img {
+    margin-top: 10px;
+  }
 }
 </style>

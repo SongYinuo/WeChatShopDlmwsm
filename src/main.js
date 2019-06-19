@@ -59,19 +59,12 @@ Vue.prototype.$http = axios
 //   },
 //   url: "/Api/Api/index"
 // }).then(function (res) {
-//   // console.log(res.data.data.user.user_id)
-//   // console.log(location.href)
-//   // console.log(router.history.current.fullPath)
 //   if (res.data.data.user.user_id <= 0) {
 //     location.href = "http://" + window.location.host + "/Api/api/wx_login?route=" + router.history.current.fullPath
 //   }
 //   else {
-//     // console.log(res.data.msg)
 //   }
-//   // console.log(res.data.user.user_id)
-
 // }).catch(function (error) {
-//   // console.log(error)
 // });
 
 // 页面修改时修改浏览器标签栏
