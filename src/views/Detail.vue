@@ -4,7 +4,7 @@
     <v-chose :goods="goods" :filter_spec="filter_spec" :spec_goods_price="spec_goods_price" :prom="prom" @lithToFather="lithToFather"/>
     <v-content/>
     <!-- <v-baseline/> -->
-    <v-footer :price_list="price_list"/>
+    <v-footer :price_list="price_list" :filter_spec="filter_spec"/>
   </div>
 </template>
 
@@ -75,6 +75,8 @@ export default {
         })
         .catch(function(error) {
         });
+    console.log("主页")
+    console.log(that.filter_spec)
   }
 }
 </script>
