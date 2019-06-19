@@ -49,7 +49,9 @@
           </el-col>
           <el-col :span="8" class="accountsBtn">
             <!-- @click="OnAccounts" -->
-            <el-button class="fr baUndertintBlack colorWhite">结账</el-button>
+            <router-link :to="{ name: '购物车详情' }">
+                <el-button class="fr baUndertintBlack colorWhite">结账</el-button>
+            </router-link >
           </el-col>
         </el-col>
       </el-row>
