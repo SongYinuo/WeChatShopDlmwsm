@@ -62,7 +62,7 @@ export default {
       posterQRcodeId: "posterQRcode122201120",
       // 商品id
       good_id:'',
-    
+      goods_list_price:[],
     };
   },
   mounted(){
