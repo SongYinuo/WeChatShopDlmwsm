@@ -21,7 +21,7 @@
     </el-row>
     <el-row>
       <el-col :span="22" :offset="1">
-        <el-col class="specificationRow brB1">
+        <el-col class="specificationRow brB1"  v-if="filter_spec_attr_list.length != 0">
           <el-col :span="18">
             <span v-if="Name == 0">未选</span>
              <span v-else>{{attrate_name}}</span>
@@ -30,6 +30,9 @@
             <el-button type="text" @click="dialogFormVisible = true">请选择</el-button>
             <i class="el-icon-arrow-right"></i>
           </el-col>
+        </el-col>
+        <el-col class="specificationRow brB1" v-else>
+          此商品没有属性
         </el-col>
         <el-col class="specificationRow">
           <el-col :span="18">
@@ -185,6 +188,8 @@ export default {
       num1: 1,
       // 属性名字
       attrate_name:'未选',
+      // 是否有属性列表
+      filter_spec_attr_list:[],
     };
   },
   methods: {
@@ -223,28 +228,6 @@ export default {
           return a-b;
         })
          console.log("123456")
-          // 新加的接口开始
-        // axios.get("/Api/Goods/get_goods_spec_name?goods_spec=" +  that.Name).then(function(res) {
-        //   console.log("123456")
-        //  console.log(res)
-        // })
-        // .catch(function(error) {
-        // });
-        // 新加的接口结束
-        //  axios.get("/Api/Goods/get_goods_spec_name" + "?goods_spec=" + that.Name)
-        // .then(function(res) {
-        //   console.log("进入函数")
-        //  console.log(res)
-        // //   that.good_list = res.data.data,
-        // //   that.goods_images_list = res.data.data.goods_images_list
-        // //  that.goods = res.data.data.goods
-        // //  that.filter_spec = res.data.data.filter_spec
-        // //  that.spec_goods_price = res.data.data.spec_goods_price
-        // //  that.prom = res.data.data.prom
-        // //  console.log(that.filter_spec)
-        // })
-        // .catch(function(error) {
-        // });
         } else {
           return false;
         }
@@ -258,7 +241,9 @@ export default {
       var monery_id = [];
       var objAttr = Object.values(that.filter_spec)
         that.price_attr.push(name.item_id)
-        const sliceArr = that.price_attr.slice(-3)
+        // Object.values(that.filter_spec).length
+        const sliceArr = that.price_attr.slice(-Object.values(that.filter_spec).length)
+        console.log(sliceArr)
         sliceArr.sort(function(a,b){
           return a - b
         })
@@ -295,6 +280,9 @@ export default {
       var that = this;
       that.filter_spec = val;
       var filter_spec_attr = Object.values(that.filter_spec)
+      console.log("属性")
+      console.log(filter_spec_attr)
+      that.filter_spec_attr_list = filter_spec_attr
       var filter_item = [];
       var filter_img = [];
       // 默认价钱数组

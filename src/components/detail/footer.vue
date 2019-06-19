@@ -53,7 +53,7 @@ import axios from "axios";
 import { MessageBox } from "mint-ui";
 import { Toast } from "mint-ui";
 export default {
-  props: ["price_list"],
+  props: ["price_list","filter_spec"],
   data() {
     return {
       shardRow: false,
@@ -63,6 +63,7 @@ export default {
       // 商品id
       good_id:'',
       goods_list_price:[],
+      filter_spec_attr_list:[],
     };
   },
   mounted(){
@@ -86,13 +87,27 @@ export default {
     add_cart:function(){
       var that = this
       console.log("加入购物车")
+      console.log(that.filter_spec_attr_list)
       console.log(that.listJoin)
-      if(that.goods_list_price.length == 0){
+      if(that.goods_list_price.length == 0 && that.filter_spec.length !=''){
         that.$message({
           message:'请选择商品属性',
           type:'success'
         })
         return
+      }else if(that.filter_spec.length == ""){
+        that.$http.post('/Api/Cart/cart_add',{goods_id:that.good_id,goods_num:1}).then(res =>{
+           console.log(res)
+           if(res.data.code == 1){
+            //  购物车页
+              this.$router.push({ name: '购物车页' })
+            //  this.$router.push("/cart")
+           }else{
+              that.$message({
+               message:res.data.msg
+             })
+           }
+         }).catch(error=>{})
       }else{
          that.$http.post('/Api/Cart/cart_add',{goods_id:that.good_id,goods_num:1,goods_spec:that.goods_list_price}).then(res =>{
            console.log(res)
@@ -100,6 +115,10 @@ export default {
             //  购物车页
               this.$router.push({ name: '购物车页' })
             //  this.$router.push("/cart")
+           }else{
+              that.$message({
+               message:res.data.msg
+             })
            }
          }).catch(error=>{})
       }
