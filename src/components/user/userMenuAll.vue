@@ -69,7 +69,7 @@
                    :to="{ name: '订单详情', params: { id: o.goods_list[0].order_id } }">
                   <el-button round>物流追踪</el-button>
                  </router-link>
-                <!-- <el-button round class="bgUndertintYellow colorWhite brR1">确认收货 -->
+                <el-button round class="bgUndertintYellow colorWhite" @click="affirm(inex)">确认收货
                 </el-button>
               </el-col>
               <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.order_attr ==='2'">
@@ -146,12 +146,12 @@ export default {
         .then(function(res) {
           thir.allOrderForm.listArray = res.data.data;
           thir.$message({
-              message: "操作成功",
-              type: "success"
-            });
+            message: "操作成功",
+            type: "success"
+          });
         })
         .catch({});
-        thir.reload();
+      thir.reload();
     },
     deleste(inex) {
       const thir = this;
@@ -167,12 +167,33 @@ export default {
         .then(function(res) {
           thir.allOrderForm.listArray = res.data.data;
           thir.$message({
-              message: "操作成功",
-              type: "success"
-            });
+            message: "操作成功",
+            type: "success"
+          });
         })
         .catch({});
-        thir.reload();
+      thir.reload();
+    },
+    affirm(inex) {
+      const thir = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url:
+          "/Api/order/order_confirm?order_id=" +
+          thir.allOrderForm.listArray[inex].order_id
+      })
+        .then(function(res) {
+          thir.allOrderForm.listArray = res.data.data;
+          thir.$message({
+            message: "操作成功",
+            type: "success"
+          });
+        })
+        .catch({});
+      thir.reload();
     }
   }
 };

@@ -24,8 +24,8 @@ export default {
     };
   },
   created(){
-    var that = this
-  console.log(that.goods_images_list)
+  var that = this
+  //  console.log(that.goods_images_list)
   },
 };
 </script>
