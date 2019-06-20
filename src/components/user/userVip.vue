@@ -101,8 +101,9 @@ export default {
    wxpay() {
            axios.post("/Api/Payment/vip_pay")
             .then((res) => {
-                if(res.code == 1) {
-                     const api = JSON.parse(res.data.data);
+                if(res.data.code == 1) {
+                     const that=this;
+                    that.api = JSON.parse(res.data.data);
                     console.log(1);
                     console.log(res.data.data);
                     console.log(2);
@@ -133,18 +134,13 @@ export default {
             console.log(5);
             console.log(pay_params);
             WeixinJSBridge.invoke(
-                'getBrandWCPayRequest', {
-                    "appId": api.appId,  //公众号名称，由商户传入     
-                    "timeStamp":api.timeStamp,  //时间戳，自1970年以来的秒数     
-                    "nonceStr":api.nonceStr,  //随机串     
-                    "package": api.package,     
-                    "signType": api.signType,  //微信签名方式：     
-                    "paySign": api.paySign  //微信签名 
-                },
+                'getBrandWCPayRequest',pay_params, 
                 function(res){
                     if(res.err_msg == "get_brand_wcpay_request:ok" ){
                     alert('支付成功！');
-                } 
+                } else{
+                   alert(res.err_code+res.err_desc+res.err_msg);
+                }
             }); 
         }
         }
