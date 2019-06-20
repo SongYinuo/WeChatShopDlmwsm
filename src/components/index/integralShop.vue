@@ -13,7 +13,7 @@
           <router-link :to="{ name: '详情页',params:{id:swiper.goods_id} }">
             <img :src="swiper.original_img" >
             <div class="integralTitle overHidden pd2">{{swiper.goods_name}}</div>
-            <p class="integralTextAnnotation">{{swiper.exchange_integral}}</p>
+            <p class="integralTextAnnotation">{{swiper.exchange_integral}}积分抵{{swiper.exchange_integral/10}}</p>
             <span class="integralPrice">￥{{swiper.shop_price}}</span>
           </router-link>
         </el-col>
@@ -27,7 +27,8 @@ export default {
   // name: "",
   data() {
     return {
-      swiperList: []
+      swiperList: [],
+      num: ''
     };
   },
   mounted() {
@@ -45,6 +46,7 @@ export default {
       })
         .then(function(res) {
           that.swiperList = res.data.data;
+          that.num = res.data.data.exchange_integral / 10;
         })
         .catch({});
     }
