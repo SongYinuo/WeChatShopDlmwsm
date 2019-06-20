@@ -4,7 +4,7 @@
       <div class="back" @click="$router.go(-1)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      待付款
+      待支付
     </el-header>
     <el-main class="userAllOrder">
       <el-row class="userAllOrderForm">
@@ -14,7 +14,7 @@
               <li class="fl text-alignCenter pd2">全部</li>
             </router-link>
             <router-link :to="{ name: '待付款' }">
-              <li class="fl text-alignCenter pd2 activeLi">待付款</li>
+              <li class="fl text-alignCenter pd2 activeLi">待支付</li>
             </router-link>
             <router-link :to="{ name: '待发货' }">
               <li class="fl text-alignCenter pd2">待发货</li>
@@ -28,155 +28,101 @@
           </ul>
         </el-col>
       </el-row>
-      <el-row class="brB10 pdB2" v-for="o in allOrderForm.listArray">
-        <el-col :span="22" :offset="1">
-          <el-col class="pd2 text-alignRight">{{o.stateText}}</el-col>
+      <el-row v-for="(o,inex) in allOrderForm.listArray">
+        <el-col :span="22" :offset="1" v-if="o.order_attr === '1'" class="brB10 pdB2">
+          <el-col class="pd2 text-alignRight">{{o.order_attr_name}}</el-col>
           <el-col :span="6" class="userAllOrderFormListImg">
-            <router-link :to="{ name: '详情页', params: { id: o.id } }">
-              <img :src="o.productImg">
+            <router-link :to="{ name: '详情页', params: { id: o.id } }" v-for="i in o.goods_list">
+              <img :src="i.thumb">
             </router-link>
           </el-col>
           <el-col :span="17" :offset="1" class="pdLR1">
             <el-row>
-              <router-link :to="{ name: '订单详情', params: { id: o.orderFormId } } ">
+              <router-link :to="{ name: '订单详情', params: { id: o.orderFormId } }">
+                <el-col v-for="(i,index) in o.goods_list" style="height: 80px;" class="pd2">
                 <el-col :span="16" class="mgT1">
-                  <div class="pd1 productTitle">{{o.title}}</div>
-                  <div>
-                    <span class="colorGray productSpecification">{{o.specificationSize}} ; </span>
-                    <span class="colorGray productSpecification">{{o.specificationShape}} ; </span>
+                  <div class="pd1 productTitle overHidden">{{i.goods_name}}</div>
+                  <div class="overHidden">
+                    <span class="colorGray productSpecification overHidden">{{i.spec_key_name}} <span v-if="i.spec_key_name!=''">;</span> </span>
                   </div>
                 </el-col>
                 <el-col :span="7" :offset="1" class="mgT2">
-                  <div class="text-alignRight price">¥{{o.price}}</div>
-                  <div class="text-alignRight amount">x{{o.amount}}</div>
-                  <div class="refundText colorYellow text-alignRight pdT1" v-if="o.state==='退款成功'">退款成功</div>
+                  <div class="text-alignRight price">¥{{i.goods_price}}</div>
+                  <div class="text-alignRight amount">x{{i.goods_num}}</div>
+                  <!-- <div class="refundText colorYellow text-alignRight pdT1" v-if="o.state==='退款成功'">退款成功</div> -->
                 </el-col>
-                <el-col class="pd2">
-                  <el-col :span="16" :offset="8">共{{o.amount}}件商品 合计：{{o.price}}</el-col>
                 </el-col>
               </router-link>
+             <el-col class="pd2">
+                  <el-col class="text-alignRight">共{{o.count_goods_num}}件商品 合计：<span class="colorRed">{{o.total_amount}}</span></el-col>
+               </el-col>
             </el-row>
             <el-row class="orderFormBtnRow">
-              <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.state==='待付款'">
-                <el-button round @click="btnCancellationOrder = true">取消订单</el-button>
-                <el-button round class="bgUndertintYellow colorWhite brR1" @click="btnPaymentOrder = true">付款
+              <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.order_attr === '1'">
+                <el-button round @click="cancel(inex)">取消订单</el-button>
+                <el-button round class="bgUndertintYellow colorWhite brR1">付款
                 </el-button>
-              </el-col>
-              <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.state==='待收货'">
-                <el-button round @click="btnLogisticsTrackingOrder = true">物流追踪</el-button>
-                <el-button round class="bgUndertintYellow colorWhite brR1" @click="btnConfirmReceiptOrder = true">确认收货
-                </el-button>
-              </el-col>
-              <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.state==='退款/退货'">
-                <el-button round @click="btnBackOrder = true">退款/退货</el-button>
-              </el-col>
-              <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.state==='交易关闭'">
-                <el-button round @click="btnCancelOrder = true">删除订单</el-button>
-              </el-col>
-              <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.state==='交易成功'">
-                <el-button round @click="btnLogisticsTrackingOrder = true">物流追踪</el-button>
-                <el-button round @click="btnCancelOrder = true">删除订单</el-button>
-              </el-col>
-              <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.state==='退款成功'">
-                <el-button round @click="btnCancelOrder = true">删除订单</el-button>
-              </el-col>
-              <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.state==='退款中'">
-                <el-button round @click="btnCancelOrder = true">删除订单</el-button>
-                <el-button round @click="btnForfeiturePayment = true">取消付款</el-button>
               </el-col>
             </el-row>
           </el-col>
         </el-col>
-      </el-row>
-      <el-row>
-        <el-dialog title="取消订单" :visible.sync="btnCancellationOrder" width="100%" :before-close="handleClose" top="50%">
-          <span>这是取消订单</span>
-          <span slot="footer" class="dialog-footer">
-            <el-button @click="btnCancellationOrder = false">取 消</el-button>
-            <el-button type="primary" @click="btnCancellationOrder = false">确 定</el-button>
-          </span>
-        </el-dialog>
-        <el-dialog title="付款" :visible.sync="btnPaymentOrder" width="100%" :before-close="handleClose" top="50%">
-          <span>这是订单付款</span>
-          <span slot="footer" class="dialog-footer">
-            <el-button @click="btnPaymentOrder = false">取 消</el-button>
-            <el-button type="primary" @click="btnPaymentOrder = false">确 定</el-button>
-          </span>
-        </el-dialog>
       </el-row>
     </el-main>
   </el-container>
 </template>
 
 <script>
+import axios from "axios";
 export default {
+  inject: ["reload"],
   data() {
     return {
-      btnCancellationOrder: false,
-      btnPaymentOrder: false,
       allOrderForm: {
         label: "待付款",
         name: "second",
-        listArray: [
-          {
-            id: "userOrderForm200001",
-            orderFormId: "orderForm100002",
-            productImg: "static/testImg/food1.jpg",
-            title: "【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
-            specificationSize: "50cm*80cm",
-            specificationShape: "鹰雕像",
-            price: 402,
-            amount: 1,
-            state: "待付款"
-          },
-          {
-            id: "userOrderForm200002",
-            orderFormId: "orderForm100003",
-            productImg: "static/testImg/food1.jpg",
-            title: "1【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
-            specificationSize: "50cm*80cm",
-            specificationShape: "鹰雕像",
-            price: 102,
-            amount: 1,
-            state: "待付款"
-          },
-          {
-            id: "userOrderForm200003",
-            orderFormId: "orderForm100004",
-            productImg: "static/testImg/food1.jpg",
-            title: "2【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
-            specificationSize: "50cm*80cm",
-            specificationShape: "鹰雕像",
-            price: 202,
-            amount: 1,
-            state: "待付款"
-          },
-          {
-            id: "userOrderForm200004",
-            orderFormId: "orderForm100005",
-            productImg: "static/testImg/food1.jpg",
-            title: "3【夢工房】龍文堂 造 岩口道安形 鉄瓶 身縦銘　ZZ-3",
-            specificationSize: "50cm*80cm",
-            specificationShape: "鹰雕像",
-            price: 302,
-            amount: 1,
-            state: "待付款"
-          }
-        ]
+        listArray: []
       }
     };
   },
+  mounted() {
+    this.getData();
+  },
   methods: {
-    handleClick(tab, event) {
-      console.log(tab, event);
-    },
-    handleClose(done) {
-      this.$confirm("确认关闭？")
-        .then(_ => {
-          done();
+    getData() {
+      const thir = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/order/order_list"
+      })
+        .then(function(res) {
+          thir.allOrderForm.listArray = res.data.data;
         })
-        .catch(_ => {});
-    }
+        .catch({});
+    },
+     cancel(inex) {
+      const thir = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url:
+          "/Api/order/order_cancle?order_id=" +
+          thir.allOrderForm.listArray[inex].order_id
+      })
+        .then(function(res) {
+          thir.allOrderForm.listArray = res.data.data;
+          thir.$message({
+              message: "操作成功",
+              type: "success"
+            });
+        })
+        .catch({});
+        thir.reload();
+    },
   }
 };
 </script>
