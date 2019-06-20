@@ -187,9 +187,13 @@ export default {
           console.log("112")
          console.log(res)
          if(res.data.code == 1){
-           console.log("成功")
+           console.log("成功125")
            axios.get('/Api/Payment/order_pay?order_id=' + res.data.data.order_id).then(function(ress){
              console.log(ress)
+             var str_attr = ress.data.data
+             console.log("支付成功")
+             console.log(str_attr)
+             console.log(eval(str_attr))
            })
          }
         })
