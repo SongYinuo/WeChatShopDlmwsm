@@ -71,7 +71,8 @@ export default {
             })
         },
         onBridgeReady(api) {
-            const api = JSON.parse(api);
+          const that=this;
+            that.api = JSON.parse(api);
             console.log(3);
             console.log(res.data.data);
             WeixinJSBridge.invoke(
