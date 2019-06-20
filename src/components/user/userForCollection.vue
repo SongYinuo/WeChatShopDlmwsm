@@ -49,7 +49,6 @@
                 <el-col :span="7" :offset="1" class="mgT2">
                   <div class="text-alignRight price">¥{{i.goods_price}}</div>
                   <div class="text-alignRight amount">x{{i.goods_num}}</div>
-                  <!-- <div class="refundText colorYellow text-alignRight pdT1" v-if="o.state==='退款成功'">退款成功</div> -->
                 </el-col>
                 </el-col>
               </router-link>
