@@ -41,38 +41,54 @@ export default {
         remainingDays: 40,
         userVipExplain: "此处为有关vip的说明文字"
       },
-      api:{}
-
+      api: {}
     };
   },
   methods: {
-    wxpay() {
-    const that= this;
-    axios
-      .get("/Api/Payment/vip_pay")
-      // .then(function(res){
-      //   that.api=JSON.parse(res.data.data);
-      //   console.log(1);
-      //    console.log(res);
-      //    console.log(666);
-      //    console.log(that.api);
-
-      //   // alert(res.data.data);
-      // })
-      .then(res => {
-         console.log(1);
-          console.log(res);
-          console.log(666);
-          console.log(res.data.data);
-          that.api = JSON.parse(res.data.data);
-          console.log(888);
-          console.log(that.api);
-        })
-        .catch(error => {});
-    },
-   
-  }
-};
+   wxpay() {
+           axios.post("/Api/Payment/vip_pay")
+            .then((res) => {
+                if(res.data.code == 1) {
+                     const that=this;
+                    that.api = JSON.parse(res.data.data);
+                    console.log(1);
+                    console.log(res.data.data);
+                    if (typeof WeixinJSBridge == "undefined"){
+                        if( document.addEventListener ){
+                            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                        }else if (document.attachEvent){
+                            document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+                            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                        }
+                        }else{
+                        this.onBridgeReady(api);
+                    }
+                }else{
+                    alert('微信支付调起失败！');
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+        },
+        onBridgeReady(api) {
+          const that=this;
+            that.api = JSON.parse(api);
+            console.log(3);
+            console.log(res.data.data);
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',api, 
+                function(res){
+                    if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                    alert('支付成功！');
+                } else{
+                   alert(res.err_code+res.err_desc+res.err_msg);
+                }
+            }); 
+        }
+        }
+        }
+  
+      
 </script>
 
 <style lang="less">
