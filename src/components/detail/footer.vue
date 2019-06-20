@@ -72,10 +72,10 @@ export default {
   },
   methods: {
     sharePosters() {
-      console.log("分享海报");
+      // console.log("分享海报");
     },
     shardFriend() {
-      console.log("分享朋友");
+      // console.log("分享朋友");
     },
     clickCollect() {
       this.$message({
@@ -86,9 +86,9 @@ export default {
     // 加入购物车
     add_cart:function(){
       var that = this
-      console.log("加入购物车")
-      console.log(that.filter_spec_attr_list)
-      console.log(that.listJoin)
+      // console.log("加入购物车")
+      // console.log(that.filter_spec_attr_list)
+      // console.log(that.listJoin)
       if(that.goods_list_price.length == 0 && that.filter_spec.length !=''){
         that.$message({
           message:'请选择商品属性',
@@ -97,7 +97,7 @@ export default {
         return
       }else if(that.filter_spec.length == ""){
         that.$http.post('/Api/Cart/cart_add',{goods_id:that.good_id,goods_num:1}).then(res =>{
-           console.log(res)
+          //  console.log(res)
            if(res.data.code == 1){
             //  购物车页
               this.$router.push({ name: '购物车页' })
@@ -110,7 +110,7 @@ export default {
          }).catch(error=>{})
       }else{
          that.$http.post('/Api/Cart/cart_add',{goods_id:that.good_id,goods_num:1,goods_spec:that.goods_list_price}).then(res =>{
-           console.log(res)
+          //  console.log(res)
            if(res.data.code == 1){
             //  购物车页
               this.$router.push({ name: '购物车页' })
@@ -127,13 +127,13 @@ export default {
   mounted(){
     var that = this
     that.good_id =  that.$route.params.id
-    console.log("价格列表")
-    console.log(that.price_list)
+    // console.log("价格列表")
+    // console.log(that.price_list)
   },
    watch:{
     price_list(val){
-      console.log("哈哈哈")
-      console.log(val)
+      // console.log("哈哈哈")
+      // console.log(val)
       this.goods_list_price = val
     }
   },

@@ -120,14 +120,15 @@
           </el-col>
           <el-col class="pd8 orderFormDeatilsBtn text-alignRight">
             <router-link
-                    :to="{ name: '物流跟踪详情', params: { id: detailsInfo.express_info.EBusinessID, order_id:detailsInfo.order_id, state:detailsInfo.order_attr_name,shipping_name:detailsInfo.shipping_name,order_sn:detailsInfo.order_sn } }" v-if="detailsInfo.order_attr==='5'">
+                    :to="{ name: '物流跟踪详情', params: { id: detailsInfo.express_info.EBusinessID, order_id:detailsInfo.order_id, state:detailsInfo.order_attr_name,shipping_name:detailsInfo.shipping_name,order_sn:detailsInfo.order_sn } }" v-if="detailsInfo.order_attr==='5'||detailsInfo.order_attr==='3'">
               <el-button round >查看物流</el-button>
             </router-link>
             <el-button round  @click="cancel()" v-if="detailsInfo.order_attr === '1'">取消订单</el-button>
             <el-button round  @click="deleste()" v-if="detailsInfo.order_attr === '4'||detailsInfo.order_attr === '5'">删除订单</el-button>
             <router-link :to="{name: '购物车详情'}">
-              <el-button round class="bgUndertintYellow colorWhite brR1" v-if="detailsInfo.order_attr ==='3'">付款</el-button>
+              <el-button round class="bgUndertintYellow colorWhite brR1" v-if="detailsInfo.order_attr === '1'">付款</el-button>
             </router-link>
+            <el-button round class="bgUndertintYellow colorWhite brR1" v-if="detailsInfo.order_attr ==='3'" @click="affirm()">确认收货</el-button>
             <!-- <el-button round class="bgUndertintYellow colorWhite brR1">确认收货
             </el-button> -->
           </el-col>
@@ -136,7 +137,6 @@
     </el-main>
   </el-container>
 </template>
-
 
 <script>
 import axios from "axios";
@@ -254,6 +254,26 @@ export default {
           "Content-Type": "application/x-www-form-urlencoded"
         },
         url: "/Api/order/order_delete?order_id=" + order_id
+      })
+        .then(function(res) {
+          thir.allOrderForm.listArray = res.data.data;
+          thir.$message({
+            message: "操作成功",
+            type: "success"
+          });
+        })
+        .catch({});
+      thir.reload();
+    },
+    affirm(inex) {
+      const thir = this;
+      const order_id = thir.$route.params.id;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/order/order_confirm?order_id=" + order_id
       })
         .then(function(res) {
           thir.allOrderForm.listArray = res.data.data;

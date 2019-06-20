@@ -28,8 +28,8 @@
           </ul>
         </el-col>
       </el-row>
-        <el-row v-for="o in allOrderForm.listArray">
-        <el-col :span="22" :offset="1" v-if="o.order_attr === '10'" class="brB10 pdB2">
+        <el-row v-for="(o,inex)  in allOrderForm.listArray">
+        <el-col :span="22" :offset="1" v-if="o.order_attr === '3'" class="brB10 pdB2">
           <el-col class="pd2 text-alignRight">{{o.order_attr_name}}</el-col>
           <el-col :span="6" class="userAllOrderFormListImg">
             <router-link :to="{ name: '详情页', params: { id: o.id } }" v-for="i in o.goods_list">
@@ -38,7 +38,7 @@
           </el-col>
           <el-col :span="17" :offset="1" class="pdLR1">
             <el-row>
-              <router-link :to="{ name: '订单详情', params: { id: o.orderFormId } }">
+              <router-link :to="{ name: '订单详情', params: { id: o.order_id } }">
                 <el-col v-for="(i,index) in o.goods_list" style="height: 80px;" class="pd2">
                 <el-col :span="16" class="mgT1">
                   <div class="pd1 productTitle overHidden">{{i.goods_name}}</div>
@@ -59,11 +59,11 @@
             </el-row>
             <el-row class="orderFormBtnRow">
               <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.order_attr ==='3'">
-                <router-link :to="{ name: '订单详情', params: { id: o.orderFormId } }">
+                <router-link :to="{ name: '订单详情', params: { id: o.order_id } }">
                     <el-button round>物流追踪</el-button>
                 </router-link>
-                <!-- <el-button round class="bgUndertintYellow colorWhite brR1">确认收货
-                </el-button> -->
+                <el-button round @click="affirm(inex)" class="bgUndertintYellow colorWhite brR1">确认收货
+                </el-button>
               </el-col>
             </el-row>
           </el-col>
@@ -94,6 +94,7 @@
 <script>
 import axios from "axios";
 export default {
+  inject: ["reload"],
   data() {
     return {
       allOrderForm: {
@@ -120,6 +121,27 @@ export default {
           thir.allOrderForm.listArray = res.data.data;
         })
         .catch({});
+    },
+    affirm(inex) {
+      const thir = this;
+      const id = thir.allOrderForm.listArray[inex].order_id;
+      console.log(id)
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/order/order_confirm?order_id=" + id
+      })
+        .then(function(res) {
+          thir.allOrderForm.listArray = res.data.data;
+          thir.$message({
+            message: "操作成功",
+            type: "success"
+          });
+        })
+        .catch({});
+      thir.reload();
     }
   }
 };
