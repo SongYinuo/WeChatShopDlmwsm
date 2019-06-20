@@ -51,9 +51,12 @@ export default {
     axios
       .get("/Api/Payment/vip_pay")
       .then(function(res){
-        that.api=res.data;
+        that.api=JSON.parse(res.data.data);
         console.log(1);
          console.log(res);
+         console.log(666);
+         console.log(that.api);
+
         // alert(res.data.data);
       })
     },
