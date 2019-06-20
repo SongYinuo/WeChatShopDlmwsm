@@ -61,7 +61,7 @@ export default {
                             document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
                         }
                         }else{
-                        this.onBridgeReady(pay_params);
+                        this.onBridgeReady(api);
                     }
                 }else{
                     alert('微信支付调起失败！');
@@ -71,13 +71,11 @@ export default {
             })
         },
         onBridgeReady(api) {
-            const pay_params = JSON.parse(api);
+            const api = JSON.parse(api);
             console.log(3);
             console.log(res.data.data);
-            console.log(5);
-            console.log(pay_params);
             WeixinJSBridge.invoke(
-                'getBrandWCPayRequest',pay_params, 
+                'getBrandWCPayRequest',api, 
                 function(res){
                     if(res.err_msg == "get_brand_wcpay_request:ok" ){
                     alert('支付成功！');
