@@ -147,63 +147,80 @@ export default {
         consignee: "张三",
         consigneePhone: "15124550264",
         placeOfReceipt: "上海市张江镇路368号39号楼233室",
-        distribution: "物流配送",
+        distribution: "物流配送"
       },
       // 商品列表
       goods_list: [],
-      goods_detail_message:'',
+      goods_detail_message: "",
       // 用户共多少积分
-      user_pay_points:'',
+      user_pay_points: "",
       // 收货地址列表
-      address_list:'',
+      address_list: ""
     };
   },
   methods: {
     // 获取页面信息
-    getData(){
-      var that = this
-       axios
-        .get("/Api/Cart/cart_submit" + "?address_id=" + '')
-        .then(function(res){
-          console.log("112")
-         console.log(res)
-         that.goods_list = res.data.data.cart_list
-         that.goods_detail_message = res.data.data.result
-         that.user_pay_points = res.data.data.user_pay_points
-         that.address_list = res.data.data.address
+    getData() {
+      var that = this;
+      axios
+        .get("/Api/Cart/cart_submit" + "?address_id=" + "")
+        .then(function(res) {
+          console.log("112");
+          console.log(res);
+          that.goods_list = res.data.data.cart_list;
+          that.goods_detail_message = res.data.data.result;
+          that.user_pay_points = res.data.data.user_pay_points;
+          that.address_list = res.data.data.address;
         })
-        .catch(function(error){
-        });   
+        .catch(function(error) {});
     },
-     // 立即支付
+    // 立即支付
     submitCarDetails() {
       console.log(this.textarea);
-      console.log("支付")
-       axios
-        .post("/Api/Cart/cart_submit",{
-          address_id:''
+      console.log("支付");
+      axios
+        .post("/Api/Cart/cart_submit", {
+          address_id: ""
         })
-        .then(function(res){
-          console.log("112")
-         console.log(res)
-         if(res.data.code == 1){
-           console.log("成功125")
-           axios.get('/Api/Payment/order_pay?order_id=' + res.data.data.order_id).then(function(ress){
-             console.log(ress)
-             var str_attr = ress.data.data
-             console.log("支付成功")
-             console.log(str_attr)
-             console.log(eval(str_attr))
-           })
-         }
+        .then(function(res) {
+          console.log("112");
+          console.log(res);
+          if (res.data.code == 1) {
+            console.log("成功125");
+            axios
+              .get("/Api/Payment/order_pay?order_id=" + res.data.data.order_id)
+              .then(function(ress) {
+                console.log(ress);
+                var str_attr = JSON.parse(ress.data.data);
+                console.log(str_attr);
+                WeixinJSBridge.invoke(
+                  "getBrandWCPayRequest",
+                  {
+                    appId: str_attr.appId, //公众号名称，由商户传入
+                    timeStamp: str_attr.timeStamp, //时间戳，自1970年以来的秒数
+                    nonceStr: str_attr.nonceStr, //随机串
+                    package: str_attr.package,
+                    signType:str_attr.signType, //微信签名方式：
+                    paySign: str_attr.paySign //微信签名
+                  },
+                  function(res) {
+                    console.log("支付成功了")
+                    console.log(res)
+                    if (res.err_msg == "get_brand_wcpay_request:ok") {
+                      // 使用以上方式判断前端返回,微信团队郑重提示：
+                      //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                    }
+                  }
+                );
+              });
+          }
         })
-        .catch(function(error){
-        });
-    },
+        .catch(function(error) {});
+    }
   },
-  mounted(){
-    var that = this
-    that.getData()
+  mounted() {
+    var that = this;
+    that.getData();
   }
 };
 </script>
