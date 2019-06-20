@@ -66,7 +66,7 @@ export default {
           console.log(res.data.data);
           that.api = JSON.parse(res.data.data);
           console.log(888);
-          console.log(api);
+          console.log(that.api);
         })
         .catch(error => {});
     },
