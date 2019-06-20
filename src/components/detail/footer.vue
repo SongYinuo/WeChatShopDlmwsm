@@ -32,7 +32,7 @@
     <el-row>
     <el-dialog title="" class="detailsDialogRow" :visible.sync="shardRow" width="100%" top="0" :append-to-body='true'>
       <el-row slot="footer" class="dialog-footer pd4">
-        <router-link :to="{ name: '分享二维码', params: { id: id, titleName: menuLinkTitle, posterQRcodeId: posterQRcodeId } }">
+        <router-link :to="{ name: '分享二维码',params: { id: good_id,} }">
           <el-col :span="12" class="text-alignCenter">
             <el-col class="shardImg"><img src="../../../static/testImg/sharePosters.png"></el-col>
             <div class="shardText pd2" @click="sharePosters">生成分享海报</div>
@@ -53,15 +53,22 @@ import axios from "axios";
 import { MessageBox } from "mint-ui";
 import { Toast } from "mint-ui";
 export default {
+  props: ["price_list","filter_spec"],
   data() {
     return {
       shardRow: false,
-      id: "Id123456",
+      // id: "Id123456",
       menuLinkTitle: "二维码",
       posterQRcodeId: "posterQRcode122201120",
       // 商品id
       good_id:'',
+      goods_list_price:[],
+      filter_spec_attr_list:[],
     };
+  },
+  mounted(){
+    var  that = this
+     that.good_id =  that.$route.params.id;
   },
   methods: {
     sharePosters() {
@@ -79,13 +86,57 @@ export default {
     // 加入购物车
     add_cart:function(){
       var that = this
-      that.$http.post('/Api/Cart/cart_add',{goods_id:that.good_id,goods_num:2}).then(res =>{}).catch(error=>{})
+      console.log("加入购物车")
+      console.log(that.filter_spec_attr_list)
+      console.log(that.listJoin)
+      if(that.goods_list_price.length == 0 && that.filter_spec.length !=''){
+        that.$message({
+          message:'请选择商品属性',
+          type:'success'
+        })
+        return
+      }else if(that.filter_spec.length == ""){
+        that.$http.post('/Api/Cart/cart_add',{goods_id:that.good_id,goods_num:1}).then(res =>{
+           console.log(res)
+           if(res.data.code == 1){
+            //  购物车页
+              this.$router.push({ name: '购物车页' })
+            //  this.$router.push("/cart")
+           }else{
+              that.$message({
+               message:res.data.msg
+             })
+           }
+         }).catch(error=>{})
+      }else{
+         that.$http.post('/Api/Cart/cart_add',{goods_id:that.good_id,goods_num:1,goods_spec:that.goods_list_price}).then(res =>{
+           console.log(res)
+           if(res.data.code == 1){
+            //  购物车页
+              this.$router.push({ name: '购物车页' })
+            //  this.$router.push("/cart")
+           }else{
+              that.$message({
+               message:res.data.msg
+             })
+           }
+         }).catch(error=>{})
+      }
     }
   },
   mounted(){
     var that = this
-    that.good_id =  that.$route.query.id
-  }
+    that.good_id =  that.$route.params.id
+    console.log("价格列表")
+    console.log(that.price_list)
+  },
+   watch:{
+    price_list(val){
+      console.log("哈哈哈")
+      console.log(val)
+      this.goods_list_price = val
+    }
+  },
 };
 </script>
 
