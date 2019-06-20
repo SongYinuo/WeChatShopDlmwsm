@@ -40,12 +40,22 @@ export default {
         userVipBanner: "static/testImg/vipBanner.jpg",
         remainingDays: 40,
         userVipExplain: "此处为有关vip的说明文字"
-      }
+      },
+      api:{}
+
     };
   },
   methods: {
     wxpay() {
-    
+    const that= this;
+    axios
+      .get("/Api/Payment/vip_pay")
+      .then(function(res){
+        that.api=res.data;
+        console.log(1);
+         console.log(res);
+        // alert(res.data.data);
+      })
     },
    
   }
