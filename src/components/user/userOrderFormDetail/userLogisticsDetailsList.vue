@@ -8,22 +8,22 @@
     </el-header>
     <el-main class="logisticsListInfo">
       <el-row class="brB10">
-        <el-col :span="22" :offset="1" class="pd2" v-for="k in productList">
-          <el-col :span="6" class="logisticsListInfoImg">
-            <img :src="k.productImg">
-          </el-col>
+        <el-col :span="22" :offset="1" class="pd2">
+          <!-- <el-col :span="6" class="logisticsListInfoImg">
+            <img :src="productImg">
+          </el-col> -->
           <el-col :span="17" :offset="1" class="pd2">
             <div>
               <span class="logisticsTitle colorGray lh1-6">物流状态：</span>
-              <span>{{k.logisticsState}}</span>
+              <span>{{state}}</span>
             </div>
             <div>
               <span class="logisticsTitle colorGray lh1-6">承运来源：</span>
-              <span>{{k.logisticsCompany}}</span>
+              <span>{{shipping_name}}</span>
             </div>
             <div>
               <span class="logisticsTitle colorGray lh1-6">运单编号：</span>
-              <span>{{k.orderFormNum}}</span>
+              <span>{{order_sn}}</span>
             </div>
           </el-col>
         </el-col>
@@ -35,12 +35,9 @@
             <el-col :span="22" :offset="1">
               <el-timeline>
                 <el-timeline-item v-for="(activity, index) in activities" :key="index" :color="activity.color"
-                  :size="activity.size" :timestamp="activity.timestamp">
+                  :size="activity.size" :timestamp="activity.AcceptTime">
                   <span class="title lh1-6">
-                    {{activity.content}}
-                    {{activity.state}}
-                    {{activity.signer}}
-                    {{activity.signerPhone}}
+                    {{activity.AcceptStation}}
                   </span>
                 </el-timeline-item>
               </el-timeline>
@@ -53,99 +50,44 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      productList: [
-        {
-          id: "A1000001",
-          productImg: "static/testImg/youhua.jpg",
-          orderFormNum: "orderFormH10000101",
-          logisticsState: "已签收",
-          logisticsCompany: "顺通快递"
-        }
-      ],
-      activities: [
-        {
-          content: "上海市浦东新区张江公司",
-          state: "已签收",
-          timestamp: "2018-04-03 20:46",
-          signer: "顺丰快递",
-          signerPhone: "15624548634",
-          color: "#DAB62E"
-        },
-        {
-          content: "上海市浦东新区 ",
-          state: "已收入",
-          timestamp: "2018-04-03 12:46",
-          signer: "张江",
-          signerPhone: "15624548634",
-          color: ""
-        },
-        {
-          content: "上海市浦东新区张江1公司",
-          state: "派件中",
-          timestamp: "2018-04-03 00:46",
-          signer: "顺丰快递",
-          signerPhone: "15624548634",
-          color: ""
-        },
-        {
-          content: "1广东省深圳市平湖公司 已发出",
-          nextSite: "深圳转运心",
-          state: "已签收",
-          timestamp: "2018-04-03 20:46",
-          signer: "转运",
-          signerPhone: "15624548634",
-          color: ""
-        },
-        {
-          content: "2广东省深圳市平湖公司 已发出",
-          nextSite: "深圳转运心",
-          state: "已签收",
-          timestamp: "2018-04-03 20:46",
-          signer: "转运",
-          signerPhone: "15624548634",
-          color: ""
-        },
-        {
-          content: "3广东省深圳市平湖公司 已发出",
-          nextSite: "深圳转运心",
-          state: "已签收",
-          timestamp: "2018-04-03 20:46",
-          signer: "转运",
-          signerPhone: "15624548634",
-          color: ""
-        },
-        {
-          content: "4广东省深圳市平湖公司 已发出",
-          nextSite: "深圳转运心",
-          state: "已签收",
-          timestamp: "2018-04-03 20:46",
-          signer: "转运",
-          signerPhone: "15624548634",
-          color: ""
-        },
-        {
-          content: "5广东省深圳市平湖公司 已发出",
-          nextSite: "深圳转运心",
-          state: "已签收",
-          timestamp: "2018-04-03 20:46",
-          signer: "转运",
-          signerPhone: "15624548634",
-          color: ""
-        },
-        {
-          content: "6广东省深圳市平湖公司 已发出",
-          nextSite: "深圳转运心",
-          state: "已签收",
-          timestamp: "2018-04-03 20:46",
-          signer: "转运",
-          signerPhone: "15624548634",
-          color: ""
-        }
-      ]
+      state: "",
+      shipping_name: "",
+      order_sn: "",
+      productImg: "",
+      activities: []
     };
+  },
+  mounted: function() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      var that = this;
+      var id = that.$route.params.id;
+      var order_id = that.$route.params.order_id;
+      var state = that.$route.params.state;
+      var shipping_name = that.$route.params.shipping_name;
+      var order_sn = that.$route.params.order_sn;
+      // var productImg = that.$route.params.productImg
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/order/order_detail?order_id=" + order_id
+      })
+        .then(function(res) {
+          that.activities = res.data.data.express_info.Traces.reverse();
+          that.state = state;
+          that.shipping_name = shipping_name;
+          that.order_sn = order_sn;
+        })
+        .catch({});
+    }
   }
 };
 </script>
@@ -154,7 +96,6 @@ export default {
 @import "../../../assets/index/style.less";
 @import "../../../assets/header.less";
 @import "../../../assets/user/user.less";
-
 .el-main {
   padding: 0;
 }

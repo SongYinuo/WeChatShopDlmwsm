@@ -469,7 +469,7 @@ export default new Router({
       title: '订单详情'
     }
   }, {
-    path: '/user/userLogisticsDetailsList/:logisticsId',
+    path: '/user/userLogisticsDetailsList/:id/:order_id/:state/:shipping_name/:order_sn',
     name: '物流跟踪详情',
     component: UserLogisticsDetailsList,
     meta: {
