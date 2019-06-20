@@ -107,7 +107,7 @@ export default {
                     console.log(1);
                     console.log(res.data.data);
                     console.log(2);
-                    console.log(api);
+                    console.log(that.api);
                     if (typeof WeixinJSBridge == "undefined"){
                         if( document.addEventListener ){
                             document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
