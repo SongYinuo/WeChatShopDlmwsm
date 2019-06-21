@@ -30,7 +30,7 @@
       </el-col>
     </el-row>
     <el-row>
-    <el-dialog title="" class="detailsDialogRow" :visible.sync="shardRow" width="100%" top="0" :append-to-body='true'>
+    <el-dialog title="" class="detailsDialogRow" :visible.sync="shardRow" width="100%" top="0" style="position"  :append-to-body='true'>
       <el-row slot="footer" class="dialog-footer pd4">
         <router-link :to="{ name: '分享二维码',params: { id: good_id,} }">
           <el-col :span="12" class="text-alignCenter">
@@ -53,7 +53,7 @@ import axios from "axios";
 import { MessageBox } from "mint-ui";
 import { Toast } from "mint-ui";
 export default {
-  props: ["price_list","filter_spec"],
+  props: ["price_list", "filter_spec"],
   data() {
     return {
       shardRow: false,
@@ -61,14 +61,14 @@ export default {
       menuLinkTitle: "二维码",
       posterQRcodeId: "posterQRcode122201120",
       // 商品id
-      good_id:'',
-      goods_list_price:[],
-      filter_spec_attr_list:[],
+      good_id: "",
+      goods_list_price: [],
+      filter_spec_attr_list: []
     };
   },
-  mounted(){
-    var  that = this
-     that.good_id =  that.$route.params.id;
+  mounted() {
+    var that = this;
+    that.good_id = that.$route.params.id;
   },
   methods: {
     sharePosters() {
@@ -84,63 +84,73 @@ export default {
       });
     },
     // 加入购物车
-    add_cart:function(){
-      var that = this
+    add_cart: function() {
+      var that = this;
       // console.log("加入购物车")
       // console.log(that.filter_spec_attr_list)
       // console.log(that.listJoin)
-      if(that.goods_list_price.length == 0 && that.filter_spec.length !=''){
+      if (that.goods_list_price.length == 0 && that.filter_spec.length != "") {
         that.$message({
-          message:'请选择商品属性',
-          type:'success'
-        })
-        return
-      }else if(that.filter_spec.length == ""){
-        that.$http.post('/Api/Cart/cart_add',{goods_id:that.good_id,goods_num:1}).then(res =>{
-          //  console.log(res)
-           if(res.data.code == 1){
-            //  购物车页
-              this.$router.push({ name: '购物车页' })
-            //  this.$router.push("/cart")
-           }else{
+          message: "请选择商品属性",
+          type: "success"
+        });
+        return;
+      } else if (that.filter_spec.length == "") {
+        that.$http
+          .post("/Api/Cart/cart_add", { goods_id: that.good_id, goods_num: 1 })
+          .then(res => {
+            //  console.log(res)
+            if (res.data.code == 1) {
+              //  购物车页
+              this.$router.push({ name: "购物车页" });
+              //  this.$router.push("/cart")
+            } else {
               that.$message({
-               message:res.data.msg
-             })
-           }
-         }).catch(error=>{})
-      }else{
-         that.$http.post('/Api/Cart/cart_add',{goods_id:that.good_id,goods_num:1,goods_spec:that.goods_list_price}).then(res =>{
-          //  console.log(res)
-           if(res.data.code == 1){
-            //  购物车页
-              this.$router.push({ name: '购物车页' })
-            //  this.$router.push("/cart")
-           }else{
+                message: res.data.msg
+              });
+            }
+          })
+          .catch(error => {});
+      } else {
+        that.$http
+          .post("/Api/Cart/cart_add", {
+            goods_id: that.good_id,
+            goods_num: 1,
+            goods_spec: that.goods_list_price
+          })
+          .then(res => {
+            //  console.log(res)
+            if (res.data.code == 1) {
+              //  购物车页
+              this.$router.push({ name: "购物车页" });
+              //  this.$router.push("/cart")
+            } else {
               that.$message({
-               message:res.data.msg
-             })
-           }
-         }).catch(error=>{})
+                message: res.data.msg
+              });
+            }
+          })
+          .catch(error => {});
       }
     }
   },
-  mounted(){
-    var that = this
-    that.good_id =  that.$route.params.id
+  mounted() {
+    var that = this;
+    that.good_id = that.$route.params.id;
     // console.log("价格列表")
     // console.log(that.price_list)
   },
-   watch:{
-    price_list(val){
+  watch: {
+    price_list(val) {
       // console.log("哈哈哈")
       // console.log(val)
-      this.goods_list_price = val
+      this.goods_list_price = val;
     }
-  },
+  }
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import "../../assets/fz.less";
 @import "../../assets/index/style.less";
 @import "../../assets/detail/details.less";
@@ -164,6 +174,11 @@ export default {
       line-height: 1;
       left: 12px;
     }
+  }
+}
+.detailsDialogRow { 
+  .el-dialog {
+    position: absolute;
   }
 }
 </style>

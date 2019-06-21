@@ -1,0 +1,193 @@
+.details .details-explainRow .explainRowPrice {
+  height: 12vw;
+  line-height: 12vw;
+  letter-spacing: 2px;
+}
+.details .details-explainRow .explainRowFreightExplain {
+  font-size: 12px;
+}
+[data-dpr="2"] .details .details-explainRow .explainRowFreightExplain {
+  font-size: 24px;
+}
+[data-dpr="2.5"] .details .details-explainRow .explainRowFreightExplain {
+  font-size: 30px;
+}
+[data-dpr="2.75"] .details .details-explainRow .explainRowFreightExplain {
+  font-size: 33px;
+}
+[data-dpr="3"] .details .details-explainRow .explainRowFreightExplain {
+  font-size: 36px;
+}
+[data-dpr="4"] .details .details-explainRow .explainRowFreightExplain {
+  font-size: 48px;
+}
+.details .specificationRow {
+  height: 10vw;
+  line-height: 10vw;
+  font-size: 14px;
+}
+[data-dpr="2"] .details .specificationRow {
+  font-size: 28px;
+}
+[data-dpr="2.5"] .details .specificationRow {
+  font-size: 35px;
+}
+[data-dpr="2.75"] .details .specificationRow {
+  font-size: 39px;
+}
+[data-dpr="3"] .details .specificationRow {
+  font-size: 42px;
+}
+[data-dpr="4"] .details .specificationRow {
+  font-size: 56px;
+}
+.details .auctionDetails {
+  height: 14vw;
+}
+.details .detailsDialog .demo-ruleForm .detailsRow-specification .specificationProductImg img {
+  width: 100px;
+}
+.details .detailsDialog .demo-ruleForm .detailsRow-specification .specificationProductText {
+  font-size: 18px;
+}
+[data-dpr="2"] .details .detailsDialog .demo-ruleForm .detailsRow-specification .specificationProductText {
+  font-size: 36px;
+}
+[data-dpr="2.5"] .details .detailsDialog .demo-ruleForm .detailsRow-specification .specificationProductText {
+  font-size: 45px;
+}
+[data-dpr="2.75"] .details .detailsDialog .demo-ruleForm .detailsRow-specification .specificationProductText {
+  font-size: 50px;
+}
+[data-dpr="3"] .details .detailsDialog .demo-ruleForm .detailsRow-specification .specificationProductText {
+  font-size: 54px;
+}
+[data-dpr="4"] .details .detailsDialog .demo-ruleForm .detailsRow-specification .specificationProductText {
+  font-size: 72px;
+}
+.details .detailsDialog .demo-ruleForm .detailsRow-specification .width33-3 {
+  width: 33.3%;
+  margin-right: 2%;
+  border: 1px solid #eee;
+}
+.details .detailsDialog .demo-ruleForm .detailsRow-specification .el-radio__input.is-checked + .el-radio__label {
+  color: #DAB62E;
+}
+.details .detailsDialog .demo-ruleForm .detailsRow-specification .el-radio__label {
+  padding: 2vw 0;
+  display: block;
+  width: 100%;
+  float: left;
+  border-radius: 4px;
+}
+.details .detailsDialog .demo-ruleForm .detailsRow-specification .is-checked {
+  border: 1px solid #DAB62E;
+}
+.details .detailsDialog .demo-ruleForm .detailsRow-specification .el-radio__original {
+  display: none;
+}
+.details .detailsDialog .demo-ruleForm .detailsRow-specification .el-radio__input {
+  display: none;
+}
+.details .detailsDialog .demo-ruleForm .subBtn {
+  width: 100%;
+}
+.details .detailsDialog .el-dialog__body {
+  padding: 10px 20px;
+}
+.details .detailsDialog .el-dialog__header {
+  padding: 10px 20px;
+}
+.detail-content .contentUrl {
+  width: 100%;
+}
+.detail-footer {
+  height: 14vw;
+}
+.detail-footer i {
+  font-size: 20px;
+}
+[data-dpr="2"] .detail-footer i {
+  font-size: 40px;
+}
+[data-dpr="2.5"] .detail-footer i {
+  font-size: 50px;
+}
+[data-dpr="2.75"] .detail-footer i {
+  font-size: 55px;
+}
+[data-dpr="3"] .detail-footer i {
+  font-size: 60px;
+}
+[data-dpr="4"] .detail-footer i {
+  font-size: 80px;
+}
+.detail-footer .foot-text {
+  font-size: 12px;
+}
+[data-dpr="2"] .detail-footer .foot-text {
+  font-size: 24px;
+}
+[data-dpr="2.5"] .detail-footer .foot-text {
+  font-size: 30px;
+}
+[data-dpr="2.75"] .detail-footer .foot-text {
+  font-size: 33px;
+}
+[data-dpr="3"] .detail-footer .foot-text {
+  font-size: 36px;
+}
+[data-dpr="4"] .detail-footer .foot-text {
+  font-size: 48px;
+}
+details.less .foot-left {
+  line-height: 7vw;
+}
+.foot-right {
+  line-height: 14vw;
+}
+.dialog-footer .shardImg img {
+  width: 24px;
+  height: 24px;
+}
+.dialog-footer .shardText {
+  font-size: 12px;
+}
+[data-dpr="2"] .dialog-footer .shardText {
+  font-size: 24px;
+}
+[data-dpr="2.5"] .dialog-footer .shardText {
+  font-size: 30px;
+}
+[data-dpr="2.75"] .dialog-footer .shardText {
+  font-size: 33px;
+}
+[data-dpr="3"] .dialog-footer .shardText {
+  font-size: 36px;
+}
+[data-dpr="4"] .dialog-footer .shardText {
+  font-size: 48px;
+}
+.detailsDialogRow .el-dialog__body {
+  padding: 10px;
+}
+.posterQRcodeInfo .posterQRcodeRow img {
+  width: 100%;
+}
+.posterQRcodeInfo .posterQRcodeRow .posterQRcodUimg {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+.posterQRcodeInfo .posterQRcodeRow .posterQRcodUname {
+  line-height: 8vw;
+}
+.posterQRcodeInfo .appletOfWeChatInfo img {
+  width: 100%;
+}
+.foot .el-dialog {
+  margin: 0;
+  bottom: 0;
+  position: absolute !important;
+  z-index: 1000;
+}

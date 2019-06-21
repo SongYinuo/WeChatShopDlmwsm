@@ -17,7 +17,7 @@
               <div class="text-alignCenter colorWhite userVipTitle pdT3">我办理的Vip</div>
               <div class="text-alignCenter colorWhite userVipDay pdT1">还有{{userVip.remainingDays}}天到期</div>
               <div class="text-alignCenter userVipTitle pdT3">
-                <el-button plain @click="wxpay">立即续费</el-button>
+                <span @click="wxpay"><img :src="userVip.userVipimg"></span>
               </div>
             </el-col>
           </el-row>
@@ -37,9 +37,10 @@ export default {
   data() {
     return {
       userVip: {
-        userVipBanner: "static/testImg/vipBanner.jpg",
+        userVipBanner: "static/testImg/VIP-bg@2x.png",
+        userVipimg: "static/testImg/xfbtn@2x.png",
         remainingDays: 40,
-        userVipExplain: "此处为有关vip的说明文字"
+        userVipExplain: "海量视频免费看，尊享会员生活"
       },
       api: {}
     };
