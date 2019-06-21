@@ -497,14 +497,14 @@ export default new Router({
       title: '推荐提现'
     }
   }, {
-    path: '/userPromotionCenter/userExtensionAgentLevelone',
+    path: '/userPromotionCenter/userExtensionAgentLevelone/:id',
     name: '一级推广',
     component: UserExtensionAgentLevelOne,
     meta: {
       title: '一级推广'
     }
   }, {
-    path: '/userPromotionCenter/userExtensionAgentLevelTwo',
+    path: '/userPromotionCenter/userExtensionAgentLevelTwo/:id',
     name: '二级推广',
     component: UserExtensionAgentLevelTwo,
     meta: {
