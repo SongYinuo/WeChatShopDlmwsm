@@ -38,7 +38,7 @@
           </el-col>
           <el-col :span="17" :offset="1" class="pdLR1">
             <el-row>
-              <router-link :to="{ name: '订单详情', params: { id: o.orderFormId } }">
+              <router-link :to="{ name: '订单详情', params: { id: o.order_id } }">
                 <el-col v-for="(i,index) in o.goods_list" style="height: 80px;" class="pd2">
                 <el-col :span="16" class="mgT1">
                   <div class="pd1 productTitle overHidden">{{i.goods_name}}</div>
@@ -59,8 +59,10 @@
             <el-row class="orderFormBtnRow">
               <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.order_attr === '1'">
                 <el-button round @click="cancel(inex)">取消订单</el-button>
-                <el-button round class="bgUndertintYellow colorWhite brR1">付款
+                <router-link :to="{ name: '购物车详情' }">
+                  <el-button round class="bgUndertintYellow colorWhite brR1">付款
                 </el-button>
+                </router-link>
               </el-col>
             </el-row>
           </el-col>
@@ -101,7 +103,7 @@ export default {
         })
         .catch({});
     },
-     cancel(inex) {
+    cancel(inex) {
       const thir = this;
       axios({
         methods: "get",
@@ -115,13 +117,13 @@ export default {
         .then(function(res) {
           thir.allOrderForm.listArray = res.data.data;
           thir.$message({
-              message: "操作成功",
-              type: "success"
-            });
+            message: "操作成功",
+            type: "success"
+          });
         })
         .catch({});
-        thir.reload();
-    },
+      thir.reload();
+    }
   }
 };
 </script>
