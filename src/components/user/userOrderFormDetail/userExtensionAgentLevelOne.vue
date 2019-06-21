@@ -8,12 +8,12 @@
     </el-header>
     <el-main class="userExtensionAgentRow">
       <el-row>
-        <el-col :span="22" :offset="1" class="user pd2 brB1" v-for="k in generalizeArrayList">
+        <el-col :span="22" :offset="1" class="user pd2 brB1">
           <el-col :span="4" class="headPortrait">
-            <img :src="k.imgUrl">
+            <img :src="generalize.head_pic">
           </el-col>
           <el-col :span="19" :offset="1">
-            <div class="pdT4">{{k.name}}</div>
+            <div class="pdT4">{{generalize.nickname}}</div>
           </el-col>
         </el-col>
       </el-row>
@@ -24,24 +24,27 @@
 export default {
   data() {
     return {
-      generalizeArrayList: [
-        {
-          imgUrl: "static/testImg/userVip.png",
-          id: "userIdA1000001",
-          name: "媛媛媛贵妃"
-        },
-        {
-          imgUrl: "static/testImg/oringe-2.jpg",
-          id: "userIdA1000002",
-          name: "A.aaCui、小兮"
-        },
-        {
-          imgUrl: "static/testImg/user-forCollection.png",
-          id: "userIdA1000003",
-          name: "吕贺鹏"
-        }
-      ]
+      generalize: {}
     };
+  },
+  mounted: function() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      const thir = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Distribut/get_lower?id=" + 1
+      })
+        .then(function(res) {
+          thir.generalize = res.data.data;
+        })
+        .catch({});
+    }
   }
 };
 </script>
