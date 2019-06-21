@@ -80,7 +80,6 @@
       },
       // 远程查询 取消了
       handleSelect(item) {
-        console.log(item, item.value, item.address);
       },
       //  查询方法
       serachBtn() {

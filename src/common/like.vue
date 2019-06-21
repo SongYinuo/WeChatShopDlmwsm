@@ -21,7 +21,6 @@ export default {
       let that = this;
       this.admire == false ? (this.admire = true) : (this.admire = false);
       localStorage.setItem("admire", this.admire); //储存状态到本地，关闭页面重新打开会显示点赞状态
-      console.log("收藏");
       this.$http
         .post("/Api/User/collect" ,{
 
@@ -31,14 +30,6 @@ export default {
        
         )
         .then(res => {
-          console.log(res);
-          console.log(that.article_id)
-          // if (res.data.code == 1) {
-          //   alert('点赞接口成功')
-          // }else if(res.data.code == 0){
-          //   alert('未点赞')
-          // }
-          console.log("文章id");
         })
         .catch(error => {});
     }

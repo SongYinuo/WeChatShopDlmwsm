@@ -149,15 +149,12 @@ export default {
     onProgress(event, file, fileList) {
     },
     handleAvatarSuccess(res, file,fileList) {
-      console.log("123456")
       var that = this
       var imgImg = "";
       for(var i=0;i<fileList.length;i++){
-        console.log(fileList[i])
         imgImg += fileList[i].response.data
       }
        imgImg = imgImg.substring(0, imgImg.lastIndexOf(','));
-       console.log(imgImg)
        that.basic = imgImg
     },
     submitForm(formName) {
@@ -180,7 +177,6 @@ export default {
             contact_phone: that.ruleForm.phone,
             content: that.ruleForm.messageText,
             img_url: that.basic
-            // video_url: that.basicVideo
           })
           .then(res => {})
           .catch(error => {});

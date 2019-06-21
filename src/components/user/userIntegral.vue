@@ -55,21 +55,6 @@ export default {
     return {
       reverse: false,
       activities: [
-        // {
-        //    grade:"+1", 
-        //   content: "连续签到1天奖励",
-        //   timestamp: "2018-04-15"
-        // },
-        // {
-        //  grade:"-100", 
-        //   content: "购买商品【绿色大米】积分抵扣",
-        //   timestamp: "2018-04-13"
-        // },
-        // {
-        //   grade:"+80", 
-        //   content: "创建成功",
-        //   timestamp: "2018-04-11"
-        // }
       ],number:[],
       items: [
         {
@@ -84,7 +69,6 @@ export default {
   methods: {
     getImg(){
        var newId = this.$route.params.id;
-       console.log(this.$route.params.id);
        
       const that = this;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
       Axios({
@@ -96,9 +80,6 @@ export default {
       }).then(function(res){
           that.activities = res.data.data;
           that.number=newId;
-          // console.log(res.data.data);
-          // console.log(typeof(that.activities))
-          // console.log(that.activities[0].change_time)
       }).catch(function(error){});
       
     }

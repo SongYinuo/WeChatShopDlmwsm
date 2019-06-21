@@ -19,13 +19,10 @@ export default {
   props:['goods_images_list'],
   data() {
     return {
-        // goods_images_list: [
-        // ]
     };
   },
   created(){
   var that = this
-  //  console.log(that.goods_images_list)
   },
 };
 </script>

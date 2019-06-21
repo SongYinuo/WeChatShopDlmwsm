@@ -51,8 +51,6 @@ export default {
                 if(res.data.code == 1) {
                      const that=this;
                     that.api = JSON.parse(res.data.data);
-                    console.log(1);
-                    console.log(res.data.data);
                     if (typeof WeixinJSBridge == "undefined"){
                         if( document.addEventListener ){
                             document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
@@ -67,14 +65,11 @@ export default {
                     alert('微信支付调起失败！');
                 }
             }).catch((err) => {
-                console.log(err);
             })
         },
         onBridgeReady(api) {
           const that=this;
             that.api = JSON.parse(api);
-            console.log(3);
-            console.log(res.data.data);
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest',api, 
                 function(res){

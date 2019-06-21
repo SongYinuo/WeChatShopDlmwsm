@@ -41,14 +41,9 @@ export default {
   methods:{
     // 监听子组件传过来的参数
     lithToFather:function(argument,data){
-      // console.log(argument)
       this.price_list = argument.join("_")
-      // console.log(this.price_list)
-      // console.log("接受的参数为")
-      // console.log(data)
       if(data.length != 0){
         for(var i=0;i<data.length;i++){
-          // console.log(data[i])
         }
       }
     }
@@ -59,13 +54,9 @@ export default {
   mounted(){
     var that = this
     var goods_id = this.$route.params.id
-    // console.log(this.$route)
-    // console.log(goods_id)
      axios
         .get("/Api/Goods/goods_detail" + "?id=" + goods_id)
         .then(function(res) {
-        //  console.log("123456", 12345678655)
-        //  console.log(res)
           that.good_list = res.data.data,
           that.goods_images_list = res.data.data.goods_images_list
          that.goods = res.data.data.goods
@@ -73,13 +64,9 @@ export default {
          that.spec_goods_price = res.data.data.spec_goods_price
          that.prom = res.data.data.prom
          that.content = res.data.data.goods.goods_content
-        //  console.log(that.comments)
-        //  console.log(that.filter_spec)
         })
         .catch(function(error) {
         });
-    // console.log("主页")
-    // console.log(that.filter_spec)
   }
 }
 </script>
