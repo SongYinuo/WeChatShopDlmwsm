@@ -1,4 +1,4 @@
-<template lang="html">
+<template lang="html"> 
   <section class="details">
     <el-row class="auctionDetails auctionBgPink pd2" v-if="promsw.length!=0">
       <el-col :span="22" :offset="1" class="mgT3" style="font-size:14px;">
