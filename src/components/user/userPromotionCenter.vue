@@ -13,11 +13,12 @@
         </el-col>
         <el-col :span="22" :offset="1">
           <div class="commissionTitle pd4 text-alignCenter colorGray">我的佣金（元）</div>
-          <div class="commissionPrice pd4 text-alignCenter">1200</div>
+          <div class="commissionPrice pd4 text-alignCenter">{{promotionCenterInfo.info.user_money}}</div>
           <div class="pd2 text-alignCenter">
-            <router-link :to="{ name: '推荐提现' }">
+            <!-- <router-link :to="{ name: '推荐提现' }">
               <el-button class="bgRed colorWhite">立即提现</el-button>
-            </router-link>
+            </router-link> -->
+              <el-button class="bgRed colorWhite" @click="withdrawDeposit()">立即提现</el-button>
           </div>
           <el-col>
             <el-col :span="8">
@@ -25,14 +26,14 @@
               <div class="commissionText colorGray pd2">累计推广收益</div>
             </el-col>
             <el-col :span="8">
-              <router-link :to="{ name: '一级推广' }">
-                <div class="pd1">{{promotionCenterInfo.levelOnePromoter}}</div>
+              <router-link :to="{ name: '一级推广', params: { id: o.orderFormId } }">
+                <div class="pd1">{{promotionCenterInfo.info.first_lower}}</div>
                 <div class="commissionText colorGray pd2">一级推广员</div>
               </router-link>
             </el-col>
             <el-col :span="8">
-              <router-link :to="{ name: '二级推广' }">
-                <div class="pd1">{{promotionCenterInfo.levelTwoPromoter}}</div>
+              <router-link :to="{ name: '二级推广', params: { id: o.orderFormId } }">
+                <div class="pd1">{{promotionCenterInfo.info.second_lower}}</div>
                 <div class="commissionText colorGray pd2">二级推广员</div>
               </router-link>
             </el-col>
@@ -47,14 +48,14 @@
               <el-col :span="8" class="text-alignRight"><i class="el-icon-arrow-right"></i></el-col>
             </router-link>
           </el-col>
-          <el-col class="brB1 pd1" v-for="k in promotionCenterInfo.accountsArray">
+          <el-col class="brB1 pd1" v-for="k in promotionCenterInfo.account">
             <el-col :span="16">
-              <div class="pd1 accountsText">{{k.accountsType}}</div>
-              <div class="pd1 accountsDate colorGray">{{k.accountsDate}}{{k.commissionNme}}</div>
+              <div class="pd1 accountsText">{{k.desc}}</div>
+              <div class="pd1 accountsDate colorGray">{{k.change_time|formatDate}}</div>
             </el-col>
             <el-col :span="8">
               <div class="text-alignRight pd1">{{k.accountsPrice}}</div>
-              <div class="text-alignRight pd1 accountsLevel colorGray">{{k.level}}{{k.levelname}}</div>
+              <div class="text-alignRight pd1 accountsLevel colorGray">{{k.user_dis_level}}{{k.dis_name}}</div>
             </el-col>
           </el-col>
         </el-col>
@@ -64,60 +65,60 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
+  filters: {
+      formatDate: function (value) {
+        let date = new Date(value * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        let y = date.getFullYear();
+        let MM = date.getMonth() + 1;
+        MM = MM < 10 ? "0" + MM : MM;
+        let d = date.getDate();
+        d = d < 10 ? "0" + d : d;
+        let h = date.getHours();
+        h = h < 10 ? "0" + h : h;
+        let m = date.getMinutes();
+        m = m < 10 ? "0" + m : m;
+        let s = date.getSeconds();
+        s = s < 10 ? "0" + s : s;
+        // return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s;//多种时间格式的拼接
+        return h + ":" + m;
+      }
+    },
   data() {
     return {
       promotionCenterInfo: {
-        advettImgUrl: "static/testImg/vipBanner.jpg",
-        promotionEarnings: 12000,
-        levelOnePromoter: 20,
-        levelTwoPromoter: 10,
-        accountsArray: [
-          {
-            accountsType: "提现",
-            commissionNme: "",
-            accountsDate: "2018.01.23 22:47:23",
-            accountsPrice: -50.0,
-            level: "",
-            levelname: ""
-          },
-          {
-            accountsType: "推广佣金",
-            commissionNme: "上帝的手术刀",
-            accountsDate: "2018.01.23 22:47:23",
-            accountsPrice: +50.0,
-            level: "1级",
-            levelname: "崔小兮"
-          },
-          {
-            accountsType: "提现",
-            ommissionNme: "",
-            accountsDate: "2018.01.23 22:47:23",
-            accountsPrice: -50,
-            level: "",
-            levelname: ""
-          },
-          {
-            accountsType: "推广佣金",
-            ommissionNme: "下帝的手术刀",
-            accountsDate: "2018.01.23 22:47:23",
-            accountsPrice: +150,
-            level: "2级",
-            levelname: "李晓明"
-          },
-          {
-            accountsType: "提现",
-            ommissionNme: "",
-            accountsDate: "2018.01.23 22:47:23",
-            accountsPrice: -50,
-            level: "",
-            levelname: ""
-          }
-        ]
+        advettImgUrl: "static/testImg/tg-bg@2x.png",
+        accountsArray: []
       }
     };
   },
-  methods: {}
+  mounted: function() {
+    this.getData();
+  },
+  methods: {
+    getData(){
+      const thir = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url:
+          "/Api/Distribut/index" 
+      })
+        .then(function(res) {
+         thir.promotionCenterInfo = res.data.data
+        })
+        .catch({});
+    },
+    withdrawDeposit(){
+      this.$message({
+            message: "功能研发中心...",
+            type: "warning"
+        });
+    }
+  }
 };
 </script>
 

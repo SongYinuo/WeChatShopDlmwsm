@@ -2,11 +2,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
 import router from './router'
-import store from '@/vuex/store.js'   //vuex
-import api from '@/http/api.js'       //http请求
+import store from '@/vuex/store.js' //vuex
+import api from '@/http/api.js' //http请求
 import axios from 'axios'
 import less from 'less'
-import Mint from 'mint-ui';    //移动端UI
+import Mint from 'mint-ui'; //移动端UI
 import 'mint-ui/lib/style.css'
 import ElementUi from 'element-ui'
 import '../node_modules/element-ui/lib/theme-chalk/index.css'
@@ -52,20 +52,20 @@ Vue.prototype.$http = axios
 //     }
 // })
 
-// axios({
-//   methods: "get",
-//   headers: {
-//     "Content-Type": "application/x-www-form-urlencoded"
-//   },
-//   url: "/Api/Api/index"
-// }).then(function (res) {
-//   if (res.data.data.user.user_id <= 0) {
-//     location.href = "http://" + window.location.host + "/Api/api/wx_login?route=" + router.history.current.fullPath
-//   }
-//   else {
-//   }
-// }).catch(function (error) {
-// });
+axios({
+  methods: "get",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  url: "/Api/Api/index"
+}).then(function (res) {
+  if (res.data.data.user.user_id <= 0) {
+    location.href = "http://" + window.location.host + "/Api/api/wx_login?route=" + router.history.current.fullPath
+  }
+  else {
+  }
+}).catch(function (error) {
+});
 
 // 页面修改时修改浏览器标签栏
 router.beforeEach((to, from, next) => {
@@ -78,7 +78,7 @@ router.beforeEach((to, from, next) => {
 
 
 axios.interceptors.request.use((config) => {
-  Mint.Indicator.open({//打开loading
+  Mint.Indicator.open({ //打开loading
     text: '加载中...',
     spinnerType: 'fading-circle'
   });
@@ -89,7 +89,7 @@ axios.interceptors.request.use((config) => {
 })
 
 axios.interceptors.response.use((response) => {
-  Mint.Indicator.close();//关闭loading
+  Mint.Indicator.close(); //关闭loading
   return response;
 }, (err) => {
   return Promise.reject(err);
