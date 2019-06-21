@@ -13,7 +13,7 @@
           <router-link :to="{ name: '详情页',params:{id:swiper.goods_id} }">
             <img :src="swiper.original_img" >
             <div class="integralTitle overHidden pd2">{{swiper.goods_name}}</div>
-            <p class="integralTextAnnotation">{{swiper.exchange_integral}}积分抵{{swiper.exchange_integral/10}}</p>
+            <p class="integralTextAnnotation overHidden">{{swiper.exchange_integral}}积分抵{{swiper.exchange_integral/10}}</p>
             <span class="integralPrice">￥{{swiper.shop_price}}</span>
           </router-link>
         </el-col>

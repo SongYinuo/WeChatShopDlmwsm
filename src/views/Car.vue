@@ -59,9 +59,9 @@
               <!-- <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox> -->
               <img :src="checkAll == true ?'/static/check@2x.png':'/static/checked@2x.png'" style="width:1.2rem;margin-top:1rem;"  @click="select_all"/>
           </el-col>
-          <el-col :span="12" class="text-alignRight pd2">
-            <div class="totalPrices">总计(不含运费): <span class="colorRed">￥1239</span></div>
-            <div class="freight colorGray">运费：<span>￥100</span></div>
+          <el-col :span="12" class="text-alignRight pd2" style="margin-top:2vw;">
+            <div class="totalPrices">总计<span class="colorRed">￥{{price}}</span></div>
+            <!-- <div class="freight colorGray">运费：<span>￥100</span></div> -->
           </el-col>
           <el-col :span="8" class="accountsBtn">
             <!-- @click="OnAccounts" -->
@@ -191,14 +191,18 @@ export default {
       // 传的序号
       input_cart: "",
       nmuber_status: "",
-      click_status:1,
+      click_status: 1,
       // 是否是编辑状态
-      edit_status:'1',
+      edit_status: "1",
       // 编辑
-      edit:'编辑',
+      edit: "编辑",
       // 结算
-      settlem:'结算',
-      delete_status:1,
+      settlem: "结算",
+      delete_status: 1,
+      // 总价
+      price: 0,
+      // 收集购物车id集合
+      cart_id_list: []
     };
   },
   mounted() {
@@ -211,61 +215,58 @@ export default {
       axios
         .get("/Api/Cart/cart_list")
         .then(function(res) {
-          console.log("12312");
-          console.log(res);
           that.cart_list = res.data.data;
+          for (var i = 0; i < that.cart_list.length; i++) {
+            if (that.cart_list[i].selected == 1) {
+              that.cart_id_list.push(that.cart_list[i].id);
+              that.price +=
+                parseFloat(that.cart_list[i].goods_price) *
+                parseFloat(that.cart_list[i].goods_num);
+            }
+          }
         })
-        .catch(function(error) {
-          // console.log(error)
-        });
+        .catch(function(error) {});
     },
 
     deleteInfo(index) {
       this.items.splice(index, 1);
     },
-    // 点击按钮的单击事件
-    radio_click: function(index,cart_id) {
-      console.log(index);
-      console.log(cart_id)
+    // 点击按钮的单击事件{{结算}}
+    radio_click: function(index, cart_id) {
       var that = this;
-      that.cart_id = cart_id
-      console.log(that.cart_id)
-      console.log(123456);
-      // that.cart_list[]
-      console.log(that.cart_list[index].selected);
-      // 请求接口
-       axios
-        .get("/Api/Cart/cart_select?ids=" + cart_id)
-        .then(function(res) {
-          console.log("12312");
-          console.log(res);
-          // that.cart_list = res.data.data;
-        })
-        .catch(function(error) {
-          // console.log(error)
-        });
+      var price_total = "";
+      // that.cart_id = cart_id;
       if (that.cart_list[index].selected == 1) {
         that.cart_list[index].selected = 0;
       } else {
         that.cart_list[index].selected = 1;
+        that.price +=
+          parseFloat(that.cart_list[index].goods_price) *
+          parseFloat(that.cart_list[index].goods_num);
+          that.cart_id_list.push(cart_id);
+         axios.get("/Api/Cart/cart_select?ids=" + that.cart_id_list.join(',')).then(function(res) {
+      });
       }
       that.select_radio();
     },
     // 监听全选按钮
     select_all: function() {
       var that = this;
-      console.log("全选");
       if (that.checkAll == true) {
         for (var i = 0; i < that.cart_list.length; i++) {
           that.cart_list[i].selected = 1;
           that.checkAll = false;
+          that.price +=
+            parseFloat(that.cart_list[i].goods_price) *
+            parseFloat(that.cart_list[i].goods_num);
         }
+        consoel.log(that.price);
       } else {
-        console.log("取消反选");
         for (var i = 0; i < that.cart_list.length; i++) {
           that.cart_list[i].selected = 0;
           that.checkAll = true;
         }
+        that.price = 0;
       }
     },
     select_radio: function() {
@@ -285,15 +286,13 @@ export default {
     },
     submitForm() {
       this.dialogFormVisible = false;
-      // console.log("2552");
       var that = this;
-      that.Name_list = that.Name_list.slice(-3)
-      //  console.log(that.Name_list)
-       that.Name_list.sort(function(a,b){
-         return a-b
-       })
-      //  console.log(that.Name_list)
-      that.nmuber_status = that.click_status == 1 ?that.Name_list.join("_"):that.nmuber_status;
+      that.Name_list = that.Name_list.slice(-3);
+      that.Name_list.sort(function(a, b) {
+        return a - b;
+      });
+      that.nmuber_status =
+        that.click_status == 1 ? that.Name_list.join("_") : that.nmuber_status;
       axios
         .post("/Api/Cart/cart_edit", {
           id: that.cart_id,
@@ -301,26 +300,19 @@ export default {
           goods_spec: that.nmuber_status
         })
         .then(function(res) {
-          console.log(res)
-          if(res.data.code == 1){
-           that.getData()
-           console.log("重新加载")
+          if (res.data.code == 1) {
+            that.getData();
           }
         });
     },
     // 设置接口信息
-     radio_clicks: function(name,index) {
-      console.log(this.Name)
-      var that = this
-      that.click_status = 2
-      that.nmuber_status = this.Name.join('_')
-      console.log(that.nmuber_status)
+    radio_clicks: function(name, index) {
+      var that = this;
+      that.click_status = 2;
+      that.nmuber_status = this.Name.join("_");
     },
     // 循环规格
     post_mask: function(id, cart_id) {
-      console.log(cart_id);
-      console.log("遮罩层")
-      console.log(this)
       var goods_id = id;
       var that = this;
       that.cart_id = cart_id;
@@ -328,8 +320,6 @@ export default {
       axios
         .get("/Api/Goods/goods_detail?id=" + goods_id)
         .then(function(res) {
-          console.log(res);
-          // console.log("列表")
           that.filter_spec = res.data.data.filter_spec;
           that.prom = res.data.data.prom;
           that.spec_goods_price = res.data.data.spec_goods_price;
@@ -348,32 +338,18 @@ export default {
             filter_item = filter_spec_attr[i];
             that.Name.push(filter_item[0].item_id);
             that.Name_list.push(filter_item[0].item_id);
-            console.log;
-            console.log("11111");
             that.img_data = filter_item[0].item;
             filter_img.push(filter_item[0].src);
-            console.log(filter_img);
             that.default_price.push(filter_spec_attr[i][0].item_id);
-            console.log(that.default_price);
-            // that.color_list.push(filter_spec_attr[i].item);
-            // console.log(that.color_list)
           }
-          console.log("123456");
           // 循环价格结束
           that.img_data = filter_img[0];
-          console.log(that.img_data);
           that.default_price = that.default_price.join("_");
           var monery_index = monery.indexOf(that.default_price);
-          console.log(monery_index);
           that.phone_price = monert_list[monery_index].price;
-          console.log(that.phone_price);
           that.ruleForm.resourceA = filter_item[0].item;
-          console.log(that.ruleForm.resourceA);
-          console.log("循环");
         })
-        .catch(function(error) {
-          // console.log(error)
-        });
+        .catch(function(error) {});
     },
     // 获取规格的接口
     // 监听数量
@@ -381,53 +357,48 @@ export default {
       this.input_number = e;
     },
     // 是否点击编辑状态
-    editt_status:function(){
-      console.log("编辑")
-      var that = this
-      if(that.edit_status == 1){
-        that.edit_status = 2
-        that.edit = "完成"
-        that.settlem = "删除"
-      }else{
-         that.edit_status = 1
-         that.edit = "编辑"
-         that.settlem = "结算"
+    editt_status: function() {
+      var that = this;
+      if (that.edit_status == 1) {
+        that.edit_status = 2;
+        that.edit = "完成";
+        that.settlem = "删除";
+      } else {
+        that.edit_status = 1;
+        that.edit = "编辑";
+        that.settlem = "结算";
       }
     },
-    settlem_status:function(){
-      var that = this
-      if( that.edit_status == 2){
-        console.log("2222")
-        that.delete_status = 2
-
-      }else{
-        console.log("1111")
+    settlem_status: function() {
+      var that = this;
+      if (that.edit_status == 2) {
+        that.delete_status = 2;
+      } else {
       }
     },
     // 确认删除
-    submit:function(){
-      var that = this
+    submit: function() {
+      var that = this;
       var cart_list_id = [];
-      for(var i=0;i<that.cart_list.length;i++){
-        if(that.cart_list[i].selected == 1){
-          cart_list_id.push(that.cart_list[i].id)
+      for (var i = 0; i < that.cart_list.length; i++) {
+        if (that.cart_list[i].selected == 1) {
+          cart_list_id.push(that.cart_list[i].id);
         }
       }
-       cart_list_id = cart_list_id.join(',')
-       console.log(cart_list_id)
-       axios.get("/Api/Cart/cart_delete?ids=" + cart_list_id)
+      cart_list_id = cart_list_id.join(",");
+      axios
+        .get("/Api/Cart/cart_delete?ids=" + cart_list_id)
         .then(function(res) {
-          console.log(res)
-         if(res.data.code == 1){
-           that.$message({message:'删除成功'});
-           that.delete_status = 1;
-         }
+          if (res.data.code == 1) {
+            that.$message({ message: "删除成功" });
+            that.delete_status = 1;
+          }
         });
     },
     // 取消删除购物车
-    cancel:function(){
-      var that = this
-      that.delete_status = 2
+    cancel: function() {
+      var that = this;
+      that.delete_status = 2;
     }
   }
 };
@@ -585,30 +556,30 @@ export default {
   left: 30%;
   text-align: center;
 }
-.delete_status{
-  width:100%;
+.delete_status {
+  width: 100%;
   height: 100%;
   position: fixed;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   background: #000;
   opacity: 0.39;
   z-index: 300;
 }
-.bg_color{
-  width:70%;
+.bg_color {
+  width: 70%;
   height: 25vw;
   background: #fff;
   position: fixed;
-  top:40%;
+  top: 40%;
   left: 15%;
   z-index: 500;
 }
-.delete_good{
+.delete_good {
   text-align: center;
-  margin-top:4vw;
+  margin-top: 4vw;
   padding-bottom: 2vw;
-  border-bottom: 1px solid #EDEDED;
+  border-bottom: 1px solid #ededed;
   font-size: 14px;
 }
 </style>

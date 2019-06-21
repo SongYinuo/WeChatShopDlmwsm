@@ -129,47 +129,6 @@ export default {
         resourceA: []
       },
       data: {
-        // state: "拍卖",
-        // unknowAuction: {
-        //   state: "未拍卖",
-        //   unknownDate: "3月28日",
-        //   unknownTime: "0:00",
-        //   inventoryMax: 800
-        // },
-        // auctionIng: {
-        //   state: "已拍卖",
-        //   unknownTime: "23:20",
-        //   inventory: 563
-        // },
-        // title: "【夢工房】龍文堂 造 岩口 道安形 鉄瓶 身縦銘　ZZ-3 ",
-        // price: "2.4w",
-        // freightPrice: "150",
-        // inventory: 120,
-        // specification: {
-        //   url: "static/testImg/product-details01.jpg",
-        //   price: "254w",
-        //   specificationUnit: "尺寸",
-        //   specificationData: [
-        //     {
-        //       label: "50cm*80cm",
-        //       btnId: 0,
-        //       checked: false
-        //     },
-        //     {
-        //       label: "30cm*60cm",
-        //       btnId: 1,
-        //       checked: false
-        //     }
-        //   ],
-        //   typeUnit: "样式",
-        //   typeData: [
-        //     {
-        //       label: "鹰雕像",
-        //       btnId: 0,
-        //       checked: false
-        //     }
-        //   ]
-        // }
       },
       // 汉字
       fellow: [],
@@ -215,64 +174,47 @@ export default {
   methods: {
     submitForm(formName) {
       var that = this;
-      // console.log("序号");
-      // console.log(that.Name);
       that.Name.slice(Object.values(that.filter_spec).length);
       that.Name.sort(function(a, b) {
         return a - b;
       });
       var nameSlice = that.Name.join("_");
-      // console.log(nameSlice);
-      // console.log(that.Name);
       axios
         .get("/Api/Goods/get_goods_spec_name?goods_spec=" + nameSlice)
         .then(function(res) {
-          // console.log("进入函数");
-          // console.log(res);
           that.attrate_name = res.data.data;
-          //  if(res.data.code == 1){
-          //    this.$message('删除成功');
-          //  }
         });
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.dialogFormVisible = false;
-          // console.log(that.default_price);
           that.$emit("lithToFather", that.Name, that.default_price);
           for (var i = 0; i < that.Name.length; i++) {
             that.font_zi.push(that.Name[i]);
-            // console.log("添加");
-            // console.log(that.font_zi.join(","));
           }
           that.zong_han = that.font_zi.join("_");
           that.zong_han.sort(function(a, b) {
             return a - b;
           });
-          // console.log("123456");
         } else {
           return false;
         }
       });
     },
     radio_click: function(name, index) {
-      // console.log(this.Name);
       var that = this;
       var monery = [];
       var monert_list = [];
       var monery_id = [];
       var objAttr = Object.values(that.filter_spec);
       that.price_attr.push(name.item_id);
-      // Object.values(that.filter_spec).length
       const sliceArr = that.price_attr.slice(
         -Object.values(that.filter_spec).length
       );
-      // console.log(sliceArr);
       sliceArr.sort(function(a, b) {
         return a - b;
       });
       var listJoin = sliceArr.join("_");
       that.Name_list = listJoin;
-      // console.log("序列");
       for (var i = 0; i < that.list_price.length; i++) {
         monery.push(that.list_price[i].key);
         monert_list.push(that.list_price[i]);
@@ -288,7 +230,6 @@ export default {
     getDataProm() {
       const thit = this;
       const goods_id = this.$route.params.id;
-      // console.log(goods_id);
       axios({
         methods: "get",
         headers: {
@@ -297,16 +238,8 @@ export default {
         url: "/Api/Goods/goods_detail?id=" + goods_id
       })
         .then(function(res) {
-          // console.log(res);
           thit.promsw = res.data.data.prom;
-          // console.log(thit.promsw, 65125125445);
-          // console.log(thit.promsw.start_time);
-          // console.log(thit.promsw.end_time);
-          // console.log(thit.timestamp)
-          // thit.times = thit.promsw.end_time - thit.timestamps;
-          // console.log(thit.times,13216545646545)
           thit.times = thit.promsw.end_time - thit.timestamp;
-          // console.log(thit.times);
         })
         .catch(function(error) {});
     },
@@ -315,15 +248,10 @@ export default {
   mounted() {
     var that = this;
     window.scrollTo(0, 0);
-    // console.log("对象变成数组");
-    // console.log(that.filter_spec);
     that.getDataProm();
   },
   watch: {
-    // 使用监听的方式，监听数据的变化
     goods(val) {
-      // console.log("商品");
-      // console.log(val);
       var that = this;
       that.goods = val;
     },
@@ -331,15 +259,12 @@ export default {
       var that = this;
       that.filter_spec = val;
       var filter_spec_attr = Object.values(that.filter_spec);
-      // console.log("属性");
-      // console.log(filter_spec_attr);
       that.filter_spec_attr_list = filter_spec_attr;
       var filter_item = [];
       var filter_img = [];
       // 默认价钱数组
       var price_list = [];
       for (var i = 0; i < filter_spec_attr.length; i++) {
-        // console.log(filter_spec_attr[i]);
         filter_item = filter_spec_attr[i];
         this.Name.push(filter_item[0].item_id);
         this.Name_list.push(filter_item[0].item_id);
@@ -348,7 +273,6 @@ export default {
         that.default_price.push(filter_spec_attr[i][0].item_id);
         that.color_list.push(filter_spec_attr[i].item);
       }
-      // console.log(that.color_list);
       that.default_price = that.default_price.join("_");
       this.img_data = filter_img[0];
       that.ruleForm.resourceA = filter_item[0].item;
@@ -368,8 +292,6 @@ export default {
     },
     // 是否有活动价格
     prom(val) {
-      // console.log("活动");
-      // console.log(val);
       this.prom = val;
     }
   }

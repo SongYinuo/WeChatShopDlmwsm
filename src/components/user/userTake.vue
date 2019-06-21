@@ -125,7 +125,6 @@ export default {
     affirm(inex) {
       const thir = this;
       const id = thir.allOrderForm.listArray[inex].order_id;
-      console.log(id)
       axios({
         methods: "get",
         headers: {

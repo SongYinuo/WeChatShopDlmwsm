@@ -39,7 +39,6 @@ export default {
       this.allData = res.data
 
     }).catch((error) => {
-      console.log(error)
     })
   }
 }

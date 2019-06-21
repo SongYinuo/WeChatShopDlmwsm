@@ -65,7 +65,7 @@
                 <!-- <div class="refundText colorYellow text-alignRight pdT1" v-if="o.state==='退款成功'">退款成功</div> -->
               </el-col>
               <el-col class="pd2">
-                <el-col :span="20" :offset="4" class="text-alignRight">共{{item.goods_num}}件商品 合计：{{item.member_goods_price}}</el-col>
+                <el-col :span="20" :offset="4" class="text-alignRight">共{{item.goods_num}}件商品 合计：{{item.goods_fee}}</el-col>
               </el-col>
             </el-row>
           </el-col>
@@ -75,17 +75,13 @@
         <el-col class="detailsPaymentInfo" :span="22" :offset="1">
           <el-col class="pd2 mgT2 brB1">
             <el-col :span="16">商品总额</el-col>
-            <el-col :span="8" class="text-alignRight">¥{{goods_detail_message.order_amount}}</el-col>
+            <el-col :span="8" class="text-alignRight">¥{{goods_detail_message.goods_price}}</el-col>
           </el-col>
           <el-col class="pd2 brB1">
             <el-col :span="4">积分</el-col>
             <el-col :span="12" class="colorGray mgT1" style="font-size:12px;">共{{user_pay_points}},最大抵扣{{goods_detail_message.integral_money}}</el-col>
             <el-col :span="8" class="text-alignRight">{{goods_detail_message.use_point}}</el-col>
           </el-col>
-          <!-- <el-col class="pd2 brB1">
-            <el-col :span="16">运费</el-col>
-            <el-col :span="8" class="text-alignRight">¥{{detailsInfo.transportationExpense}}</el-col>
-          </el-col> -->
           <el-col class="pd2 brB1">
             <el-col :span="16">配送方式</el-col>
             <el-col :span="8" class="text-alignRight">{{detailsInfo.distribution}}</el-col>
@@ -165,8 +161,6 @@ export default {
       axios
         .get("/Api/Cart/cart_submit" + "?address_id=" + "")
         .then(function(res) {
-          console.log("112");
-          console.log(res);
           that.goods_list = res.data.data.cart_list;
           that.goods_detail_message = res.data.data.result;
           that.user_pay_points = res.data.data.user_pay_points;
@@ -176,23 +170,16 @@ export default {
     },
     // 立即支付
     submitCarDetails() {
-      console.log(this.textarea);
-      console.log("支付");
       axios
         .post("/Api/Cart/cart_submit", {
           address_id: ""
         })
         .then(function(res) {
-          console.log("112");
-          console.log(res);
           if (res.data.code == 1) {
-            console.log("成功125");
             axios
               .get("/Api/Payment/order_pay?order_id=" + res.data.data.order_id)
               .then(function(ress) {
-                console.log(ress);
                 var str_attr = JSON.parse(ress.data.data);
-                console.log(str_attr);
                 WeixinJSBridge.invoke(
                   "getBrandWCPayRequest",
                   {
@@ -204,11 +191,7 @@ export default {
                     paySign: str_attr.paySign //微信签名
                   },
                   function(res) {
-                    console.log("支付成功了")
-                    console.log(res)
                     if (res.err_msg == "get_brand_wcpay_request:ok") {
-                      // 使用以上方式判断前端返回,微信团队郑重提示：
-                      //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
                     }
                   }
                 );

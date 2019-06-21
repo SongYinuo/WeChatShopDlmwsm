@@ -48,7 +48,6 @@ export default {
     onSubmit() {
       alert("点击提现");
       this.form.inputValue;
-      console.log(this.form.inputValue);
     }
   }
 };
