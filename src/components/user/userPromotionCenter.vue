@@ -26,13 +26,13 @@
               <div class="commissionText colorGray pd2">累计推广收益</div>
             </el-col>
             <el-col :span="8">
-              <router-link :to="{ name: '一级推广', params: { id: o.orderFormId } }">
+              <router-link :to="{ name: '一级推广' }">
                 <div class="pd1">{{promotionCenterInfo.info.first_lower}}</div>
                 <div class="commissionText colorGray pd2">一级推广员</div>
               </router-link>
             </el-col>
             <el-col :span="8">
-              <router-link :to="{ name: '二级推广', params: { id: o.orderFormId } }">
+              <router-link :to="{ name: '二级推广' }">
                 <div class="pd1">{{promotionCenterInfo.info.second_lower}}</div>
                 <div class="commissionText colorGray pd2">二级推广员</div>
               </router-link>
@@ -54,7 +54,7 @@
               <div class="pd1 accountsDate colorGray">{{k.change_time|formatDate}}</div>
             </el-col>
             <el-col :span="8">
-              <div class="text-alignRight pd1">{{k.accountsPrice}}</div>
+              <!-- <div class="text-alignRight pd1">{{k.accountsPrice}}</div> -->
               <div class="text-alignRight pd1 accountsLevel colorGray">{{k.user_dis_level}}{{k.dis_name}}</div>
             </el-col>
           </el-col>

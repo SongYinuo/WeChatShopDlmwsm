@@ -1,6 +1,6 @@
-<template lang="html">
+<template lang="html"> 
   <section class="details">
-    <el-row class="auctionDetails auctionBgPink pd2" v-if="promsw!=''">
+    <el-row class="auctionDetails auctionBgPink pd2" v-if="promsw.length!=0">
       <el-col :span="22" :offset="1" class="mgT3" style="font-size:14px;">
         <el-col :span="6">
           <div class="colorWhite text-alignLeft">限时秒杀</div>
@@ -15,8 +15,8 @@
       </el-col>
     </el-row>
     <el-row class="brB10 mgB2">
-      <el-col :span="22" :offset="1" class="details-explainRow">
-        <el-col :span="24" class="explainRowPrice colorRed pdB2" v-if="promsw!=''">¥{{promsw.prom_price}}元</el-col>
+      <el-col :span="22" :offset="1" class="details-explainRow pd2">
+        <el-col :span="24" class="explainRowPrice colorRed pdB2" v-if="promsw.length!=0">¥{{promsw.prom_price}}元</el-col>
         <el-col :span="24" class="explainRowPrice colorRed pdB2" v-if="promsw===''">¥{{goods.shop_price}}元</el-col>
         <el-col :span="24" class="explainRowTitle pdB2 lh1-2">{{goods.goods_name}}</el-col>
         <el-col :span="24" class="explainRowFreightExplain pdB2 lh1-2">运输费用仅限于目的地至大陆的运送。 对于包括岛屿和海外领土在内的非大陆目的地。</el-col>
