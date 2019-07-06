@@ -39,25 +39,25 @@
                                   </el-col>
                                 </div>
                                 <div v-if="userList.nickname!=''">
-                                  <el-col :span="6">
+                                  <el-col :span="8">
                                     <router-link :to="{ name: 'userExperienceExchange'}">
                                       <div class="text-alignCenter userNumTitle">{{userMenuInfo.article}}</div>
                                       <div class="text-alignCenter colorGray userText pdT2">心得</div>
                                     </router-link>
                                   </el-col>
-                                  <el-col :span="6">
+                                  <!-- <el-col :span="6">
                                     <router-link :to="{ name: 'userLectureRoom'}">
                                       <div class="text-alignCenter userNumTitle">{{userMenuInfo.classroom_count}}</div>
                                       <div class="text-alignCenter colorGray userText pdT2">用户讲堂</div>
                                     </router-link>
-                                  </el-col>
-                                  <el-col :span="6">
+                                  </el-col> -->
+                                  <el-col :span="8">
                                     <router-link :to="{ name: 'userPaintingPhotography'}">
                                       <div class="text-alignCenter userNumTitle">{{userMenuInfo.paint_count}}</div>
                                       <div class="text-alignCenter colorGray userText pdT2">书画摄影</div>
                                     </router-link>
                                   </el-col>
-                                <el-col :span="6">
+                                <el-col :span="8">
                                     <router-link :to="{ name: 'userAntiqueAppraisal'}">
                                       <div class="text-alignCenter userNumTitle">{{userMenuInfo.prove_count}}</div>
                                       <div class="text-alignCenter colorGray userText pdT2">古董鉴定</div>
@@ -107,11 +107,11 @@
             <el-row class="pd2 mgT2">
               <el-col :span="22" :offset="1" class="brB1 pd2">
                 <el-col :span="16" class="text-alignLeft orderFormTitle textIcon">
-                  <img src="../../static/testImg/user-generalize.png">
+                  <img src="../../static/testImg/user-generalize.png" style="margin-right:2px;margin-top:-2px;">
                   推广中心
                 </el-col>
                 <el-col :span="8" class="text-alignRight orderFormMore letterSpacing1 colorGray">
-                  <router-link :to="{ name: '推广中心' }">
+                  <router-link :to="{ name: '推广中心' }" style="margin-right:2px;margin-top:-2px;">
                     <span class="pdLR1">></span>
                   </router-link>
                 </el-col>
@@ -172,7 +172,7 @@ export default {
           //   text: "退款/售后"
           // }
         ],
-        couponAdvertisingImg: "static/testImg/pic1@2x.png"
+        couponAdvertisingImg: "static/testImg/vipBanner.jpg"
       }
     };
   },
@@ -190,7 +190,6 @@ export default {
         },
         url: "/Api/Api/index"
       }).then(function(res) {
-        console.log(res);
         that.userList = res.data.data.user;
       });
     },

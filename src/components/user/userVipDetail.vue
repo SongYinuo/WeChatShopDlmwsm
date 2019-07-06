@@ -1,14 +1,16 @@
 <template lang="html">
   <el-container>
     <el-header class="tittle">
-      <div class="back" @click="$router.go(-1)">
+      <div class="back" @click="$router.go(-2)">
         <i class="el-icon-arrow-left"></i>
       </div>
       {{title}}
     </el-header>
     <el-row class="Vip">
-      <el-col v-html="article_list.content"></el-col>
-      <el-col class="make">{{article_list.title}}</el-col>
+      <el-col :span="22" :offset="1">
+        <el-col class="make">{{article_list.title}}</el-col>
+        <el-col v-html="article_list.content" style="width:96%;margin-left:2%"></el-col>
+      </el-col>
     </el-row>
   </el-container>
 </template>
@@ -27,7 +29,7 @@ export default {
   methods: {
     getData: function() {
       var that = this;
-      var article_id = that.$route.params.id;
+      var article_id = that.$route.params.article_id;
       axios
         .get("/Api/User/vip_detail?article_id=" + article_id)
         .then(function(res) {

@@ -4,7 +4,7 @@
       <el-col :span="8">
         <el-col :span="8" class="detail-footer foot-left text-alignCenter pdT1-5">
             <div><i class="el-icon-star-off"></i></div>
-            <span class="foot-text" @click="clickCollect">收拍</span>
+            <span class="foot-text" @click="clickCollect">藏拍</span>
         </el-col>
         <el-col :span="8" class="detail-footer foot-left text-alignCenter pdT1-5">
             <div @click="shardRow = true"><i class="el-icon-share"></i></div>
@@ -88,14 +88,14 @@ export default {
         })
         .then(res => {
           that.$message({
-            message: "返回我的收拍，查看收拍内容",
+            message: "返回我的藏拍，查看藏拍内容",
             type: "success"
           });
           that.reload();
         })
         .catch(error => {});
       // this.$message({
-      //   message: "恭喜你，收拍成功",
+      //   message: "恭喜你，藏拍成功",
       //   type: "success"
       // });
     },

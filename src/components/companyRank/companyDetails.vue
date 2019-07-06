@@ -8,7 +8,7 @@
     </el-header>
     <el-main class="detailsInfo">
       <el-row>
-        <el-col :span="22" :offset="1" class="detailsInfoText lh1-8 textIndent2-8 img1" v-html="detailsInfo.content">
+        <el-col :span="24" class="detailsInfoText lh1-8 textIndent2-8 img1" v-html="detailsInfo.content">
           <el-col>
           {{detailsInfo.article_id}}-{{detailsInfo.content}}
           <el-col>

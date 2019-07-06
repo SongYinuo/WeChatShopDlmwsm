@@ -23,11 +23,11 @@
           </router-link>
         </div>
       </el-col>
-      <el-col>
+      <!-- <el-col>
         <router-link :to="{ name:'发布讲堂'}">
           <span class="flbtn"><img src="static/testImg/write@2x.png">讲个故事</span>
         </router-link>
-      </el-col>
+      </el-col> -->
     </el-row>
   </el-container>
 </template>

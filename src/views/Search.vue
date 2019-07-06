@@ -14,7 +14,7 @@
                     <el-autocomplete v-model="form.state" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" @select="handleSelect"></el-autocomplete>
                 </el-form-item> -->
             <el-form-item>
-              <el-input placeholder="请输入内容" v-model="form.input" class="input-with-select">
+              <el-input placeholder="请输入内容" type="text" v-model="form.input" class="input-with-select">
                 <el-button slot="append" icon="el-icon-search" @click="serachBtn"></el-button>
               </el-input>
             </el-form-item>
@@ -64,7 +64,6 @@
         var results = queryString ?
           restaurants.filter(this.createStateFilter(queryString)) :
           restaurants;
-
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           cb(results);
@@ -80,6 +79,7 @@
       },
       // 远程查询 取消了
       handleSelect(item) {
+        console.log(item, item.value, item.address);
       },
       //  查询方法
       serachBtn() {
@@ -103,7 +103,6 @@
       }
     }
   };
-
 </script>
 
 <style lang="less" scoped>
@@ -111,5 +110,4 @@
   @import "../assets/index/style.less";
   @import "../assets/search/search.less";
   @import "../assets/hotShop/hotShop.less";
-
 </style>

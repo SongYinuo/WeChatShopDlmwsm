@@ -15,7 +15,7 @@
           <el-row>
             <el-col :span="16" :offset="4" class="userVipBtnRow">
               <div class="text-alignCenter colorWhite userVipTitle pdT3">我办理的Vip</div>
-              <div class="text-alignCenter colorWhite userVipDay pdT1">还有{{userVip.remainingDays}}天到期</div>
+              <div class="text-alignCenter colorWhite userVipDay pdT1">还有{{userVips}}天到期</div>
               <div class="text-alignCenter userVipTitle pdT3">
                 <el-button plain @click="wxpay">立即续费</el-button>
               </div>
@@ -36,15 +36,31 @@ import axios from "axios";
 export default {
   data() {
     return {
+      userVips: '',
       userVip: {
         userVipBanner: "static/testImg/vipBanner.jpg",
         remainingDays: 40,
-        userVipExplain: "此处为有关vip的说明文字"
+        userVipExplain: "办理vip即可获取专属vip专属视频"
       },
       api: {}
     };
   },
+  mounted() {
+    this.getData();
+  },
   methods: {
+    getData() {
+      var that = this;
+      axios({
+        methods: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        url: "/Api/Api/index"
+      }).then(function(res) {
+        that.userVips = res.data.data.user.vip_remain_day;
+      });
+    },
     wxpay() {
       axios
         .get("/Api/Payment/vip_pay")
@@ -64,7 +80,8 @@ export default {
               if (res.err_msg == "get_brand_wcpay_request:ok") {
                 // location.href='$go_url';
               } else {
-                alert(res.err_code + res.err_desc + res.err_msg);
+                alert('支付失败');
+                // alert(res.err_code + res.err_desc + res.err_msg);
                 // location.href='$back_url';
               }
             }

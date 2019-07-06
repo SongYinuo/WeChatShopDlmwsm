@@ -217,9 +217,11 @@ export default {
             },
             function(res) {
               if (res.err_msg == "get_brand_wcpay_request:ok") {
+                this.reload();
                 // location.href='$go_url';
               } else {
-                alert(res.err_code + res.err_desc + res.err_msg);
+                // alert(res.err_code + res.err_desc + res.err_msg);
+                alert('支付失败');
                 // location.href='$back_url';
               }
             }

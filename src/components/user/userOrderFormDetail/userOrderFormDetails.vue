@@ -125,9 +125,9 @@
             </router-link>
             <el-button round  @click="cancel()" v-if="detailsInfo.order_attr === '1'">取消订单</el-button>
             <el-button round  @click="deleste()" v-if="detailsInfo.order_attr === '4'||detailsInfo.order_attr === '5'">删除订单</el-button>
-            <router-link :to="{name: '购物车详情'}">
+            <!-- <router-link :to="{name: '购物车详情'}">
               <el-button round class="bgUndertintYellow colorWhite brR1" v-if="detailsInfo.order_attr === '1'" @click="payment()">付款</el-button>
-            </router-link>
+            </router-link> -->
             <el-button round class="bgUndertintYellow colorWhite brR1" v-if="detailsInfo.order_attr ==='3'" @click="affirm()">确认收货</el-button>
             <!-- <el-button round class="bgUndertintYellow colorWhite brR1">确认收货
             </el-button> -->
@@ -306,7 +306,8 @@ export default {
               if (res.err_msg == "get_brand_wcpay_request:ok") {
                 // location.href='$go_url';
               } else {
-                alert(res.err_code + res.err_desc + res.err_msg);
+                alert('支付失败')
+                // alert(res.err_code + res.err_desc + res.err_msg);
                 // location.href='$back_url';
               }
             }

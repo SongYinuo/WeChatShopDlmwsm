@@ -9,7 +9,7 @@
       <el-main class="userCoupon">
         <el-row>
           <el-col :span="22" :offset="1" v-for="k in userCouponInfo" class="couponRow">
-             <router-link :to="{ name: 'vip详情',params: { id: k.article_id } }">
+             <router-link :to="{ name: 'vip详情',params: { article_id: k.article_id } }">
                <div v-if="is_vip===1">
                   <img :src="k.thumb">
                   <div class="pd2 text-alignCenter">{{k.title}}</div>
@@ -79,6 +79,9 @@ export default {
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/user/user.less";
+body .userCoupon .el-dialog  {
+  width: 100%;
+}
 .el-main {
   padding: 0;
 }

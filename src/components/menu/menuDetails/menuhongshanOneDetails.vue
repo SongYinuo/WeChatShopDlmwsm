@@ -20,7 +20,7 @@
         </el-col>
         <el-col :span="22" :offset="1" class=" list pdT12">
           <div v-for="list in lists">
-            <router-link :to="{ name:'详情页',query: { id: list.goods_id }}">
+            <router-link :to="{ name:'详情页',params: { id: list.goods_id }}">
               <el-row>
                 <el-col :span="8" class="pdT4">
                   <img :src="list.original_img" class="Periodimg">
@@ -63,7 +63,6 @@ export default {
       axios
         .get("/Api/Article/article_detail" + "?article_id=" + newId)
         .then(function(res) {
-          console.log(res)
           that.itemtxts = res.data.data;
           that.lists = res.data.data.goods_data;
         })
@@ -81,7 +80,7 @@ export default {
         .then(res => {
           console.log(res)
           that.$message({
-            message: "返回我的收拍，查看收拍内容",
+            message: "返回我的藏拍，查看藏拍内容",
             type: "success"
           });
           that.reload();
@@ -108,6 +107,10 @@ export default {
   right: 12px;
   top: 12px;;
   position: absolute;
+  }
+  .buy {
+    font-size: 12px;
+    padding: 2vw 3vw;
   }
 }
 </style>

@@ -11,6 +11,14 @@
                 <el-col class="advertisingImg">
                     <img :src="auctionImg.thumb">
                 </el-col>
+                <el-col class="po">
+                  <el-col class="pd1 text-alignRight">
+                  {{aa.description}}
+                  </el-col>
+                  <el-col class="pd1 text-alignRight">
+                  {{aa.start_time|formatDate}} 至 {{aa.end_time|formatDate}}
+                  </el-col>
+                </el-col>
             </el-row>
             <el-row class="pd2">
               <el-col :span="22" :offset="1">
@@ -19,7 +27,7 @@
                        <el-row class="productRow">
                              <el-col>
                                 <el-col :span="8" class="productRowInfo pdLR1" v-for="o in auctionText[0]">
-                                    <router-link :to="{ name: '详情页', params: { id: o.id } }">
+                                    <router-link :to="{ name: '详情页', params: { id: o.goods_id } }">
                                         <img :src="o.goods_image">
                                         <div class="pd2 infoTilte bgCfff lh1-2 overHidden">{{o.goods_name}}</div>
                                         <div class="colorRed bgCfff">¥{{o.goods_price}}</div>
@@ -32,7 +40,7 @@
                        <el-row class="productRow">
                              <el-col>
                                 <el-col :span="8" class="productRowInfo pdLR1" v-for="o in auctionTxt[1]">
-                                    <router-link :to="{ name: '详情页', params: { id: o.id } }">
+                                    <router-link :to="{ name: '详情页', params: { id: o.goods_id } }">
                                         <img :src="o.goods_image">
                                         <div class="pd2 infoTilte bgCfff lh1-2">{{o.goods_name}}</div>
                                         <div class="colorRed bgCfff">¥{{o.goods_price}}</div>
@@ -45,7 +53,7 @@
                        <el-row class="productRow">
                              <el-col>
                                 <el-col :span="8" class="productRowInfo pdLR1" v-for="(o,index) in auctionPopularity[2]">
-                                    <router-link :to="{ name: '详情页', params: { id: o.id } }">
+                                    <router-link :to="{ name: '详情页', params: { id: o.goods_id } }">
                                         <img :src="o.goods_image">
                                         <div class="pd2 infoTilte bgCfff lh1-2">{{o.goods_name}}</div>
                                         <div class="colorRed bgCfff">¥{{o.goods_price}}</div>
@@ -58,7 +66,7 @@
                        <el-row class="productRow">
                              <el-col>
                                 <el-col :span="8" class="productRowInfo pdLR1" v-for="(o,index) in auctionStockpile[3]">
-                                    <router-link :to="{ name: '详情页', params: { id: o.id } }">
+                                    <router-link :to="{ name: '详情页', params: { id: o.goods_id } }">
                                         <img :src="o.goods_image">
                                         <div class="pd2 infoTilte bgCfff lh1-2">{{o.goods_name}}</div>
                                         <div class="colorRed bgCfff">¥{{o.goods_price}}</div>
@@ -77,6 +85,24 @@
 <script>
 import axios from "axios";
 export default {
+      filters: {
+      formatDate: function (value) {
+        let date = new Date(value * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        let y = date.getFullYear();
+        let MM = date.getMonth() + 1;
+        MM = MM < 10 ? "0" + MM : MM;
+        let d = date.getDate();
+        d = d < 10 ? "0" + d : d;
+        let h = date.getHours();
+        h = h < 10 ? "0" + h : h;
+        let m = date.getMinutes();
+        m = m < 10 ? "0" + m : m;
+        let s = date.getSeconds();
+        s = s < 10 ? "0" + s : s;
+        // return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s;//多种时间格式的拼接
+        return MM + '-' + d + ' ' + h + ':' + m;
+      }
+    },
   data() {
     return {
       auctionList: {
@@ -108,8 +134,9 @@ export default {
       // 万年古董
       auctionPopularity: [],
       // 人气爆品
-      auctionStockpile: []
+      auctionStockpile: [],
       // 囤货必备
+      aa:''
     };
   },
 
@@ -190,6 +217,7 @@ export default {
         url: "/Api/Index/auction_list"
       })
         .then(function(res) {
+          that.aa = res.data.data.auction;
           that.auctionStockpile = res.data.data.goods_list;
         })
         .catch({});
@@ -201,11 +229,12 @@ export default {
 <style lang="less">
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
-
+body{
 .auctionRow {
   .el-main {
   padding: 0;
 }
+.el-tabs{width: 100%;}
   .el-tabs__active-bar {
     display: none;
   }
@@ -229,6 +258,7 @@ export default {
     padding: 0 20px;
   }
   .advertising {
+    position: relative;
     .advertisingImg {
       img {
         width: 100%;
@@ -258,6 +288,14 @@ export default {
     width: 25%;
     padding: 0;
   }
+  .po {
+    padding: 4px 12px;
+    color: white;
+    // background-color: rgb(0, 0, 0,0.2);
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+  }
 
   // .el-tabs__active-bar {
   //   display: block;
@@ -268,5 +306,6 @@ export default {
   // .el-tabs__nav{
   //       margin-left: 0%;
   // }
+}
 }
 </style>

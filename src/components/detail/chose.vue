@@ -1,6 +1,6 @@
-<template lang="html"> 
+<template lang="html">
   <section class="details">
-    <el-row class="auctionDetails auctionBgPink pd2" v-if="promsw.length!=0">
+    <el-row class="auctionDetails auctionBgPink pd2" v-if="promsw!=''">
       <el-col :span="22" :offset="1" class="mgT3" style="font-size:14px;">
         <el-col :span="6">
           <div class="colorWhite text-alignLeft">限时秒杀</div>
@@ -15,16 +15,15 @@
       </el-col>
     </el-row>
     <el-row class="brB10 mgB2">
-      <el-col :span="22" :offset="1" class="details-explainRow pd2">
-        <el-col :span="24" class="explainRowPrice colorRed pdB2" v-if="promsw.length!=0">¥{{promsw.prom_price}}元</el-col>
-        <el-col :span="24" class="explainRowPrice colorRed pdB2" v-if="goods.exchange_integral>0||promsw.length===0">¥{{goods.shop_price}}元</el-col>
-        <el-col :span="24" class="explainRowTitle pdB2 lh1-2">{{goods.goods_name}}</el-col>
+      <el-col :span="22" :offset="1" class="details-explainRow">
+        <el-col :span="24" class="explainRowPrice colorRed pdB2" v-if="promsw!=''">¥{{promsw.prom_price}}元</el-col>
+        <el-col :span="24" class="explainRowPrice colorRed pdB2" v-if="promsw.length===0">¥{{goods.shop_price}}元</el-col>
         <el-col :span="24" class="explainRowFreightExplain pdB2 lh1-2">运输费用仅限于目的地至大陆的运送。 对于包括岛屿和海外领土在内的非大陆目的地。</el-col>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="22" :offset="1">
-        <el-col class="specificationRow colorRed">
+         <el-col class="specificationRow colorRed" v-if="goods.exchange_integral!=0">
           <el-col :span="10">
             积分兑换
           </el-col>
@@ -53,10 +52,10 @@
     </el-row>
 
     <el-row>
-      <el-dialog title="商品规格信息" :visible.sync="dialogFormVisible" top="0" class="detailsDialog" style="position: fixed;">
+      <el-dialog title="商品规格信息" :visible.sync="dialogFormVisible" top="0" class="detailsDialog" style="position:fixed;width:100%;">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0" class="demo-ruleForm">
           <!-- <el-row class="fr inputNumber"><el-input-number :min="1" :max="99"></el-input-number></el-row> -->
-          <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="数量" style="position: absolute; right: -40px; top:70px;"></el-input-number>
+          <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="数量" style="left:35%;"></el-input-number>
           <el-row class="detailsRow-specification" v-for="(k,index,ids) in filter_spec">
             <el-col :span="24" style="padding-top:5vw;">
               <el-col :span="8" class="specificationProductImg">
@@ -237,6 +236,7 @@ export default {
         url: "/Api/Goods/goods_detail?id=" + goods_id
       })
         .then(function(res) {
+          console.log(res);
           thit.promsw = res.data.data.prom;
           thit.times = thit.promsw.end_time - thit.timestamp;
         })
@@ -301,49 +301,47 @@ export default {
 @import "../../assets/fz.less";
 @import "../../assets/detail/details.less";
 @import "../../assets/index/style.less";
-.auctionDetails {
-  .el-dialog {
-    width: 100%;
-    margin: 0;
-    bottom: 0;
-    position: initial;
-    z-index: 1000;
-    .inputNumber {
-      position: absolute;
-      right: 62px;
-      top: 120px;
-      .el-input-number {
-        line-height: 1.2;
-      }
-      .el-input-number .el-input__inner {
-        line-height: 1.2;
-        height: 18px;
-      }
+.el-dialog {
+  width: 100%;
+  margin: 0;
+  bottom: 0;
+  position: initial;
+  z-index: 1000;
+  .inputNumber {
+    position: absolute;
+    right: 62px;
+    top: 120px;
+    .el-input-number {
+      line-height: 1.2;
     }
-    .demo-ruleForm {
-      .el-input-number__increase {
-        margin-right: 78px;
-      }
-      .el-input-number__decrease,
-      .el-input-number__increase {
-        width: 20px;
-        line-height: 22px;
-        height: 22px;
-        // border-top: 1px solid #DCDFE6;
-        // border-bottom: 1px solid #DCDFE6;
-      }
-      .el-input-number .el-input {
-        line-height: 20px;
-      }
-      .el-input__inner {
-        height: 24px;
-        line-height: 20px;
-        width: 60%;
-      }
-      .el-input-number .el-input__inner {
-        padding-right: 20px;
-        padding-left: 20px;
-      }
+    .el-input-number .el-input__inner {
+      line-height: 1.2;
+      height: 18px;
+    }
+  }
+  .demo-ruleForm {
+    .el-input-number__increase {
+      margin-right: 78px;
+    }
+    .el-input-number__decrease,
+    .el-input-number__increase {
+      width: 20px;
+      line-height: 20px;
+      height: 20px;
+      // border-top: 1px solid #DCDFE6;
+      // border-bottom: 1px solid #DCDFE6;
+    }
+    .el-input-number .el-input {
+      line-height: 20px;
+    }
+    .el-input__inner {
+      height: 24px;
+      line-height: 20px;
+      width: 60%;
+    }
+    .el-input-number .el-input__inner {
+      padding-right: 20px;
+      padding-left: 20px;
     }
   }
 }

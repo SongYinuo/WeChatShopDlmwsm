@@ -6,13 +6,13 @@
       </div>
       {{title}}
     </el-header>
-    <el-main class="collectInfo">
+    <el-main class="collectInfo" id="collectInfo">
       <el-row>
-        <el-col :span="22" :offset="2">
+        <el-col :span="22" :offset="1">
           <el-tabs v-model="collect.activeName" @tab-click="handleClick">
             <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='商品'">
-              <el-col :span="22" class="pd2 brB1" v-for="o in goodslist">
+              <el-col :span="24" class="pd2 brB1" v-for="o in goodslist">
                 <el-col :span="6" class="collectInfoProductDrawing">
                   <router-link :to="{ name: '详情页',params: { id: o.goods_id, title: o.goods_name } }">
                     <img :src="o.original_img">
@@ -26,7 +26,7 @@
             </el-tab-pane>
               <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='攻略'">
-              <el-col :span="22" class="pd2 brB1" v-for="o in strategyList">
+              <el-col :span="24" class="pd2 brB1" v-for="o in strategyList">
                 <el-col :span="12">
                   <div class="strategyTitle">{{o.title}}</div>
                   <div class="pd2 strategyContent">{{o.content}}</div>
@@ -34,14 +34,14 @@
                 </el-col>
                 <el-col :span="10" :offset="1" class="collectInfoProductDrawing">
                   <router-link :to="{ name: '旅游攻略',params: { id: o.article_id, title: o.title } }">
-                    <img :src="o.author_head_pic" class="strategyImg">
+                    <img :src="o.thumb" class="strategyImg">
                   </router-link>
                 </el-col>
               </el-col>
             </el-tab-pane>
             <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='种草'">
-              <el-col :span="22" v-for="o in grow_grass" class="pdt20">
+              <el-col :span="24" v-for="o in grow_grass" class="pdt20">
                   <router-link :to="{ name: '种草详情',params: { id: o.article_id } }" >
                           <img :src="o.author_head_pic" class="headerImg" v-on:error.once="moveErrorImg($event)">
                           <div class="headerText">
@@ -64,7 +64,7 @@
           
             <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='讲堂'">
-              <el-col :span="22" class="pd2 brB1" v-for="o in lectureRoom">
+              <el-col :span="24" class="pd2 brB1" v-for="o in lectureRoom">
                 <el-col :span="12">
                   <div class=" strategyTitle">{{o.title}}</div>
                   <div class="mgT10 strategyTime">{{o.confirm_time_text}}</div>
@@ -79,13 +79,14 @@
             <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='书画'">
               <el-col :span="24" class="collectInfoProductDrawing" v-for="o in bookList">
-                <div class="ptbg" v-if="o.is_hot===1">
-                  <span class="ptAttribute">热门</span>
+                <div class="qq" v-if="o.is_hot===1">
+                  <!-- <span class="ptAttribute">热门</span> -->
+                  <img :src="qqqqa">
                 </div>
-                <div class="ptbg" v-if="o.is_hot===-1" style="display:none">
-                  <span class="ptAttribute">热门</span>
+                <div class="qq" v-if="o.is_hot===-1" style="display:none">
+                  <img :src="qqqqa">
                 </div>
-                <router-link :to="{ name: '书画详情',params: { id: o.id, title: k.title } }">
+                <router-link :to="{ name: '书画详情',query: { id: o.id, title: k.title } }">
                   <img :src="o.thumb">
                 </router-link>
                 <el-col class="mgT4 overHidden">{{o.title}}</el-col>
@@ -109,7 +110,8 @@ export default {
   },
   data() {
     return {
-      title: "收拍",
+      qqqqa: '/static/testImg/leftHot@2x.png',
+      title: "藏拍",
       collect: {
         activeName: "shangpin",
         collectionClassified: [
@@ -166,7 +168,6 @@ export default {
         url: "/Api/User/goods_collect_list"
       })
         .then(function(res) {
-          console.log(res)
           that.goodslist = res.data.data;
         })
         .catch({});
@@ -182,7 +183,6 @@ export default {
         url: "/Api/User/article_collect_front_list"
       })
         .then(function(res) {
-          console.log(res)
           that.grow_grass = res.data.data;
         })
         .catch({});
@@ -214,7 +214,6 @@ export default {
         url: "/Api/User/paint_collect_list"
       })
         .then(function(res) {
-          console.log(res)
           that.bookList = res.data.data;
         })
         .catch({});
@@ -230,7 +229,6 @@ export default {
         url: "/Api/User/classroom_collect_list"
       })
         .then(function(res) {
-          console.log(res)
           that.lectureRoom = res.data.data;
         })
         .catch({});
@@ -247,135 +245,153 @@ export default {
 @import "../assets/header.less";
 @import "../assets/index/style.less";
 @import "../assets/search/search.less";
-.collectInfoProductDrawing {
-  position: relative;
-
-  .ptAttribute {
-    font-size: 11px;
-    width: 25px;
-    transform: rotate(-90deg);
-    position: absolute;
-    left: 4px;
-    top: -8px;
-    color: #fff;
+body {
+  #collectInfo .el-tabs {
+    width: 100%;
   }
-
-  .ptbg {
-    width: 0;
-    height: 0;
-    border-width: 25px;
-    border-style: solid;
-    border-color: transparent #ee4040 transparent transparent;
-    transform: rotate(45deg);
-    /*顺时针旋转90°*/
-    position: absolute;
-    left: -24.5px;
-    top: -25px;
-  }
-}
-
-.el-main {
-  padding: 0;
-}
-
-.collectInfo {
-  .el-tabs__item.is-active {
-    color: #ffc000;
-  }
-  .el-tabs__nav-wrap::after {
-    display: none;
-  }
-  padding-bottom: 48px;
   .collectInfoProductDrawing {
-    img {
-      width: 100%;
+    position: relative;
+    .ptAttribute {
+      font-size: 11px;
+      width: 25px;
+      transform: rotate(-90deg);
+      position: absolute;
+      left: 4px;
+      top: -8px;
+      color: #fff;
+    }
+
+    .ptbg {
+      width: 0;
+      height: 0;
+      border-width: 25px;
+      border-style: solid;
+      border-color: transparent #ee4040 transparent transparent;
+      transform: rotate(45deg);
+      /*顺时针旋转90°*/
+      position: absolute;
+      left: -24.5px;
+      top: -25px;
     }
   }
-  .uUrlImg {
-    img {
-      width: 48px;
-      height: 48px;
+
+  .el-main {
+    padding: 0;
+  }
+
+  .collectInfo {
+    .el-tabs__item.is-active {
+      color: #ffc000;
+    }
+    .el-tabs__nav-wrap::after {
+      background-color: transparent;
+      display: none;
+    }
+    padding-bottom: 80px;
+    .collectInfoProductDrawing {
+      img {
+        width: 100%;
+      }
+    }
+    .uUrlImg {
+      img {
+        width: 48px;
+        height: 48px;
+        border-radius: 4px;
+      }
+    }
+    .uTime {
+      .fz(font-size, 24);
+    }
+    .annotation {
+      .fz(font-size, 28);
+      line-height: 1.4;
+    }
+    .listImg {
+      padding-left: 8px;
+      img {
+        width: 100%;
+      }
+    }
+    .videoUrl {
+      width: 100%;
+    }
+    .contentSize {
+      .fz(font-size, 24);
+    }
+    .headerImg {
+      float: left;
+      width: 40px;
       border-radius: 4px;
     }
-  }
-  .uTime {
-    .fz(font-size, 24);
-  }
-  .annotation {
-    .fz(font-size, 28);
-    line-height: 1.4;
-  }
-  .listImg {
-    padding-left: 8px;
-    img {
-      width: 100%;
+    .headerText {
+      margin-left: 50px;
     }
+    .pdt20 {
+      padding-top: 20px;
+    }
+    .userName {
+      .fz(font-size, 26);
+    }
+    .uTime {
+      .fz(font-size, 22);
+    }
+    .userTitle {
+      .fz(font-size, 28);
+      color: #313131;
+      font-weight: bold;
+    }
+    .contentSize {
+      .fz(font-size, 24);
+    }
+    .strategyImg {
+      border-radius: 4px;
+      width: 120px;
+    }
+    .strategyTitle {
+      .fz(font-size, 30);
+      font-weight: bold;
+      color: #313131;
+    }
+    .strategyContent {
+      .fz(font-size, 24);
+    }
+    .strategyTime {
+      .fz(font-size, 24);
+      color: #adaeaf;
+    }
+    .classImg {
+      border-radius: 4px;
+      width: 120px;
+    }
+    .el-tabs__active-bar {
+      color: #ffc000;
+      background-color: #ffc000;
+      width: 30px !important;
+    }
+    // .el-tabs__nav-wrap:after {
+    //   content: "";
+    //   position: absolute;
+    //   left: 0;
+    //   bottom: 0;
+    //   width: 100%;
+    //   height: 2px;
+    //   background-color: #e4e7ed;
+    //   z-index: 1;
+    // }
   }
-  .videoUrl {
-    width: 100%;
+  .el-tabs__nav-scroll .el-tabs__nav-wrap:after {
+    background-color: transparent;
+    display: none;
+    position: inherit;
   }
-  .contentSize {
-    .fz(font-size, 24);
-  }
-  .headerImg {
-    float: left;
-    width: 40px;
-    border-radius: 4px;
-  }
-  .headerText {
-    margin-left: 50px;
-  }
-  .pdt20 {
-    padding-top: 20px;
-  }
-  .userName {
-    .fz(font-size, 26);
-  }
-  .uTime {
-    .fz(font-size, 22);
-  }
-  .userTitle {
-    .fz(font-size, 28);
-    color: #313131;
-    font-weight: bold;
-  }
-  .contentSize {
-    .fz(font-size, 24);
-  }
-  .strategyImg {
-    border-radius: 4px;
-    width: 120px;
-  }
-  .strategyTitle {
-    .fz(font-size, 30);
-    font-weight: bold;
-    color: #313131;
-  }
-  .strategyContent {
-    .fz(font-size, 24);
-  }
-  .strategyTime {
-    .fz(font-size, 24);
-    color: #adaeaf;
-  }
-  .classImg {
-    border-radius: 4px;
-    width: 120px;
-  }
-  .el-tabs__active-bar {
-    color: #ffc000;
-    background-color: #ffc000;
-    width: 30px !important;
-  }
-  .el-tabs__nav-wrap:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #e4e7ed;
-    z-index: 1;
-  }
+  .collectInfo .collectInfoProductDrawing .qq 
+    img{
+      width: 40px;
+      height: 40px;
+      position: absolute; 
+      left:0px; 
+      top:6px
+    }
 }
 </style>

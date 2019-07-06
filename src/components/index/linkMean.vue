@@ -29,7 +29,7 @@ export default {
         },
         {
           text: "讲堂",
-          iconUrl: "static/testImg/redMountain.png"
+          iconUrl: "static/testImg/teaching@2x.png"
         },
         {
           text: "茶饮",
@@ -57,7 +57,7 @@ export default {
         },
         {
           text: "书画摄影",
-          iconUrl: "static/testImg/greenFood.png"
+          iconUrl: "static/testImg/draw@2x.png"
         }
       ]
     };

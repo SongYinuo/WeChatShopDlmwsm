@@ -38,6 +38,7 @@
               </el-col>
               <el-col class="detailsInfoPlaceOfReceipt pd2 lh1-2 colorGray" v-if="address_list !=''">
                {{address_list.province_name}}{{address_list.city_name}}{{address_list.district_name}}{{address_list.address}}
+                <div class="colorRed" style="font-size:12px">*请选择默认地址</div>
               </el-col>
             </el-col>
           </el-col>
@@ -79,8 +80,8 @@
           </el-col>
           <el-col class="pd2 brB1">
             <el-col :span="4">积分</el-col>
-            <el-col :span="12" class="colorGray mgT1" style="font-size:12px;">共{{user_pay_points}},最大抵扣{{goods_detail_message.integral_money}}</el-col>
-            <el-col :span="8" class="text-alignRight">-¥{{goods_detail_message.use_point}}</el-col>
+            <el-col :span="12" class="colorGray mgT1" style="font-size:12px;">共{{user_pay_points}},最大可用{{goods_detail_message.use_point}}</el-col>
+            <el-col :span="8" class="text-alignRight">-¥{{goods_detail_message.integral_money}}</el-col>
           </el-col>
           <el-col class="pd2 brB1">
             <el-col :span="16">配送方式</el-col>
@@ -106,6 +107,10 @@
           <el-col :span="8" class="orderFormDeatilsBtn text-alignRight">
             <el-button @click="submitCarDetails()" class="bgUndertintYellow colorWhite brR1" style="border-radius:0">立即支付
             </el-button>
+             <!-- <router-link :to="{ name:'全部'}">
+                <el-button class="bgUndertintYellow colorWhite brR1" style="border-radius:0">立即支付
+                </el-button>
+             </router-link> -->
           </el-col>
         </el-col>
         </el-col>
@@ -161,7 +166,6 @@ export default {
       axios
         .get("/Api/Cart/cart_submit" + "?address_id=" + "")
         .then(function(res) {
-          console.log(res)
           that.goods_list = res.data.data.cart_list;
           that.goods_detail_message = res.data.data.result;
           that.user_pay_points = res.data.data.user_pay_points;
@@ -171,6 +175,7 @@ export default {
     },
     // 立即支付
     submitCarDetails() {
+      var that = this;
       axios
         .post("/Api/Cart/cart_submit", {
           address_id: ""
@@ -188,12 +193,14 @@ export default {
                     timeStamp: str_attr.timeStamp, //时间戳，自1970年以来的秒数
                     nonceStr: str_attr.nonceStr, //随机串
                     package: str_attr.package,
-                    signType:str_attr.signType, //微信签名方式：
+                    signType: str_attr.signType, //微信签名方式：
                     paySign: str_attr.paySign //微信签名
                   },
                   function(res) {
-                    if (res.err_msg == "get_brand_wcpay_request:ok") {
-                    }
+                    that.$router.push({ name: "全部" });
+                    // if (res.err_msg == "get_brand_wcpay_request:ok") {
+
+                    // }else{}
                   }
                 );
               });

@@ -29,7 +29,7 @@
             </el-col>
             <div class="MenuLike">
               <div id="admire">
-                <img v-if="itemtxts.is_collect===0" src="static/testImg/Focus1.png" id="likeimage" @click="change()">
+                <img v-if="items.is_collect===0" src="static/testImg/Focus1.png" id="likeimage" @click="change()">
                 <img src="static/testImg/Focus2.png" id="likeimage" v-else @click="change()">
               </div>
             </div>

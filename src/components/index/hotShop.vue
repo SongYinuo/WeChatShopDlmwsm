@@ -24,7 +24,7 @@
                <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="swipers in swiperList" :key="swiper.goods_id">
                    <router-link :to="{ name: '详情页', params: { id: swipers.goods_id }}">
-                    <img :src="swipers.original_img" class="swiperListImg">
+                     <img :src="swipers.original_img" class="swiperListImg" style="z-index:-10">
                   </router-link>
                   <div class="explainRow">
                     <el-row>
@@ -82,7 +82,7 @@ export default {
         spaceBetween: 12,
         observer: true,
         observeParents: true,
-        autoplay: 10000,
+        autoplay: 3000,
         loop: true
       });
     },

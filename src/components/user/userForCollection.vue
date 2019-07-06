@@ -38,7 +38,7 @@
           </el-col>
           <el-col :span="17" :offset="1" class="pdLR1">
             <el-row>
-              <router-link :to="{ name: '订单详情', params: { id: o.order_id } }">
+              <router-link :to="{ name: '订单详情', params: { id: i.goods_id } }">
                 <el-col v-for="(i,index) in o.goods_list" style="height: 80px;" class="pd2">
                 <el-col :span="16" class="mgT1">
                   <div class="pd1 productTitle overHidden">{{i.goods_name}}</div>

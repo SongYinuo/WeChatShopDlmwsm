@@ -32,7 +32,7 @@
         <el-col :span="22" :offset="1" v-if="o.order_attr === '2'" class="brB10 pdB2">
           <el-col class="pd2 text-alignRight">{{o.order_attr_name}}</el-col>
           <el-col :span="6" class="userAllOrderFormListImg">
-            <router-link :to="{ name: '详情页', params: { id: o.id } }" v-for="i in o.goods_list">
+            <router-link :to="{ name: '详情页', params: { id: i.goods_id } }" v-for="i in o.goods_list">
               <img :src="i.thumb">
             </router-link>
           </el-col>

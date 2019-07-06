@@ -32,8 +32,8 @@
                 </span>
               </el-col>
               <el-col :span="6" class="carListImg">
-                <router-link :to="{ name: '详情页', params: { id: item.goods_id } }">
-                  <img :src="item.thumb">
+                <router-link :to="{ name: '详情页', params: { id: item.goods_id} }">
+                    <img :src="item.thumb">
                 </router-link>
               </el-col>
               <el-col :span="14" :offset="1">
@@ -42,9 +42,9 @@
                    <el-col class="selectBorder">
                     <span class="selectText">{{item.goods_name}}</span>
                   </el-col>
-                <el-col class="selectBorder">
+                <!-- <el-col class="selectBorder">
                    <span class="selectText"  :data-id = "item.goods_id">{{item.spec_key_name}}<i class="el-icon-arrow-down"></i></span>
-                  </el-col>
+                </el-col> -->
                 <div class="pdT4">
                   <el-col :span="8" class="colorRed">￥{{item.goods_price}}</el-col>
                   <el-col :span="16" style="text-align:right">
@@ -53,13 +53,30 @@
                 </div>
                 </div>
               </el-col>
+              <!-- <el-col :span="14" :offset="1">
+                <div @click="post_mask(item.goods_id,item.id)">
+                  <el-col class="overHidden" style="border:none;">{{item.title}}</el-col>
+                   <el-col class="selectBorder">
+                    <span class="selectText">{{item.goods_name}}</span>
+                  </el-col>
+                <el-col class="selectBorder">
+                   <span class="selectText"  :data-id = "item.goods_id">{{item.spec_key_name}}<i class="el-icon-arrow-down"></i></span>
+                </el-col>
+                <div class="pdT4">
+                  <el-col :span="8" class="colorRed">￥{{item.goods_price}}</el-col>
+                  <el-col :span="16" style="text-align:right">
+                    x{{item.goods_num}}
+                  </el-col>
+                </div>
+                </div>
+              </el-col> -->
             </el-col>
           </el-col>
         </el-col>
         <el-col class="carFooter brT1 bgCfff">
           <el-col :span="4" class="text-alignCenter pd2">
               <!-- <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox> -->
-              <img :src="checkAll == true ?'/static/check@2x.png':'/static/checked@2x.png'" style="width:1.2rem;margin-top:0.5rem;"  @click="select_all"/>
+              <!-- <img :src="checkAll == true ?'/static/check@2x.png':'/static/checked@2x.png'" style="width:1.2rem;margin-top:1rem;"  @click="select_all"/> -->
           </el-col>
           <el-col :span="12" class="text-alignRight pd2" style="margin-top:2vw;">
             <div class="totalPrices">总计<span class="colorRed">￥{{price}}</span></div>
@@ -68,17 +85,18 @@
           <el-col :span="8" class="accountsBtn">
             <!-- @click="OnAccounts" -->
             <!-- <el-button class="fr baUndertintBlack colorWhite" @click="settlem_status">{{settlem}}</el-button> -->
-            <router-link :to="{ name: '购物车详情' }">
+            <!-- <router-link :to="{ name: '购物车详情' }">
                 <el-button class="fr baUndertintBlack colorWhite" @click="settlem_status">{{settlem}}</el-button>
-            </router-link >
+            </router-link > -->
+             <el-button class="fr baUndertintBlack colorWhite" @click="settlem_status">{{settlem}}</el-button>
           </el-col>
         </el-col>
       </el-row>
       <el-row>
  <el-row>
-      <el-dialog title="商品规格信息" :visible.sync="dialogFormVisible" top="0" class="detailsDialog">
+      <!-- <el-dialog title="商品规格信息" :visible.sync="dialogFormVisible" top="0" class="detailsDialog">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0" class="demo-ruleForm">
-          <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="描述文字" class="cart_input" style="position: absolute; right: 40px; top:96px;"></el-input-number>
+           <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="描述文字" class="cart_input" style="width:50%;"></el-input-number>
           <el-row class="detailsRow-specification" v-for="(k,index,ids) in filter_spec">
            <el-col :span="24" style="padding-top:5vw;">
               <el-col :span="8" class="specificationProductImg">
@@ -107,7 +125,7 @@
             </div>
           </el-form-item>
         </el-form>
-      </el-dialog>
+      </el-dialog> -->
     </el-row>
         </el-form>
       </el-dialog>
@@ -234,44 +252,87 @@ export default {
       this.items.splice(index, 1);
     },
     // 点击按钮的单击事件{{结算}}
-    radio_click: function(index, cart_id) {
+ radio_click: function(index, cart_id) {
       var that = this;
       var price_total = "";
-      // that.cart_id = cart_id;
       if (that.cart_list[index].selected == 1) {
+      //  var s = that.cart_id_list.filter(item => item !== that.cart_id_list[index])
+      //  console.log("这是什么")
+      //  console.log(s)
+      //  console.log(that.cart_id_list)
+      //   console.log(that.cart_id_list);
+      //   var arr = that.cart_id_list;
+      //   var newArr = [];
+      //   arr.forEach(function(val) {
+      //     if (newArr.indexOf(val) == -1) {
+      //       newArr.push(val);
+      //     }
+      //   });
+      //   console.log("123456");
+      //   console.log(newArr);
+      //   newArr.splice(that.cart_id_list[index],1)
+      //   console.log("截取成功了")
+      //   console.log(newArr)
+      //   // 去掉重复数据结束
+      //   axios
+      //     .get("/Api/Cart/cart_select?ids=" + s.join(","))
+      //     .then(function(res) {
+      //       console.log("走接口了");
+      //     });
+        //  that.getData()
+        that.price =
+          that.price -
+          parseFloat(that.cart_list[index].goods_price) *
+            parseFloat(that.cart_list[index].goods_num);
         that.cart_list[index].selected = 0;
+        // that.cart_id_list.push(cart_id);
       } else {
+        // var s = that.cart_id_list.filter(item => item !== that.cart_id_list[index])
+        // var arr = that.cart_id_list;
+        // var newArr = [];
+        // arr.forEach(function(val) {
+        //   if (newArr.indexOf(val) == -1) {
+        //     newArr.push(val);
+        //   }
+        // });
+        // console.log("123456");
+        // console.log(newArr);
+        // newArr.splice(that.cart_id_list[index],1)
+        // console.log("成功了")
+        // console.log(s)
         that.cart_list[index].selected = 1;
         that.price +=
           parseFloat(that.cart_list[index].goods_price) *
           parseFloat(that.cart_list[index].goods_num);
-        that.cart_id_list.push(cart_id);
-        axios
-          .get("/Api/Cart/cart_select?ids=" + that.cart_id_list.join(","))
-          .then(function(res) {});
+        // that.cart_id_list.push(cart_id);
+        // axios
+        //   .get("/Api/Cart/cart_select?ids=" + s.join(","))
+        //   .then(function(res) {
+        //     console.log("哈哈哈走接口了");
+        //   });
       }
       that.select_radio();
     },
     // 监听全选按钮
-    select_all: function() {
-      var that = this;
-      if (that.checkAll == true) {
-        for (var i = 0; i < that.cart_list.length; i++) {
-          that.cart_list[i].selected = 1;
-          that.checkAll = false;
-          that.price +=
-            parseFloat(that.cart_list[i].goods_price) *
-            parseFloat(that.cart_list[i].goods_num);
-        }
-        consoel.log(that.price);
-      } else {
-        for (var i = 0; i < that.cart_list.length; i++) {
-          that.cart_list[i].selected = 0;
-          that.checkAll = true;
-        }
-        that.price = 0;
-      }
-    },
+    // select_all: function() {
+    //   var that = this;
+    //   if (that.checkAll == true) {
+    //     for (var i = 0; i < that.cart_list.length; i++) {
+    //       that.cart_list[i].selected = 1;
+    //       that.checkAll = false;
+    //       that.price +=
+    //         parseFloat(that.cart_list[i].goods_price) *
+    //         parseFloat(that.cart_list[i].goods_num);
+    //     }
+    //     consoel.log(that.price);
+    //   } else {
+    //     for (var i = 0; i < that.cart_list.length; i++) {
+    //       that.cart_list[i].selected = 0;
+    //       that.checkAll = true;
+    //     }
+    //     that.price = 0;
+    //   }
+    // },
     select_radio: function() {
       var that = this;
       for (var i = 0; i < that.cart_list.length; i++) {
@@ -288,7 +349,7 @@ export default {
       }
     },
     submitForm() {
-      this.dialogFormVisible = false;
+      // this.dialogFormVisible = false;
       var that = this;
       that.Name_list = that.Name_list.slice(-3);
       that.Name_list.sort(function(a, b) {
@@ -319,7 +380,7 @@ export default {
       var goods_id = id;
       var that = this;
       that.cart_id = cart_id;
-      that.dialogFormVisible = true;
+      // that.dialogFormVisible = true;
       axios
         .get("/Api/Goods/goods_detail?id=" + goods_id)
         .then(function(res) {
@@ -372,17 +433,51 @@ export default {
         that.settlem = "结算";
       }
     },
+
     settlem_status: function() {
       var that = this;
       if (that.edit_status == 2) {
-        that.$message({
-              message: "已生成订单 小满正在努力为您发货",
-              type: "success"
-        });
-        that.delete_status = 2;
+        // console.log("123456");
+        // that.delete_status = 2;
+        // that.$router.push("/UserCarRouterLink")
+        var cart_list_id = [];
+        for (var i = 0; i < that.cart_list.length; i++) {
+          if (that.cart_list[i].selected == 1) {
+            cart_list_id.push(that.cart_list[i].id);
+          }
+        }
+        cart_list_id = cart_list_id.join(",");
+        axios
+          .get("/Api/Cart/cart_delete?ids=" + cart_list_id)
+          .then(function(res) {
+            if (res.data.code == 1) {
+              that.$message({ message: "删除成功" });
+              // that.delete_status = 1;
+              that.getData();
+            }
+          });
       } else {
+        // "/Api/Cart/cart_select?ids=" + s.join(",")
+        // console.log("23569");
+         var cart_list_id = [];
+        for (var i = 0; i < that.cart_list.length; i++) {
+          if (that.cart_list[i].selected == 1) {
+            cart_list_id.push(that.cart_list[i].id);
+          }
+        }
+        cart_list_id = cart_list_id.join(",");
+        axios
+          .get("/Api/Cart/cart_select?ids=" + cart_list_id)
+          .then(function(res) {
+            // console.log("删除成功了")
+             that.$router.push({ name: "购物车详情" });
+            if (res.data.code == 1) {
+              that.$router.push({ name: "购物车详情" });
+            }
+          });
       }
     },
+
     // 确认删除
     submit: function() {
       var that = this;
@@ -422,6 +517,7 @@ export default {
   padding: 0;
 }
 .addRow {
+  padding-bottom: 60px;
   width: 100%;
   height: 100%;
   .el-input__inner {
@@ -436,9 +532,8 @@ export default {
   }
 
   .el-input-number {
-    width: 100px;
+    width: 100%;
     line-height: 1.2;
-    border: 1px solid #eeeeee;
   }
   .accountsBtn {
     button {
@@ -502,6 +597,25 @@ export default {
 .subBtn {
   width: 100%;
 }
+.el-dialog {
+  width: 100%;
+  margin: 0;
+  bottom: 0;
+  position: initial;
+  z-index: 1000;
+  .inputNumber {
+    position: absolute;
+    right: 62px;
+    top: 120px;
+    .el-input-number {
+      line-height: 1.2;
+    }
+    .el-input-number .el-input__inner {
+      line-height: 1.2;
+      height: 18px;
+    }
+  }
+}
 .el-radio-button__inner {
   padding: 12px;
   margin-right: 4px;
@@ -542,7 +656,7 @@ export default {
   display: inline-block;
   position: relative;
   top: 25vw;
-  // left: 30%;
+  left: 30%;
   text-align: center;
 }
 .delete_status {
@@ -571,61 +685,23 @@ export default {
   border-bottom: 1px solid #ededed;
   font-size: 14px;
 }
-.detailsDialog .el-dialog {
+.car .el-dialog {
   position: fixed;
-  .el-input-number__increase {
-    // margin-right: 78px;
+}
+.car .cart_input {
+  left: 50%;
+  width: 20%;
+  top:10px;
+  border:1px solid #eee;
+  .el-input-number__decrease  {
+    width: 20px;
   }
-  .el-input-number__decrease,
   .el-input-number__increase {
     width: 20px;
-    line-height: 22px;
-    height: 22px;
-    // border-top: 1px solid #DCDFE6;
-    // border-bottom: 1px solid #DCDFE6;
-  }
-  .el-input-number .el-input {
-    line-height: 20px;
-  }
-  .el-input__inner {
-    height: 24px;
-    line-height: 20px;
-    width: 60%;
   }
   .el-input-number .el-input__inner {
-    padding-right: 20px;
-    padding-left: 20px;
-  }
-}
-
-.detailsDialog {
-  .el-dialog {
-    width: 100%;
-    margin: 0;
-    bottom: 0;
-    position: fixed;
-    z-index: 1000;
-    .inputNumber {
-      position: absolute;
-      right: 62px;
-      top: 120px;
-      .el-input-number {
-        width: 120px;
-        line-height: 1.2;
-      }
-      .el-input-number .el-input__inner {
-        line-height: 1.2;
-        height: 18px;
-      }
-    }
-    .el-radio {
-      padding: 2vw 0;
-      margin-right: 4px;
-      border: 1px solid #eee;
-    }
-    .el-radio__label {
-      padding-left: 0;
-    }
+    padding-left: 30px;
+    padding-right: 0;
   }
 }
 </style>

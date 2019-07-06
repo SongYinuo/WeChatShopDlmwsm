@@ -34,7 +34,7 @@
                   <el-carousel :interval="4000" type="card" height="232px" style="z-index:1;">
                       <el-carousel-item v-for="(item,index) in swiperList.prom.goods_list" :key="index" class="mtSwiper">
                     <router-link :to="{ name: '详情页', params: { id: item.link_id }}">
-                      <img :src="item.goods_image" class="swiperListImg">
+                      <img :src="item.goods_image" class="swiperListImg" style="z-index:-100">
                     </router-link>
                     <div class="explainRow">
                       <el-row>

@@ -32,13 +32,13 @@
         <el-col :span="22" :offset="1" v-if="o.order_attr === '3'" class="brB10 pdB2">
           <el-col class="pd2 text-alignRight">{{o.order_attr_name}}</el-col>
           <el-col :span="6" class="userAllOrderFormListImg">
-            <router-link :to="{ name: '详情页', params: { id: o.id } }" v-for="i in o.goods_list">
+            <router-link :to="{ name: '详情页', params: { id: o.goods_id } }" v-for="i in o.goods_list">
               <img :src="i.thumb">
             </router-link>
           </el-col>
           <el-col :span="17" :offset="1" class="pdLR1">
             <el-row>
-              <router-link :to="{ name: '订单详情', params: { id: o.order_id } }">
+              <router-link :to="{ name: '订单详情', params: { id: i.order_id } }">
                 <el-col v-for="(i,index) in o.goods_list" style="height: 80px;" class="pd2">
                 <el-col :span="16" class="mgT1">
                   <div class="pd1 productTitle overHidden">{{i.goods_name}}</div>

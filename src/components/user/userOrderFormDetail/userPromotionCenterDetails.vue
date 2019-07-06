@@ -15,7 +15,7 @@
               <div class="pd1 accountsDate colorGray">{{k.change_time|formatDate}}</div>
             </el-col>
             <el-col :span="8">
-              <!-- <div class="text-alignRight pd1">{{k.accountsPrice}}</div> -->
+              <div class="text-alignRight p1">{{k.user_money}}</div>
               <div class="text-alignRight pd1 accountsLevel colorGray">{{k.user_dis_level}}{{k.dis_name}}</div>
             </el-col>
           </el-col>
@@ -76,7 +76,7 @@ export default {
     },
     withdrawDeposit(){
       this.$message({
-            message: "功能研发中心...",
+            message: "功能研发中...",
             type: "warning"
         });
     }

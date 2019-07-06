@@ -147,10 +147,10 @@ export default new Router({
     }
   }, {
     path: '/collect',
-    name: '收拍页',
+    name: '藏拍页',
     component: Collect,
     meta: {
-      title: '收拍页'
+      title: '藏拍页'
     }
   }, {
     path: '/timeIimit',
