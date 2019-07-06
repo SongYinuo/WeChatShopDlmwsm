@@ -32,10 +32,10 @@
               <el-row>
                 <el-col :span="22">
                   <img :src="array.author_head_pic" v-on:error.once="moveErrorImg($event)" class="fl menuHeader">
-                  <div class="fl menuHead-txt">{{array.title}}</div>
+                  <div class="fl menuHead-txt">{{array.author}}</div>
                   <div class="fl cl menuHead-smtxt omit">{{array.confirm_time_text}}</div>
-                  <p class="smalltxt-p cl fl">{{array.content}}</p>
-                  <div class="cl smalltxt-div">{{array.author}}</div>
+                  <p class="smalltxt-p cl fl">{{array.title}}</p>
+                  <div class="cl smalltxt-div">{{array.content}}</div>
                 </el-col>
               </el-row>
               <el-row type="flex" class="row-bg smallimg ">
