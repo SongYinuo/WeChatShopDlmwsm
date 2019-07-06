@@ -22,9 +22,9 @@
             <router-link :to="{ name: '待收货' }">
               <li class="fl text-alignCenter pd2">待收货</li>
             </router-link>
-            <router-link :to="{ name: '退款/售后' }">
+            <!-- <router-link :to="{ name: '退款/售后' }">
               <li class="fl text-alignCenter pd2">退款</li>
-            </router-link>
+            </router-link> -->
           </ul>
         </el-col>
       </el-row>

@@ -14,7 +14,7 @@
           </el-col>
           <el-col :span="14" :offset="2">
             <div class="listTitle">{{swiper.goods_name}}</div>
-            <div class="listTextAnnotation">{{swiper.exchange_integral}}</div>
+            <div class="listTextAnnotation">{{swiper.exchange_integral}}积分抵{{swiper.exchange_integral/10}}元</div>
             <div class="listPrice">￥{{swiper.shop_price}}</div>
           </el-col>
           </router-link>

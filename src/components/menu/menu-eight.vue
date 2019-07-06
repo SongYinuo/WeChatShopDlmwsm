@@ -16,14 +16,14 @@
               </div>
             </el-col>
           </el-row>
-          <div v-for="k in household.tmenu">
+          <el-col :span="5" :offset="1" v-for="k in household.tmenu">
             <router-link :to="{ name:'交易中心列表',params: { id: k.id }}">
               <span class="tradingtab-icon">
                 <img :src="k.thumb">
                 <div class="menu-strategy tc">{{k.name}}</div>
               </span>
             </router-link>
-          </div>
+          </el-col>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -87,27 +87,24 @@ export default {
 
 .tradingtab-adiv img {
   width: 80%;
-
   padding-left: 10%;
 }
 
 .tradingtab-adiv {
-  border-radius: 3px;
   margin-bottom: 38px;
 }
 
 .trading .tradingtab-icon {
-  width: 33%;
-  float: left;
   text-align: center;
 }
 
 .tradingtab-icon img {
-  border-radius: 3px;
+  border-radius: 50%;
 }
 
 // 后加的内容
 .tradingtab-icon img {
-  height: 2.5rem;
+  width: 100%;
+  height: 100%;
 }
 </style>

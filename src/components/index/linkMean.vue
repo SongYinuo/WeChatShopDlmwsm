@@ -1,6 +1,6 @@
 <template lang="html">
   <el-row class="indexLinkMean brB10">
-    <el-col :span="22" :offset="1" class="linkMeanRow">
+    <el-col :span="22" :offset="1" class="linkMeanRow pdB2">
       <div v-for="item in items" class="linkMeanCol mgTB2">
         <div class="grid-content bg-purple">
             <!-- <router-link :to="{ name: (item.text)}"> -->

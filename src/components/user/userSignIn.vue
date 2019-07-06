@@ -45,7 +45,7 @@
               :style="{'color':item.date == '今日'?'#FFAC00':'#DBDBDB'}">{{item.date}}</el-button>
           </div>
         </el-col>
-        <el-col class="text-alignCenter pd6">
+        <el-col class="text-alignCenter pd4">
           <el-button round class="signInBtn bgRedOrange colorWhite bgYellow" v-on:click="greet"
             :style="{'background-color':sign_status == 1 ?'#bbb':'#FFD800'}">{{sign_status == 1 ? '签到已成功' :'马上签到'}}
           </el-button>
@@ -138,7 +138,6 @@ export default {
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 @import "../../assets/user/user.less";
-
 .el-main {
   padding: 0;
 }
@@ -162,9 +161,9 @@ export default {
     .el-button:hover {
       color: #dcdfe6;
     }
-
     .el-button.is-circle {
-      padding: 8px;
+      // padding: 8px;
+      text-align: center;
     }
   }
 }
@@ -183,5 +182,10 @@ export default {
 .el-button:focus,
 .el-button:hover {
   background: #ffc000;
+}
+.signDeskRow {
+  .el-button span {
+    margin-left: -2px;
+  }
 }
 </style>

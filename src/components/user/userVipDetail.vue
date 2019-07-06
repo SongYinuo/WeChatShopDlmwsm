@@ -18,7 +18,6 @@ export default {
   data: function() {
     return {
       title: "Vip详情",
-      article_id: "",
       article_list: {}
     };
   },
@@ -28,7 +27,7 @@ export default {
   methods: {
     getData: function() {
       var that = this;
-      var article_id = that.$route.query.id;
+      var article_id = that.$route.params.id;
       axios
         .get("/Api/User/vip_detail?article_id=" + article_id)
         .then(function(res) {

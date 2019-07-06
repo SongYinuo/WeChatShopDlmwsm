@@ -56,7 +56,7 @@
           </el-form-item>
           <el-form-item label="材质" required class="material" label-width="40px">
             <el-col :span="24">
-              <el-form-item prop="year1">
+              <el-form-item prop="texture">
                 <el-input type="text" placeholder="请输入材质" v-model="ruleForm.texture" maxlength="50" minlength="1"
                   show-word-limit></el-input>
               </el-form-item>
@@ -102,8 +102,8 @@ export default {
         // 图片的地址
         imgUrl: {},
         // 后赋值的图片地址
-        basic: ""
       },
+      basic: "",
       rules: {
         name: [
           {

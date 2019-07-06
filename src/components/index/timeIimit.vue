@@ -28,38 +28,42 @@
       </div>
       <div class="indexSwiperRow">
             <!-- <div  id="swiper1" class="swiper-container"> -->
-              <div style="height:260px; width:90%; margin-left:5%">
-                <mt-swipe :auto="10000">
-                  <mt-swipe-item v-for="(item,index) in swiperList.prom.goods_list" :key="index" class="mtSwiper">
+              <el-col :span="22" :offset="1">
+                <!-- <mt-swipe :auto="10000">
+                  <mt-swipe-item v-for="(item,index) in swiperList.prom.goods_list" :key="index" class="mtSwiper"> -->
+                  <el-carousel :interval="4000" type="card" height="232px" style="z-index:1;">
+                      <el-carousel-item v-for="(item,index) in swiperList.prom.goods_list" :key="index" class="mtSwiper">
                     <router-link :to="{ name: '详情页', params: { id: item.link_id }}">
                       <img :src="item.goods_image" class="swiperListImg">
                     </router-link>
                     <div class="explainRow">
                       <el-row>
-                        <el-col :span="14">
-                          <div class="explainTitle overHidden pd2">
+                        <el-col :span="11">
+                          <div class="explainTitle overHidden pd2 text-alignLeft">
                             {{item.goods_name}}
                           </div>
                         </el-col>
-                        <el-col :span="4" :offset="1">
-                          <div class="explainPrice">
+                        <el-col :span="12" :offset="1">
+                          <div class="explainPrice pd2 text-alignRight">
                             ¥{{item.goods_price}}
                           </div>
                         </el-col>
-                        <el-col :span="4">
-                          <div class="explainOriginalPrice text-alignRight">
+                        <!-- <el-col :span="5">
+                          <div class="explainOriginalPrice text-alignRight pd2" style="margin-top:4px;">
                             <del>¥{{item.shop_price}}</del>
                           </div>
-                        </el-col>
+                        </el-col> -->
                         <el-col :span="24">
                           <div class="explainAnnotation lh4 pdT2 overHidden">
                             {{item.goods_remark}}
                           </div>
                         </el-col>
                       </el-row>
-                    </div>
-                  </mt-swipe-item>
-                </mt-swipe>
+                    </el-col>
+                       </el-carousel-item>
+                    </el-carousel>
+                  <!-- </mt-swipe-item>
+                </mt-swipe> -->
              </div>
       </div>
     </div>
@@ -67,7 +71,7 @@
 </template>
 
 <script>
-import 'swiper/dist/css/swiper.css';
+import "swiper/dist/css/swiper.css";
 import countDown from "vue2-countdown";
 import axios from "axios";
 export default {
@@ -88,7 +92,7 @@ export default {
   methods: {
     newDate() {},
     _initSwiperaw() {
-      var swiper1  = new Swiper("#swiper1", {
+      var swiper1 = new Swiper("#swiper1", {
         // slidesPerView: 1.2,
         // spaceBetween: 16,
         // paginationClickable: true,
@@ -131,6 +135,9 @@ export default {
 }
 
 .indexTimeLimit {
+  .el-carousel__indicator {
+    display: none;
+  }
   .mint-swipe-indicators {
     display: none;
   }

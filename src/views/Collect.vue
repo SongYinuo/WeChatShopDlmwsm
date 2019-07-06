@@ -12,9 +12,9 @@
           <el-tabs v-model="collect.activeName" @tab-click="handleClick">
             <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='商品'">
-              <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in goodslist">
+              <el-col :span="22" class="pd2 brB1" v-for="o in goodslist">
                 <el-col :span="6" class="collectInfoProductDrawing">
-                  <router-link :to="{ name: '详情页',params: { id: o.id, title: k.label } }">
+                  <router-link :to="{ name: '详情页',params: { id: o.goods_id, title: o.goods_name } }">
                     <img :src="o.original_img">
                   </router-link>
                 </el-col>
@@ -26,14 +26,14 @@
             </el-tab-pane>
               <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='攻略'">
-              <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in strategyList">
+              <el-col :span="22" class="pd2 brB1" v-for="o in strategyList">
                 <el-col :span="12">
                   <div class="strategyTitle">{{o.title}}</div>
                   <div class="pd2 strategyContent">{{o.content}}</div>
                   <div class="mgT10 strategyTime">{{o.confirm_time_text}}</div>
                 </el-col>
                 <el-col :span="10" :offset="1" class="collectInfoProductDrawing">
-                  <router-link :to="{ name: '旅游攻略',query: { id: o.article_id, title: o.title } }">
+                  <router-link :to="{ name: '旅游攻略',params: { id: o.article_id, title: o.title } }">
                     <img :src="o.author_head_pic" class="strategyImg">
                   </router-link>
                 </el-col>
@@ -41,8 +41,8 @@
             </el-tab-pane>
             <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='种草'">
-              <el-col :span="22" :offset="1" v-for="o in grow_grass" class="pdt20">
-                  <router-link :to="{ name: '种草详情',query: { id: o.article_id } }" >
+              <el-col :span="22" v-for="o in grow_grass" class="pdt20">
+                  <router-link :to="{ name: '种草详情',params: { id: o.article_id } }" >
                           <img :src="o.author_head_pic" class="headerImg" v-on:error.once="moveErrorImg($event)">
                           <div class="headerText">
                           <div class="mgT2 colorGray colorYellow userName">{{o.author}}</div>
@@ -64,13 +64,13 @@
           
             <el-tab-pane :label="k.label" :name="k.name" v-for="k in collect.collectionClassified"
               v-if="k.label==='讲堂'">
-              <el-col :span="22" :offset="1" class="pd2 brB1" v-for="o in lectureRoom">
+              <el-col :span="22" class="pd2 brB1" v-for="o in lectureRoom">
                 <el-col :span="12">
                   <div class=" strategyTitle">{{o.title}}</div>
                   <div class="mgT10 strategyTime">{{o.confirm_time_text}}</div>
                 </el-col>
                 <el-col :span="10" :offset="1" class="collectInfoProductDrawing">
-                  <router-link :to="{ name: '讲堂详情',query: { id: o.id, title: k.title } }">
+                  <router-link :to="{ name: '讲堂详情',params: { id: o.id, title: k.title } }">
                     <img :src="o.thumb" class="classImg">
                   </router-link>
                 </el-col>
@@ -85,7 +85,7 @@
                 <div class="ptbg" v-if="o.is_hot===-1" style="display:none">
                   <span class="ptAttribute">热门</span>
                 </div>
-                <router-link :to="{ name: '书画详情',query: { id: o.id, title: k.title } }">
+                <router-link :to="{ name: '书画详情',params: { id: o.id, title: k.title } }">
                   <img :src="o.thumb">
                 </router-link>
                 <el-col class="mgT4 overHidden">{{o.title}}</el-col>
@@ -109,7 +109,7 @@ export default {
   },
   data() {
     return {
-      title: "收藏",
+      title: "收拍",
       collect: {
         activeName: "shangpin",
         collectionClassified: [
@@ -166,6 +166,7 @@ export default {
         url: "/Api/User/goods_collect_list"
       })
         .then(function(res) {
+          console.log(res)
           that.goodslist = res.data.data;
         })
         .catch({});
@@ -181,6 +182,7 @@ export default {
         url: "/Api/User/article_collect_front_list"
       })
         .then(function(res) {
+          console.log(res)
           that.grow_grass = res.data.data;
         })
         .catch({});
@@ -196,6 +198,7 @@ export default {
         url: "/Api/User/article_collect_back_list"
       })
         .then(function(res) {
+          console.log(res)
           that.strategyList = res.data.data;
         })
         .catch({});
@@ -211,6 +214,7 @@ export default {
         url: "/Api/User/paint_collect_list"
       })
         .then(function(res) {
+          console.log(res)
           that.bookList = res.data.data;
         })
         .catch({});
@@ -226,6 +230,7 @@ export default {
         url: "/Api/User/classroom_collect_list"
       })
         .then(function(res) {
+          console.log(res)
           that.lectureRoom = res.data.data;
         })
         .catch({});
@@ -238,7 +243,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import "../assets/header.less";
 @import "../assets/index/style.less";
 @import "../assets/search/search.less";

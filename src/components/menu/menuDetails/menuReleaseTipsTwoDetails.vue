@@ -182,7 +182,7 @@ export default {
         that.basic === ""
       ) {
         that.$message({
-          message: "请输入当前要上传作品所需要的文字",
+          message: "请输入当前要上传作品所需要的文字或图片",
           type: "warning"
         });
       } else {

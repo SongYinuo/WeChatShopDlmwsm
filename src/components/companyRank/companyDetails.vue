@@ -9,11 +9,13 @@
     <el-main class="detailsInfo">
       <el-row>
         <el-col :span="22" :offset="1" class="detailsInfoText lh1-8 textIndent2-8 img1" v-html="detailsInfo.content">
+          <el-col>
           {{detailsInfo.article_id}}-{{detailsInfo.content}}
+          <el-col>
         </el-col>
-        <el-col class="detailsInfoImg mgTB2">
+        <!-- <el-col class="detailsInfoImg mgTB2">
           <img :src="detailsInfo.thumb">
-        </el-col>
+        </el-col> -->
       </el-row>
     </el-main>
   </el-container>
@@ -43,7 +45,7 @@ export default {
   }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import "../../assets/index/style.less";
 @import "../../assets/header.less";
 
@@ -53,7 +55,16 @@ export default {
 
 .detailsInfo {
   .detailsInfoText {
+    // width: 100%;
     .fz(font-size, 28);
+  }
+
+  // .detailsInfoText div span p {
+  //   width: 100%;
+  // }
+
+  .detailsInfoText p {
+    width: 90%;
   }
 
   .detailsInfoImg {
@@ -71,5 +82,8 @@ export default {
   margin-top: 17px;
   .fz(font-size, 24);
   color: #313131;
+}
+video {
+  width: 80%;
 }
 </style>

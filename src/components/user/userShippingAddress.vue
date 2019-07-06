@@ -31,7 +31,7 @@
                     <el-col :span="8" class="siteIcon">
                       <i class="el-icon-refresh-right"></i>
                       <i class="el-icon-refresh-left"></i>
-                      <div >
+                      <div>
                         <!-- <span @change="default_click(index)">
                           <el-radio v-model="radio" :label="3" v-if="item.is_default=== 1" >默认地址</el-radio>
                           <el-radio v-model="radio" :label="6" v-if="item.is_default=== 0" ><div style="color:#fff">地址</div></el-radio>

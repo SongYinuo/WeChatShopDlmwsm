@@ -80,7 +80,7 @@
           <el-col class="pd2 brB1">
             <el-col :span="4">积分</el-col>
             <el-col :span="12" class="colorGray mgT1" style="font-size:12px;">共{{user_pay_points}},最大抵扣{{goods_detail_message.integral_money}}</el-col>
-            <el-col :span="8" class="text-alignRight">{{goods_detail_message.use_point}}</el-col>
+            <el-col :span="8" class="text-alignRight">-¥{{goods_detail_message.use_point}}</el-col>
           </el-col>
           <el-col class="pd2 brB1">
             <el-col :span="16">配送方式</el-col>
@@ -161,6 +161,7 @@ export default {
       axios
         .get("/Api/Cart/cart_submit" + "?address_id=" + "")
         .then(function(res) {
+          console.log(res)
           that.goods_list = res.data.data.cart_list;
           that.goods_detail_message = res.data.data.result;
           that.user_pay_points = res.data.data.user_pay_points;

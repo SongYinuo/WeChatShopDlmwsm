@@ -22,9 +22,9 @@
             <router-link :to="{ name: '待收货' }">
               <li class="fl text-alignCenter pd2">待收货</li>
             </router-link>
-            <router-link :to="{ name: '退款/售后' }">
+            <!-- <router-link :to="{ name: '退款/售后' }">
               <li class="fl text-alignCenter pd2 activeLi">退款</li>
-            </router-link>
+            </router-link> -->
           </ul>
         </el-col>
       </el-row>
@@ -120,12 +120,12 @@ export default {
         .then(function(res) {
           thir.allOrderForm.listArray = res.data.data;
           thir.$message({
-              message: "操作成功",
-              type: "success"
-            });
+            message: "操作成功",
+            type: "success"
+          });
         })
         .catch({});
-        thir.reload();
+      thir.reload();
     },
     deleste(inex) {
       const thir = this;
@@ -141,12 +141,12 @@ export default {
         .then(function(res) {
           thir.allOrderForm.listArray = res.data.data;
           thir.$message({
-              message: "操作成功",
-              type: "success"
-            });
+            message: "操作成功",
+            type: "success"
+          });
         })
         .catch({});
-        thir.reload();
+      thir.reload();
     }
   }
 };

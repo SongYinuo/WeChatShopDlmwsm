@@ -22,7 +22,7 @@
           </div>
           <el-col>
             <el-col :span="8">
-              <div class="pd1">{{promotionCenterInfo.promotionEarnings}}</div>
+              <div class="pd1">{{promotionCenterInfo.info.distribut_money}}</div>
               <div class="commissionText colorGray pd2">累计推广收益</div>
             </el-col>
             <el-col :span="8">
@@ -108,13 +108,14 @@ export default {
           "/Api/Distribut/index" 
       })
         .then(function(res) {
+          console.log(res)
          thir.promotionCenterInfo = res.data.data
         })
         .catch({});
     },
     withdrawDeposit(){
       this.$message({
-            message: "功能研发中心...",
+            message: "功能研发中...",
             type: "warning"
         });
     }

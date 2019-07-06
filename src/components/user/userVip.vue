@@ -45,37 +45,35 @@ export default {
     };
   },
   methods: {
-   wxpay() {
-           axios
-           .get("/Api/Payment/vip_pay")
-           .then(function(res){
-             console.log(res);
-             var api = JSON.parse(res.data.data);
-             console.log(api);
-             WeixinJSBridge.invoke(
-                  "getBrandWCPayRequest",
-                  {
-                    appId: api.appId, //公众号名称，由商户传入
-                    timeStamp: api.timeStamp, //时间戳，自1970年以来的秒数
-                    nonceStr: api.nonceStr, //随机串
-                    package: api.package,
-                    signType:api.signType, //微信签名方式：
-                    paySign: api.paySign //微信签名
-                  },function(res) {
-                    if(res.err_msg == "get_brand_wcpay_request:ok") {
-                  // location.href='$go_url';
-                      }else{
-                     alert(res.err_code+res.err_desc+res.err_msg);
-                      // location.href='$back_url';
-                     }
-                  }
-             );
-           }).catch(function(error){});
-   }
-  
-        }
+    wxpay() {
+      axios
+        .get("/Api/Payment/vip_pay")
+        .then(function(res) {
+          var api = JSON.parse(res.data.data);
+          WeixinJSBridge.invoke(
+            "getBrandWCPayRequest",
+            {
+              appId: api.appId, //公众号名称，由商户传入
+              timeStamp: api.timeStamp, //时间戳，自1970年以来的秒数
+              nonceStr: api.nonceStr, //随机串
+              package: api.package,
+              signType: api.signType, //微信签名方式：
+              paySign: api.paySign //微信签名
+            },
+            function(res) {
+              if (res.err_msg == "get_brand_wcpay_request:ok") {
+                // location.href='$go_url';
+              } else {
+                alert(res.err_code + res.err_desc + res.err_msg);
+                // location.href='$back_url';
+              }
+            }
+          );
+        })
+        .catch(function(error) {});
+    }
   }
-      
+};
 </script>
 
 <style lang="less">

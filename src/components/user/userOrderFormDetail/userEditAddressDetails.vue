@@ -40,6 +40,7 @@
             <el-form-item prop="messageText">
               <el-input type="textarea" v-model="editForm.formDesc" :rows="7" placeholder="街道、小区门牌等详细地址"></el-input>
             </el-form-item>
+            <el-col class="colorRed pd1" style="font-size:12px;">*记得重新选择省份/城市/地区</el-col>
             <el-form-item>
               <el-col class="saveBtn" :span="22">
                 <el-button type="primary" class="bgUndertintYellow brRNone" @click="onSubmit">立即创建</el-button>
@@ -55,6 +56,7 @@
 <script>
 import axios from "axios";
 export default {
+  inject: ["reload"],
   data() {
     return {
       title: "编辑地址详情",
@@ -117,11 +119,10 @@ export default {
             trigger: "blur"
           }
         ],
-
         messageText: [
           {
             required: true,
-            message: "请输入详细留言",
+            message: "请输入详细地址",
             trigger: "blur"
           }
         ]
@@ -237,9 +238,15 @@ export default {
             address: thir.editForm.formDesc,
             id: thir.editForm.id
           })
-          .then(res => {})
+          .then(res => {
+            thir.$message({
+              message: "记得修改城市地区，修改成功",
+              type: "success"
+            });
+            thir.$router.go(-1);
+          })
           .catch(error => {});
-        this.reload();
+        // this.reload();
       }
     }
   }

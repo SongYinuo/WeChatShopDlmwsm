@@ -10,7 +10,6 @@
       <el-col :span="24" >
         <div class="likePo">
           <img :src="books.thumb_show" class="bookimg">
-          
         </div>
         <div class="bookTittle pdT6">{{books.title}}</div>
         <div class="bookTxt pdT6 text-alignCenter">{{books.img_author}}|{{books.img_width}}×{{books.img_height}}|{{books.img_year}}</div>

@@ -29,8 +29,8 @@
             </el-col>
             <div class="MenuLike">
               <div id="admire">
-                  <img  v-if="items.is_collect===0" src="static/testImg/Focus1.png" class="likeimage"  @click="change()" >
-                  <img src="static/testImg/Focus2.png" class="likeimage" v-else @click="change()" >
+                <img v-if="itemtxts.is_collect===0" src="static/testImg/Focus1.png" id="likeimage" @click="change()">
+                <img src="static/testImg/Focus2.png" id="likeimage" v-else @click="change()">
               </div>
             </div>
             <el-row>
@@ -41,7 +41,7 @@
             </el-row>
           </div>
         </el-col>
-        <el-col :span="24" class="of">
+        <el-col :span="24" class="of" v-if="swiperList.video_url!=''">
           <video :src="swiperList.video_url" autoplay="autoplay" class="menu-video"></video>
         </el-col>
       </el-row>
@@ -115,7 +115,7 @@ export default {
         })
         .then(res => {
           that.$message({
-            message: "返回我的收藏，查看收藏内容",
+            message: "返回我的收拍，查看收拍内容",
             type: "success"
           });
           that.reload();
@@ -156,4 +156,11 @@ export default {
 img {
   width: 100%;
 }
+  #likeimage {
+  width: 34px;
+  height: 34px;
+  right: 12px;
+  top: 12px;;
+  position: absolute;
+  }
 </style>

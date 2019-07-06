@@ -160,6 +160,7 @@
     margin-left: 35%;
   }.menuHeader{
     width: 44px;
+    border-radius: 50%;
   }
 
   .menuHead-smtxt {

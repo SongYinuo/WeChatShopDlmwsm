@@ -22,9 +22,9 @@
             <router-link :to="{ name: '待收货' }">
               <li class="fl text-alignCenter pd2">待收货</li>
             </router-link>
-            <router-link :to="{ name: '退款/售后' }">
+            <!-- <router-link :to="{ name: '退款/售后' }">
               <li class="fl text-alignCenter pd2">退款</li>
-            </router-link>
+            </router-link> -->
           </ul>
         </el-col>
       </el-row>
@@ -60,9 +60,10 @@
             <el-row class="orderFormBtnRow">
               <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.order_attr === '1'">
                 <el-button round @click="cancel(inex)">取消订单</el-button>
-                <router-link :to="{ name: '购物车详情' }">
+                <el-button round class="bgUndertintYellow colorWhite brR1" @click="payment(inex)">付款</el-button>
+                <!-- <router-link :to="{ name: '购物车详情' }">
                   <el-button round class="bgUndertintYellow colorWhite brR1">付款</el-button>
-                </router-link>
+                </router-link> -->
               </el-col>     
               <el-col class="pd2 orderFormBtn text-alignRight" v-if="o.order_attr ==='3'">
                  <router-link
@@ -194,6 +195,37 @@ export default {
         })
         .catch({});
       thir.reload();
+    },
+    payment(inex) {
+      const thir = this;
+      axios
+        .get(
+          "/Api/Payment/order_pay?order_id=" +
+            thir.allOrderForm.listArray[inex].order_id
+        )
+        .then(function(res) {
+          var api = JSON.parse(res.data.data);
+          WeixinJSBridge.invoke(
+            "getBrandWCPayRequest",
+            {
+              appId: api.appId, //公众号名称，由商户传入
+              timeStamp: api.timeStamp, //时间戳，自1970年以来的秒数
+              nonceStr: api.nonceStr, //随机串
+              package: api.package,
+              signType: api.signType, //微信签名方式：
+              paySign: api.paySign //微信签名
+            },
+            function(res) {
+              if (res.err_msg == "get_brand_wcpay_request:ok") {
+                // location.href='$go_url';
+              } else {
+                alert(res.err_code + res.err_desc + res.err_msg);
+                // location.href='$back_url';
+              }
+            }
+          );
+        })
+        .catch(function(error) {});
     }
   }
 };
@@ -211,7 +243,7 @@ export default {
     .userAllOrderForm {
       .el-tabs__item {
         padding: 0 10px;
-        width: 20%;
+        width: 25%;
         text-align: center;
       }
 

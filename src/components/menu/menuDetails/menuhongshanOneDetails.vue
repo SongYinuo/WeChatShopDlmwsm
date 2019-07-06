@@ -8,23 +8,27 @@
     </el-header>
     <div class="strategy">
       <el-row class="pd2">
+        <div id="admire">
+           <img v-if="itemtxts.is_collect===0" src="static/testImg/Focus1.png" id="likeimage" @click="change()">
+           <img src="static/testImg/Focus2.png" id="likeimage" v-else @click="change()">
+        </div>
         <el-col :span="22" :offset="1">
           <div>
             <div class="Period2 pd2">{{itemtxts.title}}</div>
-            <div class="Period1 pd2" v-html="itemtxts.content">{{itemtxts.content}}</div>
+            <div class="Period1 pd2" v-html="itemtxts.content" style="width:100%">{{itemtxts.content}}</div>
           </div>
         </el-col>
         <el-col :span="22" :offset="1" class=" list pdT12">
           <div v-for="list in lists">
-            <router-link :to="{ name:'详情页',query: { id: list.id }}">
+            <router-link :to="{ name:'详情页',query: { id: list.goods_id }}">
               <el-row>
                 <el-col :span="8" class="pdT4">
-                  <img :src="list.imgUrl" class="Periodimg">
+                  <img :src="list.original_img" class="Periodimg">
                 </el-col>
                 <el-col :span="16">
-                  <div class="listTittle pdT6 lh1-6">{{list.tittle}}</div>
-                  <div class="colorRed  pdT6 price">{{list.price}}</div>
-                  <div class="buy">立即购买</div>
+                  <div class="listTittle pdT6 lh1-6">{{list.goods_name}}</div>
+                  <div class="colorRed  pdT6 price">{{list.shop_price}}</div>
+                  <div class="buy" v-if="list.goods_name!=''">立即购买</div>
                 </el-col>
               </el-row>
             </router-link>
@@ -37,6 +41,7 @@
 <script type="text/javascript">
 import axios from "axios";
 export default {
+  inject: ["reload"],
   data() {
     return {
       name: [
@@ -45,20 +50,7 @@ export default {
         }
       ],
       itemtxts: [],
-      lists: [
-        {
-          imgUrl: "static/testImg/product-details01-3.jpg",
-          tittle: "【古董人雕像】价值高真品包邮",
-          price: "¥1.2w",
-          id: "21000"
-        },
-        {
-          imgUrl: "static/testImg/product-details01-3.jpg",
-          tittle: "【古董人雕像】价值高真品包邮",
-          price: "¥1.2w",
-          id: "21000"
-        }
-      ]
+      lists: []
     };
   },
   mounted() {
@@ -71,8 +63,30 @@ export default {
       axios
         .get("/Api/Article/article_detail" + "?article_id=" + newId)
         .then(function(res) {
+          console.log(res)
           that.itemtxts = res.data.data;
-        });
+          that.lists = res.data.data.goods_data;
+        })
+        .catch(error => {});
+    },
+    change: function() {
+      var newId = this.$route.params.id;
+      const that = this;
+      this.admire == false ? (this.admire = true) : (this.admire = false);
+      this.$http
+        .post("/Api/User/collect", {
+          model: "article",
+          id: newId
+        })
+        .then(res => {
+          console.log(res)
+          that.$message({
+            message: "返回我的收拍，查看收拍内容",
+            type: "success"
+          });
+          that.reload();
+        })
+        .catch(error => {});
     }
   }
 };
@@ -84,9 +98,16 @@ export default {
 @import "../../../assets/menu/menu.less";
 @import "../../../assets/menu/details.less";
 .strategy{
-img,
-video {
-  width: 100%;
-}
+  img,
+  video {
+    width: 100%;
+  }
+  #likeimage {
+  width: 34px;
+  height: 34px;
+  right: 12px;
+  top: 12px;;
+  position: absolute;
+  }
 }
 </style>

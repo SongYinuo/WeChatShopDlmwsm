@@ -162,7 +162,7 @@
     }
 
     .el-tabs__item {
-      line-height: 24px;
+      line-height: 40px;
     }
 
     .spanText {

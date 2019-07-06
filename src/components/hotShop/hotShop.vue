@@ -1,6 +1,6 @@
 <template lang="html">
-    <!-- <mt-header title="热卖商城">
-    </mt-header> -->
+      <!-- <mt-header title="热卖商城">
+      </mt-header> -->
     <el-container>
         <el-header class="tittle">
           <div class="back" @click="$router.go(-1)">
@@ -13,7 +13,7 @@
                 <el-col :span="12" v-for="item in goods_list" class="hotShopRow pdTRBL2">
                     <router-link :to="{ name: '详情页', params: { id: item.goods_id } }">
                       <img :src="item.original_img">
-                      <span class="hotShopIcon brR1 pdTRBL1">热门</span>
+                      <span class="hotShopIcon brR1 pdTRBL1 bgCOrange colorWhite">热门</span>
                       <div class="pd2">{{item.goods_name}}</div>
                       <div class="pd1">¥{{item.shop_price}}</div>
                     </router-link>

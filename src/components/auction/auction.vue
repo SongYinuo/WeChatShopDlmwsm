@@ -12,16 +12,16 @@
                     <img :src="auctionImg.thumb">
                 </el-col>
             </el-row>
-            <el-row>
+            <el-row class="pd2">
               <el-col :span="22" :offset="1">
                 <el-tabs v-model="auctionList.tabKey" >
                     <el-tab-pane v-for="k in auctionList.auctionAdvertisingArray" :label="k.label" :name="k.name"  v-if="k.label==='必抢爆款'">
                        <el-row class="productRow">
-                             <el-col :span="22" :offset="1">
+                             <el-col>
                                 <el-col :span="8" class="productRowInfo pdLR1" v-for="o in auctionText[0]">
                                     <router-link :to="{ name: '详情页', params: { id: o.id } }">
                                         <img :src="o.goods_image">
-                                        <div class="pd2 infoTilte bgCfff lh1-2">{{o.goods_name}}</div>
+                                        <div class="pd2 infoTilte bgCfff lh1-2 overHidden">{{o.goods_name}}</div>
                                         <div class="colorRed bgCfff">¥{{o.goods_price}}</div>
                                      </router-link>
                                 </el-col>
@@ -30,7 +30,7 @@
                     </el-tab-pane>
                     <el-tab-pane v-for="k in auctionList.auctionAdvertisingArray" :label="k.label" :name="k.name" v-if="k.label==='万年古董'">
                        <el-row class="productRow">
-                             <el-col :span="22" :offset="1">
+                             <el-col>
                                 <el-col :span="8" class="productRowInfo pdLR1" v-for="o in auctionTxt[1]">
                                     <router-link :to="{ name: '详情页', params: { id: o.id } }">
                                         <img :src="o.goods_image">
@@ -43,7 +43,7 @@
                     </el-tab-pane>
                     <el-tab-pane v-for="k in auctionList.auctionAdvertisingArray" :label="k.label" :name="k.name" v-if="k.label==='人气爆品'">
                        <el-row class="productRow">
-                             <el-col :span="22" :offset="1">
+                             <el-col>
                                 <el-col :span="8" class="productRowInfo pdLR1" v-for="(o,index) in auctionPopularity[2]">
                                     <router-link :to="{ name: '详情页', params: { id: o.id } }">
                                         <img :src="o.goods_image">
@@ -56,7 +56,7 @@
                     </el-tab-pane>
                     <el-tab-pane v-for="k in auctionList.auctionAdvertisingArray" :label="k.label" :name="k.name" v-if="k.label==='囤货必备'">
                        <el-row class="productRow">
-                             <el-col :span="22" :offset="1">
+                             <el-col>
                                 <el-col :span="8" class="productRowInfo pdLR1" v-for="(o,index) in auctionStockpile[3]">
                                     <router-link :to="{ name: '详情页', params: { id: o.id } }">
                                         <img :src="o.goods_image">
@@ -235,8 +235,11 @@ export default {
       }
     }
   }
+  .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
+    padding-left: 15px;
+  }
   .productRow {
-    background-color: #f5f5f5;
+    // background-color: #f5f5f5;
     .productRowInfo {
       background-color: white;
       padding-bottom: 1vw;
@@ -251,14 +254,19 @@ export default {
   .el-tabs__item.is-active {
     color: #dab62e;
   }
-  .el-tabs__active-bar {
-    display: block;
-    color: #ffc000;
-    background-color: #ffc000;
-    width: 55px !important;
+  .auctionRow .el-tabs__item {
+    width: 25%;
+    padding: 0;
   }
-  .el-tabs__nav{
-        margin-left: 0%;
-  }
+
+  // .el-tabs__active-bar {
+  //   display: block;
+  //   color: #ffc000;
+  //   background-color: #ffc000;
+  //   width: 55px !important;
+  // }
+  // .el-tabs__nav{
+  //       margin-left: 0%;
+  // }
 }
 </style>

@@ -155,9 +155,9 @@ export default {
     onProgress(event, file, fileList) {
       //请求中
     },
-    onProgressVideo(event, file, fileList) {
-      //请求中
-    },
+    // onProgressVideo(event, file, fileList) {
+    //   //请求中
+    // },
     handleAvatarSuccess(res, file, fileList) {
       var that = this;
       that.basic = "";
@@ -177,6 +177,15 @@ export default {
     // 请求课堂的接口
     classroom: function(formName) {
       var that = this;
+      if(
+        that.ruleForm.text === "" ||
+        that.ruleForm.textarea === "" ||
+        that.basic === ""){
+        that.$message({
+          message: "请输入当前要上传作品所需要的文字或图片",
+          type: "warning"
+        });
+      }else{
       that.$http
         .post("/Api/User/classroom_add?", {
           title: that.ruleForm.text,
@@ -192,6 +201,7 @@ export default {
           that.reload();
         })
         .catch(function(error) {});
+      }
     }
   }
 };

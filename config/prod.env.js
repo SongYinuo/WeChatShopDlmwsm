@@ -1,4 +1,4 @@
 module.exports = {
   NODE_ENV: '"production"',
-  API_ROOT: '"http://mwms.zongxinkai.com"'
+  API_ROOT: '"http://www.manwenmanshang.com"'
 }

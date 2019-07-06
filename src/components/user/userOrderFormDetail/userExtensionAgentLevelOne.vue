@@ -8,7 +8,7 @@
     </el-header>
     <el-main class="userExtensionAgentRow">
       <el-row>
-        <el-col :span="22" :offset="1" class="user pd2 brB1">
+        <el-col :span="22" :offset="1" class="user pd2 brB1" v-for="generalize in generalize">
           <el-col :span="4" class="headPortrait">
             <img :src="generalize.head_pic">
           </el-col>
@@ -21,10 +21,11 @@
   </el-container>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      generalize: {}
+      generalize: []
     };
   },
   mounted: function() {

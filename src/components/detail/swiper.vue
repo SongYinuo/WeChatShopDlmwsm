@@ -51,12 +51,13 @@ export default {
       border-radius: 8px;
     }
     .back {
+      padding: 4px;
       width: 7vw;
       height: 7vw;
       position: absolute;
       left: 4vw;
       top: 4vw;
-      // background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.4);
       border-radius: 50%;
       text-align: center;
       span {
@@ -65,7 +66,7 @@ export default {
         .fz(font-size, 40);
         transform: rotate(-180deg);
         &::before {
-          color: #333;
+          color: #f0f0f0;
         }
       }
       &:active {

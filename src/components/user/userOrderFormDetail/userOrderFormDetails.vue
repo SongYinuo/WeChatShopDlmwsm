@@ -126,7 +126,7 @@
             <el-button round  @click="cancel()" v-if="detailsInfo.order_attr === '1'">取消订单</el-button>
             <el-button round  @click="deleste()" v-if="detailsInfo.order_attr === '4'||detailsInfo.order_attr === '5'">删除订单</el-button>
             <router-link :to="{name: '购物车详情'}">
-              <el-button round class="bgUndertintYellow colorWhite brR1" v-if="detailsInfo.order_attr === '1'">付款</el-button>
+              <el-button round class="bgUndertintYellow colorWhite brR1" v-if="detailsInfo.order_attr === '1'" @click="payment()">付款</el-button>
             </router-link>
             <el-button round class="bgUndertintYellow colorWhite brR1" v-if="detailsInfo.order_attr ==='3'" @click="affirm()">确认收货</el-button>
             <!-- <el-button round class="bgUndertintYellow colorWhite brR1">确认收货
@@ -284,6 +284,35 @@ export default {
         })
         .catch({});
       thir.reload();
+    },
+    payment(inex) {
+      const thir = this;
+      const order_id = thir.$route.params.id;
+      axios
+        .get("/Api/Payment/order_pay?order_id=" + order_id)
+        .then(function(res) {
+          var api = JSON.parse(res.data.data);
+          WeixinJSBridge.invoke(
+            "getBrandWCPayRequest",
+            {
+              appId: api.appId, //公众号名称，由商户传入
+              timeStamp: api.timeStamp, //时间戳，自1970年以来的秒数
+              nonceStr: api.nonceStr, //随机串
+              package: api.package,
+              signType: api.signType, //微信签名方式：
+              paySign: api.paySign //微信签名
+            },
+            function(res) {
+              if (res.err_msg == "get_brand_wcpay_request:ok") {
+                // location.href='$go_url';
+              } else {
+                alert(res.err_code + res.err_desc + res.err_msg);
+                // location.href='$back_url';
+              }
+            }
+          );
+        })
+        .catch(function(error) {});
     }
   }
 };

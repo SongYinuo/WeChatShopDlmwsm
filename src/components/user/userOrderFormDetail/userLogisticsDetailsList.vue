@@ -81,6 +81,7 @@ export default {
         url: "/Api/order/order_detail?order_id=" + order_id
       })
         .then(function(res) {
+          console.log(res)
           that.activities = res.data.data.express_info.Traces.reverse();
           that.state = state;
           that.shipping_name = shipping_name;

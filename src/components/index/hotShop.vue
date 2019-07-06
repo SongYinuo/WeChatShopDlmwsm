@@ -9,7 +9,7 @@
             </el-col>
             <el-col :span="8">
               <div class="indexSwiperHeaderMore">
-                <router-link :to="{ name: '热卖商城页', params: { id: hotId, value: hotTitle } }">
+                <router-link :to="{ name: '热卖商城页' }">
                   <a>查看更多<i class="el-icon-arrow-right"></i></a>
                 </router-link>
               </div>
@@ -28,21 +28,21 @@
                   </router-link>
                   <div class="explainRow">
                     <el-row>
-                      <el-col :span="14">
+                      <el-col :span="16">
                         <div class="explainTitle">
                           {{swipers.goods_name}}
                         </div>
                       </el-col>
-                      <el-col :span="4" :offset="1">
+                      <el-col :span="6" :offset="1">
                         <div class="explainPrice">
                           ￥{{swipers.shop_price}}
                         </div>
                       </el-col>
-                      <el-col :span="4">
+                      <!-- <el-col :span="4">
                         <div class="explainOriginalPrice">
                           <del>￥{{swipers.originalPrice}}</del>
                         </div>
-                      </el-col>
+                      </el-col> -->
                       <el-col :span="24">
                         <div class="explainAnnotation">
                           {{swipers.textAnnotation}}
@@ -66,7 +66,6 @@ export default {
   data() {
     return {
       hotTitle: "热卖",
-      hotId: "HotA10001",
       swiperList: []
     };
   },
@@ -116,7 +115,7 @@ export default {
 }
 
 .swiperListImg {
-  height: 200px;
+  height: 240px;
   border-radius: 8px;
 }
 

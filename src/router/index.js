@@ -80,6 +80,7 @@ const Usercalligraphypainting = resolve => require(['@/components/user/userOrder
 const UserVipDetail = resolve => require(['@/components/user/userVipDetail.vue'], resolve)
 const UserIntegral = resolve => require(['@/components/user/userIntegral.vue'], resolve)
 const UserCarRouterLink = resolve => require(['@/components/user/userOrderFormDetail/userCarRouterLink.vue'], resolve)
+const UserVipJionIn = resolve => require(['@/components/user/userOrderFormDetail/userVipJionIn.vue'], resolve)
 export default new Router({
   routes: [{
     path: '/',
@@ -146,10 +147,10 @@ export default new Router({
     }
   }, {
     path: '/collect',
-    name: '收藏页',
+    name: '收拍页',
     component: Collect,
     meta: {
-      title: '收藏页'
+      title: '收拍页'
     }
   }, {
     path: '/timeIimit',
@@ -159,7 +160,7 @@ export default new Router({
       title: '限时抢购页'
     }
   }, {
-    path: '/hotShop/:id/:value',
+    path: '/hotShop',
     name: '热卖商城页',
     component: HotShop,
     meta: {
@@ -390,7 +391,7 @@ export default new Router({
       title: '我的讲堂详情'
     }
   },{
-    path: '/userVipDetail/:article_id',
+    path: '/userCoupon/userVipDetail/:article_id',
     name: 'vip详情',
     component: UserVipDetail,
     meta: {
@@ -551,6 +552,13 @@ export default new Router({
     component: UserCoupon,
     meta: {
       title: 'vip专区'
+    }
+  }, {
+    path: '/userVipJionIn',
+    name: 'vip办理',
+    component: UserVipJionIn,
+    meta: {
+      title: 'vip'
     }
   }, {
     path: '/userCoupon/userCouponDetails/:id',

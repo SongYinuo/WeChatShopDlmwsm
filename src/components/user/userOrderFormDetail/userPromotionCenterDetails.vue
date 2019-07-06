@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   filters: {
       formatDate: function (value) {
@@ -68,6 +69,7 @@ export default {
           "/Api/Distribut/index" 
       })
         .then(function(res) {
+          console.log(res);
          thir.promotionCenterInfo = res.data.data
         })
         .catch({});

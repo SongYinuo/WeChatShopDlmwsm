@@ -104,7 +104,7 @@ export default {
         desc: [
           {
             required: true,
-            message: "说点什么吧",
+            message: "请输入详细地址",
             trigger: "blur"
           }
         ]

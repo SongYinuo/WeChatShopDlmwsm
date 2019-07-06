@@ -19,10 +19,10 @@
         <img slot="icon" class="icon-index" src="../../static/testImg/indexPublishIcon.png">
       </span>
     </mt-tab-item>
-    <mt-tab-item id="收藏页">
+    <mt-tab-item id="收拍页">
       <!-- <i slot="icon" class="icon-category"></i> -->
       <img slot="icon" class="icon-index" src="../../static/testImg/indexCollectionIcon.png">
-      收藏
+      收拍
     </mt-tab-item>
 
     <mt-tab-item id="用户页">

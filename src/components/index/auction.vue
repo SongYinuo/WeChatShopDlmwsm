@@ -82,7 +82,7 @@ data(){
   }
   .auctionExplain {
     line-height: 1.6;
-    .fz(font-size, 18);
+    .fz(font-size, 24);
     color: #343434;
     text-align: center;
   }

@@ -32,7 +32,9 @@
                 </span>
               </el-col>
               <el-col :span="6" class="carListImg">
-                <img :src="item.thumb">
+                <router-link :to="{ name: '详情页', params: { id: item.goods_id } }">
+                  <img :src="item.thumb">
+                </router-link>
               </el-col>
               <el-col :span="14" :offset="1">
                 <div @click="post_mask(item.goods_id,item.id)">
@@ -57,7 +59,7 @@
         <el-col class="carFooter brT1 bgCfff">
           <el-col :span="4" class="text-alignCenter pd2">
               <!-- <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox> -->
-              <img :src="checkAll == true ?'/static/check@2x.png':'/static/checked@2x.png'" style="width:1.2rem;margin-top:1rem;"  @click="select_all"/>
+              <img :src="checkAll == true ?'/static/check@2x.png':'/static/checked@2x.png'" style="width:1.2rem;margin-top:0.5rem;"  @click="select_all"/>
           </el-col>
           <el-col :span="12" class="text-alignRight pd2" style="margin-top:2vw;">
             <div class="totalPrices">总计<span class="colorRed">￥{{price}}</span></div>
@@ -76,7 +78,7 @@
  <el-row>
       <el-dialog title="商品规格信息" :visible.sync="dialogFormVisible" top="0" class="detailsDialog">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0" class="demo-ruleForm">
-           <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="描述文字" class="cart_input" style="width:50%;"></el-input-number>
+          <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="描述文字" class="cart_input" style="position: absolute; right: 40px; top:96px;"></el-input-number>
           <el-row class="detailsRow-specification" v-for="(k,index,ids) in filter_spec">
            <el-col :span="24" style="padding-top:5vw;">
               <el-col :span="8" class="specificationProductImg">
@@ -243,9 +245,10 @@ export default {
         that.price +=
           parseFloat(that.cart_list[index].goods_price) *
           parseFloat(that.cart_list[index].goods_num);
-          that.cart_id_list.push(cart_id);
-         axios.get("/Api/Cart/cart_select?ids=" + that.cart_id_list.join(',')).then(function(res) {
-      });
+        that.cart_id_list.push(cart_id);
+        axios
+          .get("/Api/Cart/cart_select?ids=" + that.cart_id_list.join(","))
+          .then(function(res) {});
       }
       that.select_radio();
     },
@@ -372,6 +375,10 @@ export default {
     settlem_status: function() {
       var that = this;
       if (that.edit_status == 2) {
+        that.$message({
+              message: "已生成订单 小满正在努力为您发货",
+              type: "success"
+        });
         that.delete_status = 2;
       } else {
       }
@@ -429,8 +436,9 @@ export default {
   }
 
   .el-input-number {
-    width: 100%;
+    width: 100px;
     line-height: 1.2;
+    border: 1px solid #eeeeee;
   }
   .accountsBtn {
     button {
@@ -494,25 +502,6 @@ export default {
 .subBtn {
   width: 100%;
 }
-.el-dialog {
-  width: 100%;
-  margin: 0;
-  bottom: 0;
-  position: initial;
-  z-index: 1000;
-  .inputNumber {
-    position: absolute;
-    right: 62px;
-    top: 120px;
-    .el-input-number {
-      line-height: 1.2;
-    }
-    .el-input-number .el-input__inner {
-      line-height: 1.2;
-      height: 18px;
-    }
-  }
-}
 .el-radio-button__inner {
   padding: 12px;
   margin-right: 4px;
@@ -553,7 +542,7 @@ export default {
   display: inline-block;
   position: relative;
   top: 25vw;
-  left: 30%;
+  // left: 30%;
   text-align: center;
 }
 .delete_status {
@@ -581,5 +570,62 @@ export default {
   padding-bottom: 2vw;
   border-bottom: 1px solid #ededed;
   font-size: 14px;
+}
+.detailsDialog .el-dialog {
+  position: fixed;
+  .el-input-number__increase {
+    // margin-right: 78px;
+  }
+  .el-input-number__decrease,
+  .el-input-number__increase {
+    width: 20px;
+    line-height: 22px;
+    height: 22px;
+    // border-top: 1px solid #DCDFE6;
+    // border-bottom: 1px solid #DCDFE6;
+  }
+  .el-input-number .el-input {
+    line-height: 20px;
+  }
+  .el-input__inner {
+    height: 24px;
+    line-height: 20px;
+    width: 60%;
+  }
+  .el-input-number .el-input__inner {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+.detailsDialog {
+  .el-dialog {
+    width: 100%;
+    margin: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 1000;
+    .inputNumber {
+      position: absolute;
+      right: 62px;
+      top: 120px;
+      .el-input-number {
+        width: 120px;
+        line-height: 1.2;
+      }
+      .el-input-number .el-input__inner {
+        line-height: 1.2;
+        height: 18px;
+      }
+    }
+    .el-radio {
+      padding: 2vw 0;
+      margin-right: 4px;
+      border: 1px solid #eee;
+    }
+    .el-radio__label {
+      padding-left: 0;
+    }
+  }
 }
 </style>

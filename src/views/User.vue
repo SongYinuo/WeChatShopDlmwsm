@@ -96,7 +96,7 @@
               <el-col :span="22" :offset="1">
                 <div class="couponRow pd1">
                   <!-- to="{ name: (k.routerLink), query:{ id:k.id }}" -->
-                  <router-link :to="{ name: 'vip专区',query:{is_vip:userList.is_vip}}">
+                  <router-link :to="{ name: 'vip专区',params:{is_vip:userList.is_vip}}">
                     <img :src="userInfo.couponAdvertisingImg">
                   </router-link>
                 </div>
@@ -167,10 +167,10 @@ export default {
             iconUrl: "static/testImg/user-take.png",
             text: "待收货"
           },
-          {
-            iconUrl: "static/testImg/user-after.png",
-            text: "退款/售后"
-          }
+          // {
+          //   iconUrl: "static/testImg/user-after.png",
+          //   text: "退款/售后"
+          // }
         ],
         couponAdvertisingImg: "static/testImg/pic1@2x.png"
       }
@@ -190,6 +190,7 @@ export default {
         },
         url: "/Api/Api/index"
       }).then(function(res) {
+        console.log(res);
         that.userList = res.data.data.user;
       });
     },
@@ -236,7 +237,7 @@ export default {
       .fz(font-size, 28);
     }
     .orderFormMenu {
-      width: 20%;
+      width: 25%;
       .menuTitle {
         .fz(font-size, 28);
       }

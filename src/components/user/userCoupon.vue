@@ -9,22 +9,24 @@
       <el-main class="userCoupon">
         <el-row>
           <el-col :span="22" :offset="1" v-for="k in userCouponInfo" class="couponRow">
-             <router-link :to="{ name: 'vip详情',query: { id: k.article_id } }">
-                <img :src="k.thumb">
-                <div class="pd2 text-alignCenter">{{k.title}}</div>
+             <router-link :to="{ name: 'vip详情',params: { id: k.article_id } }">
+               <div v-if="is_vip===1">
+                  <img :src="k.thumb">
+                  <div class="pd2 text-alignCenter">{{k.title}}</div>
+               </div>
              </router-link>
-             <div @click="dialogShows = true">
+             <div v-if="is_vip===0" @click="dialogShows = true">
                 <img :src="k.thumb">
                 <div class="pd2 text-alignCenter">{{k.title}}</div>
              </div>
           </el-col>
         </el-row>
-        <el-dialog title="提示" :visible.sync="dialogShows" width="80%" v-if="filters.vipid==''">
+        <el-dialog title="提示" :visible.sync="dialogShows" width="80%">
           <span>此栏目只针对VIP用户，是否升级为VIP用户？</span>
           <span slot="footer" class="dialog-footer">
             <el-button @click="dialogShows = false">取 消</el-button>
             <el-button type="primary" @click="dialogShows = false">
-              <router-link :to="{ name: '推荐提现' }" class="colorWhite">
+              <router-link :to="{ name: 'vip办理' }" class="colorWhite">
                 确 定
               </router-link>
             </el-button>
@@ -42,6 +44,7 @@ export default {
       title: "vip专区",
       dialogShows: false,
       userCouponInfo: [],
+      is_vip: '',
       filters: {
         vipid: ""
       }
@@ -53,7 +56,8 @@ export default {
   methods: {
     getData() {
       const that = this;
-      var is_vip = that.$route.query.is_vip;
+      const is_vip = that.$route.params.is_vip;
+      that.is_vip = is_vip;
       axios({
         methods: "get",
         headers: {
@@ -63,7 +67,6 @@ export default {
       })
         .then(function(res) {
           that.userCouponInfo = res.data.data;
-          is_vip = that.$route.query.is_vip;
           that.filters.vipid = is_vip;
         })
         .catch(function(error) {});

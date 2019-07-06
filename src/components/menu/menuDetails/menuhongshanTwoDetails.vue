@@ -110,7 +110,7 @@ export default {
         })
         .then(res => {
           that.$message({
-            message: "返回我的收藏，查看收藏内容",
+            message: "返回我的收拍，查看收拍内容",
             type: "success"
           });
           that.reload();
