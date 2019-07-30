@@ -12,7 +12,7 @@
     <v-hotShop/>
     <!-- <v-section3/> -->
     <v-companyRank/>
-    <v-auction/>
+    <!-- <v-auction/> -->
     <v-integralShop/>
     <v-undergraduateBusiness/>
     <v-baseline/>
