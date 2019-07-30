@@ -1,6 +1,6 @@
 <template lang="html">
  <el-container class="integral">
-    <el-row class="title">
+    <el-row class="title" style="padding-top:24px">
           <el-col :span="22" :offset="1">
             <div class="title">积分商城
             <router-link :to="{ name: '更多积分商品' }">
