@@ -14,6 +14,11 @@
         </el-col>
       </el-col>
     </el-row>
+    <el-row>
+      <el-col :span="22" :offset="1" class="pd2" style="font-size:16px;">
+          {{goods.goods_name}}
+      </el-col>
+    </el-row>
     <el-row class="brB10 mgB2">
       <el-col :span="22" :offset="1" class="details-explainRow">
         <el-col :span="24" class="explainRowPrice colorRed pdB2" v-if="promsw!=''">¥{{promsw.prom_price}}元</el-col>
@@ -236,7 +241,6 @@ export default {
         url: "/Api/Goods/goods_detail?id=" + goods_id
       })
         .then(function(res) {
-          console.log(res);
           thit.promsw = res.data.data.prom;
           thit.times = thit.promsw.end_time - thit.timestamp;
         })

@@ -60,7 +60,7 @@ axios({
   url: "/Api/Api/index"
 }).then(function (res) {
   if (res.data.data.user.user_id <= 0) {
-    location.href = "http://" + window.location.host + "/Api/api/wx_login?route=" + router.history.current.fullPath
+    location.href = "https://" + window.location.host + "/Api/api/wx_login?route=" + router.history.current.fullPath
   }
   else {
   }

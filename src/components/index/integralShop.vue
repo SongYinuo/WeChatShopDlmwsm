@@ -80,6 +80,7 @@ export default {
     margin-bottom: 10px;
   }
   .title {
+    width: 100%;
     color: #313131;
     .fz(font-size, 42);
     padding-bottom: 17px;

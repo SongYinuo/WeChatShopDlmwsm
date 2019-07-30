@@ -34,7 +34,7 @@
                 <el-row class="rows">
                   <el-col :span="8" v-for="q in o.goods_list" 
                     class="ShunPrincessRow bgCBlue pdTRBL1">
-                    <router-link :to="{ name: '详情页'}">
+                    <router-link :to="{ name: '详情页',params: { id: q.goods_id,title:q.goods_name }}">
                       <div class="bgCfff pdTRBL1">
                         <img :src="q.original_img">
                         <div class="shunPrincessProductTitle pd2">{{q.goods_name}}</div>

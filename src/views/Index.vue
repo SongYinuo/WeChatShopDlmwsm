@@ -5,8 +5,8 @@
     <v-search/>
     <v-swiper/>
     <!-- <v-swiper :swiperData="datas.swiper"/> -->
-    <v-menuTitle/>
-    <v-linkMean/>
+    <!-- <v-menuTitle/>
+    <v-linkMean/> -->
     <v-timeIimit/>
     <!-- <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/> -->
     <v-hotShop/>

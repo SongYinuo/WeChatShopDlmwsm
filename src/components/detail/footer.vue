@@ -112,7 +112,6 @@ export default {
         that.$http
           .post("/Api/Cart/cart_add", { goods_id: that.good_id, goods_num: 1 })
           .then(res => {
-            console.log(res);
             if (res.data.code == 1) {
               //  购物车页
               this.$router.push({ name: "购物车页" });
@@ -131,7 +130,6 @@ export default {
             goods_spec: that.goods_list_price
           })
           .then(res => {
-            console.log(res);
             if (res.data.code == 1) {
               //  购物车页
               this.$router.push({ name: "购物车页" });

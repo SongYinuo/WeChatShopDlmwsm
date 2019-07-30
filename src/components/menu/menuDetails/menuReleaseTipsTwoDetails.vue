@@ -1,7 +1,7 @@
 <template lang="html">
   <el-container>
     <el-header class="tittle">
-      <div class="back" @click="$router.go(-1)">
+      <div class="back" @click="$router.go(-2)">
         <i class="el-icon-arrow-left"></i>
       </div>
       发布
@@ -198,7 +198,7 @@ export default {
               message: "上传成功",
               type: "success"
             });
-            that.reload();
+              that.reload();
           })
           .catch(function(error) {});
       }

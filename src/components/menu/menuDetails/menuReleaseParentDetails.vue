@@ -119,6 +119,17 @@ export default {
     margin-top: 20%;
   }
 
+  @media screen and (max-width: 320px) {
+    .placeholder {
+      height: 80px;
+    }
+  }
+
+  @media screen and (max-width: 360px) {
+    .placeholder {
+      height: 120px;
+    }
+  }
   .fork {
     .fz(font-size, 60);
     color: #c6c6c6;

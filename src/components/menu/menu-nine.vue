@@ -23,7 +23,7 @@
                 <el-row v-for="o in k.sub_menu">
                 <el-row>
                   <el-col :span="24">
-                    <div class="maskHeaderTitle pd4 colorBlack text-alignCenter bgCfff">{{o.title}}</div>
+                    <div class="maskHeaderTitle pd2 colorBlack text-alignCenter bgCfff">{{o.title}}</div>
                     <el-col class="listRome fr" :span="6" v-if="index<6">
                       <router-link :to="{ name: '更多列表',query: { id: o.id,title:o.name } }">
                         查看更多
@@ -38,7 +38,7 @@
                     <router-link :to="{ name: '详情页',params: { id: q.goods_id,title:q.goods_name }}">
                       <div class="bgCfff pdTRBL1">
                         <img :src="q.original_img">
-                        <div class="shunPrincessProductTitle pd2">{{q.goods_name}}</div>
+                        <div class="shunPrincessProductTitle pd2 ">{{q.goods_name}}</div>
                         <div class="shunPrincessProductPrice pdB2 colorRed">¥{{q.shop_price}}</div>
                       </div>
                     </router-link>

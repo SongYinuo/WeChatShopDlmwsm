@@ -31,7 +31,7 @@
               <el-col :span="22" :offset="1">
                 <!-- <mt-swipe :auto="10000">
                   <mt-swipe-item v-for="(item,index) in swiperList.prom.goods_list" :key="index" class="mtSwiper"> -->
-                  <el-carousel :interval="4000" type="card" height="232px" style="z-index:1;">
+                  <el-carousel :interval="4000" type="card" height="252px" style="z-index:1;">
                       <el-carousel-item v-for="(item,index) in swiperList.prom.goods_list" :key="index" class="mtSwiper">
                     <router-link :to="{ name: '详情页', params: { id: item.link_id }}">
                       <img :src="item.goods_image" class="swiperListImg" style="z-index:-100">
@@ -59,11 +59,12 @@
                           </div>
                         </el-col>
                       </el-row>
-                    </el-col>
+                        </div>
                        </el-carousel-item>
                     </el-carousel>
                   <!-- </mt-swipe-item>
                 </mt-swipe> -->
+              </el-col>
              </div>
       </div>
     </div>
